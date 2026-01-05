@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcdi2a61j6eg5"]
+
+[ext_resource type="Texture2D" uid="uid://bnmjo044iuemu" path="res://assets/sprites/weapons/arrow.png" id="1_hvjes"]
+[ext_resource type="Script" uid="uid://be06mcsae7l86" path="res://src/scenes/entities/enemies/archer/arrow.gd" id="1_wpnl2"]
+[ext_resource type="Script" uid="uid://cc3uwu1rrhmr8" path="res://src/scripts/resources/damage_information.gd" id="2_wpnl2"]
+
+[sub_resource type="Resource" id="Resource_f1ggk"]
+script = ExtResource("2_wpnl2")
+damage = 5
+metadata/_custom_type_script = "uid://cc3uwu1rrhmr8"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvjes"]
+size = Vector2(12, 2)
+
+[node name="Arrow" type="Area2D" node_paths=PackedStringArray("collision_shape", "sprite")]
+top_level = true
+y_sort_enabled = true
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_wpnl2")
+collision_shape = NodePath("CollisionShape")
+sprite = NodePath("Sprite")
+speed = 100
+damage_information = SubResource("Resource_f1ggk")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+rotation = 1.5707964
+texture = ExtResource("1_hvjes")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hvjes")

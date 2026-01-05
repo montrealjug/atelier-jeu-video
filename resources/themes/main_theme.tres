@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://87yeb2smcrut"]
+
+[ext_resource type="FontFile" uid="uid://djwwvjks5nwa6" path="res://assets/fonts/upheavtt.ttf" id="1_x2ak3"]
+[ext_resource type="Texture2D" uid="uid://c11wqeb8r3spc" path="res://assets/sprites/ui/button.png" id="2_yjg5f"]
+[ext_resource type="Texture2D" uid="uid://b640c2nu1cuqo" path="res://assets/sprites/ui/button_pressed.png" id="3_0wthw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dagba"]
+texture = ExtResource("2_yjg5f")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xtbu8"]
+texture = ExtResource("2_yjg5f")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hf3i3"]
+texture = ExtResource("3_0wthw")
+
+[resource]
+Button/colors/font_outline_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
+Button/constants/outline_size = 4
+Button/font_sizes/font_size = 10
+Button/fonts/font = ExtResource("1_x2ak3")
+Button/styles/focus = SubResource("StyleBoxTexture_dagba")
+Button/styles/hover = SubResource("StyleBoxTexture_dagba")
+Button/styles/normal = SubResource("StyleBoxTexture_xtbu8")
+Button/styles/pressed = SubResource("StyleBoxTexture_hf3i3")
+Label/colors/font_outline_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
+Label/constants/outline_size = 8
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_x2ak3")

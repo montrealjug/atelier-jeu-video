@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1kf8mir5dbwc"]
+
+[ext_resource type="Script" uid="uid://cbv4o4o8tfen4" path="res://src/scenes/ui/pause_screen/pause_screen.gd" id="1_fjpw8"]
+[ext_resource type="Theme" uid="uid://87yeb2smcrut" path="res://resources/themes/main_theme.tres" id="1_k6vq8"]
+[ext_resource type="PackedScene" uid="uid://boml0pmsrnkxp" path="res://src/scenes/ui/components/confirm_sfx/confirm_sfx.tscn" id="2_wumy1"]
+
+[node name="PauseScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fjpw8")
+confirm_sfx_scene = ExtResource("2_wumy1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.4392157)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PauseLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_k6vq8")
+text = "pause"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_bottom = NodePath("../MenuButton")
+theme = ExtResource("1_k6vq8")
+text = "restart"
+
+[node name="MenuButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../RestartButton")
+theme = ExtResource("1_k6vq8")
+text = "menu"

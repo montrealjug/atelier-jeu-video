@@ -1,0 +1,106 @@
+[gd_scene load_steps=13 format=3 uid="uid://crw6duhe3pt0v"]
+
+[ext_resource type="Texture2D" uid="uid://oi03lis8rlhg" path="res://assets/sprites/items/potion_red.png" id="1_a4evd"]
+[ext_resource type="Script" uid="uid://cp7urkap43s2n" path="res://src/scenes/items/upgrade_potion.gd" id="1_aftmx"]
+[ext_resource type="PackedScene" uid="uid://opudia3iyf6m" path="res://src/scenes/entities/enemies/shared/smoke_particles/smoke_particles.tscn" id="2_1scma"]
+[ext_resource type="Texture2D" uid="uid://daos7mp53ld25" path="res://assets/sprites/misc/shadow.png" id="2_y0ovh"]
+[ext_resource type="Texture2D" uid="uid://bypiu7tas4vxt" path="res://assets/sprites/ui/a_button.png" id="3_8ihpf"]
+[ext_resource type="PackedScene" uid="uid://b1rl8j1y1ke36" path="res://src/scenes/items/pickup_sfx.tscn" id="3_te8sg"]
+[ext_resource type="Theme" uid="uid://87yeb2smcrut" path="res://resources/themes/main_theme.tres" id="5_4j3dn"]
+[ext_resource type="AudioStream" uid="uid://c2p1l881bqph1" path="res://assets/sounds/sfx/spawn.wav" id="6_gbh4h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a4evd"]
+radius = 19.026299
+
+[sub_resource type="Animation" id="Animation_4j3dn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PotionSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_y0ovh"]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PotionSprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gbh4h"]
+_data = {
+&"RESET": SubResource("Animation_4j3dn"),
+&"appear": SubResource("Animation_y0ovh")
+}
+
+[node name="UpgradePotion" type="Area2D"]
+y_sort_enabled = true
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("1_aftmx")
+smoke_particles_scene = ExtResource("2_1scma")
+pickup_sfx_scene = ExtResource("3_te8sg")
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.36862746)
+z_index = -1
+z_as_relative = false
+position = Vector2(0, 6)
+texture = ExtResource("2_y0ovh")
+
+[node name="PotionSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("1_a4evd")
+
+[node name="ButtonSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+y_sort_enabled = true
+position = Vector2(4, 5)
+texture = ExtResource("3_8ihpf")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a4evd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_gbh4h")
+}
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = 11.0
+offset_right = 12.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_4j3dn")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 6
+text = "label"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpawnSfx" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_gbh4h")
+volume_db = 4.584

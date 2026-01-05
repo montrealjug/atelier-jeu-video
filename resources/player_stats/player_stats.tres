@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=4 format=3 uid="uid://hr6lk00xhp8w"]
+
+[ext_resource type="Script" uid="uid://dhp40tqdwfct6" path="res://src/scripts/resources/player_stats.gd" id="1_0mxw8"]
+[ext_resource type="Script" uid="uid://cc3uwu1rrhmr8" path="res://src/scripts/resources/damage_information.gd" id="1_udfje"]
+
+[sub_resource type="Resource" id="Resource_o225j"]
+script = ExtResource("1_udfje")
+damage = 3
+metadata/_custom_type_script = "uid://cc3uwu1rrhmr8"
+
+[resource]
+script = ExtResource("1_0mxw8")
+hp_max = 30
+mana_max = 20
+speed = 80
+attack_cooldown = 0.2
+damage_information = SubResource("Resource_o225j")
+metadata/_custom_type_script = "uid://dhp40tqdwfct6"

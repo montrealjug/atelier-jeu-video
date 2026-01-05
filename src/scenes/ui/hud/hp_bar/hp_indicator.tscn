@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmx638jp264ur"]
+
+[ext_resource type="Texture2D" uid="uid://dsulrbvx8un2x" path="res://assets/sprites/ui/player_hp_bar_empty.png" id="1_sjixh"]
+[ext_resource type="Texture2D" uid="uid://cndlkvlpul66f" path="res://assets/sprites/ui/player_hp_bar_fill.png" id="2_xccai"]
+[ext_resource type="Script" uid="uid://cs8h7142kr3u8" path="res://src/scenes/ui/hud/hp_bar/player_hp_bar.gd" id="3_hm1tx"]
+[ext_resource type="Theme" uid="uid://87yeb2smcrut" path="res://resources/themes/main_theme.tres" id="4_xccai"]
+
+[node name="HpIndicator" type="Control"]
+custom_minimum_size = Vector2(63, 16)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("3_hm1tx")
+
+[node name="HpBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.001
+value = 1.0
+texture_under = ExtResource("1_sjixh")
+texture_progress = ExtResource("2_xccai")
+texture_progress_offset = Vector2(1, 0)
+
+[node name="HpText" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="CurrentHp" type="Label" parent="HpText"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_xccai")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 8
+text = "30"
+
+[node name="Separator" type="Label" parent="HpText"]
+layout_mode = 2
+theme = ExtResource("4_xccai")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 8
+text = "/"
+
+[node name="MaxHp" type="Label" parent="HpText"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_xccai")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 8
+text = "30"

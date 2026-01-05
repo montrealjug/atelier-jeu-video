@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbsryv8x370db"]
+
+[ext_resource type="PackedScene" uid="uid://crw6duhe3pt0v" path="res://src/scenes/items/upgrade_potion.tscn" id="1_uws12"]
+[ext_resource type="Texture2D" uid="uid://bp75ipj5703ij" path="res://assets/sprites/items/potion_blue.png" id="2_uqok1"]
+
+[node name="MoveSpeedPotion" instance=ExtResource("1_uws12")]
+upgrade_type = 3
+color = Color(0.7529412, 0.79607844, 0.8627451, 1)
+
+[node name="PotionSprite" parent="." index="1"]
+texture = ExtResource("2_uqok1")
+
+[node name="Label" parent="." index="5"]
+text = "move speed+"

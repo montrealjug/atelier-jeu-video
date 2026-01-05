@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://dirdwypci1ouv"]
+
+[ext_resource type="Script" uid="uid://cramr2h5np4mb" path="res://src/scenes/entities/enemies/shared/health/enemy_health.gd" id="1_gfuni"]
+[ext_resource type="PackedScene" uid="uid://0fuvfiq2avnf" path="res://src/scenes/entities/enemies/shared/hit_sfx/hit_sfx.tscn" id="2_0gd08"]
+[ext_resource type="Texture2D" uid="uid://ceuc8l1fx6xiw" path="res://assets/sprites/ui/hp_fill.png" id="2_83kxx"]
+[ext_resource type="PackedScene" uid="uid://c2relpfwbrxpu" path="res://src/scenes/entities/shared/damage_indicator/damage_indicator.tscn" id="3_f1ru8"]
+[ext_resource type="Texture2D" uid="uid://bxeyqoyfb4hg" path="res://assets/sprites/ui/hp_empty.png" id="3_j11ws"]
+
+[node name="Health" type="Node2D"]
+script = ExtResource("1_gfuni")
+hit_sfx_scene = ExtResource("2_0gd08")
+damage_indicator_scene = ExtResource("3_f1ru8")
+
+[node name="HpBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_right = 16.0
+offset_bottom = 8.0
+grow_vertical = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_under = ExtResource("3_j11ws")
+texture_progress = ExtResource("2_83kxx")

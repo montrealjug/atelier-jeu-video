@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1rl8j1y1ke36"]
+
+[ext_resource type="AudioStream" uid="uid://bh13q0osquae4" path="res://assets/sounds/sfx/collect.wav" id="1_174oi"]
+[ext_resource type="Script" uid="uid://oco5nvjmija6" path="res://src/scenes/entities/shared/one_shot_sound/one_shot_sound.gd" id="1_vajlw"]
+
+[node name="PickupSfx" type="AudioStreamPlayer"]
+stream = ExtResource("1_174oi")
+script = ExtResource("1_vajlw")
+metadata/_custom_type_script = "uid://oco5nvjmija6"

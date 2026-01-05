@@ -1,0 +1,78 @@
+[gd_scene load_steps=17 format=3 uid="uid://s28pmc5l6bx"]
+
+[ext_resource type="Script" uid="uid://barc36edqtg3h" path="res://src/scenes/entities/enemies/shared/enemy.gd" id="1_le6ar"]
+[ext_resource type="Resource" uid="uid://crh4r78tigi3q" path="res://resources/enemy_stats/knight_stats.tres" id="2_58gwj"]
+[ext_resource type="Script" uid="uid://ctw8qg4ako1bi" path="res://src/scripts/resources/enemy_data.gd" id="3_nq7r5"]
+[ext_resource type="PackedScene" uid="uid://2cdeid6uewk3" path="res://src/scenes/entities/enemies/shared/hurt_box/hurt_box.tscn" id="3_tb262"]
+[ext_resource type="PackedScene" uid="uid://cigf4tambls3a" path="res://src/scenes/entities/enemies/shared/sprite/enemy_sprite.tscn" id="4_nq7r5"]
+[ext_resource type="Shader" uid="uid://b68sxx64mnqgf" path="res://resources/visual_shaders/flash.tres" id="5_52njo"]
+[ext_resource type="Texture2D" uid="uid://cxrqwecaap0mc" path="res://assets/sprites/entities/knight.png" id="6_lk4g6"]
+[ext_resource type="Script" uid="uid://bw83irovcswq5" path="res://src/scenes/entities/enemies/shared/sprite/enemy_sprite.gd" id="7_ckp30"]
+[ext_resource type="Texture2D" uid="uid://cql2iayccpjvl" path="res://assets/sprites/weapons/double_axe.png" id="8_pchpt"]
+[ext_resource type="PackedScene" uid="uid://dirdwypci1ouv" path="res://src/scenes/entities/enemies/shared/health/enemy_health.tscn" id="9_7m4ay"]
+[ext_resource type="PackedScene" uid="uid://bhp4vmjehwk7a" path="res://src/scenes/entities/enemies/shared/death/death_manager.tscn" id="11_58gwj"]
+[ext_resource type="Script" uid="uid://ebynkm3siehe" path="res://src/scenes/entities/enemies/shared/move_strategies/straight_follow_strategy.gd" id="13_lf87s"]
+
+[sub_resource type="Resource" id="Resource_52njo"]
+resource_local_to_scene = true
+script = ExtResource("3_nq7r5")
+metadata/_custom_type_script = "uid://ctw8qg4ako1bi"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sctwv"]
+size = Vector2(6, 9)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_58gwj"]
+resource_local_to_scene = true
+shader = ExtResource("5_52njo")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pdk2"]
+size = Vector2(6, 9)
+
+[node name="Knight" type="CharacterBody2D" node_paths=PackedStringArray("health") groups=["enemy"]]
+y_sort_enabled = true
+collision_layer = 48
+collision_mask = 33
+motion_mode = 1
+script = ExtResource("1_le6ar")
+stats = ExtResource("2_58gwj")
+data = SubResource("Resource_52njo")
+health = NodePath("Health")
+
+[node name="EnemyHurtBox" parent="." instance=ExtResource("3_tb262")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHurtBox"]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_sctwv")
+
+[node name="EnemySprite" parent="." node_paths=PackedStringArray("enemy", "health") instance=ExtResource("4_nq7r5")]
+material = SubResource("ShaderMaterial_58gwj")
+texture = ExtResource("6_lk4g6")
+script = ExtResource("7_ckp30")
+enemy = NodePath("..")
+health = NodePath("../Health")
+
+[node name="AxeSprite" type="Sprite2D" parent="."]
+position = Vector2(8, -7)
+rotation = 0.40491638
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("8_pchpt")
+
+[node name="Health" parent="." node_paths=PackedStringArray("hurt_box", "enemy") instance=ExtResource("9_7m4ay")]
+position = Vector2(-8, 6)
+hurt_box = NodePath("../EnemyHurtBox")
+enemy = NodePath("..")
+
+[node name="PhysicsCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_2pdk2")
+
+[node name="DeathManager" parent="." node_paths=PackedStringArray("enemy", "health") instance=ExtResource("11_58gwj")]
+enemy = NodePath("..")
+health = NodePath("../Health")
+
+[node name="EnemyStraightFollowStrategy" type="Node" parent="." node_paths=PackedStringArray("enemy")]
+script = ExtResource("13_lf87s")
+enemy = NodePath("..")
+metadata/_custom_type_script = "uid://ebynkm3siehe"

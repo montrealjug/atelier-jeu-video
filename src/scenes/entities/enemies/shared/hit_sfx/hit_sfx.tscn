@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://0fuvfiq2avnf"]
+
+[ext_resource type="AudioStream" uid="uid://xtawam60wlm2" path="res://assets/sounds/sfx/enemy_hit.wav" id="1_kqguf"]
+[ext_resource type="Script" uid="uid://oco5nvjmija6" path="res://src/scenes/entities/shared/one_shot_sound/one_shot_sound.gd" id="1_xdpfl"]
+
+[node name="HitSfx" type="AudioStreamPlayer"]
+stream = ExtResource("1_kqguf")
+volume_db = -6.805
+bus = &"SFX"
+script = ExtResource("1_xdpfl")
+random_pitch_min = 0.8
+random_pitch_max = 1.2
+metadata/_custom_type_script = "uid://oco5nvjmija6"

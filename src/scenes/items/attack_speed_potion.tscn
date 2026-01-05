@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgt0ptudkbota"]
+
+[ext_resource type="PackedScene" uid="uid://crw6duhe3pt0v" path="res://src/scenes/items/upgrade_potion.tscn" id="1_7422s"]
+[ext_resource type="Texture2D" uid="uid://b3qyctkuh3341" path="res://assets/sprites/items/potion_green.png" id="2_8hev4"]
+
+[node name="AttackSpeedPotion" instance=ExtResource("1_7422s")]
+upgrade_type = 1
+color = Color(0.2627451, 0.88235295, 0.7019608, 1)
+
+[node name="PotionSprite" parent="." index="1"]
+texture = ExtResource("2_8hev4")
+
+[node name="Label" parent="." index="5"]
+text = "attack speed+"

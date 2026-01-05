@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://yb6d02bwxv2i"]
+
+[ext_resource type="PackedScene" uid="uid://crw6duhe3pt0v" path="res://src/scenes/items/upgrade_potion.tscn" id="1_bup8v"]
+[ext_resource type="Texture2D" uid="uid://c4rjq65nng5re" path="res://assets/sprites/items/potion_grey.png" id="2_yienw"]
+
+[node name="DamagePotion" instance=ExtResource("1_bup8v")]
+color = Color(0.7529412, 0.79607844, 0.8627451, 1)
+
+[node name="PotionSprite" parent="." index="1"]
+texture = ExtResource("2_yienw")
+
+[node name="Label" parent="." index="5"]
+text = "damage+"

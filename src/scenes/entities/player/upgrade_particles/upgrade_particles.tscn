@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxgxrbms10uto"]
+
+[ext_resource type="Script" uid="uid://bxbhndfk72v6h" path="res://src/scenes/entities/shared/one_shot_particles/one_shot_particles.gd" id="1_qlcnv"]
+
+[sub_resource type="Curve" id="Curve_qlcnv"]
+_limits = [0.0, 30.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9875, 18.539328), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ptysj"]
+curve = SubResource("Curve_qlcnv")
+
+[sub_resource type="Curve" id="Curve_taic2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.022471905), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_iqsn0"]
+curve = SubResource("Curve_taic2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0kfdh"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 45.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = -2.2351742e-06
+tangential_accel_min = -2.2351742e-06
+tangential_accel_max = -2.2351742e-06
+damping_min = 1.0
+damping_max = 1.0
+damping_curve = SubResource("CurveTexture_ptysj")
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_iqsn0")
+
+[node name="UpgradeParticles" type="GPUParticles2D"]
+emitting = false
+amount = 32
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_0kfdh")
+script = ExtResource("1_qlcnv")
+metadata/_custom_type_script = "uid://bxbhndfk72v6h"

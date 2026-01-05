@@ -1,0 +1,79 @@
+[gd_scene load_steps=18 format=3 uid="uid://13fj2xmvwbbh"]
+
+[ext_resource type="Script" uid="uid://barc36edqtg3h" path="res://src/scenes/entities/enemies/shared/enemy.gd" id="1_qayao"]
+[ext_resource type="PackedScene" uid="uid://2cdeid6uewk3" path="res://src/scenes/entities/enemies/shared/hurt_box/hurt_box.tscn" id="1_skw3k"]
+[ext_resource type="Resource" uid="uid://b8urhyob668ft" path="res://resources/enemy_stats/archer_stats.tres" id="2_mp8xf"]
+[ext_resource type="PackedScene" uid="uid://cigf4tambls3a" path="res://src/scenes/entities/enemies/shared/sprite/enemy_sprite.tscn" id="2_qayao"]
+[ext_resource type="Script" uid="uid://ctw8qg4ako1bi" path="res://src/scripts/resources/enemy_data.gd" id="3_hdxm5"]
+[ext_resource type="Shader" uid="uid://b68sxx64mnqgf" path="res://resources/visual_shaders/flash.tres" id="3_hpc7y"]
+[ext_resource type="Script" uid="uid://bw83irovcswq5" path="res://src/scenes/entities/enemies/shared/sprite/enemy_sprite.gd" id="5_hdxm5"]
+[ext_resource type="Texture2D" uid="uid://o3suwi8igris" path="res://assets/sprites/entities/archer.png" id="7_hpc7y"]
+[ext_resource type="PackedScene" uid="uid://dirdwypci1ouv" path="res://src/scenes/entities/enemies/shared/health/enemy_health.tscn" id="7_p8pgi"]
+[ext_resource type="PackedScene" uid="uid://0kua4vljiw2f" path="res://src/scenes/entities/enemies/archer/arrow_shooter.tscn" id="11_mp8xf"]
+[ext_resource type="PackedScene" uid="uid://bhp4vmjehwk7a" path="res://src/scenes/entities/enemies/shared/death/death_manager.tscn" id="12_c8e84"]
+[ext_resource type="PackedScene" uid="uid://dcdi2a61j6eg5" path="res://src/scenes/entities/enemies/archer/arrow.tscn" id="12_hdxm5"]
+[ext_resource type="Script" uid="uid://bb3xxn7vnq3he" path="res://src/scenes/entities/enemies/shared/move_strategies/shoot_from_distance_strategy.gd" id="12_hpc7y"]
+
+[sub_resource type="Resource" id="Resource_p8pgi"]
+resource_local_to_scene = true
+script = ExtResource("3_hdxm5")
+metadata/_custom_type_script = "uid://ctw8qg4ako1bi"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c67ir"]
+size = Vector2(6, 9)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mp8xf"]
+resource_local_to_scene = true
+shader = ExtResource("3_hpc7y")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xt527"]
+size = Vector2(6, 9)
+
+[node name="Archer" type="CharacterBody2D" node_paths=PackedStringArray("health") groups=["enemy"]]
+y_sort_enabled = true
+collision_layer = 48
+collision_mask = 33
+motion_mode = 1
+script = ExtResource("1_qayao")
+stats = ExtResource("2_mp8xf")
+data = SubResource("Resource_p8pgi")
+health = NodePath("Health")
+
+[node name="EnemyHurtBox" parent="." instance=ExtResource("1_skw3k")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHurtBox"]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_c67ir")
+
+[node name="EnemySprite" parent="." node_paths=PackedStringArray("enemy", "health") instance=ExtResource("2_qayao")]
+material = SubResource("ShaderMaterial_mp8xf")
+texture = ExtResource("7_hpc7y")
+script = ExtResource("5_hdxm5")
+enemy = NodePath("..")
+health = NodePath("../Health")
+
+[node name="Health" parent="." node_paths=PackedStringArray("hurt_box", "enemy") instance=ExtResource("7_p8pgi")]
+position = Vector2(-8, 6)
+hurt_box = NodePath("../EnemyHurtBox")
+enemy = NodePath("..")
+
+[node name="PhysicsCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_xt527")
+
+[node name="ArrowShooter" parent="." instance=ExtResource("11_mp8xf")]
+arrow_scene = ExtResource("12_hdxm5")
+
+[node name="DeathManager" parent="." node_paths=PackedStringArray("enemy", "health") instance=ExtResource("12_c8e84")]
+enemy = NodePath("..")
+health = NodePath("../Health")
+
+[node name="EnemyShootfromDistanceStrategy" type="Node" parent="." node_paths=PackedStringArray("enemy", "shooter_component")]
+script = ExtResource("12_hpc7y")
+min_distance = 100.0
+shoot_cooldown = 3.0
+enemy = NodePath("..")
+shooter_component = NodePath("../ArrowShooter")
+metadata/_custom_type_script = "uid://bb3xxn7vnq3he"

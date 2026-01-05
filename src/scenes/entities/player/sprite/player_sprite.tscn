@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://btdl5bib3qgbm"]
+
+[ext_resource type="Shader" uid="uid://b68sxx64mnqgf" path="res://resources/visual_shaders/flash.tres" id="1_8g1s0"]
+[ext_resource type="Texture2D" uid="uid://di4eri2ujk4b2" path="res://assets/sprites/entities/mage.png" id="1_x5fo1"]
+[ext_resource type="Script" uid="uid://72goo1gpu8id" path="res://src/scenes/entities/player/sprite/player_sprite.gd" id="2_1ifkv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_us741"]
+shader = ExtResource("1_8g1s0")
+shader_parameter/flash_color = Color(1, 0.105669856, 0, 1)
+shader_parameter/flash_value = 0.0
+
+[sub_resource type="Animation" id="Animation_1ifkv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x5fo1"]
+resource_name = "sprite_animation"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 0.9)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_swokn"]
+_data = {
+&"RESET": SubResource("Animation_1ifkv"),
+&"sprite_animation": SubResource("Animation_x5fo1")
+}
+
+[node name="PlayerSprite" type="Sprite2D"]
+material = SubResource("ShaderMaterial_us741")
+texture = ExtResource("1_x5fo1")
+offset = Vector2(0, -8)
+script = ExtResource("2_1ifkv")
+
+[node name="AnimationTree" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_swokn")
+}
+autoplay = "sprite_animation"

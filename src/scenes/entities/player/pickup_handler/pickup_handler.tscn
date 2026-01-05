@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg4rsje1220yw"]
+
+[ext_resource type="Script" uid="uid://b4t4rdpjo7spf" path="res://src/scenes/entities/player/pickup_handler/pickup_handler.gd" id="1_uad4j"]
+[ext_resource type="PackedScene" uid="uid://dxgxrbms10uto" path="res://src/scenes/entities/player/upgrade_particles/upgrade_particles.tscn" id="2_u7ie3"]
+
+[node name="PickupHandler" type="Area2D"]
+collision_layer = 0
+collision_mask = 64
+script = ExtResource("1_uad4j")
+upgrade_particles_scene = ExtResource("2_u7ie3")

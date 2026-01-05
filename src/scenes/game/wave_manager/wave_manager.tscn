@@ -1,0 +1,44 @@
+[gd_scene load_steps=12 format=3 uid="uid://b2uisy5a4w2jd"]
+
+[ext_resource type="Script" uid="uid://ba2mfs2ai7slu" path="res://src/scenes/game/wave_manager/wave_manager.gd" id="1_jh2db"]
+[ext_resource type="Script" uid="uid://df2nx5j0m8id6" path="res://src/scripts/resources/wave_data.gd" id="2_c8r5e"]
+[ext_resource type="Resource" uid="uid://d25i6w3htu7vu" path="res://resources/wave_data/wave1_data.tres" id="3_i5j1t"]
+[ext_resource type="Resource" uid="uid://bhh1u4lbvx0e7" path="res://resources/wave_data/wave2_data.tres" id="4_0lheo"]
+[ext_resource type="Script" uid="uid://ciq1abjpwxnih" path="res://src/scenes/game/wave_manager/spawn_strategies/random_spawn_strategy.gd" id="4_5mk5q"]
+[ext_resource type="PackedScene" uid="uid://brprqwlpgme0d" path="res://src/scenes/game/enemy_spawner/enemy_spawner.tscn" id="5_nku7h"]
+[ext_resource type="Resource" uid="uid://c6hg3qc3n16t" path="res://resources/wave_data/wave3_data.tres" id="5_pcl2k"]
+[ext_resource type="Resource" uid="uid://bu774tlb45avq" path="res://resources/wave_data/wave4_data.tres" id="6_a57sw"]
+[ext_resource type="Script" uid="uid://dd0vwlu45p33c" path="res://src/scenes/game/wave_manager/spawn_strategies/cluster_spawn_strategy.gd" id="6_nku7h"]
+[ext_resource type="Script" uid="uid://c0aefeki1ym0k" path="res://src/scenes/game/wave_manager/spawn_strategies/circle_spawn_strategy.gd" id="7_6yygy"]
+[ext_resource type="Resource" uid="uid://h667p14mgwdg" path="res://resources/wave_data/wave5_data.tres" id="7_loowi"]
+
+[node name="WaveManager" type="Node"]
+script = ExtResource("1_jh2db")
+waves_data = Array[ExtResource("2_c8r5e")]([ExtResource("3_i5j1t"), ExtResource("4_0lheo"), ExtResource("5_pcl2k"), ExtResource("6_a57sw"), ExtResource("7_loowi")])
+
+[node name="WaveTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 30.0
+one_shot = true
+
+[node name="SpawnStrategies" type="Node" parent="."]
+
+[node name="RandomSpawnStrategy" type="Node" parent="SpawnStrategies"]
+unique_name_in_owner = true
+script = ExtResource("4_5mk5q")
+spawner_scene = ExtResource("5_nku7h")
+metadata/_custom_type_script = "uid://ciq1abjpwxnih"
+
+[node name="ClusterSpawnStrategy" type="Node" parent="SpawnStrategies"]
+unique_name_in_owner = true
+script = ExtResource("6_nku7h")
+cluster_radius = 35.0
+spawner_scene = ExtResource("5_nku7h")
+metadata/_custom_type_script = "uid://dd0vwlu45p33c"
+
+[node name="CircleSpawnStrategy" type="Node" parent="SpawnStrategies"]
+unique_name_in_owner = true
+script = ExtResource("7_6yygy")
+circle_radius = 125.0
+spawner_scene = ExtResource("5_nku7h")
+metadata/_custom_type_script = "uid://c0aefeki1ym0k"

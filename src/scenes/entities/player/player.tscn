@@ -1,0 +1,138 @@
+[gd_scene load_steps=24 format=3 uid="uid://bm67hkd61onj5"]
+
+[ext_resource type="Script" uid="uid://bgp1vyk3sp3xl" path="res://src/scenes/entities/player/player.gd" id="1_qopur"]
+[ext_resource type="PackedScene" uid="uid://btdl5bib3qgbm" path="res://src/scenes/entities/player/sprite/player_sprite.tscn" id="2_5etv0"]
+[ext_resource type="Resource" uid="uid://hr6lk00xhp8w" path="res://resources/player_stats/player_stats.tres" id="2_6kvpb"]
+[ext_resource type="Script" uid="uid://babrxroub7b5k" path="res://src/scripts/resources/player_data.gd" id="3_5vmyf"]
+[ext_resource type="PackedScene" uid="uid://c54tfk8chmtu8" path="res://src/scenes/entities/player/hurt_box/player_hurt_box.tscn" id="4_bsoco"]
+[ext_resource type="PackedScene" uid="uid://rvqdmju3y4rh" path="res://src/scenes/entities/player/weapon/weapon.tscn" id="4_ja0qc"]
+[ext_resource type="Script" uid="uid://6mjagepgcm62" path="res://src/scenes/entities/player/movement/player_movement.gd" id="5_6kvpb"]
+[ext_resource type="PackedScene" uid="uid://cg4rsje1220yw" path="res://src/scenes/entities/player/pickup_handler/pickup_handler.tscn" id="8_d28hy"]
+[ext_resource type="PackedScene" uid="uid://de47nfwesaue7" path="res://src/scenes/entities/player/camera/camera.tscn" id="8_sjc18"]
+[ext_resource type="PackedScene" uid="uid://c5e73fvo2l384" path="res://src/scenes/entities/player/health/player_health.tscn" id="10_3wmh5"]
+[ext_resource type="Texture2D" uid="uid://dc2me7bq6ctph" path="res://assets/sprites/weapons/spark.png" id="12_k7lkm"]
+[ext_resource type="Script" uid="uid://c7ad5vyk1go2d" path="res://src/scenes/entities/player/death_handler/death_handler.gd" id="13_3vwgm"]
+[ext_resource type="Texture2D" uid="uid://daos7mp53ld25" path="res://assets/sprites/misc/shadow.png" id="13_d28hy"]
+[ext_resource type="AudioStream" uid="uid://dycluigi8fxut" path="res://assets/sounds/sfx/player_death.wav" id="14_d28hy"]
+
+[sub_resource type="Resource" id="Resource_k7lkm"]
+resource_local_to_scene = true
+script = ExtResource("3_5vmyf")
+metadata/_custom_type_script = "uid://babrxroub7b5k"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3wmh5"]
+size = Vector2(6, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cx3ie"]
+size = Vector2(8, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d28hy"]
+
+[sub_resource type="Gradient" id="Gradient_k7lkm"]
+offsets = PackedFloat32Array(0, 0.8457944, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3vwgm"]
+gradient = SubResource("Gradient_k7lkm")
+
+[sub_resource type="Curve" id="Curve_d28hy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5541667, 1), 0.0, 0.0, 0, 0, Vector2(0.7708334, 0.9887641), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_lgfv5"]
+curve = SubResource("Curve_d28hy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3vwgm"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 25.0
+initial_velocity_max = 250.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -100.0
+tangential_accel_max = 99.99999
+scale_min = 0.19999999
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_lgfv5")
+color_ramp = SubResource("GradientTexture1D_3vwgm")
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 0
+motion_mode = 1
+script = ExtResource("1_qopur")
+stats = ExtResource("2_6kvpb")
+data = SubResource("Resource_k7lkm")
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.36862746)
+z_index = -1
+z_as_relative = false
+texture = ExtResource("13_d28hy")
+
+[node name="PlayerSprite" parent="." node_paths=PackedStringArray("player", "health") instance=ExtResource("2_5etv0")]
+y_sort_enabled = true
+player = NodePath("..")
+health = NodePath("../PlayerHealth")
+
+[node name="PlayerHurtBox" parent="." instance=ExtResource("4_bsoco")]
+
+[node name="HurtBoxCollisionShape" type="CollisionShape2D" parent="PlayerHurtBox"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_3wmh5")
+
+[node name="PhysicsCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_cx3ie")
+
+[node name="Weapon" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_ja0qc")]
+position = Vector2(0, -5)
+player = NodePath("..")
+
+[node name="PickupHandler" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_d28hy")]
+unique_name_in_owner = true
+player = NodePath("..")
+
+[node name="PickupCollisionShape" type="CollisionShape2D" parent="PickupHandler"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_d28hy")
+
+[node name="Camera" parent="." instance=ExtResource("8_sjc18")]
+limit_left = 0
+limit_top = 0
+limit_right = 1263
+limit_bottom = 656
+limit_smoothed = true
+
+[node name="DeathParticles" type="GPUParticles2D" parent="."]
+process_mode = 3
+emitting = false
+amount = 256
+texture = ExtResource("12_k7lkm")
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_3vwgm")
+
+[node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("5_6kvpb")
+player = NodePath("..")
+metadata/_custom_type_script = "uid://6mjagepgcm62"
+
+[node name="PlayerHealth" parent="." node_paths=PackedStringArray("hurt_box", "player") instance=ExtResource("10_3wmh5")]
+unique_name_in_owner = true
+hurt_box = NodePath("../PlayerHurtBox")
+player = NodePath("..")
+
+[node name="PlayerDeathHandler" type="Node" parent="." node_paths=PackedStringArray("death_particles", "death_sfx", "sprite", "weapon", "health")]
+script = ExtResource("13_3vwgm")
+death_particles = NodePath("../DeathParticles")
+death_sfx = NodePath("../DeathSfx")
+sprite = NodePath("../PlayerSprite")
+weapon = NodePath("../Weapon")
+health = NodePath("../PlayerHealth")
+metadata/_custom_type_script = "uid://c7ad5vyk1go2d"
+
+[node name="DeathSfx" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("14_d28hy")
+volume_db = -7.751
+bus = &"SFX"

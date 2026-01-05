@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://xkcnsgxt7vq6"]
+
+[ext_resource type="Theme" uid="uid://87yeb2smcrut" path="res://resources/themes/main_theme.tres" id="1_6jm6l"]
+[ext_resource type="Script" uid="uid://ccr56o16168ef" path="res://src/scenes/ui/death_screen/death_screen.gd" id="1_was05"]
+[ext_resource type="PackedScene" uid="uid://boml0pmsrnkxp" path="res://src/scenes/ui/components/confirm_sfx/confirm_sfx.tscn" id="2_qn3b5"]
+
+[node name="DeathScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_was05")
+confirm_sfx_scene = ExtResource("2_qn3b5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.13333334, 0.078431375, 0.4392157)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="YoureDeadLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_6jm6l")
+text = "oh no! you're dead!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_bottom = NodePath("../MenuButton")
+focus_mode = 0
+theme = ExtResource("1_6jm6l")
+text = "restart"
+
+[node name="MenuButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../RestartButton")
+focus_mode = 0
+theme = ExtResource("1_6jm6l")
+text = "menu"

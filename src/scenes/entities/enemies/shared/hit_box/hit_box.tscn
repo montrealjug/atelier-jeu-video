@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dmbosnw4msnii"]
+
+[node name="EnemyHitBox" type="Area2D"]
+collision_layer = 16
+collision_mask = 0

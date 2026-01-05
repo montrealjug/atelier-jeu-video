@@ -1,0 +1,105 @@
+[gd_scene load_steps=17 format=3 uid="uid://ccbtxwd52fgw5"]
+
+[ext_resource type="Script" uid="uid://barc36edqtg3h" path="res://src/scenes/entities/enemies/shared/enemy.gd" id="1_fwjwt"]
+[ext_resource type="Resource" uid="uid://7jedw75x2mtv" path="res://resources/enemy_stats/spider_stats.tres" id="2_fwjwt"]
+[ext_resource type="Script" uid="uid://ctw8qg4ako1bi" path="res://src/scripts/resources/enemy_data.gd" id="3_8fejy"]
+[ext_resource type="PackedScene" uid="uid://2cdeid6uewk3" path="res://src/scenes/entities/enemies/shared/hurt_box/hurt_box.tscn" id="4_6350r"]
+[ext_resource type="PackedScene" uid="uid://cigf4tambls3a" path="res://src/scenes/entities/enemies/shared/sprite/enemy_sprite.tscn" id="5_j5e6b"]
+[ext_resource type="Shader" uid="uid://b68sxx64mnqgf" path="res://resources/visual_shaders/flash.tres" id="6_jkbi6"]
+[ext_resource type="Texture2D" uid="uid://bo8tedx4mfphj" path="res://assets/sprites/entities/spider.png" id="7_drsdw"]
+[ext_resource type="Script" uid="uid://bw83irovcswq5" path="res://src/scenes/entities/enemies/shared/sprite/enemy_sprite.gd" id="8_35bxt"]
+[ext_resource type="Texture2D" uid="uid://daos7mp53ld25" path="res://assets/sprites/misc/shadow.png" id="9_fwjwt"]
+[ext_resource type="PackedScene" uid="uid://dirdwypci1ouv" path="res://src/scenes/entities/enemies/shared/health/enemy_health.tscn" id="10_2m5tw"]
+[ext_resource type="PackedScene" uid="uid://bhp4vmjehwk7a" path="res://src/scenes/entities/enemies/shared/death/death_manager.tscn" id="12_2pdk6"]
+[ext_resource type="Script" uid="uid://dlp7yv0vxb7aq" path="res://src/scenes/entities/enemies/shared/move_strategies/swing_strategy.gd" id="16_8fejy"]
+
+[sub_resource type="Resource" id="Resource_2lpm5"]
+resource_local_to_scene = true
+script = ExtResource("3_8fejy")
+metadata/_custom_type_script = "uid://ctw8qg4ako1bi"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5pu8"]
+size = Vector2(6, 3.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33sh0"]
+size = Vector2(6, 9)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2pdk6"]
+resource_local_to_scene = true
+shader = ExtResource("6_jkbi6")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0
+
+[node name="Spider" type="CharacterBody2D" node_paths=PackedStringArray("health") groups=["enemy"]]
+z_index = 2
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_fwjwt")
+stats = ExtResource("2_fwjwt")
+data = SubResource("Resource_2lpm5")
+health = NodePath("Health")
+
+[node name="PhysicsCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_r5pu8")
+
+[node name="EnemyHurtBox" parent="." instance=ExtResource("4_6350r")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHurtBox"]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_33sh0")
+
+[node name="SpiderWeb" type="Node2D" parent="."]
+z_index = 3
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(0, -14)
+
+[node name="InnerLine" type="Line2D" parent="SpiderWeb"]
+points = PackedVector2Array(0, 0, 0, -1000)
+width = 2.0
+default_color = Color(0.7529412, 0.79607844, 0.8627451, 0.3137255)
+
+[node name="LeftLine" type="Line2D" parent="SpiderWeb"]
+position = Vector2(-2, 0)
+points = PackedVector2Array(0, 0, 0, -1000)
+width = 2.0
+default_color = Color(0.24705882, 0.14901961, 0.19215687, 0.3137255)
+
+[node name="RightLine" type="Line2D" parent="SpiderWeb"]
+position = Vector2(2, 0)
+points = PackedVector2Array(0, 0, 0, -1000)
+width = 2.0
+default_color = Color(0.24705882, 0.14901961, 0.19215687, 0.3137255)
+
+[node name="EnemySprite" parent="." node_paths=PackedStringArray("enemy", "health") instance=ExtResource("5_j5e6b")]
+z_index = 1
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_2pdk6")
+texture = ExtResource("7_drsdw")
+script = ExtResource("8_35bxt")
+enemy = NodePath("..")
+health = NodePath("../Health")
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.36862746)
+z_index = -1
+z_as_relative = false
+position = Vector2(0, 4)
+texture = ExtResource("9_fwjwt")
+
+[node name="Health" parent="." node_paths=PackedStringArray("hurt_box", "enemy") instance=ExtResource("10_2m5tw")]
+position = Vector2(-8, 10)
+hurt_box = NodePath("../EnemyHurtBox")
+enemy = NodePath("..")
+
+[node name="DeathManager" parent="." node_paths=PackedStringArray("enemy", "health") instance=ExtResource("12_2pdk6")]
+enemy = NodePath("..")
+health = NodePath("../Health")
+
+[node name="EnemySwingStrategy" type="Node" parent="." node_paths=PackedStringArray("enemy")]
+script = ExtResource("16_8fejy")
+enemy = NodePath("..")
+orbit_radius = 1000.0
+max_angle_deg = 2.0
+metadata/_custom_type_script = "uid://dlp7yv0vxb7aq"

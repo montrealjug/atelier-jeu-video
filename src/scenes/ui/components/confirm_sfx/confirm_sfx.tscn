@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://boml0pmsrnkxp"]
+
+[ext_resource type="AudioStream" uid="uid://c4b6rvbgwa72f" path="res://assets/sounds/sfx/confirm.wav" id="1_2dw8l"]
+[ext_resource type="Script" uid="uid://oco5nvjmija6" path="res://src/scenes/entities/shared/one_shot_sound/one_shot_sound.gd" id="2_t26xw"]
+
+[node name="ConfirmSfx" type="AudioStreamPlayer"]
+stream = ExtResource("1_2dw8l")
+script = ExtResource("2_t26xw")
+metadata/_custom_type_script = "uid://oco5nvjmija6"

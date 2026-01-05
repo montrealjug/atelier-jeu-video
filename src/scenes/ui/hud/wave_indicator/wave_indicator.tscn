@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://ph68ehp7k5c1"]
+
+[ext_resource type="Script" uid="uid://dysprarj14mug" path="res://src/scenes/ui/hud/wave_indicator/wave_indicator.gd" id="1_brbxa"]
+[ext_resource type="Theme" uid="uid://87yeb2smcrut" path="res://resources/themes/main_theme.tres" id="1_vn3fh"]
+
+[node name="WaveIndicator" type="Control"]
+custom_minimum_size = Vector2(130, 16)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_brbxa")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Wave" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_vn3fh")
+text = "wave "
+
+[node name="CurrentWaveNumber" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_vn3fh")
+text = "1"
+
+[node name="Separator" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_vn3fh")
+text = "/"
+
+[node name="MaxWaveNumber" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_vn3fh")
+text = "5"

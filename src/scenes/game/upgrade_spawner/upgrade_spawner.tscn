@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bviq5iddqxnlq"]
+
+[ext_resource type="Script" uid="uid://d0jnyf6qdliqg" path="res://src/scenes/game/upgrade_spawner/upgrade_spawner.gd" id="1_eckan"]
+[ext_resource type="PackedScene" uid="uid://yb6d02bwxv2i" path="res://src/scenes/items/damage_potion.tscn" id="2_bp18p"]
+[ext_resource type="PackedScene" uid="uid://cgt0ptudkbota" path="res://src/scenes/items/attack_speed_potion.tscn" id="3_1icjy"]
+[ext_resource type="PackedScene" uid="uid://pyksrobuph2e" path="res://src/scenes/items/hp_potion.tscn" id="4_bji5b"]
+[ext_resource type="PackedScene" uid="uid://cbsryv8x370db" path="res://src/scenes/items/move_speed_potion.tscn" id="5_1icjy"]
+[ext_resource type="Theme" uid="uid://87yeb2smcrut" path="res://resources/themes/main_theme.tres" id="6_bji5b"]
+
+[node name="UpgradeSpawner" type="Node"]
+script = ExtResource("1_eckan")
+upgrades = Dictionary[int, PackedScene]({
+0: ExtResource("2_bp18p"),
+1: ExtResource("3_1icjy"),
+2: ExtResource("4_bji5b"),
+3: ExtResource("5_1icjy")
+})
+upgrade_spawn_amounts = Dictionary[int, int]({
+1: 2,
+2: 3,
+3: 3,
+4: 4,
+5: 0
+})
+upgrade_pick_amounts = Dictionary[int, int]({
+1: 1,
+2: 2,
+3: 2,
+4: 3,
+5: 0
+})
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.5
+offset_top = -11.0
+offset_right = 13.5
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_bji5b")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "pick 2"
+horizontal_alignment = 1
+vertical_alignment = 1

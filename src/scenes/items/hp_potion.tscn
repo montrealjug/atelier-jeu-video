@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://pyksrobuph2e"]
+
+[ext_resource type="PackedScene" uid="uid://crw6duhe3pt0v" path="res://src/scenes/items/upgrade_potion.tscn" id="1_umayj"]
+
+[node name="HpPotion" instance=ExtResource("1_umayj")]
+upgrade_type = 2
+color = Color(1, 0.4392157, 0.42745098, 1)
+
+[node name="Label" parent="." index="5"]
+text = "hp+"

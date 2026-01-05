@@ -1,0 +1,76 @@
+[gd_scene load_steps=15 format=3 uid="uid://bm67hkd61onj5"]
+
+[ext_resource type="Script" uid="uid://bgp1vyk3sp3xl" path="res://src/scenes/entities/player/player.gd" id="1_qopur"]
+[ext_resource type="PackedScene" uid="uid://btdl5bib3qgbm" path="res://src/scenes/entities/player/sprite/player_sprite.tscn" id="2_5etv0"]
+[ext_resource type="Resource" uid="uid://hr6lk00xhp8w" path="res://resources/player_stats/player_stats.tres" id="2_6kvpb"]
+[ext_resource type="Script" uid="uid://cbxg476pi68aw" path="res://src/scripts/state-machine/state_machine.gd" id="3_0pd4b"]
+[ext_resource type="Script" uid="uid://babrxroub7b5k" path="res://src/scripts/resources/player_data.gd" id="3_5vmyf"]
+[ext_resource type="Script" uid="uid://dp25mfdrf26u6" path="res://src/scenes/entities/player/state-machine/idle_state.gd" id="4_5etv0"]
+[ext_resource type="PackedScene" uid="uid://c54tfk8chmtu8" path="res://src/scenes/entities/player/hurt_box/player_hurt_box.tscn" id="4_bsoco"]
+[ext_resource type="PackedScene" uid="uid://rvqdmju3y4rh" path="res://src/scenes/entities/player/weapon/weapon.tscn" id="4_ja0qc"]
+[ext_resource type="Script" uid="uid://6mjagepgcm62" path="res://src/scenes/entities/player/state-machine/move_state.gd" id="5_6kvpb"]
+[ext_resource type="PackedScene" uid="uid://de47nfwesaue7" path="res://src/scenes/entities/player/camera/camera.tscn" id="8_sjc18"]
+[ext_resource type="PackedScene" uid="uid://c5e73fvo2l384" path="res://src/scenes/entities/player/health/player_health.tscn" id="10_3wmh5"]
+
+[sub_resource type="Resource" id="Resource_k7lkm"]
+resource_local_to_scene = true
+script = ExtResource("3_5vmyf")
+metadata/_custom_type_script = "uid://babrxroub7b5k"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3wmh5"]
+size = Vector2(6, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cx3ie"]
+size = Vector2(8, 10)
+
+[node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("1_qopur")
+stats = ExtResource("2_6kvpb")
+data = SubResource("Resource_k7lkm")
+
+[node name="PlayerSprite" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_5etv0")]
+player = NodePath("..")
+
+[node name="PlayerHurtBox" parent="." instance=ExtResource("4_bsoco")]
+
+[node name="HurtBoxCollisionShape" type="CollisionShape2D" parent="PlayerHurtBox"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_3wmh5")
+
+[node name="PhysicsCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_cx3ie")
+
+[node name="Weapon" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_ja0qc")]
+position = Vector2(0, -5)
+player = NodePath("..")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_0pd4b")
+initial_state = NodePath("PlayerIdleState")
+metadata/_custom_type_script = "uid://cbxg476pi68aw"
+
+[node name="PlayerIdleState" type="Node" parent="StateMachine"]
+unique_name_in_owner = true
+script = ExtResource("4_5etv0")
+metadata/_custom_type_script = "uid://dp25mfdrf26u6"
+
+[node name="PlayerMoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+unique_name_in_owner = true
+script = ExtResource("5_6kvpb")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://6mjagepgcm62"
+
+[node name="Camera" parent="." instance=ExtResource("8_sjc18")]
+limit_left = 0
+limit_top = 0
+limit_right = 1263
+limit_bottom = 656
+limit_smoothed = true
+
+[node name="PlayerHealth" parent="." node_paths=PackedStringArray("hurt_box", "player") instance=ExtResource("10_3wmh5")]
+hurt_box = NodePath("../PlayerHurtBox")
+player = NodePath("..")

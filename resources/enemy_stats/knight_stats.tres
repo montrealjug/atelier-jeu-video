@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=4 format=3 uid="uid://crh4r78tigi3q"]
+
+[ext_resource type="Script" uid="uid://bayvyo74bdfdd" path="res://src/scripts/resources/enemy_stats.gd" id="1_iygmx"]
+[ext_resource type="Script" uid="uid://cc3uwu1rrhmr8" path="res://src/scripts/resources/damage_information.gd" id="1_yfi2t"]
+
+[sub_resource type="Resource" id="Resource_o1b0i"]
+script = ExtResource("1_yfi2t")
+damage = 10
+metadata/_custom_type_script = "uid://cc3uwu1rrhmr8"
+
+[resource]
+script = ExtResource("1_iygmx")
+hp_max = 30
+damage_information = SubResource("Resource_o1b0i")
+speed = 20
+metadata/_custom_type_script = "uid://bayvyo74bdfdd"

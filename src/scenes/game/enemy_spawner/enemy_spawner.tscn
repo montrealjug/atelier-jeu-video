@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://brprqwlpgme0d"]
+
+[ext_resource type="Script" uid="uid://bkt0ns3dtetvi" path="res://src/scenes/game/enemy_spawner/enemy_spawner.gd" id="1_gkpn7"]
+[ext_resource type="Texture2D" uid="uid://c44b4paws4y3u" path="res://assets/sprites/misc/target.png" id="2_fe6pg"]
+[ext_resource type="PackedScene" uid="uid://opudia3iyf6m" path="res://src/scenes/entities/enemies/shared/smoke_particles/smoke_particles.tscn" id="2_rkirg"]
+[ext_resource type="AudioStream" uid="uid://c2p1l881bqph1" path="res://assets/sounds/sfx/spawn.wav" id="4_snc6q"]
+
+[sub_resource type="Animation" id="Animation_hso6k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TargetSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TargetSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.93333334, 0.27058825, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rkirg"]
+resource_name = "target_animation"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TargetSprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 1, 1.4, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.1, 0.9), Vector2(0.9, 0.7), Vector2(1.1, 0.8), Vector2(0.9, 0.7), Vector2(1.1, 0.9), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TargetSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.9, 1.6, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.93333334, 0.27058825, 1), Color(1, 0.93333334, 0.27058825, 1), Color(1, 0.4509804, 0.22352941, 1), Color(1, 0.4509804, 0.22352941, 1), Color(1, 0.21392411, 0.1016984, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ljgey"]
+_data = {
+&"RESET": SubResource("Animation_hso6k"),
+&"target_animation": SubResource("Animation_rkirg")
+}
+
+[node name="EnemySpawner" type="Node2D"]
+script = ExtResource("1_gkpn7")
+smoke_particles_scene = ExtResource("2_rkirg")
+
+[node name="TargetSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 0.93333334, 0.27058825, 1)
+z_index = 3
+z_as_relative = false
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_fe6pg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ljgey")
+}
+
+[node name="SpawnSfx" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_snc6q")
+volume_db = 4.584

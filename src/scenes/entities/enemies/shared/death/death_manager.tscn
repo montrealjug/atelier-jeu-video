@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhp4vmjehwk7a"]
+
+[ext_resource type="Script" uid="uid://wvyf66wcj086" path="res://src/scenes/entities/enemies/shared/death/death_manager.gd" id="1_dyg6m"]
+[ext_resource type="PackedScene" uid="uid://opudia3iyf6m" path="res://src/scenes/entities/enemies/shared/smoke_particles/smoke_particles.tscn" id="2_rpwmd"]
+
+[node name="DeathManager" type="Node2D"]
+script = ExtResource("1_dyg6m")
+death_particles_scene = ExtResource("2_rpwmd")

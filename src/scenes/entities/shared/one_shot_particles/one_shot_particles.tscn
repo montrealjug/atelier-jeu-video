@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4kmcxppyrxu2"]
+
+[ext_resource type="Script" uid="uid://bxbhndfk72v6h" path="res://src/scenes/entities/shared/one_shot_particles/one_shot_particles.gd" id="1_14nns"]
+
+[node name="OneShotParticles" type="GPUParticles2D"]
+script = ExtResource("1_14nns")
