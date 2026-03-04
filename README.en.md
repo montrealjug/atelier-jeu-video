@@ -2,7 +2,7 @@
 
 [🇫🇷 Français](README.md) | 🇬🇧 English
 
-![Tini Wizard Main Image](tini-wizard-main-image.png)
+![Tiny Wizard Main Image](./readme-images/tiny-wizard.png)
 
 Welcome to the **Video Game Programming** workshop by [Devoxx4Kids Québec](https://www.devoxx4kids.org/quebec/) !
 
@@ -296,7 +296,7 @@ var score: int = 0
 **Challenge 15 — Discover signals**
 Open `src/scripts/autoloads/signals.gd`.
 You'll see `signal enemy_died(enemy: Enemy)`. This is a **signal**: when an enemy dies, this signal is sent to everyone listening.
-Who is already listening? Search for `enemy_died.connect` in the project (**Search > Find in Files**).
+Who is already listening? Search for `enemy_died.connect` in the project (**Project > Find in Files**).
 
 ---
 

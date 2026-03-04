@@ -1,6 +1,6 @@
 # 🧙 Devoxx4Kids — Dungeon du Sorcier
 
-![Tini Wizard main](Tini-Wizard-main.png)
+![Tiny Wizard Main Image](./readme-images/tiny-wizard.png)
 
 Bienvenue à l'atelier **Programmation de Jeux Vidéo** de [Devoxx4Kids Québec](https://www.devoxx4kids.org/quebec/) !
 
@@ -295,7 +295,7 @@ var score: int = 0
 **Défi 15 — Découvre les signaux**
 Ouvre `src/scripts/autoloads/signals.gd`.
 Tu vois `signal enemy_died(enemy: Enemy)` ? C'est un **signal** : quand un ennemi meurt, ce signal est envoyé à tous ceux qui l'écoutent.
-Qui l'écoute déjà ? Cherche `enemy_died.connect` dans le projet (menu **Search > Find in Files**).
+Qui l'écoute déjà ? Cherche `enemy_died.connect` dans le projet (menu **Project > Find in Files**).
 
 ---
 
