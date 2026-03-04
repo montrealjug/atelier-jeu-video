@@ -385,7 +385,9 @@ Voici les outils dont tu disposes :
 - `global_position` — la position de l'arme dans le monde du jeu
 - `.normalized()` — transforme un vecteur en une direction de longueur 1
 
-**Indice :** pour obtenir une direction qui pointe d'un point A vers un point B, on calcule `B - A`. Ici, A c'est l'arme, et B c'est la souris. Et n'oublie pas de normaliser le résultat !
+**Indice :** ici, tu dois :
+	* Ajouter `else` à l’instruction `if` — rappelle-toi des bases du code qu’on a vues au début de l’atelier !
+	* Écrire cette ligne sous le `else`, mais en programmation avec les outils : `current direction = (global mouse position - global position).normalized`
 
 <details>
 <summary>Solution</summary>
