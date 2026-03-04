@@ -128,7 +128,7 @@ Follow these steps in order. Ask a workshop leader if you're stuck!
 3. [ ] **Launch the game** and play for a few minutes to understand it ([How to Play](#️-how-to-play))
 4. [ ] **Explore the project**: browse folders, scenes, and scripts — ask questions!
 5. [ ] **Identify what's missing** (hint: try aiming with the mouse!)
-6. [ ] **Complete your challenges** — follow the [35 challenges](#️-your-35-challenges) below
+6. [ ] **Complete your challenges** — follow the [27 challenges](#️-your-27-challenges) below
 7. [ ] **Demo your game** to your parents at the end of the session!
 
 ### Open the Project in Godot
@@ -266,7 +266,7 @@ You'll see these a lot in the game's code!
 
 ---
 
-## ⚔️ Your 35 Challenges
+## ⚔️ Your 27 Challenges
 
 Challenges are grouped by difficulty. **Start with Group 1** and go at your own pace!
 
@@ -482,27 +482,22 @@ Launch the game and survive to your wave!
 
 **Challenge 21 — Look at the current wizard sprite**
 In the FileSystem, navigate to `assets/sprites/entities/`.
-Double-click `mage.png` to preview it. This is the image that represents your wizard in the game!
+Double-click `mage.png` to preview it in the right panel. This is the image that represents your wizard in the game!
 
-**Challenge 22 — Find a new character**
+##### Pixel Art
 Go to [OpenGameArt.org](https://opengameart.org/), a website offering free open source art resources for video games.
 In the search bar, look for **"top down character"** or **"pixel art character"**.
-Find a character you like — ideally a top-down view in **PNG** format (transparent background preferred).
+These are characters that can be freely used in video games like this one.
 
-**Challenge 23 — Download and import the image into Godot**
-Download the PNG file to your computer.
-Then, in Godot, **drag the image from Windows File Explorer** directly into the `assets/sprites/entities/` folder in the FileSystem panel. Godot will import it automatically!
+Since these images often require some adaptation, we have already prepared a few characters for you, ready to use in the `assets/sprites/entities/` folder.
+Choose one of the following: `girl.png`, `boy.png`, `sumo.png`, `mage.png`, or even take the appearance of an enemy with `archer.png`!
 
-**Challenge 24 — Replace the wizard's texture**
+##### Change your appearance
 In the FileSystem, open `src/scenes/entities/player/sprite/player_sprite.tscn` by double-clicking it.
-Click the **PlayerSprite** node in the scene tree.
-In the Inspector on the right, find the **Texture** property.
-**Drag your new PNG** from the FileSystem onto that property. The wizard's appearance changes!
-Press **F5** to launch the game and see your new character in action.
-
-**Challenge 25 — Adjust the position if needed**
-If your character looks offset or misaligned in the game, click **PlayerSprite** and find the **Offset** property in the Inspector.
-The current value is `(0, -8)`. Adjust the **Y** value to move the image up or down until it looks right!
+- Click the **PlayerSprite** node in the scene tree.
+- In the Inspector on the right, find the **Texture** property.
+- **Drag your new PNG** from the FileSystem onto that property. The wizard's appearance changes!
+- Launch the game with **F5** to see your new character in action.
 
 ---
 
@@ -512,26 +507,26 @@ The current value is `(0, -8)`. Adjust the **Y** value to move the image up or d
 >
 > In Godot, an object that blocks others is called a **StaticBody2D**. You give it a **CollisionShape2D** to define its shape, and a visual element so you can see it.
 
-**Challenge 26 — Open the main game scene**
+**Challenge 22 — Open the main game scene**
 In the FileSystem, navigate to `src/scenes/game/wave_manager/` and double-click **`game.tscn`**.
 You can see the arena in the Viewport. This is where you'll place your walls!
 
-**Challenge 27 — Create your first wall**
+##### Create your first wall
 In the scene tree on the left, **right-click the `LevelMap` node** and choose **Add Child Node**.
 Search for **`StaticBody2D`** and click **Create**.
 Rename it `Wall1` (double-click on the node in the scene tree to rename it).
 
-**Challenge 28 — Give it a collision shape**
+##### Give it a collision shape
 Right-click **`Wall1`** and add a child node **`CollisionShape2D`**.
 Click that node in the tree. In the Inspector, click **Shape** and choose **New RectangleShape2D**.
 Click on the new shape and set its size: **`x = 32`, `y = 32`** (a 32-pixel square).
 
-**Challenge 29 — Make the wall visible**
+##### Make the wall visible
 Right-click **`Wall1`** and add a child node **`ColorRect`**.
 In the Inspector, set **Size** to `Vector2(64, 64)` and **Color** to a stone-like color (e.g. dark grey `#606060`).
 Also set the **Position** of the ColorRect to `Vector2(-32, -32)` to center it on the wall.
 
-**Challenge 30 — Duplicate and position 4 walls**
+##### Duplicate and position 4 walls
 Right-click **`Wall1`** in the scene tree and choose **Duplicate** — repeat 3 times to get `Wall2`, `Wall3`, and `Wall4`.
 For each wall, select it and change its **Position** in the Inspector to spread them around the arena (e.g. `(-200, 0)`, `(200, 0)`, `(0, -150)`, `(0, 150)`).
 Launch the game — the wizard and enemies can no longer walk through your walls!
@@ -542,7 +537,7 @@ Launch the game — the wizard and enemies can no longer walk through your walls
 
 > In Group 7, you **write code** to customize the game your way. These challenges aren't necessarily harder — they're about **expressing your creativity through code**!
 
-**Challenge 31 — Change the fireball color**
+**Challenge 23 — Change the fireball color**
 Open `src/scenes/entities/player/fireball/fireball.gd`.
 In the `_ready()` function, after the two existing lines, add:
 ```gdscript
@@ -550,14 +545,14 @@ sprite.modulate = Color(0.5, 0, 1)  # purple fireballs!
 ```
 Launch the game. Try other colors: `Color.GREEN`, `Color.BLUE`, `Color(1, 0.5, 0)` for orange, `Color.RED`…
 
-**Challenge 32 — Change the explosion color**
+**Challenge 24 — Change the explosion color**
 In the same `fireball.gd` file, still inside `_ready()`, also add:
 ```gdscript
 spark_particles.modulate = Color(0, 1, 0)  # green explosion sparks!
 ```
 Launch the game and shoot fireballs — the sparks on impact change color!
 
-**Challenge 33 — Track your survival time**
+**Challenge 25 — Track your survival time**
 Open `src/scripts/autoloads/game_data.gd`.
 Add a variable and a function to measure elapsed time:
 ```gdscript
@@ -568,7 +563,7 @@ func _process(delta: float) -> void:
 ```
 `GameData.survival_time` now holds the number of seconds since the game started!
 
-**Challenge 34 — Display the survival time on screen**
+**Challenge 26 — Display the survival time on screen**
 Open `src/scenes/ui/hud/hud.tscn`. Add a **Label** node and name it `TimeLabel`.
 In the HUD script, add or complete the `_process` function to show the time:
 ```gdscript
@@ -578,7 +573,7 @@ func _process(_delta: float) -> void:
 	time_label.text = str(int(GameData.survival_time)) + "s"
 ```
 
-**Challenge 35 — Print your stats by pressing Space**
+**Challenge 27 — Print your stats by pressing Space**
 In `src/scripts/autoloads/game_data.gd`, inside the `_process` function, add:
 ```gdscript
 if Input.is_action_just_pressed("ui_accept"):  # Space bar

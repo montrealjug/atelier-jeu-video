@@ -127,7 +127,7 @@ Suis ces étapes dans l'ordre. Demande à un animateur si tu es bloqué !
 3. [ ] **Lance le jeu** et joue quelques minutes pour le comprendre ([Coment Jouer](#-comment-jouer))
 4. [ ] **Explore le projet** : regarde les dossiers, les scènes, les scripts, poses des questions
 5. [ ] **Identifie ce qui manque** dans le jeu (indice : essaie de viser avec la souris !)
-6. [ ] **Complète tes défis** — suis les [35 défis](#-tes-35-défis) ci-dessous
+6. [ ] **Complète tes défis** — suis les [27 défis](#-tes-27-défis) ci-dessous
 7. [ ] **Présente ton jeu** à tes parents à la fin de la session !
 
 ### Ouvrir le projet dans Godot
@@ -265,7 +265,7 @@ Tu les verras souvent dans le code du jeu !
 
 ---
 
-## ⚔️ Tes 35 défis
+## ⚔️ Tes 27 défis
 
 Les défis sont regroupés par niveau de difficulté. **Commence par le groupe 1** et avance à ton rythme !
 
@@ -481,27 +481,22 @@ Lance le jeu et survie jusqu'à ta vague !
 
 #### **Défi 21 — Observe le sprite actuel du sorcier**
 Dans le FileSystem, navigue jusqu'au dossier `assets/sprites/entities/`.
-Double-clique sur `mage.png` pour le prévisualiser. C'est cette image qui représente ton sorcier dans le jeu !
+Double-clique sur `mage.png` pour le prévisualiser dans la colonne de droite. C'est cette image qui représente ton sorcier dans le jeu !
 
-#### **Défi 22 — Trouve un nouveau personnage**
+##### Pixel Art
 Rends-toi sur [OpenGameArt.org](https://opengameart.org/), un site de ressources artistiques open source et gratuites pour les jeux vidéo.
 Dans la barre de recherche, cherche **"top down character"** ou **"pixel art character"**.
-Trouve un personnage qui te plaît — idéalement en vue du dessus et au format **PNG** (fond transparent de préférence).
+Ce sont ces personnages qui peuvent être intégrés gratuitement dans les jeux vidéos comme celui-ci.
 
-#### **Défi 23 — Télécharge et importe l'image dans Godot**
-Télécharge le fichier PNG sur ton ordinateur.
-Puis, dans Godot, **glisse l'image depuis l'explorateur de fichiers Windows** directement dans le dossier `assets/sprites/entities/` du FileSystem. Godot l'importe automatiquement !
+Puisque souvent ces images demandent un peu d'adaptation, nous avons préparé pour toi, quelques autres personnages qui sont déjà dans le dossier `assets/sprites/entities/`.
+Choisit un des personnages suivants: `girl.png`, `boy.png`, `sumo.png`, `mage.png` ou même prends l'apparence d'un enemi avec `archer.png` 
 
-#### **Défi 24 — Remplace la texture du sorcier**
+##### Changes d'apparence
 Dans le FileSystem, ouvre `src/scenes/entities/player/sprite/player_sprite.tscn` en double-cliquant dessus.
-Clique sur le nœud **PlayerSprite** dans l'arbre de scène.
-Dans l'Inspector à droite, trouve la propriété **Texture**.
-**Glisse ton nouveau PNG** depuis le FileSystem jusqu'à cette propriété. L'apparence du sorcier change !
-Lance le jeu avec **F5** pour voir ton personnage en action.
-
-#### **Défi 25 — Ajuste la position si nécessaire**
-Si ton personnage semble décalé ou mal centré dans le jeu, clique sur **PlayerSprite** et cherche la propriété **Offset** dans l'Inspector.
-La valeur actuelle est `(0, -8)`. Modifie la valeur **Y** pour déplacer l'image vers le haut ou le bas jusqu'à ce que ça soit bien aligné !
+- Clique sur le nœud **PlayerSprite** dans l'arbre de scène.
+- Dans l'Inspector à droite, trouve la propriété **Texture**.
+- **Glisse ton nouveau PNG** depuis le FileSystem jusqu'à cette propriété. L'apparence du sorcier change !
+- Lance le jeu avec **F5** pour voir ton personnage en action.
 
 ---
 
@@ -511,26 +506,26 @@ La valeur actuelle est `(0, -8)`. Modifie la valeur **Y** pour déplacer l'image
 >
 > Dans Godot, un objet qui bloque les autres s'appelle un **StaticBody2D** (corps statique). On lui ajoute une **CollisionShape2D** pour définir sa forme, et un visuel pour le voir à l'écran.
 
-#### **Défi 26 — Ouvre la scène principale du jeu**
+#### **Défi 22 — Ouvre la scène principale du jeu**
 Dans le FileSystem, navigue jusqu'à `src/scenes/game/wave_manager/` et double-clique sur **`game.tscn`**.
 Tu vois l'arène du jeu dans le Viewport. C'est ici que tu vas placer tes murs !
 
-#### **Défi 27 — Crée ton premier mur**
+##### Crée ton premier mur
 Dans l'arbre de scène à gauche, fais un **clic droit sur le nœud `LevelMap`** et choisis **Add Child Node**.
 Cherche **`StaticBody2D`** et clique **Create**.
 Renomme-le `Mur1` (double-clique sur le nœud dans l'arbre de scène pour le renommer).
 
-#### **Défi 28 — Donne-lui une forme de collision**
+##### Donne-lui une forme de collision
 Fais un clic droit sur **`Mur1`** et ajoute un nœud enfant **`CollisionShape2D`**.
 Clique sur ce nœud dans l'arbre. Dans l'Inspector, clique sur **Shape** puis choisis **New RectangleShape2D**.
 Clique sur la forme créée et change sa taille : **`x = 32`, `y = 32`** (un carré de 32 pixels).
 
-#### **Défi 29 — Rends le mur visible**
+##### Rends le mur visible
 Fais un clic droit sur **`Mur1`** et ajoute un nœud enfant **`ColorRect`**.
 Dans l'Inspector, change **Size** à `Vector2(64, 64)` et **Color** à une couleur pierre (par exemple gris foncé `#606060`).
 Change aussi la **Position** du ColorRect à `Vector2(-32, -32)` pour le centrer sur le mur.
 
-#### **Défi 30 — Duplique et positionne 4 murs**
+##### Duplique et positionne 4 murs
 Fais un **clic droit sur `Mur1`** dans l'arbre de scène et choisis **Duplicate** — répète 3 fois pour avoir `Mur2`, `Mur3` et `Mur4`.
 Pour chaque mur, sélectionne-le et change sa **Position** dans l'Inspector pour le placer dans l'arène (exemples : `(-200, 0)`, `(200, 0)`, `(0, -150)`, `(0, 150)`).
 Lance le jeu — le sorcier et les ennemis ne peuvent plus traverser tes murs !
@@ -541,7 +536,7 @@ Lance le jeu — le sorcier et les ennemis ne peuvent plus traverser tes murs !
 
 > Dans le groupe 7, tu **écris du code** pour personnaliser le jeu selon tes envies. Ces défis ne sont pas forcément plus difficiles — ils t'apprennent à **exprimer ta créativité avec le code** !
 
-#### **Défi 31 — Change la couleur des boules de feu**
+#### **Défi 23 — Change la couleur des boules de feu**
 Ouvre `src/scenes/entities/player/fireball/fireball.gd`.
 Dans la fonction `_ready()`, après les deux lignes existantes, ajoute :
 ```gdscript
@@ -549,14 +544,14 @@ sprite.modulate = Color(0.5, 0, 1)  # boules de feu violettes !
 ```
 Lance le jeu. Essaie d'autres couleurs : `Color.GREEN`, `Color.BLUE`, `Color(1, 0.5, 0)` pour l'orange, `Color.RED`…
 
-#### **Défi 32 — Change la couleur de l'explosion**
+#### **Défi 24 — Change la couleur de l'explosion**
 Dans le même fichier `fireball.gd`, toujours dans `_ready()`, ajoute aussi :
 ```gdscript
 spark_particles.modulate = Color(0, 1, 0)  # étincelles vertes !
 ```
 Lance le jeu et tire des boules de feu — les étincelles à l'impact changent de couleur !
 
-#### **Défi 33 — Compte le temps de survie**
+#### **Défi 25 — Compte le temps de survie**
 Ouvre `src/scripts/autoloads/game_data.gd`.
 Ajoute une variable et une fonction pour mesurer le temps écoulé :
 ```gdscript
@@ -567,7 +562,7 @@ func _process(delta: float) -> void:
 ```
 `GameData.survival_time` contient maintenant le nombre de secondes depuis le début de la partie !
 
-#### **Défi 34 — Affiche le temps de survie à l'écran**
+#### **Défi 26 — Affiche le temps de survie à l'écran**
 Ouvre `src/scenes/ui/hud/hud.tscn`. Ajoute un nœud **Label** et nomme-le `TimeLabel`.
 Dans le script du HUD, ajoute ou complète la fonction `_process` pour afficher le temps :
 ```gdscript
@@ -577,7 +572,7 @@ func _process(_delta: float) -> void:
 	time_label.text = str(int(GameData.survival_time)) + "s"
 ```
 
-#### **Défi 35 — Affiche tes stats en appuyant sur Espace**
+#### **Défi 27 — Affiche tes stats en appuyant sur Espace**
 Dans `src/scripts/autoloads/game_data.gd`, dans la fonction `_process`, ajoute :
 ```gdscript
 if Input.is_action_just_pressed("ui_accept"):  # touche Espace
