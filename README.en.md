@@ -200,6 +200,72 @@ atelier-jeu-video/
 
 ---
 
+## 📖 Code Basics
+
+Before starting the challenges, here are the three essential building blocks of code you'll encounter. No need to memorize everything — come back here if you get stuck!
+
+---
+
+### 📦 Variables — storing information
+
+A **variable** is a named box where you store a value. You can read it or change it at any time.
+
+```gdscript
+var speed: int = 200        # a box called "speed" holding the number 200
+var name: String = "Merlin" # a box called "name" holding some text
+```
+
+In the game, `player_stats.speed` is a variable that holds the wizard's speed.
+Change its value and the wizard moves faster or slower.
+
+The **type** (`int`, `String`...) tells you what the box can hold: a whole number, some text, etc.
+You'll also see `float` for decimal numbers (e.g. `0.5`).
+
+---
+
+### ❓ if / else — making a decision
+
+**if** lets the code choose what to do based on a condition.
+If the condition is true, the `if` block runs. Otherwise, the `else` block runs.
+
+```gdscript
+if points > 10:
+    print("You win!")
+else:
+    print("Not yet...")
+```
+
+In the game, we use `if / else` to aim with the joystick OR the mouse depending on what the player is using:
+
+```gdscript
+if right_stick_direction != Vector2.ZERO:
+    current_direction = right_stick_direction  # joystick detected → use it
+else:
+    current_direction = ...                    # otherwise → aim with the mouse
+```
+
+---
+
+### 🔧 Functions — grouping code together
+
+A **function** is a named block of code you can call whenever you need it.
+It avoids writing the same code over and over.
+
+```gdscript
+func say_hello() -> void:
+    print("Hello!")
+
+say_hello()  # calls the function → prints "Hello!"
+```
+
+In Godot, some functions are called automatically by the engine:
+- `_ready()` — runs **once** when the scene starts
+- `_process(delta)` — runs **every frame** (60 times per second)
+
+You'll see these a lot in the game's code!
+
+---
+
 ## ⚔️ Your 20 Challenges
 
 Challenges are grouped by difficulty. **Start with Group 1** and go at your own pace!
@@ -313,6 +379,18 @@ var right_stick_direction := get_right_stick_direction(0.1)
 if right_stick_direction != Vector2.ZERO:
 	current_direction = right_stick_direction
 ```
+Your turn! Add an `else` block right after the `if`. Inside that `else`, you need to update `current_direction` with the direction pointing toward the mouse.
+
+Here are the tools you have:
+- `get_global_mouse_position()` — returns the position of the mouse in the game world
+- `global_position` — the position of the weapon in the game world
+- `.normalized()` — turns a vector into a direction with a length of 1
+
+**Hint:** to get a direction pointing from point A to point B, you compute `B - A`. Here, A is the weapon and B is the mouse. And don't forget to normalize the result!
+
+<details>
+<summary>Solution</summary>
+
 Add an `else` branch to aim toward the mouse when no joystick is used:
 ```gdscript
 var right_stick_direction := get_right_stick_direction(0.1)
@@ -322,6 +400,18 @@ else:
 	current_direction = (get_global_mouse_position() - global_position).normalized()
 ```
 Launch the game — you can now aim with your mouse! 🎯
+
+**What does this new line do?**
+`get_global_mouse_position()` gives you the position of your mouse cursor in the game world.
+We subtract `global_position` (the weapon's position) to get a vector pointing **from the weapon toward the mouse**.
+Then `.normalized()` shrinks that vector to a length of 1, so the fireball always travels at the same speed regardless of how far the mouse is.
+
+**Why add it in the `else` branch?**
+The `if` already handles aiming with a gamepad's right stick.
+The `else` only runs when **no joystick is being used** — so that's where we plug in the mouse.
+This way the game works with both types of controls, without one interfering with the other.
+
+</details>
 
 **Challenge 17 — Increase the score on each kill**
 In `src/scripts/autoloads/game_data.gd`, add a function to listen to the `enemy_died` signal:

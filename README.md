@@ -199,6 +199,72 @@ atelier-jeu-video/
 
 ---
 
+## 📖 Les bases du code
+
+Avant de commencer les défis, voici les trois briques essentielles du code que tu vas rencontrer. Pas besoin de tout mémoriser — reviens ici si tu bloques !
+
+---
+
+### 📦 Les variables — stocker une information
+
+Une **variable**, c'est une boîte avec un nom, dans laquelle tu ranges une valeur. Tu peux lire cette valeur ou la changer à tout moment.
+
+```gdscript
+var speed: int = 200        # une boîte "speed" qui contient le nombre 200
+var name: String = "Merlin" # une boîte "name" qui contient du texte
+```
+
+Dans le jeu, `player_stats.speed` est une variable qui contient la vitesse du sorcier.
+Si tu changes sa valeur, le sorcier va plus vite ou plus lentement.
+
+**Le type** (`int`, `String`...) indique ce que la boîte peut contenir : un nombre entier, du texte, etc.
+Tu verras aussi `float` pour les nombres à virgule (ex: `0.5`).
+
+---
+
+### ❓ Le if / else — prendre une décision
+
+Le **if** permet au code de choisir quoi faire selon une condition.
+S'il la condition est vraie, le bloc du `if` s'exécute. Sinon, c'est le bloc du `else`.
+
+```gdscript
+if points > 10:
+	print("Tu as gagné !")
+else:
+	print("Pas encore...")
+```
+
+Dans le jeu, on utilise `if / else` pour viser avec le joystick OU avec la souris selon ce que le joueur utilise :
+
+```gdscript
+if right_stick_direction != Vector2.ZERO:
+	current_direction = right_stick_direction  # joystick détecté → on l'utilise
+else:
+    current_direction = ...                    # sinon → on vise avec la souris
+```
+
+---
+
+### 🔧 Les fonctions — regrouper du code
+
+Une **fonction**, c'est un bloc de code qui a un nom et qu'on peut appeler quand on en a besoin.
+Ça évite de répéter le même code partout.
+
+```gdscript
+func dire_bonjour() -> void:
+    print("Bonjour !")
+
+dire_bonjour()  # appelle la fonction → affiche "Bonjour !"
+```
+
+Dans Godot, certaines fonctions sont appelées automatiquement par le moteur :
+- `_ready()` — s'exécute **une fois** au démarrage de la scène
+- `_process(delta)` — s'exécute **à chaque image** (60 fois par seconde)
+
+Tu les verras souvent dans le code du jeu !
+
+---
+
 ## ⚔️ Tes 20 défis
 
 Les défis sont regroupés par niveau de difficulté. **Commence par le groupe 1** et avance à ton rythme !
@@ -312,6 +378,18 @@ var right_stick_direction := get_right_stick_direction(0.1)
 if right_stick_direction != Vector2.ZERO:
 	current_direction = right_stick_direction
 ```
+À toi de jouer ! Ajoute un bloc `else` juste après le `if`. Dans ce `else`, tu dois mettre à jour `current_direction` avec la direction qui pointe vers la souris.
+
+Voici les outils dont tu disposes :
+- `get_global_mouse_position()` — retourne la position de la souris dans le monde du jeu
+- `global_position` — la position de l'arme dans le monde du jeu
+- `.normalized()` — transforme un vecteur en une direction de longueur 1
+
+**Indice :** pour obtenir une direction qui pointe d'un point A vers un point B, on calcule `B - A`. Ici, A c'est l'arme, et B c'est la souris. Et n'oublie pas de normaliser le résultat !
+
+<details>
+<summary>Solution</summary>
+
 Ajoute un `else` pour viser vers la souris si aucun joystick n'est utilisé :
 ```gdscript
 var right_stick_direction := get_right_stick_direction(0.1)
@@ -321,6 +399,18 @@ else:
 	current_direction = (get_global_mouse_position() - global_position).normalized()
 ```
 Lance le jeu — tu peux maintenant viser avec ta souris ! 🎯
+
+**Que fait cette nouvelle ligne ?**
+`get_global_mouse_position()` donne la position de ta souris dans le monde du jeu.
+On soustrait `global_position` (la position de l'arme) pour obtenir un vecteur qui pointe **de l'arme vers la souris**.
+Enfin, `.normalized()` ramène ce vecteur à une longueur de 1, pour que la vitesse de la boule de feu soit toujours la même quelle que soit la distance de la souris.
+
+**Pourquoi on l'ajoute dans le `else` ?**
+Le `if` gère déjà la visée avec le joystick droit d'une manette.
+Le `else` s'exécute uniquement quand **aucun joystick n'est utilisé** — c'est donc là qu'on branche la souris.
+Ainsi le jeu fonctionne avec les deux types de contrôle, sans que l'un interfère avec l'autre.
+
+</details>
 
 **Défi 17 — Augmente le score à chaque kill**
 Dans `src/scripts/autoloads/game_data.gd`, ajoute une fonction pour écouter le signal `enemy_died` :
