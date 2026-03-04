@@ -352,11 +352,21 @@ Lance le jeu et survie jusqu'à ta vague !
 Tu as terminé tes défis ? **Bravo !** 🎉
 
 Il est temps de présenter ton travail à tes parents. Explique-leur :
-- C'est quoi Godot et GDScript ?
-- C'est quoi l'Open Source ?
-- Qu'est-ce que tu as modifié dans le jeu ?
-- Quel défi était le plus difficile ?
-- Qu'est-ce que tu aimerais ajouter si tu avais plus de temps ?
+* Quels sont les grands moteurs de jeu dans l'industrie ? 
+	* Réponse: Unity, Unreal Engine, Godot
+* C'est quoi un jeu Open Source ?
+	* Réponse: c'est un jeu dont le code source est public : n'importe qui peut le lire, l'utiliser, le modifier et le partager.
+* C'est quoi Godot et GDScript ?
+	* Réponse: C'est un moteur de jeu vidéo gratuit et Open Source. 
+	* Réponse: GDScript est le langage de programmation principal de Godot. Inspiré de Python.
+* Qu'est-ce que tu as modifié dans le jeu ?
+	* Réponse: 
+		* Groupe 1: La vitesse du sorcier, devenir invincible, réduire la vie des ennemis, des millions d'ennmis
+		* Groupe 2: Tirer comme une mitrailleurs, doubler les dégats, changer la formation d'apparition, changer les vagues
+		* Groupe 3: Doubler la vitesse du joueur, Accélérer la boule de feu, Réparer la visée avec la souris, Ajouter une variable de score, découvrirg les signaux
+		* Groupe 4: Réparer la visée de la souris, Augmenter le score à cahque kill, Afficher le score à l'écran, Créer une nouvelle vague
+* Quel défi était le plus difficile ? Pourquoi ?
+* Tu as personnalisé le jeu ? Comment ? 
 
 ---
 

@@ -352,12 +352,22 @@ Launch the game and survive to your wave!
 
 Done with your challenges? **Congratulations!** 🎉
 
-Time to show your work to your parents. Explain to them:
-- What are Godot and GDScript?
-- What is Open Source?
-- What did you change in the game?
-- Which challenge was the hardest?
-- What would you add if you had more time?
+It’s time to present your work to your parents. Explain to them:
+* What are the main game engines used in the industry?
+  * Answer: Unity, Unreal Engine, Godot
+* What is an open-source game?
+  * Answer: It is a game whose source code is public: anyone can read it, use it, modify it, and share it.
+* What are Godot and GDScript?
+  * Answer: Godot is a free and open-source game engine.
+  * Answer: GDScript is Godot’s main programming language. It is inspired by Python.
+* What did you modify in the game?
+  * Answer:
+	* Group 1: The wizard’s speed, becoming invincible, reducing enemy health, millions of enemies
+	* Group 2: Shooting like a machine gun, doubling damage, changing the spawn formation, changing the waves
+	* Group 3: Doubling the player’s speed, speeding up the fireball, fixing mouse aiming, adding a score variable, discovering signals
+	* Group 4: Fixing mouse aiming, increasing the score with each kill, displaying the score on screen, creating a new wave
+* Which challenge was the hardest? Why?
+* Did you personalize the game? How?
 
 ---
 
