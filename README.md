@@ -127,7 +127,7 @@ Suis ces étapes dans l'ordre. Demande à un animateur si tu es bloqué !
 3. [ ] **Lance le jeu** et joue quelques minutes pour le comprendre ([Coment Jouer](#-comment-jouer))
 4. [ ] **Explore le projet** : regarde les dossiers, les scènes, les scripts, poses des questions
 5. [ ] **Identifie ce qui manque** dans le jeu (indice : essaie de viser avec la souris !)
-6. [ ] **Complète tes défis** — suis les [20 défis](#-tes-20-défis) ci-dessous
+6. [ ] **Complète tes défis** — suis les [35 défis](#-tes-35-défis) ci-dessous
 7. [ ] **Présente ton jeu** à tes parents à la fin de la session !
 
 ### Ouvrir le projet dans Godot
@@ -265,7 +265,7 @@ Tu les verras souvent dans le code du jeu !
 
 ---
 
-## ⚔️ Tes 20 défis
+## ⚔️ Tes 35 défis
 
 Les défis sont regroupés par niveau de difficulté. **Commence par le groupe 1** et avance à ton rythme !
 
@@ -446,6 +446,120 @@ Lance le jeu et survie jusqu'à ta vague !
 
 ---
 
+### 🎨 Groupe 5 — Artiste Pixel Art *(Personnaliser le personnage)*
+
+> Dans le groupe 5, tu vas **changer l'apparence visuelle du sorcier** en remplaçant son image par un personnage open source trouvé sur internet. Pas besoin d'écrire du code — c'est une mission de graphisme !
+>
+> Les sprites open source sont des images libres de droits que la communauté met à disposition gratuitement. C'est comme ça que fonctionne l'Open Source dans le monde de l'art !
+
+**Défi 21 — Observe le sprite actuel du sorcier**
+Dans le FileSystem, navigue jusqu'au dossier `assets/sprites/entities/`.
+Double-clique sur `mage.png` pour le prévisualiser. C'est cette image qui représente ton sorcier dans le jeu !
+
+**Défi 22 — Trouve un nouveau personnage**
+Rends-toi sur [OpenGameArt.org](https://opengameart.org/), un site de ressources artistiques open source et gratuites pour les jeux vidéo.
+Dans la barre de recherche, cherche **"top down character"** ou **"pixel art character"**.
+Trouve un personnage qui te plaît — idéalement en vue du dessus et au format **PNG** (fond transparent de préférence).
+
+**Défi 23 — Télécharge et importe l'image dans Godot**
+Télécharge le fichier PNG sur ton ordinateur.
+Puis, dans Godot, **glisse l'image depuis l'explorateur de fichiers Windows** directement dans le dossier `assets/sprites/entities/` du FileSystem. Godot l'importe automatiquement !
+
+**Défi 24 — Remplace la texture du sorcier**
+Dans le FileSystem, ouvre `src/scenes/entities/player/sprite/player_sprite.tscn` en double-cliquant dessus.
+Clique sur le nœud **PlayerSprite** dans l'arbre de scène.
+Dans l'Inspector à droite, trouve la propriété **Texture**.
+**Glisse ton nouveau PNG** depuis le FileSystem jusqu'à cette propriété. L'apparence du sorcier change !
+Lance le jeu avec **F5** pour voir ton personnage en action.
+
+**Défi 25 — Ajuste la position si nécessaire**
+Si ton personnage semble décalé ou mal centré dans le jeu, clique sur **PlayerSprite** et cherche la propriété **Offset** dans l'Inspector.
+La valeur actuelle est `(0, -8)`. Modifie la valeur **Y** pour déplacer l'image vers le haut ou le bas jusqu'à ce que ça soit bien aligné !
+
+---
+
+### 🏗️ Groupe 6 — Architecte *(Ajouter des obstacles)*
+
+> Dans le groupe 6, tu vas **ajouter des murs** dans l'arène pour créer des obstacles physiques. Le sorcier et les ennemis ne pourront pas les traverser — ça change complètement la façon de jouer !
+>
+> Dans Godot, un objet qui bloque les autres s'appelle un **StaticBody2D** (corps statique). On lui ajoute une **CollisionShape2D** pour définir sa forme, et un visuel pour le voir à l'écran.
+
+**Défi 26 — Ouvre la scène principale du jeu**
+Dans le FileSystem, navigue jusqu'à `src/scenes/game/wave_manager/` et double-clique sur **`game.tscn`**.
+Tu vois l'arène du jeu dans le Viewport. C'est ici que tu vas placer tes murs !
+
+**Défi 27 — Crée ton premier mur**
+Dans l'arbre de scène à gauche, fais un **clic droit sur le nœud `LevelMap`** et choisis **Add Child Node**.
+Cherche **`StaticBody2D`** et clique **Create**.
+Renomme-le `Mur1` (double-clique sur le nœud dans l'arbre de scène pour le renommer).
+
+**Défi 28 — Donne-lui une forme de collision**
+Fais un clic droit sur **`Mur1`** et ajoute un nœud enfant **`CollisionShape2D`**.
+Clique sur ce nœud dans l'arbre. Dans l'Inspector, clique sur **Shape** puis choisis **New RectangleShape2D**.
+Clique sur la forme créée et change sa taille : **`x = 32`, `y = 32`** (un carré de 32 pixels).
+
+**Défi 29 — Rends le mur visible**
+Fais un clic droit sur **`Mur1`** et ajoute un nœud enfant **`ColorRect`**.
+Dans l'Inspector, change **Size** à `Vector2(64, 64)` et **Color** à une couleur pierre (par exemple gris foncé `#606060`).
+Change aussi la **Position** du ColorRect à `Vector2(-32, -32)` pour le centrer sur le mur.
+
+**Défi 30 — Duplique et positionne 4 murs**
+Fais un **clic droit sur `Mur1`** dans l'arbre de scène et choisis **Duplicate** — répète 3 fois pour avoir `Mur2`, `Mur3` et `Mur4`.
+Pour chaque mur, sélectionne-le et change sa **Position** dans l'Inspector pour le placer dans l'arène (exemples : `(-200, 0)`, `(200, 0)`, `(0, -150)`, `(0, 150)`).
+Lance le jeu — le sorcier et les ennemis ne peuvent plus traverser tes murs !
+
+---
+
+### 🎮 Groupe 7 — Codeur Créatif *(Personnaliser avec du code)*
+
+> Dans le groupe 7, tu **écris du code** pour personnaliser le jeu selon tes envies. Ces défis ne sont pas forcément plus difficiles — ils t'apprennent à **exprimer ta créativité avec le code** !
+
+**Défi 31 — Change la couleur des boules de feu**
+Ouvre `src/scenes/entities/player/fireball/fireball.gd`.
+Dans la fonction `_ready()`, après les deux lignes existantes, ajoute :
+```gdscript
+sprite.modulate = Color(0.5, 0, 1)  # boules de feu violettes !
+```
+Lance le jeu. Essaie d'autres couleurs : `Color.GREEN`, `Color.BLUE`, `Color(1, 0.5, 0)` pour l'orange, `Color.RED`…
+
+**Défi 32 — Change la couleur de l'explosion**
+Dans le même fichier `fireball.gd`, toujours dans `_ready()`, ajoute aussi :
+```gdscript
+spark_particles.modulate = Color(0, 1, 0)  # étincelles vertes !
+```
+Lance le jeu et tire des boules de feu — les étincelles à l'impact changent de couleur !
+
+**Défi 33 — Compte le temps de survie**
+Ouvre `src/scripts/autoloads/game_data.gd`.
+Ajoute une variable et une fonction pour mesurer le temps écoulé :
+```gdscript
+var survival_time: float = 0.0
+
+func _process(delta: float) -> void:
+	survival_time += delta
+```
+`GameData.survival_time` contient maintenant le nombre de secondes depuis le début de la partie !
+
+**Défi 34 — Affiche le temps de survie à l'écran**
+Ouvre `src/scenes/ui/hud/hud.tscn`. Ajoute un nœud **Label** et nomme-le `TimeLabel`.
+Dans le script du HUD, ajoute ou complète la fonction `_process` pour afficher le temps :
+```gdscript
+@onready var time_label: Label = $TimeLabel
+
+func _process(_delta: float) -> void:
+	time_label.text = str(int(GameData.survival_time)) + "s"
+```
+
+**Défi 35 — Affiche tes stats en appuyant sur Espace**
+Dans `src/scripts/autoloads/game_data.gd`, dans la fonction `_process`, ajoute :
+```gdscript
+if Input.is_action_just_pressed("ui_accept"):  # touche Espace
+	print("Score : ", score, " | Temps : ", int(survival_time), "s")
+```
+Lance le jeu et appuie sur **Espace** pendant une partie — tes stats s'affichent dans la console en bas de Godot !
+
+---
+
 ### 🏆 Présente ton jeu !
 
 Tu as terminé tes défis ? **Bravo !** 🎉
@@ -459,11 +573,14 @@ Il est temps de présenter ton travail à tes parents. Explique-leur :
 	* Réponse: C'est un moteur de jeu vidéo gratuit et Open Source. 
 	* Réponse: GDScript est le langage de programmation principal de Godot. Inspiré de Python.
 * Qu'est-ce que tu as modifié dans le jeu ?
-	* Réponse: 
-		* Groupe 1: La vitesse du sorcier, devenir invincible, réduire la vie des ennemis, des millions d'ennmis
-		* Groupe 2: Tirer comme une mitrailleurs, doubler les dégats, changer la formation d'apparition, changer les vagues
-		* Groupe 3: Doubler la vitesse du joueur, Accélérer la boule de feu, Réparer la visée avec la souris, Ajouter une variable de score, découvrirg les signaux
-		* Groupe 4: Réparer la visée de la souris, Augmenter le score à cahque kill, Afficher le score à l'écran, Créer une nouvelle vague
+	* Réponse:
+		* Groupe 1: La vitesse du sorcier, devenir invincible, réduire la vie des ennemis, des millions d'ennemis
+		* Groupe 2: Tirer comme une mitrailleuse, doubler les dégâts, changer la formation d'apparition, changer les vagues
+		* Groupe 3: Doubler la vitesse du joueur, accélérer la boule de feu, réparer la visée avec la souris, ajouter une variable de score, découvrir les signaux
+		* Groupe 4: Réparer la visée de la souris, augmenter le score à chaque kill, afficher le score à l'écran, créer une nouvelle vague
+		* Groupe 5: Trouver un sprite open source, l'importer dans Godot, remplacer l'apparence du sorcier
+		* Groupe 6: Ajouter des murs dans l'arène, avec collisions et visuel
+		* Groupe 7: Changer la couleur des boules de feu et des explosions, compter le temps de survie, l'afficher à l'écran
 * Quel défi était le plus difficile ? Pourquoi ?
 * Tu as personnalisé le jeu ? Comment ? 
 
