@@ -386,8 +386,8 @@ Voici les outils dont tu disposes :
 - `.normalized()` — transforme un vecteur en une direction de longueur 1
 
 **Indice :** ici, tu dois :
-	* Ajouter `else` à l’instruction `if` — rappelle-toi des bases du code qu’on a vues au début de l’atelier !
-	* Écrire cette ligne sous le `else`, mais en programmation avec les outils : `current direction = (global mouse position - global position).normalized`
+- Ajouter `else` à l’instruction `if` — rappelle-toi des bases du code qu’on a vues au début de l’atelier !
+- Écrire cette ligne sous le `else`, mais en programmation avec les outils : `current direction = (global mouse position - global position).normalized`
 
 <details>
 <summary>Solution</summary>
