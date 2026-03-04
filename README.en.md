@@ -273,6 +273,13 @@ This is where speed is applied! Modify the line to use `player_stats.speed * 2`.
 Open `src/scenes/entities/player/fireball/fireball.gd`.
 Find the `speed` variable. You can also change it from the editor: in the `fireball.tscn` scene, click the root node and look for **`Speed`** in the Inspector. Set it to `1000`!
 
+<details>
+<summary>Solution</summary>
+
+![Challenge 12 solution](./readme-images/find-speed-variable.png)
+
+</details>
+
 **Challenge 13 — Understand why aiming is broken**
 Open `src/scenes/entities/player/weapon/weapon.gd`.
 Read the `_process` function. See `get_right_stick_direction(0.1)`?

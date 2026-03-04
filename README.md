@@ -272,6 +272,13 @@ C'est ici que la vitesse est appliquée ! Modifie la ligne pour mettre `player_s
 Ouvre `src/scenes/entities/player/fireball/fireball.gd`.
 Trouve la variable `speed`. Elle est aussi configurable depuis l'éditeur : dans la scène `fireball.tscn`, clique sur le nœud racine et cherche **`Speed`** dans l'Inspector. Change-la à `1000` !
 
+<details>
+<summary>Solution</summary>
+
+![Solution du défi 12](./readme-images/find-speed-variable.png)
+
+</details>
+
 **Défi 13 — Comprends pourquoi la visée ne fonctionne pas**
 Ouvre `src/scenes/entities/player/weapon/weapon.gd`.
 Lis la fonction `_process`. Tu vois `get_right_stick_direction(0.1)` ?
