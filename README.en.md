@@ -428,22 +428,49 @@ func _on_enemy_died(_enemy: Enemy) -> void:
 Launch the game and watch the console at the bottom of Godot — the score goes up with every kill!
 
 **Challenge 18 — Display the score on screen**
-Open the scene `src/scenes/ui/hud/hud.tscn`. In the scene tree (left panel), right-click the root node and add a **Label** node. Name it `ScoreLabel`.
-Then, add a script to the HUD (or modify the existing one) to update this label:
+Open the scene `src/scenes/ui/hud/hud.tscn`.
+
+In the scene tree (left panel), right-click the root node and add a **Label** node. Name it `ScoreLabel`.
+Then, right-click the **ScoreLabel** node you just created and add a script to update this label:
 ```gdscript
 @onready var score_label: Label = $ScoreLabel
 
 func _process(_delta: float) -> void:
 	score_label.text = "Score: " + str(GameData.score)
 ```
+Finally, click **"2D"** in the toolbar at the very top of the editor to switch to the visual scene view.
+In the scene tree on the left, select **ScoreLabel** with a left-click — you'll see it highlighted in red in the 2D scene.
+Drag it wherever you want on screen, then launch the game to check that it works!
+
+<details>
+<summary>Solution</summary>
+
+![Challenge 18 solution](./readme-images/score-2d.png)
+
+</details>
 
 **Challenge 19 — Create wave 6**
 In the FileSystem, right-click `resources/wave_data/wave5_data.tres` and choose **Duplicate**. Rename the file to `wave6_data.tres`.
 Open it and design the hardest wave you can imagine! More enemies, knights, archers…
 
+<details>
+<summary>Solution</summary>
+
+![Challenge 19 solution](./readme-images/add-wave-step1.png)
+
+</details>
+
 **Challenge 20 — Add your wave 6 to the game**
 Open the scene `src/scenes/game/wave_manager/game.tscn`. Click the **WaveManager** node in the tree. In the Inspector, find the **`Waves Data`** array and click **+** to add an entry. Select your `wave6_data.tres` file.
 Launch the game and survive to your wave!
+
+**Tip**: to save time while testing, after adding your wave to the WaveManager, use the 3 bars to the left of the number in the `Waves Data` column to drag your wave up and place it first.
+<details>
+<summary>Solution</summary>
+
+![Challenge 20 solution](./readme-images/add-wave-step2.png)
+
+</details>
 
 ---
 
@@ -575,13 +602,13 @@ It’s time to present your work to your parents. Explain to them:
   * Answer: GDScript is Godot’s main programming language. It is inspired by Python.
 * What did you modify in the game?
   * Answer:
-    * Group 1: The wizard’s speed, becoming invincible, reducing enemy health, millions of enemies
-    * Group 2: Shooting like a machine gun, doubling damage, changing the spawn formation, changing the waves
-    * Group 3: Doubling the player’s speed, speeding up the fireball, fixing mouse aiming, adding a score variable, discovering signals
-    * Group 4: Fixing mouse aiming, increasing the score with each kill, displaying the score on screen, creating a new wave
-    * Group 5: Finding an open source sprite, importing it into Godot, replacing the wizard’s appearance
-    * Group 6: Adding walls to the arena with collisions and a visible shape
-    * Group 7: Changing the color of fireballs and explosions, tracking survival time, displaying it on screen
+	* Group 1: The wizard’s speed, becoming invincible, reducing enemy health, millions of enemies
+	* Group 2: Shooting like a machine gun, doubling damage, changing the spawn formation, changing the waves
+	* Group 3: Doubling the player’s speed, speeding up the fireball, fixing mouse aiming, adding a score variable, discovering signals
+	* Group 4: Fixing mouse aiming, increasing the score with each kill, displaying the score on screen, creating a new wave
+	* Group 5: Finding an open source sprite, importing it into Godot, replacing the wizard’s appearance
+	* Group 6: Adding walls to the arena with collisions and a visible shape
+	* Group 7: Changing the color of fireballs and explosions, tracking survival time, displaying it on screen
 * Which challenge was the hardest? Why?
 * Did you personalize the game? How?
 

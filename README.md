@@ -277,21 +277,21 @@ Les défis sont regroupés par niveau de difficulté. **Commence par le groupe 1
 >
 > Pour ouvrir un fichier `.tres` : double-clique dessus dans le panneau **FileSystem** (en bas à gauche). Ses propriétés s'affichent dans l'**Inspector** (à droite).
 
-**Défi 1 — Lance le jeu et survie !**
+#### **Défi 1 — Lance le jeu et survie !**
 Appuie sur **F5**. Joue quelques minutes. Essaie de survivre aux vagues d'ennemis. Combien de vagues peux-tu atteindre ?
 
-**Défi 2 — Rends le sorcier ultra-rapide**
+#### **Défi 2 — Rends le sorcier ultra-rapide**
 Ouvre `resources/player_stats/player_stats.tres` dans l'Inspector.
 Change la valeur de **`Speed`** à `500`. Lance le jeu. Essaie `50`. Quelle valeur est la plus fun ?
 
-**Défi 3 — Deviens invincible**
+#### **Défi 3 — Deviens invincible**
 Dans le même fichier, change **`Hp Max`** à `9999`. Lance le jeu. Tu ne peux plus mourir !
 
-**Défi 4 — Écrase les chauves-souris en un coup**
+#### **Défi 4 — Écrase les chauves-souris en un coup**
 Ouvre `resources/enemy_stats/bat_stats.tres`.
 Change **`Hp Max`** à `1`. Les chauves-souris meurent maintenant en un seul tir !
 
-**Défi 5 — Fais exploser la vague 1**
+#### **Défi 5 — Fais exploser la vague 1**
 Ouvre `resources/wave_data/wave1_data.tres`.
 Dans la liste **`Sub Waves`**, clique sur le premier élément. Change **`Amount`** à `20`.
 Lance le jeu — tu es envahi !
@@ -302,23 +302,23 @@ Lance le jeu — tu es envahi !
 
 > Dans le groupe 2, tu continues à modifier des fichiers `.tres`, mais tu explores plus en profondeur les configurations disponibles.
 
-**Défi 6 — Tire comme une mitrailleuse**
+#### **Défi 6 — Tire comme une mitrailleuse**
 Dans `resources/player_stats/player_stats.tres`, change **`Attack Cooldown`** à `0.05`.
 (La valeur actuelle est le temps en secondes entre chaque tir. Plus c'est petit, plus tu tires vite !)
 
-**Défi 7 — Double tes dégâts**
+#### **Défi 7 — Double tes dégâts**
 Toujours dans `player_stats.tres`, cherche **`Damage Information`** et clique dessus pour l'ouvrir. Change la valeur de **`Damage`**. Essaie `50` !
 
-**Défi 8 — Change la formation d'apparition**
+#### **Défi 8 — Change la formation d'apparition**
 Dans `resources/wave_data/wave1_data.tres`, ouvre un `SubWaveData` et change **`Pattern`** :
 - `RANDOM` : les ennemis apparaissent n'importe où
 - `CIRCLE` : ils apparaissent en cercle autour de toi
 - `CLUSTER` : ils apparaissent en groupe
 
-**Défi 9 — Remplace les ennemis**
+#### **Défi 9 — Remplace les ennemis**
 Dans la même vague, change **`Enemy Type`** pour `KNIGHT` ou `SPIDER`. Lance le jeu — surprise !
 
-**Défi 10 — Crée ton équilibre parfait**
+#### **Défi 10 — Crée ton équilibre parfait**
 Restore les stats du joueur à des valeurs raisonnables, mais garde les modifications de vague que tu préfères. Crée une vague 1 qui te semble fun à jouer !
 
 ---
@@ -329,12 +329,12 @@ Restore les stats du joueur à des valeurs raisonnables, mais garde les modifica
 >
 > Pour ouvrir un script : double-clique dessus dans le **FileSystem**. Il s'ouvre dans l'éditeur de code.
 
-**Défi 11 — Lis le déplacement du joueur**
+#### **Défi 11 — Lis le déplacement du joueur**
 Ouvre `src/scenes/entities/player/movement/player_movement.gd`.
 Tu vois la ligne : `player.velocity = input_vector * player_stats.speed`
 C'est ici que la vitesse est appliquée ! Modifie la ligne pour mettre `player_stats.speed * 2`. Qu'est-ce qui se passe ?
 
-**Défi 12 — Accélère la boule de feu**
+#### **Défi 12 — Accélère la boule de feu**
 Ouvre `src/scenes/entities/player/fireball/fireball.gd`.
 Trouve la variable `speed`. Elle est aussi configurable depuis l'éditeur : dans la scène `fireball.tscn`, clique sur le nœud racine et cherche **`Speed`** dans l'Inspector. Change-la à `1000` !
 
@@ -345,12 +345,12 @@ Trouve la variable `speed`. Elle est aussi configurable depuis l'éditeur : dans
 
 </details>
 
-**Défi 13 — Comprends pourquoi la visée ne fonctionne pas**
+#### **Défi 13 — Comprends pourquoi la visée ne fonctionne pas**
 Ouvre `src/scenes/entities/player/weapon/weapon.gd`.
 Lis la fonction `_process`. Tu vois `get_right_stick_direction(0.1)` ?
 C'est la direction du joystick droit (manette). Si personne n'utilise de manette, `current_direction` ne change jamais... et le sorcier tire toujours vers la droite. C'est le bug que tu vas corriger au défi 16 !
 
-**Défi 14 — Ajoute une variable de score**
+#### **Défi 14 — Ajoute une variable de score**
 Ouvre `src/scripts/autoloads/game_data.gd`.
 À la fin du fichier, ajoute cette ligne :
 ```gdscript
@@ -358,7 +358,7 @@ var score: int = 0
 ```
 `GameData.score` sera maintenant accessible depuis n'importe quel script du jeu.
 
-**Défi 15 — Découvre les signaux**
+#### **Défi 15 — Découvre les signaux**
 Ouvre `src/scripts/autoloads/signals.gd`.
 Tu vois `signal enemy_died(enemy: Enemy)` ? C'est un **signal** : quand un ennemi meurt, ce signal est envoyé à tous ceux qui l'écoutent.
 Qui l'écoute déjà ? Cherche `enemy_died.connect` dans le projet (menu **Project > Find in Files**).
@@ -371,7 +371,7 @@ Qui l'écoute déjà ? Cherche `enemy_died.connect` dans le projet (menu **Proje
 >
 > N'oublie pas de sauvegarder tes fichiers après chaque modification (**Ctrl+S**).
 
-**Défi 16 — Répare la visée à la souris** ⭐ *(le défi principal !)*
+#### **Défi 16 — Répare la visée à la souris** ⭐ *(le défi principal !)*
 Dans `src/scenes/entities/player/weapon/weapon.gd`, trouve dans `_process` ce bloc :
 ```gdscript
 var right_stick_direction := get_right_stick_direction(0.1)
@@ -414,7 +414,7 @@ Ainsi le jeu fonctionne avec les deux types de contrôle, sans que l'un interfè
 
 </details>
 
-**Défi 17 — Augmente le score à chaque kill**
+#### **Défi 17 — Augmente le score à chaque kill**
 Dans `src/scripts/autoloads/game_data.gd`, ajoute une fonction pour écouter le signal `enemy_died` :
 ```gdscript
 func _ready() -> void:
@@ -426,23 +426,50 @@ func _on_enemy_died(_enemy: Enemy) -> void:
 ```
 Lance le jeu et regarde la console en bas de Godot — le score monte à chaque ennemi tué !
 
-**Défi 18 — Affiche le score à l'écran**
-Ouvre la scène `src/scenes/ui/hud/hud.tscn`. Dans l'arbre de scène (à gauche), fais un clic droit sur le nœud racine et ajoute un nœud **Label**. Nomme-le `ScoreLabel`.
-Ensuite, ajoute un script au HUD (ou modifie celui existant) pour mettre à jour ce label :
+#### **Défi 18 — Affiche le score à l'écran**
+Ouvre la scène `src/scenes/ui/hud/hud.tscn`. 
+
+Dans l'arbre de scène (à gauche), fais un clic droit sur le nœud racine et ajoute un nœud **Label**. Nomme-le `ScoreLabel`.
+Ensuite, fais un clic droit sur le noeud ScoreLabel que tu viens de créer et ajoutes un script pour mettre à jour ce label :
 ```gdscript
 @onready var score_label: Label = $ScoreLabel
 
 func _process(_delta: float) -> void:
 	score_label.text = "Score : " + str(GameData.score)
 ```
+Finalement, cliques sur "2D" dans la barre tout en haut de la fenêtre de cet editeur pour rentrer dans l'édition visuelle de la scène.
+Dans l'arborescence sur la gauche, sélectionnes avec un clic gauche, le "ScoreLabel" que tu viens de créer, tu le vois maintenant surligné en rouge dans la scène 2D que tu as précedemment ouverte.
+Place le oú tu veux et lances le jeu pour vérifier qu'il fonctionne correctement !
 
-**Défi 19 — Crée une vague 6**
+<details>
+<summary>Solution</summary>
+
+![Solution du défi 18](./readme-images/score-2d.png)
+
+</details>
+
+#### **Défi 19 — Crée une vague 6**
 Dans le FileSystem, fais un clic droit sur `resources/wave_data/wave5_data.tres` et choisis **Duplicate**. Renomme le fichier en `wave6_data.tres`.
 Ouvre-la et crée la vague la plus difficile que tu puisses imaginer ! Plus d'ennemis, des knights, des archers...
 
-**Défi 20 — Ajoute ta vague 6 au jeu**
+<details>
+<summary>Solution</summary>
+
+![Solution du défi 19](./readme-images/add-wave-step1.png)
+
+</details>
+
+#### **Défi 20 — Ajoute ta vague 6 au jeu**
 Ouvre la scène `src/scenes/game/wave_manager/game.tscn`. Clique sur le nœud **WaveManager** dans l'arbre. Dans l'Inspector, trouve le tableau **`Waves Data`** et clique sur le **+** pour ajouter une entrée. Sélectionne ton fichier `wave6_data.tres`.
 Lance le jeu et survie jusqu'à ta vague !
+
+**Astuce**: si tu veux gagner du temps pour tester, après avoir ajouté ta vague dans dans le WaveManager, utilise les 3 barres sur la gauche du chiffre dans la colonne `Waves Data` pour remonter ta wave et la placer en première.
+<details>
+<summary>Solution</summary>
+
+![Solution du défi 20](./readme-images/add-wave-step2.png)
+
+</details>
 
 ---
 
@@ -452,27 +479,27 @@ Lance le jeu et survie jusqu'à ta vague !
 >
 > Les sprites open source sont des images libres de droits que la communauté met à disposition gratuitement. C'est comme ça que fonctionne l'Open Source dans le monde de l'art !
 
-**Défi 21 — Observe le sprite actuel du sorcier**
+#### **Défi 21 — Observe le sprite actuel du sorcier**
 Dans le FileSystem, navigue jusqu'au dossier `assets/sprites/entities/`.
 Double-clique sur `mage.png` pour le prévisualiser. C'est cette image qui représente ton sorcier dans le jeu !
 
-**Défi 22 — Trouve un nouveau personnage**
+#### **Défi 22 — Trouve un nouveau personnage**
 Rends-toi sur [OpenGameArt.org](https://opengameart.org/), un site de ressources artistiques open source et gratuites pour les jeux vidéo.
 Dans la barre de recherche, cherche **"top down character"** ou **"pixel art character"**.
 Trouve un personnage qui te plaît — idéalement en vue du dessus et au format **PNG** (fond transparent de préférence).
 
-**Défi 23 — Télécharge et importe l'image dans Godot**
+#### **Défi 23 — Télécharge et importe l'image dans Godot**
 Télécharge le fichier PNG sur ton ordinateur.
 Puis, dans Godot, **glisse l'image depuis l'explorateur de fichiers Windows** directement dans le dossier `assets/sprites/entities/` du FileSystem. Godot l'importe automatiquement !
 
-**Défi 24 — Remplace la texture du sorcier**
+#### **Défi 24 — Remplace la texture du sorcier**
 Dans le FileSystem, ouvre `src/scenes/entities/player/sprite/player_sprite.tscn` en double-cliquant dessus.
 Clique sur le nœud **PlayerSprite** dans l'arbre de scène.
 Dans l'Inspector à droite, trouve la propriété **Texture**.
 **Glisse ton nouveau PNG** depuis le FileSystem jusqu'à cette propriété. L'apparence du sorcier change !
 Lance le jeu avec **F5** pour voir ton personnage en action.
 
-**Défi 25 — Ajuste la position si nécessaire**
+#### **Défi 25 — Ajuste la position si nécessaire**
 Si ton personnage semble décalé ou mal centré dans le jeu, clique sur **PlayerSprite** et cherche la propriété **Offset** dans l'Inspector.
 La valeur actuelle est `(0, -8)`. Modifie la valeur **Y** pour déplacer l'image vers le haut ou le bas jusqu'à ce que ça soit bien aligné !
 
@@ -484,26 +511,26 @@ La valeur actuelle est `(0, -8)`. Modifie la valeur **Y** pour déplacer l'image
 >
 > Dans Godot, un objet qui bloque les autres s'appelle un **StaticBody2D** (corps statique). On lui ajoute une **CollisionShape2D** pour définir sa forme, et un visuel pour le voir à l'écran.
 
-**Défi 26 — Ouvre la scène principale du jeu**
+#### **Défi 26 — Ouvre la scène principale du jeu**
 Dans le FileSystem, navigue jusqu'à `src/scenes/game/wave_manager/` et double-clique sur **`game.tscn`**.
 Tu vois l'arène du jeu dans le Viewport. C'est ici que tu vas placer tes murs !
 
-**Défi 27 — Crée ton premier mur**
+#### **Défi 27 — Crée ton premier mur**
 Dans l'arbre de scène à gauche, fais un **clic droit sur le nœud `LevelMap`** et choisis **Add Child Node**.
 Cherche **`StaticBody2D`** et clique **Create**.
 Renomme-le `Mur1` (double-clique sur le nœud dans l'arbre de scène pour le renommer).
 
-**Défi 28 — Donne-lui une forme de collision**
+#### **Défi 28 — Donne-lui une forme de collision**
 Fais un clic droit sur **`Mur1`** et ajoute un nœud enfant **`CollisionShape2D`**.
 Clique sur ce nœud dans l'arbre. Dans l'Inspector, clique sur **Shape** puis choisis **New RectangleShape2D**.
 Clique sur la forme créée et change sa taille : **`x = 32`, `y = 32`** (un carré de 32 pixels).
 
-**Défi 29 — Rends le mur visible**
+#### **Défi 29 — Rends le mur visible**
 Fais un clic droit sur **`Mur1`** et ajoute un nœud enfant **`ColorRect`**.
 Dans l'Inspector, change **Size** à `Vector2(64, 64)` et **Color** à une couleur pierre (par exemple gris foncé `#606060`).
 Change aussi la **Position** du ColorRect à `Vector2(-32, -32)` pour le centrer sur le mur.
 
-**Défi 30 — Duplique et positionne 4 murs**
+#### **Défi 30 — Duplique et positionne 4 murs**
 Fais un **clic droit sur `Mur1`** dans l'arbre de scène et choisis **Duplicate** — répète 3 fois pour avoir `Mur2`, `Mur3` et `Mur4`.
 Pour chaque mur, sélectionne-le et change sa **Position** dans l'Inspector pour le placer dans l'arène (exemples : `(-200, 0)`, `(200, 0)`, `(0, -150)`, `(0, 150)`).
 Lance le jeu — le sorcier et les ennemis ne peuvent plus traverser tes murs !
@@ -514,7 +541,7 @@ Lance le jeu — le sorcier et les ennemis ne peuvent plus traverser tes murs !
 
 > Dans le groupe 7, tu **écris du code** pour personnaliser le jeu selon tes envies. Ces défis ne sont pas forcément plus difficiles — ils t'apprennent à **exprimer ta créativité avec le code** !
 
-**Défi 31 — Change la couleur des boules de feu**
+#### **Défi 31 — Change la couleur des boules de feu**
 Ouvre `src/scenes/entities/player/fireball/fireball.gd`.
 Dans la fonction `_ready()`, après les deux lignes existantes, ajoute :
 ```gdscript
@@ -522,14 +549,14 @@ sprite.modulate = Color(0.5, 0, 1)  # boules de feu violettes !
 ```
 Lance le jeu. Essaie d'autres couleurs : `Color.GREEN`, `Color.BLUE`, `Color(1, 0.5, 0)` pour l'orange, `Color.RED`…
 
-**Défi 32 — Change la couleur de l'explosion**
+#### **Défi 32 — Change la couleur de l'explosion**
 Dans le même fichier `fireball.gd`, toujours dans `_ready()`, ajoute aussi :
 ```gdscript
 spark_particles.modulate = Color(0, 1, 0)  # étincelles vertes !
 ```
 Lance le jeu et tire des boules de feu — les étincelles à l'impact changent de couleur !
 
-**Défi 33 — Compte le temps de survie**
+#### **Défi 33 — Compte le temps de survie**
 Ouvre `src/scripts/autoloads/game_data.gd`.
 Ajoute une variable et une fonction pour mesurer le temps écoulé :
 ```gdscript
@@ -540,7 +567,7 @@ func _process(delta: float) -> void:
 ```
 `GameData.survival_time` contient maintenant le nombre de secondes depuis le début de la partie !
 
-**Défi 34 — Affiche le temps de survie à l'écran**
+#### **Défi 34 — Affiche le temps de survie à l'écran**
 Ouvre `src/scenes/ui/hud/hud.tscn`. Ajoute un nœud **Label** et nomme-le `TimeLabel`.
 Dans le script du HUD, ajoute ou complète la fonction `_process` pour afficher le temps :
 ```gdscript
@@ -550,7 +577,7 @@ func _process(_delta: float) -> void:
 	time_label.text = str(int(GameData.survival_time)) + "s"
 ```
 
-**Défi 35 — Affiche tes stats en appuyant sur Espace**
+#### **Défi 35 — Affiche tes stats en appuyant sur Espace**
 Dans `src/scripts/autoloads/game_data.gd`, dans la fonction `_process`, ajoute :
 ```gdscript
 if Input.is_action_just_pressed("ui_accept"):  # touche Espace
