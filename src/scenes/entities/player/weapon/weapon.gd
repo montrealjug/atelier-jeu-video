@@ -9,7 +9,7 @@ extends Node2D
 @onready var sprite: Sprite2D = %Sprite
 
 ## The current direction the player is targeting
-var current_direction: Vector2
+var current_direction: Vector2 = Vector2.RIGHT
 var player_stats: PlayerStats
 
 
