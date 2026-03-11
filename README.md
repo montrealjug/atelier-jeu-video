@@ -1,8 +1,10 @@
 # 🧙 Devoxx4Kids — Dungeon du Sorcier
 
+🇫🇷 Français | [🇬🇧 English](README.en.md)
+
 ![Tiny Wizard Main Image](./readme-images/tiny-wizard.png)
 
-Bienvenue à l'atelier **Programmation de Jeux Vidéo** de [Devoxx4Kids Québec](https://www.devoxx4kids.org/quebec/) !
+Bienvenue à l'atelier **Programmation de Jeux Vidéo** de [Devoxx4Kids Québec](https://www.devoxx4kids.org/quebec) !
 
 Tu vas explorer un vrai jeu vidéo, comprendre comment il fonctionne, et l'améliorer toi-même. 
 À la fin de la session, tu pourras le présenter à tes parents !
@@ -19,11 +21,11 @@ Il en existe plusieurs, chacun avec ses forces. Voici les plus connus :
 
 | Moteur | Utilisé pour | Pourquoi on le choisit |
 |--------|-------------|------------------------|
-| [**Unity**](https://unity.com/) | Hollow Knight, Cuphead, Among Us | Très populaire, énorme communauté, compatible avec presque toutes les plateformes. Idéal pour les studios indépendants. |
-| [**Unreal Engine**](https://www.unrealengine.com/) | Fortnite, Valorant, Hogwarts Legacy | Graphismes ultra-réalistes. Utilisé par les grands studios AAA (gros budgets). |
-| [**Godot**](https://godotengine.org/) | Cassette Beasts, Sonic Colors Ultimate | Gratuit, Open Source, léger, facile à apprendre. Parfait pour débuter et pour les jeux indépendants. |
-| [**GameMaker**](https://gamemaker.io/) | Undertale, Hotline Miami, Stardew Valley | Simple à prendre en main, très apprécié pour les jeux 2D. |
-| [**RPG Maker**](https://www.rpgmakerweb.com/) | Omori, Yume Nikki | Spécialisé dans les RPG (jeux de rôle). Peu ou pas de programmation requise. |
+| [**Unity**](https://unity.com) | Hollow Knight, Cuphead, Among Us | Très populaire, énorme communauté, compatible avec presque toutes les plateformes. Idéal pour les studios indépendants. |
+| [**Unreal Engine**](https://www.unrealengine.com) | Fortnite, Valorant, Hogwarts Legacy | Graphismes ultra-réalistes. Utilisé par les grands studios AAA (gros budgets). |
+| [**Godot**](https://godotengine.org) | Cassette Beasts, Sonic Colors Ultimate | Gratuit, Open Source, léger, facile à apprendre. Parfait pour débuter et pour les jeux indépendants. |
+| [**GameMaker**](https://gamemaker.io) | Undertale, Hotline Miami, Stardew Valley | Simple à prendre en main, très apprécié pour les jeux 2D. |
+| [**RPG Maker**](https://www.rpgmakerweb.com) | Omori, Yume Nikki | Spécialisé dans les RPG (jeux de rôle). Peu ou pas de programmation requise. |
 
 > 💡 **Lequel choisir ?** Ça dépend du projet ! Pour débuter, **Godot** et **GameMaker** sont excellents. Pour viser les gros jeux 3D professionnels, on se tourne plutôt vers **Unreal**. Dans cet atelier, on utilise **Godot** — il est gratuit, Open Source, et sa prise en main est rapide.
 
@@ -168,21 +170,32 @@ Si le projet n'est pas déjà ouvert sur les ordinateurs:
 
 ```
 atelier-jeu-video/
-├── assets/          🎨 Images, sons, musiques
-├── resources/       ⚙️  Fichiers de configuration (stats, vagues...)
-│   ├── enemy_stats/     Stats de chaque ennemi (vie, vitesse, dégâts)
-│   ├── player_stats/    Stats du joueur
-│   └── wave_data/       Configuration des vagues d'ennemis
-└── src/             💻 Le code et les scènes du jeu
-	├── scenes/          Scènes Godot (personnages, UI, monde...)
-	│   ├── entities/    Joueur et ennemis
-	│   ├── game/        Logique principale du jeu (vagues, spawn...)
-	│   ├── items/       Les potions ramassables
-	│   └── ui/          Interface (menus, HUD, écran de mort)
-	└── scripts/         Scripts GDScript réutilisables
-		├── autoloads/   Scripts accessibles partout dans le jeu
-		└── resources/   Définitions des types de ressources
+├── assets/          	🎨 Images, sons, musiques
+├── resources/       	⚙️ Fichiers de configuration (stats, vagues...)
+│   ├── enemy_stats/    📊 Stats de chaque ennemi (vie, vitesse, dégâts)
+│   ├── player_stats/   📊 Stats du joueur
+│   └── wave_data/      🌊 Configuration des vagues d'ennemis
+└── src/             	💻 Le code et les scènes du jeu
+	├── scenes/         🎬 Scènes Godot (personnages, UI, monde...)
+	│   ├── entities/   🧙 Joueur et ennemis
+	│   ├── game/       🧠 Logique principale du jeu (vagues, spawn...)
+	│   ├── items/      🍶 Les potions ramassables
+	│   └── ui/         🪟 Interface (menus, HUD, écran de mort)
+	└── scripts/        📜 Scripts GDScript réutilisables
+		├── autoloads/  📜 Scripts accessibles partout dans le jeu
+		└── resources/  📜 Définitions des types de ressources
 ```
+
+### Les types de fichiers à connaître et leur localisation dans le FileSystem
+```
+atelier-jeu-video/
+├── assets/          	🎨 Fichiers .png, .jpg, .ttf, .wav, .mp3
+├── resources/       	⚙️ Fichiers .tres
+└── src/             	💻 Le code et les scènes du jeu
+	├── scenes/         🎬 Fichiers .tscn, .gd
+	└── scripts/        📜 Fichiers .gd
+```
+---
 
 ### Les fichiers clés à connaître
 
@@ -196,8 +209,6 @@ atelier-jeu-video/
 | `src/scenes/entities/player/fireball/fireball.gd` | La boule de feu |
 | `src/scripts/autoloads/game_data.gd` | Données globales du jeu |
 | `src/scripts/autoloads/signals.gd` | Les signaux (événements) du jeu |
-
----
 
 ## 📖 Les bases du code
 
@@ -693,6 +704,46 @@ C'est un jeu d'aventure en vue du dessus dans un donjon. Tu joues un **sorcier**
 - **Langage** : GDScript
 - **Type** : Top-down dungeon, survie par vagues
 
+## 🪳Erreurs et Diagnostiques
+Si tu as une erreur que tu n'arrives pas à résoudre, c'est aussi normal en programmation ! 
+Les programmeurs travaillent sur des machines différentes qui sont toutes configurées différement, mais surtout les versions des languages et logiciels changent très souvent ! Les programmeurs sont des gros travailleurs 🧑‍💻
+Voici celles qui nous ont posé problème à nous aussi et dont nous avons trouvé la solution.
+
+### 🚨 Panique à bord, le projet ne fonctionne plus !
+Tu as modifié beaucoup de choses et le projet ne fonctionne plus ? Ne panique pas, tu peux simplement le re-télécharger et le réouvrir tout neuf !
+* Si tu sais déjà utiliser GIT, alors à la racine de ton projet utilises la commande `git restore`
+* Si tu préfères, tu peux le toujours télécharger ici.
+	* Télécharges le fichier ZIP ici [atelier-jeu-video](https://github.com/montrealjug/atelier-jeu-video/archive/refs/heads/main.zip)
+	* C'est une archive, il faut que tu extraie les fichier à l'intérieur. Tu peux double cliquer dessus et copier-coller les fichiers dans le dossier que tu préfères sur ton ordinateur
+	* Assures toi que Godot est bien fermé
+	* Remplace les fichiers de ton ancien projet par les nouveaux
+	* Relance l'application Godot et si besoin réimporte ton projet
+
+### Godot Version / Imports
+
+#### Error related to Godot Version
+![Error-à-ajouter](./readme-images/error-godot-import.png)
+
+#### Solution
+1. Télécharges la dernière version de Godot ici: [Download](https://godotengine.org/download)
+2. Extrait le contenu de l'archive zip à un endroit que tu préfères sur ton ordinateur, par exemple ici `C:\Program Files\Godot`
+3. Ton dossier Godot devrait maintenant contenir deux fichiers, comme ci-dessous:
+
+![New Version](./readme-images/error-godot-import-new-version.png)
+
+4. Créer toi un raccourci du fichier `Godot_v4.6.1-stable_win64.exe` en faisant un clic droit dessus. Tu peux mettre ton raccourcis sur le bureau, dans la barre des tâches, ou oú tu préfères.
+5. Lance Godot à partir de ton nouveau raccourcis.
+6. S'il ne détecte pas le projet du jeu automatiquement, importe le ici en cliquant sur `importer`. S'il est déjà listé, tu peux le lancer en cliquant directement dessus.
+
+![Solution](./readme-images/error-godot-import-solution.png)
+
+### Toujours bloqué ?
+Contacte nous ici ([Contact](#-ouvrir-le-projet-dans-godot)), on sera contents de t'aider !
 ---
 
 *Fait avec ❤️ pour Devoxx4Kids Québec — Inspirons la prochaine génération de développeurs de jeux !*
+
+## Contacts
+Concepteur de l'atelier: [Romain Dalichamp](https://linkfr.ee/romain.dalichamp)
+Créateur du jeu & Développeur: [Florian Rea](https://www.linkedin.com/in/florian-rea-57a7bb107)
+Animateur de l'atelier: [Anthony Dahanne](https://www.linkedin.com/in/anthonydahanne)

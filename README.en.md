@@ -4,7 +4,7 @@
 
 ![Tiny Wizard Main Image](./readme-images/tiny-wizard.png)
 
-Welcome to the **Video Game Programming** workshop by [Devoxx4Kids Québec](https://www.devoxx4kids.org/quebec/) !
+Welcome to the **Video Game Programming** workshop by [Devoxx4Kids Québec](https://www.devoxx4kids.org/quebec) !
 
 You will explore a real video game, understand how it works, and improve it yourself.
 At the end of the session, you will get to demo it to your parents!
@@ -21,11 +21,11 @@ There are several engines, each with its strengths. Here are the most well-known
 
 | Engine | Used for | Why developers choose it |
 |--------|---------|--------------------------|
-| [**Unity**](https://unity.com/) | Hollow Knight, Cuphead, Among Us | Very popular, huge community, compatible with almost every platform. Great for indie studios. |
-| [**Unreal Engine**](https://www.unrealengine.com/) | Fortnite, Valorant, Hogwarts Legacy | Ultra-realistic graphics. Used by large AAA studios (big budgets). |
-| [**Godot**](https://godotengine.org/) | Cassette Beasts, Sonic Colors Ultimate | Free, Open Source, lightweight, easy to learn. Perfect for beginners and indie games. |
-| [**GameMaker**](https://gamemaker.io/) | Undertale, Hotline Miami, Stardew Valley | Easy to get started, very popular for 2D games. |
-| [**RPG Maker**](https://www.rpgmakerweb.com/) | Omori, Yume Nikki | Specialized in RPGs (role-playing games). Little to no programming required. |
+| [**Unity**](https://unity.com) | Hollow Knight, Cuphead, Among Us | Very popular, huge community, compatible with almost every platform. Great for indie studios. |
+| [**Unreal Engine**](https://www.unrealengine.com) | Fortnite, Valorant, Hogwarts Legacy | Ultra-realistic graphics. Used by large AAA studios (big budgets). |
+| [**Godot**](https://godotengine.org) | Cassette Beasts, Sonic Colors Ultimate | Free, Open Source, lightweight, easy to learn. Perfect for beginners and indie games. |
+| [**GameMaker**](https://gamemaker.io) | Undertale, Hotline Miami, Stardew Valley | Easy to get started, very popular for 2D games. |
+| [**RPG Maker**](https://www.rpgmakerweb.com) | Omori, Yume Nikki | Specialized in RPGs (role-playing games). Little to no programming required. |
 
 > 💡 **Which one to choose?** It depends on the project! For beginners, **Godot** and **GameMaker** are excellent. For large professional 3D games, developers lean toward **Unreal**. In this workshop, we use **Godot** — it's free, Open Source, and quick to pick up.
 
@@ -43,12 +43,12 @@ This game is Open Source. The game engine we use, **Godot**, is too. Even this R
 
 ### 🎮 Let's Discover Godot!
 
-[**Godot Engine**](https://godotengine.org/) is a free and Open Source **game engine**. A game engine is a tool that gives you everything you need to build a game: displaying images, playing sounds, detecting collisions, reading keyboard input, and more.
+[**Godot Engine**](https://godotengine.org) is a free and Open Source **game engine**. A game engine is a tool that gives you everything you need to build a game: displaying images, playing sounds, detecting collisions, reading keyboard input, and more.
 
 It is used by thousands of developers around the world, from hobbyists to professionals.
 
-* 📖 [Official Godot Documentation (English)](https://docs.godotengine.org/en/stable/)
-* 📖 [Official Godot Documentation (French)](https://docs.godotengine.org/fr/stable/)
+* 📖 [Official Godot Documentation (English)](https://docs.godotengine.org/en/stable)
+* 📖 [Official Godot Documentation (French)](https://docs.godotengine.org/fr/stable)
 
 ### How Does Godot Work?
 
@@ -169,21 +169,33 @@ If the project is not already open on the computers:
 
 ```
 atelier-jeu-video/
-├── assets/          🎨 Images, sounds, music
-├── resources/       ⚙️  Configuration files (stats, waves...)
-│   ├── enemy_stats/     Each enemy's stats (HP, speed, damage)
-│   ├── player_stats/    Player stats
-│   └── wave_data/       Enemy wave configuration
-└── src/             💻 Game code and scenes
-    ├── scenes/          Godot scenes (characters, UI, world...)
-    │   ├── entities/    Player and enemies
-    │   ├── game/        Core game logic (waves, spawning...)
-    │   ├── items/       Collectible potions
-    │   └── ui/          Interface (menus, HUD, death screen)
-    └── scripts/         Reusable GDScript files
-        ├── autoloads/   Scripts accessible from anywhere in the game
-        └── resources/   Custom resource type definitions
+├── assets/          	🎨 Images, sounds, music
+├── resources/       	⚙️ Configuration files (stats, waves...)
+│   ├── enemy_stats/    📊 Each enemy's stats (HP, speed, damage)
+│   ├── player_stats/   📊 Player stats
+│   └── wave_data/      🌊 Enemy wave configuration
+└── src/             	💻 Game code and scenes
+	├── scenes/         🎬 Godot scenes (characters, UI, world...)
+	│   ├── entities/   🧙 Player and enemies
+	│   ├── game/       🧠 Core game logic (waves, spawning...)
+	│   ├── items/      🍶 Collectible potions
+	│   └── ui/         🪟 Interface (menus, HUD, death screen)
+	└── scripts/        📜 Reusable GDScript files
+		├── autoloads/  📜 Scripts accessible from anywhere in the game
+		└── resources/  📜 Custom resource type definitions
 ```
+
+### File Types to Know and Where to Find Them in the FileSystem
+```
+atelier-jeu-video/
+├── assets/          	🎨 .png, .jpg, .ttf, .wav, .mp3 files
+├── resources/       	⚙️ .tres files
+└── src/             	💻 Game code and scenes
+	├── scenes/         🎬 .tscn, .gd files
+	└── scripts/        📜 .gd files
+```
+
+---
 
 ### Key Files to Know
 
@@ -197,8 +209,6 @@ atelier-jeu-video/
 | `src/scenes/entities/player/fireball/fireball.gd` | The fireball |
 | `src/scripts/autoloads/game_data.gd` | Global game data |
 | `src/scripts/autoloads/signals.gd` | Game signals (events) |
-
----
 
 ## 📖 Code Basics
 
@@ -278,21 +288,21 @@ Challenges are grouped by difficulty. **Start with Group 1** and go at your own 
 >
 > To open a `.tres` file: double-click it in the **FileSystem** panel (bottom left). Its properties appear in the **Inspector** (right side).
 
-**Challenge 1 — Launch the game and survive!**
+#### **Challenge 1 — Launch the game and survive!**
 Press **F5**. Play for a few minutes. Try to survive the enemy waves. How many waves can you reach?
 
-**Challenge 2 — Make the wizard super fast**
+#### **Challenge 2 — Make the wizard super fast**
 Open `resources/player_stats/player_stats.tres` in the Inspector.
 Change **`Speed`** to `500`. Launch the game. Try `50`. Which value is the most fun?
 
-**Challenge 3 — Become invincible**
+#### **Challenge 3 — Become invincible**
 In the same file, change **`Hp Max`** to `9999`. Launch the game. You can no longer die!
 
-**Challenge 4 — One-shot the bats**
+#### **Challenge 4 — One-shot the bats**
 Open `resources/enemy_stats/bat_stats.tres`.
 Change **`Hp Max`** to `1`. Bats now die in a single shot!
 
-**Challenge 5 — Flood wave 1**
+#### **Challenge 5 — Flood wave 1**
 Open `resources/wave_data/wave1_data.tres`.
 In the **`Sub Waves`** list, click on the first element. Change **`Amount`** to `20`.
 Launch the game — you're surrounded!
@@ -303,23 +313,23 @@ Launch the game — you're surrounded!
 
 > In Group 2, you keep modifying `.tres` files, but you explore more configuration options.
 
-**Challenge 6 — Shoot like a machine gun**
+#### **Challenge 6 — Shoot like a machine gun**
 In `resources/player_stats/player_stats.tres`, change **`Attack Cooldown`** to `0.05`.
 (This value is the time in seconds between each shot. The smaller it is, the faster you shoot!)
 
-**Challenge 7 — Double your damage**
+#### **Challenge 7 — Double your damage**
 Still in `player_stats.tres`, find **`Damage Information`** and click to open it. Change the **`Damage`** value. Try `50`!
 
-**Challenge 8 — Change the spawn formation**
+#### **Challenge 8 — Change the spawn formation**
 In `resources/wave_data/wave1_data.tres`, open a `SubWaveData` and change **`Pattern`**:
 - `RANDOM`: enemies appear anywhere
 - `CIRCLE`: they appear in a circle around you
 - `CLUSTER`: they appear as a group
 
-**Challenge 9 — Replace the enemies**
+#### **Challenge 9 — Replace the enemies**
 In the same wave, change **`Enemy Type`** to `KNIGHT` or `SPIDER`. Launch the game — surprise!
 
-**Challenge 10 — Find your perfect balance**
+#### **Challenge 10 — Find your perfect balance**
 Restore player stats to reasonable values, but keep the wave changes you prefer. Build a wave 1 that feels fun to play!
 
 ---
@@ -330,12 +340,12 @@ Restore player stats to reasonable values, but keep the wave changes you prefer.
 >
 > To open a script: double-click it in the **FileSystem**. It opens in the code editor.
 
-**Challenge 11 — Read the player movement**
+#### **Challenge 11 — Read the player movement**
 Open `src/scenes/entities/player/movement/player_movement.gd`.
 You'll see the line: `player.velocity = input_vector * player_stats.speed`
 This is where speed is applied! Modify the line to use `player_stats.speed * 2`. What happens?
 
-**Challenge 12 — Speed up the fireball**
+#### **Challenge 12 — Speed up the fireball**
 Open `src/scenes/entities/player/fireball/fireball.gd`.
 Find the `speed` variable. You can also change it from the editor: in the `fireball.tscn` scene, click the root node and look for **`Speed`** in the Inspector. Set it to `1000`!
 
@@ -346,12 +356,12 @@ Find the `speed` variable. You can also change it from the editor: in the `fireb
 
 </details>
 
-**Challenge 13 — Understand why aiming is broken**
+#### **Challenge 13 — Understand why aiming is broken**
 Open `src/scenes/entities/player/weapon/weapon.gd`.
 Read the `_process` function. See `get_right_stick_direction(0.1)`?
 That's the direction of the right gamepad stick. If no one is using a gamepad, `current_direction` never changes… and the wizard always shoots right. This is the bug you'll fix in Challenge 16!
 
-**Challenge 14 — Add a score variable**
+#### **Challenge 14 — Add a score variable**
 Open `src/scripts/autoloads/game_data.gd`.
 At the end of the file, add this line:
 ```gdscript
@@ -359,7 +369,7 @@ var score: int = 0
 ```
 `GameData.score` will now be accessible from any script in the game.
 
-**Challenge 15 — Discover signals**
+#### **Challenge 15 — Discover signals**
 Open `src/scripts/autoloads/signals.gd`.
 You'll see `signal enemy_died(enemy: Enemy)`. This is a **signal**: when an enemy dies, this signal is sent to everyone listening.
 Who is already listening? Search for `enemy_died.connect` in the project (**Project > Find in Files**).
@@ -372,7 +382,7 @@ Who is already listening? Search for `enemy_died.connect` in the project (**Proj
 >
 > Don't forget to save your files after each change (**Ctrl+S**).
 
-**Challenge 16 — Fix mouse aiming** ⭐ *(the main challenge!)*
+#### **Challenge 16 — Fix mouse aiming** ⭐ *(the main challenge!)*
 In `src/scenes/entities/player/weapon/weapon.gd`, find this block in `_process`:
 ```gdscript
 var right_stick_direction := get_right_stick_direction(0.1)
@@ -415,7 +425,7 @@ This way the game works with both types of controls, without one interfering wit
 
 </details>
 
-**Challenge 17 — Increase the score on each kill**
+#### **Challenge 17 — Increase the score on each kill**
 In `src/scripts/autoloads/game_data.gd`, add a function to listen to the `enemy_died` signal:
 ```gdscript
 func _ready() -> void:
@@ -427,7 +437,7 @@ func _on_enemy_died(_enemy: Enemy) -> void:
 ```
 Launch the game and watch the console at the bottom of Godot — the score goes up with every kill!
 
-**Challenge 18 — Display the score on screen**
+#### **Challenge 18 — Display the score on screen**
 Open the scene `src/scenes/ui/hud/hud.tscn`.
 
 In the scene tree (left panel), right-click the root node and add a **Label** node. Name it `ScoreLabel`.
@@ -449,7 +459,7 @@ Drag it wherever you want on screen, then launch the game to check that it works
 
 </details>
 
-**Challenge 19 — Create wave 6**
+#### **Challenge 19 — Create wave 6**
 In the FileSystem, right-click `resources/wave_data/wave5_data.tres` and choose **Duplicate**. Rename the file to `wave6_data.tres`.
 Open it and design the hardest wave you can imagine! More enemies, knights, archers…
 
@@ -460,7 +470,7 @@ Open it and design the hardest wave you can imagine! More enemies, knights, arch
 
 </details>
 
-**Challenge 20 — Add your wave 6 to the game**
+#### **Challenge 20 — Add your wave 6 to the game**
 Open the scene `src/scenes/game/wave_manager/game.tscn`. Click the **WaveManager** node in the tree. In the Inspector, find the **`Waves Data`** array and click **+** to add an entry. Select your `wave6_data.tres` file.
 Launch the game and survive to your wave!
 
@@ -480,7 +490,7 @@ Launch the game and survive to your wave!
 >
 > Open source sprites are royalty-free images shared freely by the community. That's how Open Source works in the art world!
 
-**Challenge 21 — Look at the current wizard sprite**
+#### **Challenge 21 — Look at the current wizard sprite**
 In the FileSystem, navigate to `assets/sprites/entities/`.
 Double-click `mage.png` to preview it in the right panel. This is the image that represents your wizard in the game!
 
@@ -507,7 +517,7 @@ In the FileSystem, open `src/scenes/entities/player/sprite/player_sprite.tscn` b
 >
 > In Godot, an object that blocks others is called a **StaticBody2D**. You give it a **CollisionShape2D** to define its shape, and a visual element so you can see it.
 
-**Challenge 22 — Open the main game scene**
+#### **Challenge 22 — Open the main game scene**
 In the FileSystem, navigate to `src/scenes/game/wave_manager/` and double-click **`game.tscn`**.
 You can see the arena in the Viewport. This is where you'll place your walls!
 
@@ -537,7 +547,7 @@ Launch the game — the wizard and enemies can no longer walk through your walls
 
 > In Group 7, you **write code** to customize the game your way. These challenges aren't necessarily harder — they're about **expressing your creativity through code**!
 
-**Challenge 23 — Change the fireball color**
+#### **Challenge 23 — Change the fireball color**
 Open `src/scenes/entities/player/fireball/fireball.gd`.
 In the `_ready()` function, after the two existing lines, add:
 ```gdscript
@@ -545,14 +555,14 @@ sprite.modulate = Color(0.5, 0, 1)  # purple fireballs!
 ```
 Launch the game. Try other colors: `Color.GREEN`, `Color.BLUE`, `Color(1, 0.5, 0)` for orange, `Color.RED`…
 
-**Challenge 24 — Change the explosion color**
+#### **Challenge 24 — Change the explosion color**
 In the same `fireball.gd` file, still inside `_ready()`, also add:
 ```gdscript
 spark_particles.modulate = Color(0, 1, 0)  # green explosion sparks!
 ```
 Launch the game and shoot fireballs — the sparks on impact change color!
 
-**Challenge 25 — Track your survival time**
+#### **Challenge 25 — Track your survival time**
 Open `src/scripts/autoloads/game_data.gd`.
 Add a variable and a function to measure elapsed time:
 ```gdscript
@@ -563,7 +573,7 @@ func _process(delta: float) -> void:
 ```
 `GameData.survival_time` now holds the number of seconds since the game started!
 
-**Challenge 26 — Display the survival time on screen**
+#### **Challenge 26 — Display the survival time on screen**
 Open `src/scenes/ui/hud/hud.tscn`. Add a **Label** node and name it `TimeLabel`.
 In the HUD script, add or complete the `_process` function to show the time:
 ```gdscript
@@ -573,7 +583,7 @@ func _process(_delta: float) -> void:
 	time_label.text = str(int(GameData.survival_time)) + "s"
 ```
 
-**Challenge 27 — Print your stats by pressing Space**
+#### **Challenge 27 — Print your stats by pressing Space**
 In `src/scripts/autoloads/game_data.gd`, inside the `_process` function, add:
 ```gdscript
 if Input.is_action_just_pressed("ui_accept"):  # Space bar
@@ -694,6 +704,48 @@ A top-down dungeon adventure game. You play a **wizard** who must survive waves 
 - **Language**: GDScript
 - **Genre**: Top-down dungeon, wave survival
 
+## 🪳 Errors and Diagnostics
+
+If you run into an error you can't fix, that's completely normal in programming!
+Developers work on different machines with different configurations, and language and software versions change all the time. Programmers are hard workers 🧑‍💻
+Here are issues we ran into ourselves — along with the solutions we found.
+
+### 🚨 Panic mode — the project isn't working anymore!
+Did you change a lot of things and the project stopped working? Don't panic — you can simply re-download it and start fresh!
+* If you already know how to use GIT, run `git restore` at the root of your project
+* Otherwise, you can always download it here:
+	* Download the ZIP file here: [atelier-jeu-video](https://github.com/montrealjug/atelier-jeu-video/archive/refs/heads/main.zip)
+	* It's an archive — extract the files inside. You can double-click it and copy-paste the files into any folder you like on your computer
+	* Make sure Godot is closed
+	* Replace the files of your old project with the new ones
+	* Relaunch Godot and re-import the project if needed
+
+### Godot Version / Imports
+
+#### Error related to Godot Version
+![Error to add](./readme-images/error-godot-import.png)
+
+#### Solution
+1. Download the latest version of Godot here: [Download](https://godotengine.org/download)
+2. Extract the zip archive to a location of your choice, for example `C:\Program Files\Godot`
+3. Your Godot folder should now contain two files, like below:
+
+![New Version](./readme-images/error-godot-import-new-version.png)
+
+4. Create a shortcut to `Godot_v4.6.1-stable_win64.exe` by right-clicking it. You can place the shortcut on your desktop, taskbar, or wherever you prefer.
+5. Launch Godot from your new shortcut.
+6. If it doesn't automatically detect the game project, import it by clicking `Import`. If it's already listed, you can launch it directly by clicking on it.
+
+![Solution](./readme-images/error-godot-import-solution.png)
+
+### Still stuck?
+Contact us here ([Contacts](#contacts)), we'll be happy to help!
+
 ---
 
 *Made with ❤️ for Devoxx4Kids Québec — Inspiring the next generation of game developers!*
+
+## Contacts
+Workshop designer: [Romain Dalichamp](https://linkfr.ee/romain.dalichamp)
+Game creator & Developer: [Florian Rea](https://www.linkedin.com/in/florian-rea-57a7bb107)
+Workshop facilitator: [Anthony Dahanne](https://www.linkedin.com/in/anthonydahanne)
