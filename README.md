@@ -47,8 +47,7 @@ Ce jeu est Open Source. Le moteur de jeu utilisé, **Godot**, l'est aussi. Même
 
 Il est utilisé par des milliers de développeurs dans le monde, des amateurs comme des professionnels.
 
-* 📖 [Documentation officielle de Godot (en anglais)](https://docs.godotengine.org/en/stable/)
-* 📖 [Documentation officielle de Godot (en français)](https://docs.godotengine.org/fr/stable/)
+* 📖 [Documentation officielle de Godot](https://docs.godotengine.org/fr/stable/)
 
 ### Comment fonctionne Godot ?
 
@@ -78,8 +77,7 @@ L'interface de Godot se divise en 4 grandes zones :
 └────────────────────────────────────────────────┘
 ```
 
-* 📖 [Découvrir l'interface de Godot (en anglais)](https://docs.godotengine.org/en/stable/getting_started/introduction/first_look_at_the_editor.html)
-* 📖 [Découvrir l'interface de Godot (en français)](https://docs.godotengine.org/fr/4.x/getting_started/introduction/first_look_at_the_editor.html)
+* 📖 [Découvrir l'interface de Godot](https://docs.godotengine.org/fr/4.x/getting_started/introduction/first_look_at_the_editor.html)
 
 ### Les langages de programmation les plus connus
 
@@ -251,7 +249,7 @@ Dans le jeu, on utilise `if / else` pour viser avec le joystick OU avec la souri
 if right_stick_direction != Vector2.ZERO:
 	current_direction = right_stick_direction  # joystick détecté → on l'utilise
 else:
-    current_direction = ...                    # sinon → on vise avec la souris
+	current_direction = ...                    # sinon → on vise avec la souris
 ```
 
 ---
@@ -263,7 +261,7 @@ Une **fonction**, c'est un bloc de code qui a un nom et qu'on peut appeler quand
 
 ```gdscript
 func dire_bonjour() -> void:
-    print("Bonjour !")
+	print("Bonjour !")
 
 dire_bonjour()  # appelle la fonction → affiche "Bonjour !"
 ```

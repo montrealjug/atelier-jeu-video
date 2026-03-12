@@ -47,8 +47,7 @@ This game is Open Source. The game engine we use, **Godot**, is too. Even this R
 
 It is used by thousands of developers around the world, from hobbyists to professionals.
 
-* 📖 [Official Godot Documentation (English)](https://docs.godotengine.org/en/stable)
-* 📖 [Official Godot Documentation (French)](https://docs.godotengine.org/fr/stable)
+* 📖 [Official Godot Documentation](https://docs.godotengine.org/en/stable)
 
 ### How Does Godot Work?
 
@@ -78,7 +77,7 @@ The Godot interface is divided into 4 main areas:
 └────────────────────────────────────────────────┘
 ```
 
-* 📖 [First look at the Godot editor (English)](https://docs.godotengine.org/en/stable/getting_started/introduction/first_look_at_the_editor.html)
+* 📖 [First look at the Godot editor](https://docs.godotengine.org/en/stable/getting_started/introduction/first_look_at_the_editor.html)
 
 ### The Most Common Programming Languages
 
@@ -114,8 +113,7 @@ func _process(delta):
 	position.x += speed * delta  # Moves the object to the right
 ```
 
-* 📖 [Introduction to GDScript (English)](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html)
-* 📖 [Introduction to GDScript (French)](https://docs.godotengine.org/fr/stable/tutorials/scripting/gdscript/gdscript_basics.html)
+* 📖 [Introduction to GDScript](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html)
 
 ---
 
