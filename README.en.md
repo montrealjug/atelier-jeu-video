@@ -119,15 +119,49 @@ func _process(delta):
 
 ## 🏁 Workshop Steps
 
-Follow these steps in order. Ask a workshop leader if you're stuck!
+Follow these steps below in order. Ask a workshop leader if you're stuck!
 
 1. [X] **Install Godot** — if not already done — following the instructions in the [Home Installation](#-home-installation) section below
-2. [ ] **Open the project** in Godot ([Open the project in Godot](#open-the-project-in-godot))
-3. [ ] **Launch the game** and play for a few minutes to understand it ([How to Play](#️-how-to-play))
+2. [ ] **Open the project** in Godot
+3. [ ] **Launch the game** and play for a few minutes to understand it
 4. [ ] **Explore the project**: browse folders, scenes, and scripts — ask questions!
 5. [ ] **Identify what's missing** (hint: try aiming with the mouse!)
-6. [ ] **Complete your challenges** — follow the [27 challenges](#️-your-27-challenges) below
+6. [ ] **Complete your challenges** — Complete all the challenge steps below
 7. [ ] **Demo your game** to your parents at the end of the session!
+
+---
+
+## 🎮 Game Overview
+
+### The Game
+A top-down dungeon adventure game. You play a **wizard** who must survive waves of enemies by shooting fireballs. Collect **potions** to upgrade your stats between waves!
+
+### Enemies
+| Enemy | Behavior |
+|-------|----------|
+| 🦇 Bat | Charges straight at you |
+| 👻 Ghost | Swings side to side while moving |
+| 🕷️ Spider | Charges straight at you |
+| 🏹 Archer | Keeps its distance and shoots arrows |
+| ⚔️ Knight | Charges straight at you, very tanky |
+
+### Potions
+| Potion | Effect |
+|--------|--------|
+| ❤️ Health Potion | Restores hit points |
+| 💨 Speed Potion | Increases movement speed |
+| ⚔️ Damage Potion | Increases fireball damage |
+| 🌀 Attack Speed Potion | Reduces time between shots |
+
+### Technical Details
+- **Engine**: [Godot Engine 4](https://godotengine.org/)
+- **Language**: GDScript
+- **Genre**: Top-down dungeon, wave survival
+
+---
+
+## Let's go, let's start by... playing!
+A good video game is a fun video game. How do you know if a game is fun? No choice — you have to play it 🎮!
 
 ### Open the Project in Godot
 If the project is not already open on the computers:
@@ -138,11 +172,9 @@ If the project is not already open on the computers:
 4. Click **Import & Edit**
 5. Press **F5** (or the ▶ button at the top right) to launch the game
 
----
+### How to Play
 
-## 🕹️ How to Play
-
-### Keyboard + Mouse *(recommended)*
+#### Keyboard + Mouse *(recommended)*
 
 | Action | Key |
 |--------|-----|
@@ -152,7 +184,7 @@ If the project is not already open on the computers:
 
 > ⚠️ **Warning:** Right now, mouse aiming doesn't work — the wizard always shoots to the right! **That's one of your challenges to fix.** 🎯
 
-### Gamepad
+#### Gamepad
 
 | Action | Button |
 |--------|--------|
@@ -163,7 +195,10 @@ If the project is not already open on the computers:
 
 ---
 
-## 🗺️ How the Project is Organized
+## How do we make it even more fun?
+The game isn't perfect — things are missing. That's what you're going to learn to fix. Start by understanding how the game is organized.
+
+## File Structure
 
 ```
 atelier-jeu-video/
@@ -238,18 +273,18 @@ If the condition is true, the `if` block runs. Otherwise, the `else` block runs.
 
 ```gdscript
 if points > 10:
-    print("You win!")
+	print("You win!")
 else:
-    print("Not yet...")
+	print("Not yet...")
 ```
 
 In the game, we use `if / else` to aim with the joystick OR the mouse depending on what the player is using:
 
 ```gdscript
 if right_stick_direction != Vector2.ZERO:
-    current_direction = right_stick_direction  # joystick detected → use it
+	current_direction = right_stick_direction  # joystick detected → use it
 else:
-    current_direction = ...                    # otherwise → aim with the mouse
+	current_direction = ...                    # otherwise → aim with the mouse
 ```
 
 ---
@@ -261,7 +296,7 @@ It avoids writing the same code over and over.
 
 ```gdscript
 func say_hello() -> void:
-    print("Hello!")
+	print("Hello!")
 
 say_hello()  # calls the function → prints "Hello!"
 ```
@@ -672,35 +707,6 @@ Pick up where you left off during the workshop. You can also invent your own imp
 - 🌍 [Devoxx4Kids](https://www.devoxx4kids.org/) — The organization behind these workshops
 - 💻 [GitHub](https://github.com) — Where developers share their Open Source code
 - 🐍 [Learn Python](https://www.learnpython.org/) — Learn Python, a language similar to GDScript
-
----
-
-## 🎮 Game Overview
-
-### Summary
-A top-down dungeon adventure game. You play a **wizard** who must survive waves of enemies by shooting fireballs. Collect **potions** to upgrade your stats between waves!
-
-### Enemies
-| Enemy | Behavior |
-|-------|----------|
-| 🦇 Bat | Charges straight at you |
-| 👻 Ghost | Swings side to side while moving |
-| 🕷️ Spider | Charges straight at you |
-| 🏹 Archer | Keeps its distance and shoots arrows |
-| ⚔️ Knight | Charges straight at you, very tanky |
-
-### Potions
-| Potion | Effect |
-|--------|--------|
-| ❤️ Health Potion | Restores hit points |
-| 💨 Speed Potion | Increases movement speed |
-| ⚔️ Damage Potion | Increases fireball damage |
-| 🌀 Attack Speed Potion | Reduces time between shots |
-
-### Technical Details
-- **Engine**: [Godot Engine 4](https://godotengine.org/)
-- **Language**: GDScript
-- **Genre**: Top-down dungeon, wave survival
 
 ## 🪳 Errors and Diagnostics
 

@@ -120,15 +120,49 @@ func _process(delta):
 
 ## 🏁 Étapes de l'atelier
 
-Suis ces étapes dans l'ordre. Demande à un animateur si tu es bloqué !
+Suis ces étapes ci dessous dans l'ordre. Demande à un animateur si tu es bloqué !
 
 1. [X] **Installe Godot** - si ce n'est pas déjà fait - en suivant les instructions plus bas dans la section [Installation à la maison](#-installation-à-la-maison)
-2. [ ] **Ouvre le projet** dans Godot ([Ouvrir le projet dans Godot](#-ouvrir-le-projet-dans-godot))
-3. [ ] **Lance le jeu** et joue quelques minutes pour le comprendre ([Coment Jouer](#-comment-jouer))
+2. [ ] **Ouvre le projet** dans Godot
+3. [ ] **Lance le jeu** et joue quelques minutes pour le comprendre
 4. [ ] **Explore le projet** : regarde les dossiers, les scènes, les scripts, poses des questions
 5. [ ] **Identifie ce qui manque** dans le jeu (indice : essaie de viser avec la souris !)
-6. [ ] **Complète tes défis** — suis les [27 défis](#-tes-27-défis) ci-dessous
+6. [ ] **Complète tes défis** — Complète toutes les étapes des défis ci-dessous
 7. [ ] **Présente ton jeu** à tes parents à la fin de la session !
+
+---
+
+## 🎮 Aperçu du jeu
+
+### Le jeu
+C'est un jeu d'aventure en vue du dessus dans un donjon. Tu joues un **sorcier** qui doit survivre à des **vagues d'ennemis** en tirant des boules de feu. Ramasse des **potions** pour améliorer tes statistiques entre les vagues !
+
+### Les ennemis
+| Ennemi | Comportement |
+|--------|-------------|
+| 🦇 Chauve-souris | Fonce droit vers toi |
+| 👻 Fantôme | Se balance en se déplaçant |
+| 🕷️ Araignée | Fonce droit vers toi |
+| 🏹 Archer | Garde ses distances et tire des flèches |
+| ⚔️ Chevalier | Fonce droit vers toi, très résistant |
+
+### Les potions
+| Potion | Effet |
+|--------|-------|
+| ❤️ Potion de vie | Restaure des points de vie |
+| 💨 Potion de vitesse | Augmente ta vitesse de déplacement |
+| ⚔️ Potion de dégâts | Augmente les dégâts de tes boules de feu |
+| 🌀 Potion de cadence | Réduit le temps entre chaque tir |
+
+### Détails techniques
+- **Moteur** : [Godot Engine 4](https://godotengine.org/)
+- **Langage** : GDScript
+- **Type** : Top-down dungeon, survie par vagues
+
+---
+
+## C'est partit, commençons par ... jouer !
+Un bon jeu vidéo est un jeu vidéo qui est fun. Comment savoir si un jeu est fun ? Pas le choix, il faut y jouer 🎮 !
 
 ### Ouvrir le projet dans Godot
 Si le projet n'est pas déjà ouvert sur les ordinateurs:
@@ -139,11 +173,9 @@ Si le projet n'est pas déjà ouvert sur les ordinateurs:
 4. Clique sur **Import & Edit**
 5. Appuie sur **F5** (ou le bouton ▶ en haut à droite) pour lancer le jeu
 
----
+### Comment jouer
 
-## 🕹️ Comment jouer
-
-### Clavier + Souris *(recommandé)*
+#### Clavier + Souris *(recommandé)*
 
 | Action | Touche |
 |--------|--------|
@@ -153,7 +185,7 @@ Si le projet n'est pas déjà ouvert sur les ordinateurs:
 
 > ⚠️ **Attention :** Pour l'instant, la visée avec la souris ne fonctionne pas encore — le sorcier tire toujours vers la droite ! **C'est l'un de tes défis de le corriger.** 🎯
 
-### Manette (gamepad)
+#### Manette (gamepad)
 
 | Action | Bouton |
 |--------|--------|
@@ -163,8 +195,10 @@ Si le projet n'est pas déjà ouvert sur les ordinateurs:
 | Pause | Start |
 
 ---
+## Comment le rendre encore plus fun ?
+Le jeu n'est pas parfait, il manque des choses ? C'est ce que tu vas apprendre à faire. Commence par comprendre comment le jeu est organisé.
 
-## 🗺️ Comment le projet est organisé
+## Structure de fichiers
 
 ```
 atelier-jeu-video/
@@ -674,33 +708,6 @@ Reprends là où tu t'étais arrêté pendant l'atelier. Tu peux aussi inventer 
 - 🐍 [Learn Python](https://www.learnpython.org/) — Pour apprendre Python, un langage similaire à GDScript
 
 ---
-
-## 🎮 Aperçu du jeu
-
-### Le jeu en résumé
-C'est un jeu d'aventure en vue du dessus dans un donjon. Tu joues un **sorcier** qui doit survivre à des **vagues d'ennemis** en tirant des boules de feu. Ramasse des **potions** pour améliorer tes statistiques entre les vagues !
-
-### Les ennemis
-| Ennemi | Comportement |
-|--------|-------------|
-| 🦇 Chauve-souris | Fonce droit vers toi |
-| 👻 Fantôme | Se balance en se déplaçant |
-| 🕷️ Araignée | Fonce droit vers toi |
-| 🏹 Archer | Garde ses distances et tire des flèches |
-| ⚔️ Chevalier | Fonce droit vers toi, très résistant |
-
-### Les potions
-| Potion | Effet |
-|--------|-------|
-| ❤️ Potion de vie | Restaure des points de vie |
-| 💨 Potion de vitesse | Augmente ta vitesse de déplacement |
-| ⚔️ Potion de dégâts | Augmente les dégâts de tes boules de feu |
-| 🌀 Potion de cadence | Réduit le temps entre chaque tir |
-
-### Détails techniques
-- **Moteur** : [Godot Engine 4](https://godotengine.org/)
-- **Langage** : GDScript
-- **Type** : Top-down dungeon, survie par vagues
 
 ## 🪳Erreurs et Diagnostiques
 Si tu as une erreur que tu n'arrives pas à résoudre, c'est aussi normal en programmation ! 
