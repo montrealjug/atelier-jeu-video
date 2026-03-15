@@ -122,18 +122,18 @@ func _process(delta):
 Follow these steps below in order. Ask a workshop leader if you're stuck!
 
 1. [x] **Install Godot** — if not already done — following the instructions in the [Home Installation](#🏠-home-installation) section below
-2. [ ] **[Discover the game](#🎮-game-overview)** in Godot, discover the game and play for a few minutes to understand it
+2. [ ] **[Discover the game](#-game-overview)** in Godot, discover the game and play for a few minutes to understand it
 3. [ ] **[Open the project](#lets-play)** in Godot, discover the game and play for a few minutes to understand it
 4. [ ] **[Explore the project](#file-structure)** : discover the files, folders, scenes, and scripts
-5. [ ] **[Learn the code basics](#📖-code-basics)** to be ready to understand, modify, and program the game
-6. [ ] **[Complete your challenges](#⚔️-your-challenges)** - Complete all the challenge steps below
-   - [ ] **[Challenge Group 1](#🔍-group-1---explorer)** - 🔍 No code required
-   - [ ] **[Challenge Group 2](#⚙️-group-2---resource-tinkerer)** - ⚙️ Resource Tinkerer
-   - [ ] **[Challenge Group 3](#📖-group-3---code-reader)** - 📖 Code Reader - Understanding scripts
-   - [ ] **[Challenge Group 4](#💻-group-4---coder)** - 💻 Coder - Write code!
-   - [ ] **[Challenge Group 5](#🎨-group-5---pixel-art-artist)** - 🎨 Pixel Art Artist - Customize your character
-   - [ ] **[Challenge Group 6](#️🏗️-group-6---architect)** - 🏗️ Architect - Add Obstacles
-   - [ ] **[Challenge Group 7](#🎮-group-7---creative-coder)** - 🎮 Creative Coder - Customize with code
+5. [ ] **[Learn the code basics](#-code-basics)** to be ready to understand, modify, and program the game
+6. [ ] **[Complete your challenges](#-your-challenges)** - Complete all the challenge steps below
+   - [ ] **[Challenge Group 1](#-group-1---explorer)** - 🔍 No code required
+   - [ ] **[Challenge Group 2](#-group-2---resource-tinkerer)** - ⚙️ Resource Tinkerer
+   - [ ] **[Challenge Group 3](#-group-3---code-reader)** - 📖 Code Reader - Understanding scripts
+   - [ ] **[Challenge Group 4](#-group-4---coder)** - 💻 Coder - Write code!
+   - [ ] **[Challenge Group 5](#-group-5---pixel-art-artist)** - 🎨 Pixel Art Artist - Customize your character
+   - [ ] **[Challenge Group 6](#️-group-6---architect)** - 🏗️ Architect - Add Obstacles
+   - [ ] **[Challenge Group 7](#-group-7---creative-coder)** - 🎮 Creative Coder - Customize with code
 7. [ ] **[Upload your project](#️-upload-your-project)** before leaving to our [Google Drive folder](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj?usp=sharing) to find it at home
 8. [ ] **[Demo your game!](#-present-your-game)** to your parents at the end of the session!
 

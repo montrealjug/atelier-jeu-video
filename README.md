@@ -128,7 +128,7 @@ Suis ces étapes ci dessous dans l'ordre. Demande à un animateur si tu es bloqu
 2. [ ] **[Découvre le jeu](#-aperçu-du-jeu)** dans Godot, découvre le jeu et joue quelques minutes pour le comprendre
 3. [ ] **[Ouvre le projet](#jouons)** dans Godot, découvre le jeu et joue quelques minutes pour le comprendre
 4. [ ] **[Explore le projet](#structure-de-fichiers)** : découvre les fichiers, les dossiers, les scènes, les scripts
-5. [ ] **[Apprends les bases du code](#📖-les-bases-du-code)** pour être prêt à comprendre, modifier et programmer le jeu
+5. [ ] **[Apprends les bases du code](#-les-bases-du-code)** pour être prêt à comprendre, modifier et programmer le jeu
 6. [ ] **[Complète tes défis](#-tes-défis)** - Complète toutes les étapes des défis ci-dessous
    - [ ] **[Groupe de défis 1](#-groupe-1---explorateur)** - 🔍 (pas-de-code-requis)
    - [ ] **[Groupe de défis 2](#-groupe-2---bidouilleur-de-ressources)** - ⚙️ Bidouilleur de Ressources
