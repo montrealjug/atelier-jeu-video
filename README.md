@@ -742,7 +742,7 @@ Lance le jeu et appuie sur **Espace** pendant une partie — tes stats s'affiche
 
 ---
 
-### Présente ton jeu !
+### Présente ton jeu
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
 
