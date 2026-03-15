@@ -123,7 +123,7 @@ Follow these steps below in order. Ask a workshop leader if you're stuck!
 
 1. [x] **Install Godot** — if not already done — following the instructions in the [Home Installation](#-home-installation) section below
 2. [ ] **[Discover the game](#-game-overview)** in Godot, discover the game and play for a few minutes to understand it
-3. [ ] **[Open the project](#lets-play)** in Godot, discover the game and play for a few minutes to understand it
+3. [ ] **[Open the project](#lets-play-)** in Godot, discover the game and play for a few minutes to understand it
 4. [ ] **[Explore the project](#file-structure)** : discover the files, folders, scenes, and scripts
 5. [ ] **[Learn the code basics](#-code-basics)** to be ready to understand, modify, and program the game
 6. [ ] **[Complete your challenges](#-your-challenges)** - Complete all the challenge steps below
