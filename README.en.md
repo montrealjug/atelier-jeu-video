@@ -141,7 +141,7 @@ Follow these steps below in order. Ask a workshop leader if you're stuck!
 
 ## 🎮 Game Overview
 
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 ### The Game
 
@@ -176,7 +176,7 @@ A top-down dungeon adventure game. You play a **wizard** who must survive waves 
 
 ## Let's Play!
 
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 A good video game is a fun video game. How do you know if a game is fun? No choice — you have to play it 🎮!
 
@@ -219,7 +219,7 @@ The game isn't perfect — things are missing. That's what you're going to learn
 
 ## File Structure
 
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 ```
 atelier-jeu-video/
@@ -267,7 +267,7 @@ atelier-jeu-video/
 
 ## 📖 Code Basics
 
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 Before starting the challenges, here are the three essential building blocks of code you'll encounter. No need to memorize everything — come back here if you get stuck!
 
@@ -336,7 +336,7 @@ You'll see these a lot in the game's code!
 
 ## ⚔️ Your Challenges
 
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 Challenges are grouped by difficulty. **Start with Group 1** and go at your own pace!
 
@@ -344,7 +344,7 @@ Challenges are grouped by difficulty. **Start with Group 1** and go at your own 
 
 ### 🔍 Group 1 - Explorer
 
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 > In Group 1, you only modify **configuration files** (.tres) directly in the Godot editor. No coding needed!
 >
@@ -378,7 +378,7 @@ Launch the game — you're surrounded!
 
 ### ⚙️ Group 2 - Resource Tinkerer
 
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 > In Group 2, you keep modifying `.tres` files, but you explore more configuration options.
 
@@ -411,7 +411,7 @@ Restore player stats to reasonable values, but keep the wave changes you prefer.
 
 ### 📖 Group 3 - Code Reader
 
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 > In Group 3, you open real GDScript code files (`.gd`). The goal is to **read and understand**, then make small modifications.
 >
@@ -462,7 +462,7 @@ Who is already listening? Search for `enemy_died.connect` in the project (**Proj
 
 ### 💻 Group 4 - Coder
 
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 > In Group 4, you **write code** to add new features. This is the hardest part — but also the most satisfying! 💪
 >
@@ -588,7 +588,7 @@ Launch the game and survive to your wave!
 
 ### 🎨 Group 5 - Pixel Art Artist
 
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 > In Group 5, you'll **change the wizard's visual appearance** by replacing the sprite image with an open source character found online. No code required — this is a design challenge!
 >
@@ -620,7 +620,7 @@ In the FileSystem, open `src/scenes/entities/player/sprite/player_sprite.tscn` b
 ---
 
 ### 🏗️ Group 6 - Architect
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 > In Group 6, you'll **add walls** to the arena to create physical obstacles. The wizard and enemies won't be able to pass through them — this completely changes how the game plays!
 >
@@ -659,7 +659,7 @@ Launch the game — the wizard and enemies can no longer walk through your walls
 
 ### 🎮 Group 7 - Creative Coder
 
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 > In Group 7, you **write code** to customize the game your way. These challenges aren't necessarily harder — they're about **expressing your creativity through code**!
 
@@ -725,7 +725,7 @@ Launch the game and press **Space** during a run — your stats appear in the co
 
 ### ⬆️ Upload Your Project
 
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 1. Open the Windows folder at the following location: `C:\workspace\`
 2. `Right-click` on the `atelier-jeu-video` folder
@@ -742,7 +742,7 @@ Launch the game and press **Space** during a run — your stats appear in the co
 
 ### 🏆 Present Your Game!
 
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 Done with your challenges? **Congratulations!** 🎉
 
@@ -771,7 +771,7 @@ It’s time to present your work to your parents. Explain to them:
 
 ## 🏠 Home Installation
 
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 Want to keep modifying the game at home? Follow these steps!
 
@@ -825,7 +825,7 @@ Pick up where you left off during the workshop. You can also invent your own imp
 ---
 
 ## 📚 Going Further
-[Back to steps ⬆️](#🏁-workshop-steps)
+[Back to steps ⬆️](#-workshop-steps)
 
 ### Godot & GDScript
 
