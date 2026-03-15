@@ -124,7 +124,7 @@ func _process(delta):
 
 Suis ces étapes ci dessous dans l'ordre. Demande à un animateur si tu es bloqué !
 
-1. [x] **Installe Godot** - si ce n'est pas déjà fait - en suivant les instructions plus bas dans la section [Installation à la maison](#🏠-installation-à-la-maison)
+1. [x] **Installe Godot** - si ce n'est pas déjà fait - en suivant les instructions plus bas dans la section [Installation à la maison](#-installation-à-la-maison)
 2. [ ] **[Découvre le jeu](#-aperçu-du-jeu)** dans Godot, découvre le jeu et joue quelques minutes pour le comprendre
 3. [ ] **[Ouvre le projet](#jouons)** dans Godot, découvre le jeu et joue quelques minutes pour le comprendre
 4. [ ] **[Explore le projet](#structure-de-fichiers)** : découvre les fichiers, les dossiers, les scènes, les scripts
