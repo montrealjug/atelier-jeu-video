@@ -117,33 +117,32 @@ func _process(delta):
 - 📖 [Introduction à GDScript (en français)](https://docs.godotengine.org/fr/stable/tutorials/scripting/gdscript/gdscript_basics.html)
 
 ---
-#%EF%B8%8F-upload-ton-projet
-#%EF%B8%8F-upload-ton-projet
 
-## 🏁 Étapes de l'atelier
+## Étapes de l'atelier
 
 Suis ces étapes ci dessous dans l'ordre. Demande à un animateur si tu es bloqué !
 
-1. [x] **Installe Godot** - si ce n'est pas déjà fait - en suivant les instructions plus bas dans la section [Installation à la maison](#-installation-à-la-maison)
-2. [ ] **[Découvre le jeu](#-aperçu-du-jeu)** dans Godot, découvre le jeu et joue quelques minutes pour le comprendre
-3. [ ] **[Ouvre le projet](#jouons-)** dans Godot, découvre le jeu et joue quelques minutes pour le comprendre
+1. [x] **Installe Godot** - si ce n'est pas déjà fait - en suivant les instructions plus bas dans la section [Installation à la maison](#installation-à-la-maison)
+2. [ ] **[Découvre le jeu](#aperçu-du-jeu)** 🎮 dans Godot, découvre le jeu et joue quelques minutes pour le comprendre
+3. [ ] **[Ouvre le projet](#jouons)** 🎮 dans Godot, découvre le jeu et joue quelques minutes pour le comprendre
 4. [ ] **[Explore le projet](#structure-de-fichiers)** : découvre les fichiers, les dossiers, les scènes, les scripts
-5. [ ] **[Apprends les bases du code](#-les-bases-du-code)** pour être prêt à comprendre, modifier et programmer le jeu
-6. [ ] **[Complète tes défis](#-tes-défis)** - Complète toutes les étapes des défis ci-dessous
-   - [ ] **[Groupe de défis 1](#-groupe-1---explorateur)** - 🔍 (pas-de-code-requis)
-   - [ ] **[Groupe de défis 2](#-groupe-2---bidouilleur-de-ressources)** - ⚙️ Bidouilleur de Ressources
-   - [ ] **[Groupe de défis 3](#-groupe-3---lecteur-de-code)** - 📖 Lecteur de Code - Comprendre les scripts
-   - [ ] **[Groupe de défis 4](#-groupe-4---codeur)** - 💻 Codeur - Écris du code !
-   - [ ] **[Groupe de défis 5](#-groupe-5---artiste-pixel-art)** - 🎨 Artiste Pixel Art - Personnalise ton personnage
-   - [ ] **[Groupe de défis 6](#-groupe-6---architecte)** - 🏗️ Architecte - Ajoute des Obstacles
-   - [ ] **[Groupe de défis 7](#-groupe-7---codeur-créatif)** - 🎮 Codeur Créatif - Personnalise avec du code
-7. [ ] **[Upload ton projet](#-upload-ton-projet)** avant de partir dans notre [dossier Google Drive](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj?usp=sharing) pour le retrouver chez toi
-8. [ ] **[Présente ton jeu !](#-présente-ton-jeu)** à tes parents à la fin de la session !
+5. [ ] **[Apprends les bases du code](#les-bases-du-code)** 📖 pour être prêt à comprendre, modifier et programmer le jeu
+6. [ ] **[Complète tes défis](#tes-défis)** ⚔️ Complète toutes les étapes des défis ci-dessous
+   - [ ] **[Groupe de défis 1](#groupe-1---explorateur)** - 🔍 (pas-de-code-requis)
+   - [ ] **[Groupe de défis 2](#groupe-2---bidouilleur-de-ressources)** - ⚙️ Bidouilleur de Ressources
+   - [ ] **[Groupe de défis 3](#groupe-3---lecteur-de-code)** - 📖 Lecteur de Code - Comprendre les scripts
+   - [ ] **[Groupe de défis 4](#groupe-4---codeur)** - 💻 Codeur - Écris du code !
+   - [ ] **[Groupe de défis 5](#groupe-5---artiste-pixel-art)** - 🎨 Artiste Pixel Art - Personnalise ton personnage
+   - [ ] **[Groupe de défis 6](#groupe-6---architecte)** - 🏗️ Architecte - Ajoute des Obstacles
+   - [ ] **[Groupe de défis 7](#groupe-7---codeur-créatif)** - 🎮 Codeur Créatif - Personnalise avec du code
+7. [ ] **[Upload ton projet](#upload-ton-projet)** ⬆️ avant de partir dans notre [dossier Google Drive](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj?usp=sharing) pour le retrouver chez toi
+8. [ ] **[Présente ton jeu !](#présente-ton-jeu)** à tes parents à la fin de la session !
 
 ---
 
-## 🎮 Aperçu du jeu
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+## Aperçu du jeu
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 ### Le jeu
 
@@ -176,8 +175,9 @@ C'est un jeu d'aventure en vue du dessus dans un donjon. Tu joues un **sorcier**
 
 ---
 
-## Jouons !
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+## Jouons
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 Un bon jeu vidéo est un jeu vidéo qui est fun. Comment savoir si un jeu est fun ? Pas le choix, il faut y jouer 🎮 !
 
@@ -219,7 +219,8 @@ Si le projet n'est pas déjà ouvert sur les ordinateurs:
 Le jeu n'est pas parfait, il manque des choses ? C'est ce que tu vas apprendre à faire. Commence par comprendre comment le jeu est organisé.
 
 ## Structure de fichiers
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 ```
 atelier-jeu-video/
@@ -265,8 +266,9 @@ atelier-jeu-video/
 | `src/scripts/autoloads/game_data.gd`                     | Données globales du jeu                       |
 | `src/scripts/autoloads/signals.gd`                       | Les signaux (événements) du jeu               |
 
-## 📖 Les bases du code
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+## Les bases du code
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 Avant de commencer les défis, voici les trois briques essentielles du code que tu vas rencontrer. Pas besoin de tout mémoriser — reviens ici si tu bloques !
 
@@ -333,15 +335,17 @@ Tu les verras souvent dans le code du jeu !
 
 ---
 
-## ⚔️ Tes défis
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+## Tes défis
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 Les défis sont regroupés par niveau de difficulté. **Commence par le groupe 1** et avance à ton rythme !
 
 ---
 
-### 🔍 Groupe 1 - Explorateur
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+### Groupe 1 - Explorateur
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 > Dans le groupe 1, tu modifies uniquement des **fichiers de configuration** (.tres) directement dans l'éditeur Godot. Pas besoin d'écrire du code !
 >
@@ -373,8 +377,9 @@ Lance le jeu — tu es envahi !
 
 ---
 
-### ⚙️ Groupe 2 - Bidouilleur de Ressources
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+### Groupe 2 - Bidouilleur de Ressources
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 > Dans le groupe 2, tu continues à modifier des fichiers `.tres`, mais tu explores plus en profondeur les configurations disponibles.
 
@@ -405,8 +410,9 @@ Restore les stats du joueur à des valeurs raisonnables, mais garde les modifica
 
 ---
 
-### 📖 Groupe 3 - Lecteur de Code
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+### Groupe 3 - Lecteur de Code
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 > Dans le groupe 3, tu ouvres de vrais fichiers de code GDScript (`.gd`). L'objectif est de **lire et comprendre**, puis de faire de petites modifications.
 >
@@ -455,8 +461,9 @@ Qui l'écoute déjà ? Cherche `enemy_died.connect` dans le projet (menu **Proje
 
 ---
 
-### 💻 Groupe 4 - Codeur
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+### Groupe 4 - Codeur
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 > Dans le groupe 4, tu **écris du code** pour ajouter de nouvelles fonctionnalités. C'est la partie la plus difficile — mais aussi la plus satisfaisante ! 💪
 >
@@ -580,8 +587,9 @@ Lance le jeu et survie jusqu'à ta vague !
 
 ---
 
-### 🎨 Groupe 5 - Artiste Pixel Art
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+### Groupe 5 - Artiste Pixel Art
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 > Dans le groupe 5, tu vas **changer l'apparence visuelle du sorcier** en remplaçant son image par un personnage open source trouvé sur internet. Pas besoin d'écrire du code — c'est une mission de graphisme !
 >
@@ -612,8 +620,9 @@ Dans le FileSystem, ouvre `src/scenes/entities/player/sprite/player_sprite.tscn`
 
 ---
 
-### 🏗️ Groupe 6 - Architecte
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+### Groupe 6 - Architecte
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 > Dans le groupe 6, tu vas **ajouter des murs** dans l'arène pour créer des obstacles physiques. Le sorcier et les ennemis ne pourront pas les traverser — ça change complètement la façon de jouer !
 >
@@ -650,8 +659,9 @@ Lance le jeu — le sorcier et les ennemis ne peuvent plus traverser tes murs !
 
 ---
 
-### 🎮 Groupe 7 - Codeur Créatif
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+### Groupe 7 - Codeur Créatif
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 > Dans le groupe 7, tu **écris du code** pour personnaliser le jeu selon tes envies. Ces défis ne sont pas forcément plus difficiles — ils t'apprennent à **exprimer ta créativité avec le code** !
 
@@ -715,12 +725,13 @@ Lance le jeu et appuie sur **Espace** pendant une partie — tes stats s'affiche
 
 ---
 
-### ⬆️ Upload ton Projet
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+### Upload ton Projet
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 1. Ouvres le dossier windows à l'emplacement suivant: `C:\workspace\\`
 2. Fais un `Clic-Droit` sur le dossier `atelier-jeu-video`
-3. Sélectionne  `Compress to ...` `>` `ZIP File`
+3. Sélectionne `Compress to ...` `>` `ZIP File`
 4. Après compression, un fichier sera créé avec l'extension `******.zip`. Renomme le avec ton prénom
 5. Clique sur [ce lien pour ouvrir directement le dossier Google Drive](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj) dans un navigateur internet.
 6. Glisse ton fichier `******.zip` dans le navigateur pour uploader ton fichier sur notre Google Drive.
@@ -731,8 +742,9 @@ Lance le jeu et appuie sur **Espace** pendant une partie — tes stats s'affiche
 
 ---
 
-### 🏆 Présente ton jeu !
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+### Présente ton jeu !
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 Tu as terminé tes défis ? **Bravo !** 🎉
 
@@ -759,8 +771,9 @@ Il est temps de présenter ton travail à tes parents. Explique-leur :
 
 ---
 
-## 🏠 Installation à la maison
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+## Installation à la maison
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 Tu veux continuer à modifier le jeu chez toi ? Suis ces étapes !
 
@@ -813,8 +826,9 @@ Reprends là où tu t'étais arrêté pendant l'atelier. Tu peux aussi inventer 
 
 ---
 
-## 📚 Pour aller plus loin
-[Revenir aux étapes ⬆️](#-étapes-de-latelier)
+## Pour aller plus loin
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
 
 ### Godot & GDScript
 
@@ -834,13 +848,13 @@ Reprends là où tu t'étais arrêté pendant l'atelier. Tu peux aussi inventer 
 
 ---
 
-## 🪳Erreurs et Diagnostiques
+## Erreurs et Diagnostiques
 
 Si tu as une erreur que tu n'arrives pas à résoudre, c'est aussi normal en programmation !
 Les programmeurs travaillent sur des machines différentes qui sont toutes configurées différement, mais surtout les versions des languages et logiciels changent très souvent ! Les programmeurs sont des gros travailleurs 🧑‍💻
 Voici celles qui nous ont posé problème à nous aussi et dont nous avons trouvé la solution.
 
-### 🚨 Panique à bord, le projet ne fonctionne plus !
+### Panique à bord, le projet ne fonctionne plus
 
 Tu as modifié beaucoup de choses et le projet ne fonctionne plus ? Ne panique pas, tu peux simplement le re-télécharger et le réouvrir tout neuf !
 
