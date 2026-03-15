@@ -123,9 +123,9 @@ func _process(delta):
 Suis ces étapes ci dessous dans l'ordre. Demande à un animateur si tu es bloqué !
 
 1. [x] **Installe Godot** - si ce n'est pas déjà fait - en suivant les instructions plus bas dans la section [Installation à la maison](#installation-à-la-maison)
-2. [ ] **[Découvre le jeu](#aperçu-du-jeu)** 🎮 dans Godot, découvre le jeu et joue quelques minutes pour le comprendre
-3. [ ] **[Ouvre le projet](#jouons)** 🎮 dans Godot, découvre le jeu et joue quelques minutes pour le comprendre
-4. [ ] **[Explore le projet](#structure-de-fichiers)** : découvre les fichiers, les dossiers, les scènes, les scripts
+2. [ ] **[Découvre le jeu](#aperçu-du-jeu)** - 🎮 dans Godot, découvre le jeu et joue quelques minutes pour le comprendre
+3. [ ] **[Ouvre le projet](#jouons)** - 🎮 dans Godot, découvre le jeu et joue quelques minutes pour le comprendre
+4. [ ] **[Explore le projet](#structure-de-fichiers)** : - 📂 découvre les fichiers, les dossiers, les scènes, les scripts
 5. [ ] **[Apprends les bases du code](#les-bases-du-code)** 📖 pour être prêt à comprendre, modifier et programmer le jeu
 6. [ ] **[Complète tes défis](#tes-défis)** ⚔️ Complète toutes les étapes des défis ci-dessous
    - [ ] **[Groupe de défis 1](#groupe-1---explorateur)** - 🔍 (pas-de-code-requis)
@@ -135,8 +135,8 @@ Suis ces étapes ci dessous dans l'ordre. Demande à un animateur si tu es bloqu
    - [ ] **[Groupe de défis 5](#groupe-5---artiste-pixel-art)** - 🎨 Artiste Pixel Art - Personnalise ton personnage
    - [ ] **[Groupe de défis 6](#groupe-6---architecte)** - 🏗️ Architecte - Ajoute des Obstacles
    - [ ] **[Groupe de défis 7](#groupe-7---codeur-créatif)** - 🎮 Codeur Créatif - Personnalise avec du code
-7. [ ] **[Upload ton projet](#upload-ton-projet)** ⬆️ avant de partir dans notre [dossier Google Drive](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj?usp=sharing) pour le retrouver chez toi
-8. [ ] **[Présente ton jeu !](#présente-ton-jeu)** à tes parents à la fin de la session !
+7. [ ] **[Upload ton projet](#upload-ton-projet)** - ⬆️ avant de partir dans notre [dossier Google Drive](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj?usp=sharing) pour le retrouver chez toi
+8. [ ] **[Présente ton jeu !](#présente-ton-jeu)** - 🏁 à tes parents à la fin de la session !
 
 ---
 
