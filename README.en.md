@@ -829,12 +829,9 @@ Pick up where you left off during the workshop. You can also invent your own imp
 
 ### Godot & GDScript
 
-- 📖 [Official Godot Documentation (English)](https://docs.godotengine.org/en/stable/)
-- 📖 [Official Godot Documentation (French)](https://docs.godotengine.org/fr/stable/)
-- 📖 [GDScript Basics (English)](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html)
-- 📖 [GDScript Basics (French)](https://docs.godotengine.org/fr/stable/tutorials/scripting/gdscript/gdscript_basics.html)
-- 🎓 [Your first Godot game (official tutorial, English)](https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html)
-- 🎓 [Your first Godot game (official tutorial, French)](https://docs.godotengine.org/fr/stable/getting_started/first_2d_game/index.html)
+- 📖 [Official Godot Documentation](https://docs.godotengine.org/en/stable/)
+- 📖 [GDScript Basics](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html)
+- 🎓 [Your first Godot game (official tutorial)](https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html)
 - 🎥 [GDQuest — Godot tutorials (YouTube)](https://www.youtube.com/@Gdquest)
 
 ### Open Source & Programming

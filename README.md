@@ -113,8 +113,7 @@ func _process(delta):
 	position.x += vitesse * delta  # Déplace l'objet vers la droite
 ```
 
-- 📖 [Introduction à GDScript (en anglais)](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html)
-- 📖 [Introduction à GDScript (en français)](https://docs.godotengine.org/fr/stable/tutorials/scripting/gdscript/gdscript_basics.html)
+- 📖 [Introduction à GDScript](https://docs.godotengine.org/fr/stable/tutorials/scripting/gdscript/gdscript_basics.html)
 
 ---
 
@@ -832,12 +831,9 @@ Reprends là où tu t'étais arrêté pendant l'atelier. Tu peux aussi inventer 
 
 ### Godot & GDScript
 
-- 📖 [Documentation officielle de Godot en anglais](https://docs.godotengine.org/en/stable/)
-- 📖 [Documentation officielle de Godot en français](https://docs.godotengine.org/fr/stable/)
-- 📖 [Bases de GDScript en anglais](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html)
-- 📖 [Bases de GDScript en français](https://docs.godotengine.org/fr/stable/tutorials/scripting/gdscript/gdscript_basics.html)
-- 🎓 [Ton premier jeu avec Godot (tutoriel officiel en anglais)](https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html)
-- 🎓 [Ton premier jeu avec Godot (tutoriel officiel en français)](https://docs.godotengine.org/fr/stable/getting_started/first_2d_game/index.html)
+- 📖 [Documentation officielle de Godot](https://docs.godotengine.org/fr/stable/)
+- 📖 [Bases de GDScript](https://docs.godotengine.org/fr/stable/tutorials/scripting/gdscript/gdscript_basics.html)
+- 🎓 [Ton premier jeu avec Godot (tutoriel officiel)](https://docs.godotengine.org/fr/stable/getting_started/first_2d_game/index.html)
 - 🎥 [GDQuest — Tutoriels Godot (YouTube)](https://www.youtube.com/@Gdquest)
 
 ### Open Source & Programmation
