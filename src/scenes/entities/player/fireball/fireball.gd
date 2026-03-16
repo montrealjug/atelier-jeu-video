@@ -19,6 +19,7 @@ func _ready() -> void:
 	body_entered.connect(die)
 	area_entered.connect(die)
 	sprite.modulate = Color(0.5, 0, 1)  # boules de feu violettes !
+	spark_particles.modulate = Color(0, 1, 0)
 
 
 func _physics_process(delta: float) -> void:
