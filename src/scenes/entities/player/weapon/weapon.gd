@@ -25,6 +25,8 @@ func _process(_delta: float) -> void:
 	var right_stick_direction := get_right_stick_direction(0.1)
 	if right_stick_direction != Vector2.ZERO:
 		current_direction = right_stick_direction
+	else:
+		current_direction = (get_global_mouse_position() - global_position).normalized()
 	sprite.flip_v = current_direction.x < 0
 	rotation = Vector2.RIGHT.angle_to(current_direction)
 
