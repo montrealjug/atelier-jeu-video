@@ -127,13 +127,14 @@ Follow these steps below in order. Ask a workshop leader if you're stuck!
 4. [ ] **[Explore the project](#file-structure)** - 📂 discover the files, folders, scenes, and scripts
 5. [ ] **[Learn the code basics](#code-basics)** - 📖 to be ready to understand, modify, and program the game
 6. [ ] **[Complete your challenges](#your-challenges)** ⚔️ Complete all the challenge steps below
-   - [ ] **[Challenge Group 1](#group-1---explorer)** - 🔍 No code required
-   - [ ] **[Challenge Group 2](#group-2---resource-tinkerer)** - ⚙️ Resource Tinkerer
-   - [ ] **[Challenge Group 3](#group-3---code-reader)** - 📖 Code Reader - Understanding scripts
-   - [ ] **[Challenge Group 4](#group-4---coder)** - 💻 Coder - Write code!
-   - [ ] **[Challenge Group 5](#group-5---pixel-art-artist)** - 🎨 Pixel Art Artist - Customize your character
-   - [ ] **[Challenge Group 6](#group-6---architect)** - 🏗️ Architect - Add Obstacles
-   - [ ] **[Challenge Group 7](#group-7---creative-coder)** - 🎮 Creative Coder - Customize with code
+   - [ ] **[Challenge Group 1](#group---explorer)** - 🔍 No code required
+   - [ ] **[Challenge Group 2](#group---resource-tinkerer)** - ⚙️ Resource Tinkerer
+   - [ ] **[Challenge Group 3](#group---code-reader)** - 📖 Code Reader - Understanding scripts
+   - [ ] **[Challenge Group 4](#group---coder)** - 💻 Coder - Write code!
+   - [ ] **[Challenge Group 5](#group---score)** - 🔢 Perfectionist - Add a score
+   - [ ] **[Challenge Group 6](#group---pixel-art-artist)** - 🎨 Pixel Art Artist - Customize your character
+   - [ ] **[Challenge Group 7](#group---architect)** - 🏗️ Architect - Add Obstacles
+   - [ ] **[Challenge Group 8](#group---creative-coder)** - 🎮 Creative Coder - Customize with code
 7. [ ] **[Upload Your Project](#upload-your-project)** ⬆️ - before leaving to our [Google Drive folder](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj?usp=sharing) to find it at home
 8. [ ] **[Demo your game!](#demo-your-game)** - 🏁 to your parents at the end of the session!
 
@@ -342,7 +343,7 @@ Challenges are grouped by difficulty. **Start with Group 1** and go at your own 
 
 ---
 
-### Group 1 - Explorer
+### Group - Explorer
 
 [Back to steps ⬆️](#workshop-steps)
 
@@ -376,7 +377,7 @@ Launch the game — you're surrounded!
 
 ---
 
-### Group 2 - Resource Tinkerer
+### Group - Resource Tinkerer
 
 [Back to steps ⬆️](#workshop-steps)
 
@@ -409,7 +410,7 @@ Restore player stats to reasonable values, but keep the wave changes you prefer.
 
 ---
 
-### Group 3 - Code Reader
+### Group - Code Reader
 
 [Back to steps ⬆️](#workshop-steps)
 
@@ -439,28 +440,11 @@ Find the `speed` variable. You can also change it from the editor: in the `fireb
 
 Open `src/scenes/entities/player/weapon/weapon.gd`.
 Read the `_process` function. See `get_right_stick_direction(0.1)`?
-That's the direction of the right gamepad stick. If no one is using a gamepad, `current_direction` never changes… and the wizard always shoots right. This is the bug you'll fix in Challenge 16!
-
-#### **Challenge 14 — Add a score variable**
-
-Open `src/scripts/autoloads/game_data.gd`.
-At the end of the file, add this line:
-
-```gdscript
-var score: int = 0
-```
-
-`GameData.score` will now be accessible from any script in the game.
-
-#### **Challenge 15 — Discover signals**
-
-Open `src/scripts/autoloads/signals.gd`.
-You'll see `signal enemy_died(enemy: Enemy)`. This is a **signal**: when an enemy dies, this signal is sent to everyone listening.
-Who is already listening? Search for `enemy_died.connect` in the project (**Project > Find in Files**).
+That's the direction of the right gamepad stick. If no one is using a gamepad, `current_direction` never changes… and the wizard always shoots right. This is the bug you'll fix in the next challenge!
 
 ---
 
-### Group 4 - Coder
+### Group - Coder
 
 [Back to steps ⬆️](#workshop-steps)
 
@@ -468,7 +452,7 @@ Who is already listening? Search for `enemy_died.connect` in the project (**Proj
 >
 > Don't forget to save your files after each change (**Ctrl+S**).
 
-#### **Challenge 16 — Fix mouse aiming** ⭐ _(the main challenge!)_
+#### **Challenge 14 — Fix mouse aiming**
 
 In `src/scenes/entities/player/weapon/weapon.gd`, find this block in `_process`:
 
@@ -504,6 +488,8 @@ else:
 	current_direction = (get_global_mouse_position() - global_position).normalized()
 ```
 
+</details>
+
 Launch the game — you can now aim with your mouse! 🎯
 
 **What does this new line do?**
@@ -516,7 +502,44 @@ The `if` already handles aiming with a gamepad's right stick.
 The `else` only runs when **no joystick is being used** — so that's where we plug in the mouse.
 This way the game works with both types of controls, without one interfering with the other.
 
-</details>
+---
+
+### Group - Score
+
+[Back to steps ⬆️](#workshop-steps)
+
+#### **Challenge 15 — Add a score variable**
+
+Let's create a score visible on screen to track how many enemies we've killed!
+
+Open `src/scripts/autoloads/game_data.gd`.
+At the end of the file, add this line:
+
+```gdscript
+var score: int = 0
+```
+
+But wait, all programmers know that a variable named `score` doesn't describe enough what it's for.
+Let's apply an important best practice in programming to make the code easier to read, for you or someone else.
+Add a comment in English indicating that this variable is used to count the number of enemies killed.
+
+<details>
+<summary>Solution</summary>
+
+```gdscript
+## Total number of ennemies killed
+var score: int = 0
+```
+
+## </details>
+
+`GameData.score` will now be accessible from any script in the game.
+
+#### **Challenge 16 — Discover signals**
+
+Open `src/scripts/autoloads/signals.gd`.
+You'll see `signal enemy_died(enemy: Enemy)`. This is a **signal**: when an enemy dies, this signal is sent to everyone listening.
+Who is already listening? Search for `enemy_died.connect` in the project (**Project > Find in Files**).
 
 #### **Challenge 17 — Increase the score on each kill**
 
@@ -533,12 +556,19 @@ func _on_enemy_died(_enemy: Enemy) -> void:
 
 Launch the game and watch the console at the bottom of Godot — the score goes up with every kill!
 
+If you don't remember where the console is in Godot, [go back to see this diagram](#how-does-godot-work)
+
 #### **Challenge 18 — Display the score on screen**
 
 Open the scene `src/scenes/ui/hud/hud.tscn`.
 
-In the scene tree (left panel), right-click the root node and add a **Label** node. Name it `ScoreLabel`.
-Then, right-click the **ScoreLabel** node you just created and add a script to update this label:
+In the scene tree (left panel), right-click the root node named `Hud` and add a **Label** node. Name it `ScoreLabel`.
+Then, right-click the `Hud` node again. It doesn't have a script attached yet to update this label, let's do it:
+
+1. Right-click on `Hud`
+2. Attach a Script
+3. A window opens — don't change anything and click `Create`
+4. Replace the file content with this code
 
 ```gdscript
 @onready var score_label: Label = $ScoreLabel
@@ -549,7 +579,8 @@ func _process(_delta: float) -> void:
 
 Finally, click **"2D"** in the toolbar at the very top of the editor to switch to the visual scene view.
 In the scene tree on the left, select **ScoreLabel** with a left-click — you'll see it highlighted in red in the 2D scene.
-Drag it wherever you want on screen, then launch the game to check that it works!
+
+Place it wherever you want in the blue zone and launch the game to check that it works!
 
 <details>
 <summary>Solution</summary>
@@ -557,6 +588,10 @@ Drag it wherever you want on screen, then launch the game to check that it works
 ![Challenge 18 solution](./readme-images/score-2d.png)
 
 </details>
+
+---
+
+### Group - One More Wave
 
 #### **Challenge 19 — Create wave 6**
 
@@ -586,7 +621,7 @@ Launch the game and survive to your wave!
 
 ---
 
-### Group 5 - Pixel Art Artist
+### Group - Pixel Art Artist
 
 [Back to steps ⬆️](#workshop-steps)
 
@@ -619,7 +654,7 @@ In the FileSystem, open `src/scenes/entities/player/sprite/player_sprite.tscn` b
 
 ---
 
-### Group 6 - Architect
+### Group - Architect
 [Back to steps ⬆️](#workshop-steps)
 
 > In Group 6, you'll **add walls** to the arena to create physical obstacles. The wizard and enemies won't be able to pass through them — this completely changes how the game plays!
@@ -657,7 +692,7 @@ Launch the game — the wizard and enemies can no longer walk through your walls
 
 ---
 
-### Group 7 - Creative Coder
+### Group - Creative Coder
 
 [Back to steps ⬆️](#workshop-steps)
 
@@ -891,3 +926,24 @@ _Made with ❤️ for Devoxx4Kids Québec — Inspiring the next generation of g
 Workshop designer: [Romain Dalichamp](https://linkfr.ee/romain.dalichamp)
 Game creator & Developer: [Florian Rea](https://www.linkedin.com/in/florian-rea-57a7bb107)
 Workshop facilitator: [Anthony Dahanne](https://www.linkedin.com/in/anthonydahanne)
+
+## Workshop Commands
+
+Some commands to properly reset a project
+
+- Each child should start working on the local `workshop` branch
+- Children do not push to the `workshop` branch, it's just to avoid working on the `main` branch
+- `main` = `workshop`
+- Each branch has code compatible with the other branches.
+- In the workshop branch, you can easily run `git merge branch1 branch2 branch3` to get the solutions for the desired group
+- The `solutions` branch contains all solutions already merged, with tags
+
+<details>
+<summary>Solution</summary>
+
+```
+git reset --hard origin/workshop
+git merge challenges-group-fix-mouse-aiming challenges-group-score
+```
+
+</details>
