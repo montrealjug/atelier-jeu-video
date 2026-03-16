@@ -347,7 +347,7 @@ Challenges are grouped by difficulty. **Start with Group 1** and go at your own 
 
 [Back to steps ⬆️](#workshop-steps)
 
-> In Group 1, you only modify **configuration files** (.tres) directly in the Godot editor. No coding needed!
+> In this group, you only modify **configuration files** (.tres) directly in the Godot editor. No coding needed!
 >
 > To open a `.tres` file: double-click it in the **FileSystem** panel (bottom left). Its properties appear in the **Inspector** (right side).
 
@@ -381,7 +381,7 @@ Launch the game — you're surrounded!
 
 [Back to steps ⬆️](#workshop-steps)
 
-> In Group 2, you keep modifying `.tres` files, but you explore more configuration options.
+> In this group, you keep modifying `.tres` files, but you explore more configuration options.
 
 #### **Challenge 6 — Shoot like a machine gun**
 
@@ -414,7 +414,7 @@ Restore player stats to reasonable values, but keep the wave changes you prefer.
 
 [Back to steps ⬆️](#workshop-steps)
 
-> In Group 3, you open real GDScript code files (`.gd`). The goal is to **read and understand**, then make small modifications.
+> In this group, you open real GDScript code files (`.gd`). The goal is to **read and understand**, then make small modifications.
 >
 > To open a script: double-click it in the **FileSystem**. It opens in the code editor.
 
@@ -448,7 +448,7 @@ That's the direction of the right gamepad stick. If no one is using a gamepad, `
 
 [Back to steps ⬆️](#workshop-steps)
 
-> In Group 4, you **write code** to add new features. This is the hardest part — but also the most satisfying! 💪
+> In this group, you **write code** to add new features. This is the hardest part — but also the most satisfying! 💪
 >
 > Don't forget to save your files after each change (**Ctrl+S**).
 
@@ -507,6 +507,8 @@ This way the game works with both types of controls, without one interfering wit
 ### Group - Score
 
 [Back to steps ⬆️](#workshop-steps)
+
+> In this group, you'll **add a score system** to the game — you'll learn about signals, good coding practices, and display a live kill counter on screen.
 
 #### **Challenge 15 — Add a score variable**
 
@@ -593,6 +595,10 @@ Place it wherever you want in the blue zone and launch the game to check that it
 
 ### Group - One More Wave
 
+[Back to steps ⬆️](#workshop-steps)
+
+> In this group, you'll **design your own enemy wave** from scratch and add it to the game. No code required — pure game design!
+
 #### **Challenge 19 — Create wave 6**
 
 In the FileSystem, right-click `resources/wave_data/wave5_data.tres` and choose **Duplicate**. Rename the file to `wave6_data.tres`.
@@ -625,7 +631,7 @@ Launch the game and survive to your wave!
 
 [Back to steps ⬆️](#workshop-steps)
 
-> In Group 5, you'll **change the wizard's visual appearance** by replacing the sprite image with an open source character found online. No code required — this is a design challenge!
+> In this group, you'll **change the wizard's visual appearance** by replacing the sprite image with an open source character found online. No code required — this is a design challenge!
 >
 > Open source sprites are royalty-free images shared freely by the community. That's how Open Source works in the art world!
 
@@ -658,7 +664,7 @@ In the FileSystem, open `src/scenes/entities/player/sprite/player_sprite.tscn` b
 
 [Back to steps ⬆️](#workshop-steps)
 
-> In Group 6, you'll **add walls** to the arena to create physical obstacles. The wizard and enemies won't be able to pass through them — this completely changes how the game plays!
+> In this group, you'll **add walls** to the arena to create physical obstacles. The wizard and enemies won't be able to pass through them — this completely changes how the game plays!
 >
 > In Godot, an object that blocks others is called a **StaticBody2D**. You give it a **CollisionShape2D** to define its shape, and a visual element so you can see it.
 
@@ -697,7 +703,7 @@ Launch the game — the wizard and enemies can no longer walk through your walls
 
 [Back to steps ⬆️](#workshop-steps)
 
-> In Group 7, you **write code** to customize the game your way. These challenges aren't necessarily harder — they're about **expressing your creativity through code**!
+> In this group, you **write code** to customize the game your way. These challenges aren't necessarily harder — they're about **expressing your creativity through code**!
 
 #### **Challenge 23 — Change the fireball color**
 
