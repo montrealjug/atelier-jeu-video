@@ -615,7 +615,7 @@ Launch the game and survive to your wave!
 <details>
 <summary>Solution</summary>
 
-![Challenge 20 solution](./readme-images/add-wave-step2.png)
+![Challenge 20 solution](./readme-images/add-wave-step2.gif)
 
 </details>
 
@@ -655,6 +655,7 @@ In the FileSystem, open `src/scenes/entities/player/sprite/player_sprite.tscn` b
 ---
 
 ### Group - Architect
+
 [Back to steps ⬆️](#workshop-steps)
 
 > In Group 6, you'll **add walls** to the arena to create physical obstacles. The wizard and enemies won't be able to pass through them — this completely changes how the game plays!
@@ -860,6 +861,7 @@ Pick up where you left off during the workshop. You can also invent your own imp
 ---
 
 ## 📚 Going Further
+
 [Back to steps ⬆️](#workshop-steps)
 
 ### Godot & GDScript

@@ -132,9 +132,10 @@ Suis ces étapes ci dessous dans l'ordre. Demande à un animateur si tu es bloqu
    - [ ] **[Groupe de défis 3](#groupe---lecteur-de-code)** - 📖 Lecteur de Code - Comprendre les scripts
    - [ ] **[Groupe de défis 4](#groupe---codeur)** - 💻 Codeur - Écris du code !
    - [ ] **[Groupe de défis 5](#groupe---score)** - 🔢 Perfectionniste - Ajoutes un score
-   - [ ] **[Groupe de défis 6](#groupe---artiste-pixel-art)** - 🎨 Artiste Pixel Art - Personnalise ton personnage
-   - [ ] **[Groupe de défis 7](#groupe---architecte)** - 🏗️ Architecte - Ajoute des Obstacles
-   - [ ] **[Groupe de défis 8](#groupe---codeur-créatif)** - 🎮 Codeur Créatif - Personnalise avec du code
+   - [ ] **[Groupe de défis 6](#groupe---une-vague-de-plus)** - 🌊 Créer ta propre vague d'ennemis
+   - [ ] **[Groupe de défis 7](#groupe---artiste-pixel-art)** - 🎨 Artiste Pixel Art - Personnalise ton personnage
+   - [ ] **[Groupe de défis 8](#groupe---architecte)** - 🏗️ Architecte - Ajoute des Obstacles
+   - [ ] **[Groupe de défis 9](#groupe---codeur-créatif)** - 🎮 Codeur Créatif - Personnalise avec du code
 7. [ ] **[Upload ton projet](#upload-ton-projet)** - ⬆️ avant de partir dans notre [dossier Google Drive](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj?usp=sharing) pour le retrouver chez toi
 8. [ ] **[Présente ton jeu !](#présente-ton-jeu)** - 🏁 à tes parents à la fin de la session !
 
@@ -625,6 +626,8 @@ Place le oú tu veux dans la zone bleue et lance le jeu pour vérifier qu'il fon
 
 ### Groupe - Une Vague de Plus
 
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
+
 #### **Défi 19 — Crée une vague 6**
 
 Dans le FileSystem, fais un clic droit sur `resources/wave_data/wave5_data.tres` et choisis **Duplicate**. Renomme le fichier en `wave6_data.tres`.
@@ -647,7 +650,7 @@ Lance le jeu et survie jusqu'à ta vague !
 <details>
 <summary>Solution</summary>
 
-![Solution du défi 20](./readme-images/add-wave-step2.png)
+![Solution du défi 20](./readme-images/add-wave-step2.gif)
 
 </details>
 
