@@ -670,7 +670,7 @@ In the FileSystem, open `src/scenes/entities/player/sprite/player_sprite.tscn` b
 
 #### **Challenge 22 — Open the main game scene**
 
-In the FileSystem, navigate to `src/scenes/game/wave_manager/` and double-click **`game.tscn`**.
+In the FileSystem, navigate to `src/scenes/game/wave_manager/` and double-click **`game.tscn`**. Click **2D** in the top toolbar.
 You can see the arena in the Viewport. This is where you'll place your walls!
 
 ##### Create your first wall
@@ -681,20 +681,47 @@ Rename it `Wall1` (double-click on the node in the scene tree to rename it).
 
 ##### Give it a collision shape
 
-Right-click **`Wall1`** and add a child node **`CollisionShape2D`**.
-Click that node in the tree. In the Inspector, click **Shape** and choose **New RectangleShape2D**.
-Click on the new shape and set its size: **`x = 32`, `y = 32`** (a 32-pixel square).
+- Right-click **`Wall1`** and add a child node **`CollisionShape2D`**
+- Click that node in the tree
+- In the Inspector, click **Shape** and choose **New RectangleShape2D**
+- Click on `RectangleShape2D` again to adjust the `Size`. Set **`x = 32`, `y = 32`**
+
+<details>
+<summary>Solution</summary>
+
+![Solution](./readme-images/solution-architect-collisionshape2d.png)
+
+</details>
+
+> 💡 If you have trouble selecting your wall, here are two tips:
+>
+> - In your scene list, select `Wall1` then hold **Alt** on your keyboard. You'll see **two arrows: one green and one red** appear on your object in the viewport. Use those arrows with the mouse to move your wall.
+> - It might also be because another element is in the way — for example, the `Spawn Area` takes up a lot of space. In that case, find it in the scene list and click the small white eye on the same line to hide it temporarily, so you can edit your wall more easily. Don't forget to show it again before launching the game!
 
 ##### Make the wall visible
 
 Right-click **`Wall1`** and add a child node **`ColorRect`**.
-In the Inspector, set **Size** to `Vector2(64, 64)` and **Color** to a stone-like color (e.g. dark grey `#606060`).
-Also set the **Position** of the ColorRect to `Vector2(-32, -32)` to center it on the wall.
+
+Then, in the Inspector:
+
+- Change **Color** to a stone-like color (e.g. dark grey `#606060`).
+- Under `Layout > Transform`:
+  - Set **Size** to **`x = 32`, `y = 32`** and
+  - Set **Position** to **`x = -16`, `y = -16`** to center it on the wall.
+
+<details>
+<summary>Solution</summary>
+
+![Solution](./readme-images/solution-architect-colorrect.png)
+
+</details>
 
 ##### Duplicate and position 4 walls
 
-Right-click **`Wall1`** in the scene tree and choose **Duplicate** — repeat 3 times to get `Wall2`, `Wall3`, and `Wall4`.
-For each wall, select it and change its **Position** in the Inspector to spread them around the arena (e.g. `(-200, 0)`, `(200, 0)`, `(0, -150)`, `(0, 150)`).
+**Right-click `Wall1`** in the scene tree and choose **Duplicate** — repeat 3 times to get `Wall2`, `Wall3`, and `Wall4`.
+
+For each wall, select it and place it wherever you want!
+
 Launch the game — the wizard and enemies can no longer walk through your walls!
 
 ---

@@ -703,7 +703,7 @@ Dans le FileSystem, ouvre `src/scenes/entities/player/sprite/player_sprite.tscn`
 
 #### **Défi 22 — Ouvre la scène principale du jeu**
 
-Dans le FileSystem, navigue jusqu'à `src/scenes/game/wave_manager/` et double-clique sur **`game.tscn`**.
+Dans le FileSystem, navigue jusqu'à `src/scenes/game/wave_manager/` et double-clique sur **`game.tscn`**. Cliques dans la barre du haut sur `2D`.
 Tu vois l'arène du jeu dans le Viewport. C'est ici que tu vas placer tes murs !
 
 ##### Crée ton premier mur
@@ -714,20 +714,47 @@ Renomme-le `Mur1` (double-clique sur le nœud dans l'arbre de scène pour le ren
 
 ##### Donne-lui une forme de collision
 
-Fais un clic droit sur **`Mur1`** et ajoute un nœud enfant **`CollisionShape2D`**.
-Clique sur ce nœud dans l'arbre. Dans l'Inspector, clique sur **Shape** puis choisis **New RectangleShape2D**.
-Clique sur la forme créée et change sa taille : **`x = 32`, `y = 32`** (un carré de 32 pixels).
+- Fais un clic droit sur **`Mur1`** et ajoute un nœud enfant **`CollisionShape2D`**
+- Clique sur ce nœud dans l'arbre
+- Dans l'Inspector, clique sur **Shape** puis choisis **New RectangleShape2D**
+- Cliques à nouveau sur `RectangleShape2D`, pour ajuster la `Size`. configures **`x = 32`, `y = 32`**
+
+<details>
+<summary>Solution</summary>
+
+![Solution](./readme-images/solution-architect-collisionshape2d.png)
+
+</details>
+
+> 💡 Si tu as du mal à sélectionner ton mur, voici deux astuces:
+>
+> - Dans ta liste de scènes, sélectionnes ton `Mur1` puis, sur ton clavier, reste appuyé sur la touche "Alt". Tu verras apparaitre sur ton object dans le viewport, **deux flèches: un verte et un rouge**. Avec la souris, sers toi de ces flèches pour bouger ton mur.
+> - C'est aussi peut être parceque tu es gêné par un autre élément. Par exemple, si c'est le `Spawn Area` car il prend beaucoup de place. Dans ce cas là, trouve le dans la liste des scnès, et clique sur le petit oeil blanc qui est sur la même ligne, ça permettra de le cacher temporairement afin de te laisser éditer ton mur plus facilement. N'oublies pas de le remettre avant de lancer le jeu !
 
 ##### Rends le mur visible
 
 Fais un clic droit sur **`Mur1`** et ajoute un nœud enfant **`ColorRect`**.
-Dans l'Inspector, change **Size** à `Vector2(64, 64)` et **Color** à une couleur pierre (par exemple gris foncé `#606060`).
-Change aussi la **Position** du ColorRect à `Vector2(-32, -32)` pour le centrer sur le mur.
+
+Puis, dans l'Inspector:
+
+- Change **Color** à une couleur pierre (par exemple gris foncé `#606060`).
+- Sous `Layout > Transform`:
+  - Change **Size** à **`x = 32`, `y = 32`** et
+  - Change aussi la **Position** à **`x = -16`, `y = -16`** pour le centrer sur le mur.
+
+<details>
+<summary>Solution</summary>
+
+![Solution](./readme-images/solution-architect-colorrect.png)
+
+</details>
 
 ##### Duplique et positionne 4 murs
 
 Fais un **clic droit sur `Mur1`** dans l'arbre de scène et choisis **Duplicate** — répète 3 fois pour avoir `Mur2`, `Mur3` et `Mur4`.
-Pour chaque mur, sélectionne-le et change sa **Position** dans l'Inspector pour le placer dans l'arène (exemples : `(-200, 0)`, `(200, 0)`, `(0, -150)`, `(0, 150)`).
+
+Pour chaque mur, sélectionne-le et place les oú tu veux !
+
 Lance le jeu — le sorcier et les ennemis ne peuvent plus traverser tes murs !
 
 ---
