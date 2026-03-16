@@ -359,20 +359,41 @@ Appuie sur **F5**. Joue quelques minutes. Essaie de survivre aux vagues d'ennemi
 Ouvre `resources/player_stats/player_stats.tres` dans l'Inspector.
 Change la valeur de **`Speed`** à `500`. Lance le jeu. Essaie `50`. Quelle valeur est la plus fun ?
 
+- La valeur initiale était: `50`.
+
 #### **Défi 3 - Deviens invincible**
 
 Dans le même fichier, change **`Hp Max`** à `9999`. Lance le jeu. Tu ne peux plus mourir !
+
+- La valeur initiale était: `30`.
 
 #### **Défi 4 - Écrase les chauves-souris en un coup**
 
 Ouvre `resources/enemy_stats/bat_stats.tres`.
 Change **`Hp Max`** à `1`. Les chauves-souris meurent maintenant en un seul tir !
 
+- La valeur initiale était: `5`.
+
 #### **Défi 5 - Fais exploser la vague 1**
 
 Ouvre `resources/wave_data/wave1_data.tres`.
 Dans la liste **`Sub Waves`**, clique sur le premier élément. Change **`Amount`** à `20`.
 Lance le jeu — tu es envahi !
+
+- La valeur initiale était: `1`.
+
+#### **Défi 6 — Tire comme une mitrailleuse**
+
+Dans `resources/player_stats/player_stats.tres`, change **`Attack Cooldown`** à `0.05`.
+(La valeur actuelle est le temps en secondes entre chaque tir. Plus c'est petit, plus tu tires vite !)
+
+- La valeur initiale était: `0.2`.
+
+#### **Défi 7 — Double tes dégâts**
+
+Toujours dans `player_stats.tres`, cherche **`Damage Information`** et clique dessus pour l'ouvrir. Change la valeur de **`Damage`**. Essaie `50` !
+
+- La valeur initiale était: `3`.
 
 ---
 
@@ -382,15 +403,6 @@ Lance le jeu — tu es envahi !
 
 > Dans le groupe 2, tu continues à modifier des fichiers `.tres`, mais tu explores plus en profondeur les configurations disponibles.
 
-#### **Défi 6 — Tire comme une mitrailleuse**
-
-Dans `resources/player_stats/player_stats.tres`, change **`Attack Cooldown`** à `0.05`.
-(La valeur actuelle est le temps en secondes entre chaque tir. Plus c'est petit, plus tu tires vite !)
-
-#### **Défi 7 — Double tes dégâts**
-
-Toujours dans `player_stats.tres`, cherche **`Damage Information`** et clique dessus pour l'ouvrir. Change la valeur de **`Damage`**. Essaie `50` !
-
 #### **Défi 8 — Change la formation d'apparition**
 
 Dans `resources/wave_data/wave1_data.tres`, ouvre un `SubWaveData` et change **`Pattern`** :
@@ -399,13 +411,29 @@ Dans `resources/wave_data/wave1_data.tres`, ouvre un `SubWaveData` et change **`
 - `CIRCLE` : ils apparaissent en cercle autour de toi
 - `CLUSTER` : ils apparaissent en groupe
 
+- Les valeurs initiales étaient:
+  - Subwave 0: `Random`
+  - Subwave 1: `Random`
+  - Subwave 2: `Cluster`
+  - Subwave 3: `Cluster`
+  - Subwave 4: `Random`
+  - Subwave 5: `Circle`
+
 #### **Défi 9 — Remplace les ennemis**
 
 Dans la même vague, change **`Enemy Type`** pour `KNIGHT` ou `SPIDER`. Lance le jeu — surprise !
 
+- Les valeurs initiales étaient:
+  - Subwave 0: `Bat`
+  - Subwave 1: `Bat`
+  - Subwave 2: `Bat`
+  - Subwave 3: `Ghost`
+  - Subwave 4: `Bat`
+  - Subwave 5: `Ghost`
+
 #### **Défi 10 — Crée ton équilibre parfait**
 
-Restore les stats du joueur à des valeurs raisonnables, mais garde les modifications de vague que tu préfères. Crée une vague 1 qui te semble fun à jouer !
+Crée une vague 1 qui te semble fun à jouer et garde les changements que tu préfères !
 
 ---
 
@@ -425,8 +453,12 @@ C'est ici que la vitesse est appliquée ! Modifie la ligne pour mettre `player_s
 
 #### **Défi 12 — Accélère la boule de feu**
 
+Ce défi ne peut être testé qu'avec une manette. Car un bug🪳 s'est introduit dans le jeu et la visée à la souris ne fonctionne pas encore. Fais ce dernier défi pour essayer la menette et la souris, avant que tu puisses aller corriger le bug !
+
 Ouvre `src/scenes/entities/player/fireball/fireball.gd`.
-Trouve la variable `speed`. Elle est aussi configurable depuis l'éditeur : dans la scène `fireball.tscn`, clique sur le nœud racine et cherche **`Speed`** dans l'Inspector. Change-la à `1000` !
+Trouve la variable `speed` dans le code, et de la même manière que dans le défi précédent, augmente la vitesse de la boule de feu.
+
+Elle est aussi configurable depuis l'éditeur : dans la scène `fireball.tscn`, clique sur le nœud racine et cherche **`Speed`** dans l'Inspector. Change-la à `1000` !
 
 <details>
 <summary>Solution</summary>
