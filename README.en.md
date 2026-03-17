@@ -138,8 +138,7 @@ Follow these steps below in order. Ask a workshop leader if you're stuck!
    - [ ] **[Challenge Group 9](#group---creative-coder)** - 🎮 Creative Coder - Customize with code
    - [ ] **[Challenge Group 10](#group---add-a-new-laser-weapon)** - 🔫 Add a New Laser Weapon
    - [ ] **[Challenge Group 11](#group---continuous-laser)** - ⚡ Continuous Laser
-
-- [ ] **[Challenge Group 12](#group---teleportation)** - 🌀 Teleportation
+   - [ ] **[Challenge Group 12](#group---teleportation)** - 🌀 Teleportation
 
 7. [ ] **[Upload Your Project](#upload-your-project)** ⬆️ - before leaving to our [Google Drive folder](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj?usp=sharing) to find it at home
 8. [ ] **[Demo your game!](#demo-your-game)** - 🏁 to your parents at the end of the session!
