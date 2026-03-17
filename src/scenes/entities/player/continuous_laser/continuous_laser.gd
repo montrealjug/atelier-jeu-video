@@ -3,6 +3,7 @@ class_name ContinuousLaser extends Node2D
 @onready var raycast: RayCast2D = $RayCast2D
 @onready var line: Line2D = $Line2D
 @onready var damage_timer: Timer = $DamageTimer
+@onready var glow: Line2D = $GlowLine
 
 var damage_information: DamageInformation
 var is_active: bool = false
@@ -33,9 +34,12 @@ func _process(_delta: float) -> void:
 	if not is_active:
 		return
 	if raycast.is_colliding():
-		line.set_point_position(1, to_local(raycast.get_collision_point()))
+		var hit := to_local(raycast.get_collision_point())
+		line.set_point_position(1, hit)
+		glow.set_point_position(1, hit)
 	else:
 		line.set_point_position(1, Vector2(400, 0))
+		glow.set_point_position(1, Vector2(400, 0))
 
 
 func _on_damage_timer_timeout() -> void:

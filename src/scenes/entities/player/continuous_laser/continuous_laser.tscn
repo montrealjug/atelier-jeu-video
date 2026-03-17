@@ -9,6 +9,11 @@ script = ExtResource("1_wieoc")
 target_position = Vector2(400, 0)
 collision_mask = 33
 
+[node name="GlowLine" type="Line2D" parent="." unique_id=489386562]
+points = PackedVector2Array(0, 0, 400, 0)
+width = 8.0
+default_color = Color(0.16862746, 1, 0.96862745, 0.47843137)
+
 [node name="Line2D" type="Line2D" parent="." unique_id=1342020869]
 points = PackedVector2Array(0, 0, 400, 0)
 width = 4.0
