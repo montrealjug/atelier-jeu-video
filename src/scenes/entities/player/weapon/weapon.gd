@@ -7,6 +7,7 @@ extends Node2D
 
 @onready var attack_cooldown: Timer = %AttackCooldown
 @onready var sprite: Sprite2D = %Sprite
+@onready var continuous_laser: ContinuousLaser = $ContinuousLaser
 
 ## The current direction the player is targeting
 var current_direction: Vector2 = Vector2.RIGHT
@@ -30,6 +31,13 @@ func _process(_delta: float) -> void:
 
 	if Input.is_action_pressed("attack_primary"):
 		fire()
+	if Input.is_action_pressed("attack_secondary"):
+		if not continuous_laser.is_active and not continuous_laser.needs_rearm:
+			continuous_laser.activate(player_stats.damage_information)
+	else:
+		continuous_laser.needs_rearm = false
+		if continuous_laser.is_active:
+			continuous_laser.deactivate()
 
 
 func get_right_stick_direction(dead_zone: float) -> Vector2:

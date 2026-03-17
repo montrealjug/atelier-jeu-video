@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://ca6r8rdhobilh"]
+
+[ext_resource type="Script" uid="uid://ccymu4u4mtypw" path="res://src/scenes/entities/player/continuous_laser/continuous_laser.gd" id="1_wieoc"]
+
+[node name="ContinuousLaser" type="Node2D" unique_id=300544340]
+script = ExtResource("1_wieoc")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1216255056]
+target_position = Vector2(400, 0)
+collision_mask = 33
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1342020869]
+points = PackedVector2Array(0, 0, 400, 0)
+width = 4.0
+default_color = Color(0.10032373, 0.81775606, 0.80571806, 1)
+
+[node name="DamageTimer" type="Timer" parent="." unique_id=866431285]
+wait_time = 0.05
