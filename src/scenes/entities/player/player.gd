@@ -12,6 +12,7 @@ signal stats_changed(type: UpgradePotion.UpgradeType)
 @onready var pickup_handler: PlayerPickupHandler = %PickupHandler
 @onready var player_health: PlayerHealth = %PlayerHealth
 @onready var teleport_cooldown: Timer = $TeleportCooldown
+@onready var teleport_label: Label = $TeleportLabel
 
 
 ## Runs once just when the Player has been initialized
@@ -40,3 +41,10 @@ func _input(event: InputEvent) -> void:
 		if teleport_cooldown.is_stopped():
 			global_position = get_global_mouse_position()
 			teleport_cooldown.start()
+
+func _process(_delta: float) -> void:
+	if teleport_cooldown.is_stopped():
+		teleport_label.visible = false
+	else:
+		teleport_label.visible = true
+		teleport_label.text = "%.1f" % teleport_cooldown.time_left
