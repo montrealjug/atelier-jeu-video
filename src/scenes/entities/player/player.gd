@@ -11,6 +11,7 @@ signal stats_changed(type: UpgradePotion.UpgradeType)
 
 @onready var pickup_handler: PlayerPickupHandler = %PickupHandler
 @onready var player_health: PlayerHealth = %PlayerHealth
+@onready var teleport_cooldown: Timer = $TeleportCooldown
 
 
 ## Runs once just when the Player has been initialized
@@ -36,4 +37,6 @@ func _on_stats_changed(type: UpgradePotion.UpgradeType) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("teleport"):
-		global_position = get_global_mouse_position()
+		if teleport_cooldown.is_stopped():
+			global_position = get_global_mouse_position()
+			teleport_cooldown.start()
