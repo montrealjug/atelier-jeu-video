@@ -39,8 +39,8 @@ func _on_stats_changed(type: UpgradePotion.UpgradeType) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("teleport"):
 		if teleport_cooldown.is_stopped():
-			global_position = get_global_mouse_position()
 			teleport_cooldown.start()
+			_do_teleport()
 
 func _process(_delta: float) -> void:
 	if teleport_cooldown.is_stopped():
@@ -48,3 +48,14 @@ func _process(_delta: float) -> void:
 	else:
 		teleport_label.visible = true
 		teleport_label.text = "%.1f" % teleport_cooldown.time_left
+		
+func _do_teleport() -> void:
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 0.0, 0.5)
+	await tween.finished
+
+	global_position = get_global_mouse_position()
+	get_viewport().get_camera_2d().reset_smoothing()
+
+	tween = create_tween()
+	tween.tween_property(self, "modulate:a", 1.0, 0.5)
