@@ -4,6 +4,7 @@ extends Node2D
 
 @export var player: Player
 @export var fireball_scene: PackedScene
+@export var laser_scene: PackedScene
 
 @onready var attack_cooldown: Timer = %AttackCooldown
 @onready var sprite: Sprite2D = %Sprite
@@ -30,6 +31,8 @@ func _process(_delta: float) -> void:
 
 	if Input.is_action_pressed("attack_primary"):
 		fire()
+	if Input.is_action_just_pressed("attack_secondary"):
+		fire_laser()
 
 
 func get_right_stick_direction(dead_zone: float) -> Vector2:
@@ -52,6 +55,14 @@ func spawn_fireball() -> void:
 	fireball.direction = current_direction
 	fireball.damage_information = player_stats.damage_information
 
+func fire_laser() -> void:
+	if laser_scene:
+		spawn_laser()
+
+func spawn_laser() -> void:
+	var laser := NodeUtil.instance_2d_scene_at_location(laser_scene, self, global_position) as Laser
+	laser.direction = current_direction
+	laser.damage_information = player_stats.damage_information
 
 ## Update the attack cooldown timer if the player's attack speed has changed
 func _on_stats_changed(type: UpgradePotion.UpgradeType) -> void:
