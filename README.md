@@ -136,6 +136,8 @@ Suis ces étapes ci dessous dans l'ordre. Demande à un animateur si tu es bloqu
    - [ ] **[Groupe de défis 7](#groupe---artiste-pixel-art)** - 🎨 Artiste Pixel Art - Personnalise ton personnage
    - [ ] **[Groupe de défis 8](#groupe---architecte)** - 🏗️ Architecte - Ajoute des Obstacles
    - [ ] **[Groupe de défis 9](#groupe---codeur-créatif)** - 🎮 Codeur Créatif - Personnalise avec du code
+   - [ ] **[Groupe de défis 10](#groupe---ajoutes-une-nouvelle-arme-laser)** - 🔫 Ajoutes une nouvelle arme laser
+   - [ ] **[Groupe de défis 11](#groupe---laser-continu)** - ⚡ Laser Continu
 7. [ ] **[Upload ton projet](#upload-ton-projet)** - ⬆️ avant de partir dans notre [dossier Google Drive](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj?usp=sharing) pour le retrouver chez toi
 8. [ ] **[Présente ton jeu !](#présente-ton-jeu)** - 🏁 à tes parents à la fin de la session !
 
@@ -812,16 +814,429 @@ func _process(_delta: float) -> void:
 	time_label.text = str(int(GameData.survival_time)) + "s"
 ```
 
-#### **Défi 27 — Affiche tes stats en appuyant sur Espace**
+Va dans le viewport `2D` et place le temps oú tu veux sur l'écran.
 
-Dans `src/scripts/autoloads/game_data.gd`, dans la fonction `_process`, ajoute :
+---
+
+### Groupe - Ajoutes une nouvelle arme laser
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
+
+> Dans ce groupe, tu vas ajouter une **deuxième arme** au sorcier : un rayon laser tiré avec le clic droit ! Tu vas écrire un nouveau script de zéro, créer une scène, et connecter le tout au système d'armes existant. C'est le défi le plus ambitieux !
+
+#### **Défi 27 — Explore le code de la boule de feu**
+
+Avant de créer quoi que ce soit, comprends comment fonctionne la boule de feu.
+
+Ouvre `src/scenes/entities/player/fireball/fireball.gd`. Lis-le entièrement.
+
+- Quelle classe est-ce qu'il étend ? (`Area2D`)
+- Quelles variables `@export` a-t-il ?
+- Que fait la fonction `die()` ?
+
+Maintenant ouvre `src/scenes/entities/player/weapon/weapon.gd`. Lis la fonction `spawn_fireball()`.
+
+- Que fait `NodeUtil.instance_2d_scene_at_location` ?
+- Quelles deux propriétés sont définies sur la boule de feu avant de tirer ?
+
+Tu as maintenant tous les outils pour créer le laser ! 🔍
+
+#### **Défi 28 — Crée le script du laser**
+
+Dans le FileSystem, fais un clic droit sur `src/scenes/entities/player/` et choisis **New Folder**. Nomme-le `laser`.
+
+Dans ce nouveau dossier, clic droit → **New Script**. Nomme-le `laser.gd`.
+
+Ton laser doit :
+
+1. Se déplacer dans une direction à grande vitesse (`speed = 400` — contre `160` pour la boule de feu)
+2. **Tourner pour pointer dans sa direction** (`rotation = direction.angle()`) pour que le trait soit orienté correctement
+3. Disparaître instantanément au premier contact — avec une garde pour éviter les double-appels
+
+**Indice :** Inspire-toi de `fireball.gd`. Les différences clés :
+
+- Garde seulement `@export var speed: int = 400` — pas besoin de références aux nœuds enfants
+- Dans `_physics_process`, ajoute `rotation = direction.angle()` **avant** le déplacement
+- `die()` appelle `set_deferred("monitoring", false)` sur `self` (l'Area2D lui-même) — aucun nœud enfant requis
+- Ajoute `var is_dying: bool = false` pour bloquer les double-appels
+
+<details>
+<summary>Solution</summary>
 
 ```gdscript
-if Input.is_action_just_pressed("ui_accept"):  # touche Espace
-	print("Score : ", score, " | Temps : ", int(survival_time), "s")
+class_name Laser
+extends Area2D
+
+@export var speed: int = 400
+
+var direction: Vector2 = Vector2.RIGHT
+var damage_information: DamageInformation
+var is_dying: bool = false
+
+
+func _ready() -> void:
+	body_entered.connect(die)
+	area_entered.connect(die)
+
+
+func _physics_process(delta: float) -> void:
+	rotation = direction.angle()
+	global_position += direction * speed * delta
+
+
+func die(_element: Node2D) -> void:
+	if is_dying:
+		return
+	is_dying = true
+	set_deferred("monitoring", false)
+	queue_free()
 ```
 
-Lance le jeu et appuie sur **Espace** pendant une partie — tes stats s'affichent dans la console en bas de Godot !
+</details>
+
+Sauvegarde avec **Ctrl+S**.
+
+#### **Défi 29 — Crée la scène du laser**
+
+Le laser sera dessiné avec un nœud **Line2D** — un trait cyan qui tourne dans la direction de tir. Pas de sprite, pas de particules : un vrai rayon !
+
+Dans le FileSystem, fais un clic droit sur `src/scenes/entities/player/fireball/fireball.tscn` et choisis **Duplicate**. Déplace le nouveau fichier dans le dossier `laser/` et renomme-le `laser.tscn`.
+
+Ouvre `laser.tscn` en double-cliquant dessus.
+
+**1 — Change le script :**
+
+- Dans l'arbre de scène, renomme le nœud racine de `Fireball` à `Laser`.
+- Clique sur l'icône script (📜) dans l'Inspector → détache `fireball.gd` → glisse `laser.gd` sur la propriété **Script**.
+- Mets `Speed` à `400` dans l'Inspector.
+
+**2 — Supprime les nœuds de la boule de feu :**
+
+Sélectionne et supprime ces nœuds dans l'arbre de scène (sélectionne → touche `Suppr`) :
+
+- `TrailParticles`
+- `SparkParticles`
+- `ShadowSprite`
+- `FireballSfx`
+- `Sprite`
+
+**3 — Ajoute le rayon laser :**
+
+Fais un clic droit sur le nœud racine **Laser** → **Add Child Node** → cherche **`Line2D`** → **Create**.
+
+Sélectionne le nœud **Line2D** et dans l'Inspector :
+
+- **Default Color** → mets la couleur cyan : clique sur la case de couleur et entre `(R: 0, G: 255, B: 255)`
+- **Width** → `4`
+- **Points** → clique **+** deux fois pour ajouter deux points :
+  - Point 0 : `x = 0, y = 0`
+  - Point 1 : `x = 30, y = 0`
+
+Sauvegarde avec **Ctrl+S**.
+
+> 💡 La Line2D trace un trait du point 0 au point 1. Comme le laser tourne dans `_physics_process`, il pointera toujours dans sa direction de déplacement !
+
+#### **Défi 30 — Connecte le laser à l'arme**
+
+Ouvre `src/scenes/entities/player/weapon/weapon.gd`.
+
+Sous `@export var fireball_scene: PackedScene`, ajoute un nouvel export pour le laser :
+
+```gdscript
+@export var laser_scene: PackedScene
+```
+
+À la fin de la fonction `_process` (après le bloc `attack_primary`), ajoute :
+
+```gdscript
+	if Input.is_action_just_pressed("attack_secondary"):
+		fire_laser()
+```
+
+Ensuite, ajoute ces deux nouvelles fonctions après `spawn_fireball()` :
+
+```gdscript
+func fire_laser() -> void:
+	if laser_scene:
+		spawn_laser()
+
+func spawn_laser() -> void:
+	var laser := NodeUtil.instance_2d_scene_at_location(laser_scene, self, global_position) as Laser
+	laser.direction = current_direction
+	laser.damage_information = player_stats.damage_information
+```
+
+Sauvegarde avec **Ctrl+S**.
+
+**Configure le clic droit :**
+Va dans **Project > Project Settings > Input Map**, trouve `attack_secondary` et clique sur **+** pour ajouter un événement. Appuie sur le **bouton droit de la souris** — il devrait apparaître dans la liste.
+
+**Assigne la scène dans l'éditeur :**
+Ouvre `src/scenes/entities/player/weapon/weapon.tscn`, sélectionne le nœud **Weapon**, et dans l'Inspector glisse `laser.tscn` sur la propriété **Laser Scene**.
+
+Lance le jeu — **clic gauche** tire des boules de feu, **clic droit** tire des lasers ! 🔵
+
+---
+
+### Groupe - Laser Continu
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
+
+> Dans ce groupe, tu vas créer un **rayon laser continu** — il reste actif jusqu'à ce qu'un ennemi meure ! Au lieu de faire des dégâts par impact, il fait des **dégâts au fil du temps**. Tu vas utiliser un nouvel outil de Godot appelé `RayCast2D` pour détecter ce qui se trouve sur le chemin du laser à chaque frame.
+
+#### **Défi 31 — Comprendre le RayCast2D**
+
+Un `RayCast2D` envoie un rayon invisible depuis un point dans une direction. À chaque frame, il répond à la question : « Est-ce que j'ai touché quelque chose ? Si oui, quoi et où exactement ? »
+
+Contrairement à l'`Area2D` utilisée pour les boules de feu (qui détecte les chevauchements entre formes), un `RayCast2D` donne toujours le **premier** objet sur son chemin — parfait pour un rayon laser qui s'arrête au premier ennemi ou mur rencontré.
+
+Ouvre `src/scenes/entities/player/weapon/weapon.gd` et lis la fonction `spawn_fireball()`.
+
+- La boule de feu est un projectile : elle est créée, puis se déplace seule à chaque frame.
+- Le laser continu est différent : **il ne bouge pas**. Il reste attaché à l'arme, tourne avec elle, et lit le point de collision du raycast à chaque frame pour dessiner le rayon.
+
+Réfléchis :
+
+- Pourquoi `RayCast2D` est-il meilleur qu'un long `Area2D` pour un rayon ?
+- Quelle est la différence entre « 10 dégâts par impact » et « 10 dégâts par seconde » ?
+
+#### **Défi 32 — Crée la scène du laser continu**
+
+Crée un nouveau dossier `src/scenes/entities/player/continuous_laser/`.
+
+À l'intérieur, clic droit → **New Scene**. Choisis **Node2D** comme racine et nomme-la `ContinuousLaser`. Sauvegarde sous `continuous_laser.tscn`.
+
+Ajoute trois nœuds enfants à `ContinuousLaser` :
+
+**1 — RayCast2D :**
+Clic droit sur `ContinuousLaser` → Add Child Node → `RayCast2D`.
+Dans l'Inspector :
+
+- `Target Position` : `x = 400, y = 0`
+- `Collision Mask` : clique sur la grille et active **la couche 1** (world) et **la couche 6** (enemy_physics)
+
+**2 — Line2D :**
+Clic droit sur `ContinuousLaser` → Add Child Node → `Line2D`.
+Dans l'Inspector :
+
+- **Default Color** → cyan `(R: 0, G: 255, B: 255)`
+- **Width** → `4`
+- **Points** → clique **+** deux fois :
+  - Point 0 : `x = 0, y = 0`
+  - Point 1 : `x = 400, y = 0`
+
+**3 — Timer** (renomme-le `DamageTimer`) :
+Clic droit sur `ContinuousLaser` → Add Child Node → `Timer`. Renomme-le `DamageTimer`.
+Dans l'Inspector :
+
+- `Wait Time` : `0.2`
+- `One Shot` : ❌
+- `Autostart` : ❌
+
+Sauvegarde avec **Ctrl+S**.
+
+> 💡 Puisque `ContinuousLaser` sera un **enfant de l'Arme**, il tourne automatiquement avec elle — le rayon pointera toujours dans la direction visée par le sorcier !
+
+#### **Défi 33 — Écris le script du laser continu**
+
+Dans le dossier `src/scenes/entities/player/continuous_laser/`, crée un nouveau script `continuous_laser.gd` et attache-le au nœud `ContinuousLaser`.
+
+Le script doit :
+
+1. `activate(dmg_info)` — rendre le rayon visible et démarrer le timer de dégâts
+2. `deactivate()` — cacher le rayon et arrêter le timer
+3. Dans `_process` — mettre à jour l'extrémité de la Line2D pour suivre le point de collision du raycast à chaque frame
+4. Au timeout de `DamageTimer` — trouver l'ennemi que le raycast touche et appeler `hurt.emit()`
+5. Quand `Signals.enemy_died` se déclenche — appeler automatiquement `deactivate()`
+
+**Indices :**
+
+- `raycast.get_collision_point()` retourne la position de collision en espace **global** — utilise `to_local(...)` pour la convertir en espace local du nœud pour la Line2D
+- Pour trouver la hurtbox de l'ennemi : `body.find_child("EnemyHurtBox") as EnemyHurtBox`, puis appelle `hurtbox.hurt.emit(damage_information)`
+- Commence avec `visible = false` dans `_ready()` — le laser est éteint par défaut
+
+<details>
+<summary>Solution</summary>
+
+```gdscript
+class_name ContinuousLaser
+extends Node2D
+
+@onready var raycast: RayCast2D = $RayCast2D
+@onready var line: Line2D = $Line2D
+@onready var damage_timer: Timer = $DamageTimer
+
+var damage_information: DamageInformation
+var is_active: bool = false
+var needs_rearm: bool = false
+
+
+func _ready() -> void:
+	damage_timer.timeout.connect(_on_damage_timer_timeout)
+	Signals.enemy_died.connect(_on_enemy_died)
+	visible = false
+
+
+func activate(dmg_info: DamageInformation) -> void:
+	damage_information = dmg_info
+	is_active = true
+	needs_rearm = false
+	visible = true
+	damage_timer.start()
+
+
+func deactivate() -> void:
+	is_active = false
+	visible = false
+	damage_timer.stop()
+
+
+func _process(_delta: float) -> void:
+	if not is_active:
+		return
+	if raycast.is_colliding():
+		line.set_point_position(1, to_local(raycast.get_collision_point()))
+	else:
+		line.set_point_position(1, Vector2(400, 0))
+
+
+func _on_damage_timer_timeout() -> void:
+	if not raycast.is_colliding():
+		return
+	var body = raycast.get_collider()
+	var hurtbox := body.find_child("EnemyHurtBox") as EnemyHurtBox
+	if hurtbox:
+		hurtbox.hurt.emit(damage_information)
+
+
+func _on_enemy_died(_enemy: Enemy) -> void:
+	deactivate()
+	needs_rearm = true
+```
+
+</details>
+
+Sauvegarde avec **Ctrl+S**.
+
+#### **Défi 34 — Connecte le laser continu à l'arme**
+
+**Ajoute la scène à l'arme :**
+Ouvre `src/scenes/entities/player/weapon/weapon.tscn`. Dans l'arbre de scène, clic droit sur le nœud racine **Weapon** → **Instantiate Child Scene** → sélectionne `continuous_laser.tscn`.
+
+Le nœud `ContinuousLaser` est maintenant enfant de l'Arme. Comme l'Arme tourne vers la souris, le laser suit automatiquement !
+
+**Modifie `weapon.gd` :**
+Ouvre `src/scenes/entities/player/weapon/weapon.gd`.
+
+Ajoute cette ligne avec les autres variables `@onready` en haut :
+
+```gdscript
+@onready var continuous_laser: ContinuousLaser = $ContinuousLaser
+```
+
+Dans `_process`, remplace le bloc `attack_secondary` par :
+
+```gdscript
+	if Input.is_action_pressed("attack_secondary"):
+		if not continuous_laser.is_active and not continuous_laser.needs_rearm:
+			continuous_laser.activate(player_stats.damage_information)
+	else:
+		continuous_laser.needs_rearm = false
+		if continuous_laser.is_active:
+			continuous_laser.deactivate()
+```
+
+> 💡 Le laser reste actif tant que le bouton est maintenu. Si un ennemi meurt, `needs_rearm` bloque la réactivation automatique — le joueur doit relâcher puis ré-appuyer.
+
+Lance le jeu — **maintiens le clic droit** pour déclencher le laser continu. Relâche pour l'éteindre, ou laisse-le tuer un ennemi et il s'éteindra automatiquement ! ⚡
+
+#### **Défi 35 — Ajoute un effet de lueur au rayon**
+
+Un vrai rayon laser a une lueur autour de lui ! On va ajouter une deuxième `Line2D` plus large et semi-transparente derrière le rayon principal pour simuler cet effet.
+
+**Dans `continuous_laser.tscn` :**
+
+Dans l'arbre de scène, fais un clic droit sur le nœud racine `ContinuousLaser` → **Add Child Node** → `Line2D`. Renomme-le `GlowLine`.
+
+Sélectionne `GlowLine` et dans l'Inspector :
+
+- **Default Color** → cyan semi-transparent : `(R: 0, G: 255, B: 255, A: 60)`
+- **Width** → `8`
+- **Points** → clique **+** deux fois :
+  - Point 0 : `x = 0, y = 0`
+  - Point 1 : `x = 400, y = 0`
+
+Dans l'arbre de scène, **glisse `GlowLine` au-dessus de `Line2D`** pour qu'il s'affiche derrière le rayon principal.
+
+Sauvegarde avec **Ctrl+S**.
+
+**Dans `continuous_laser.gd` :**
+
+Ajoute une référence au nœud `GlowLine` avec les autres `@onready` :
+
+```gdscript
+@onready var glow: Line2D = $GlowLine
+```
+
+Dans la fonction `_process`, mets à jour le point final de `glow` en même temps que `line` :
+
+```gdscript
+func _process(_delta: float) -> void:
+	if not is_active:
+		return
+	if raycast.is_colliding():
+		var hit := to_local(raycast.get_collision_point())
+		line.set_point_position(1, hit)
+		glow.set_point_position(1, hit)
+	else:
+		line.set_point_position(1, Vector2(400, 0))
+		glow.set_point_position(1, Vector2(400, 0))
+```
+
+Lance le jeu — le rayon a maintenant une auréole lumineuse autour de lui ! ✨
+
+#### **Défi 36 — Ajoute un son de laser**
+
+**Dans `continuous_laser.tscn` :**
+
+Clic droit sur `ContinuousLaser` → Add Child Node → `AudioStreamPlayer`. Renomme-le `LaserSfx`.
+
+Dans l'Inspector :
+
+- **Stream** → glisse `assets/sounds/sfx/continuous_laser.wav` depuis le FileSystem
+- **Autoplay** : ❌
+- Dans la section **Looping** du fichier audio (double-clique sur `continuous_laser.wav` dans le FileSystem) → active **Loop**
+- Si ça ne fonctionne pas ici, c'est que le fichier importé est en lecture seule regarde la solution ci-dessous pour savoir comment faire
+
+<details>
+
+<summary>Solution</summary>
+
+![image](./readme-images/continuous-beam-audio-loop-mode.png)
+
+</details>
+
+**Dans `continuous_laser.gd` :**
+
+Ajoute la référence :
+
+```gdscript
+@onready var laser_sfx: AudioStreamPlayer = $LaserSfx
+```
+
+Dans `activate()`, ajoute à la fin :
+
+```gdscript
+	laser_sfx.play()
+```
+
+Dans `deactivate()`, ajoute à la fin :
+
+```gdscript
+	laser_sfx.stop()
+```
+
+Lance le jeu — le laser fait maintenant du bruit tant qu'il est actif, et s'arrête dès qu'il se coupe ! 🔊
 
 ---
 
@@ -866,6 +1281,8 @@ Il est temps de présenter ton travail à tes parents. Explique-leur :
   - Groupe 5: Trouver un sprite open source, l'importer dans Godot, remplacer l'apparence du sorcier
   - Groupe 6: Ajouter des murs dans l'arène, avec collisions et visuel
   - Groupe 7: Changer la couleur des boules de feu et des explosions, compter le temps de survie, l'afficher à l'écran
+  - Groupe 8: Créer une arme laser, écrire un script, créer une scène, connecter au système d'armes
+  - Groupe 9: Créer un laser continu avec RayCast2D, dégâts au fil du temps, désactivation automatique à la mort d'un ennemi
 - Quel défi était le plus difficile ? Pourquoi ?
 - Tu as personnalisé le jeu ? Comment ?
 

@@ -127,14 +127,17 @@ Follow these steps below in order. Ask a workshop leader if you're stuck!
 4. [ ] **[Explore the project](#file-structure)** - 📂 discover the files, folders, scenes, and scripts
 5. [ ] **[Learn the code basics](#code-basics)** - 📖 to be ready to understand, modify, and program the game
 6. [ ] **[Complete your challenges](#your-challenges)** ⚔️ Complete all the challenge steps below
-   - [ ] **[Challenge Group 1](#group---explorer)** - 🔍 No code required
+   - [ ] **[Challenge Group 1](#group---explorer)** - 🔍 Explorer
    - [ ] **[Challenge Group 2](#group---resource-tinkerer)** - ⚙️ Resource Tinkerer
    - [ ] **[Challenge Group 3](#group---code-reader)** - 📖 Code Reader - Understanding scripts
    - [ ] **[Challenge Group 4](#group---coder)** - 💻 Coder - Write code!
    - [ ] **[Challenge Group 5](#group---score)** - 🔢 Perfectionist - Add a score
-   - [ ] **[Challenge Group 6](#group---pixel-art-artist)** - 🎨 Pixel Art Artist - Customize your character
-   - [ ] **[Challenge Group 7](#group---architect)** - 🏗️ Architect - Add Obstacles
-   - [ ] **[Challenge Group 8](#group---creative-coder)** - 🎮 Creative Coder - Customize with code
+   - [ ] **[Challenge Group 6](#group---one-more-wave)** - 🌊 Create your own wave of enemies
+   - [ ] **[Challenge Group 7](#group---pixel-art-artist)** - 🎨 Pixel Art Artist - Customize your character
+   - [ ] **[Challenge Group 8](#group---architect)** - 🏗️ Architect - Add Obstacles
+   - [ ] **[Challenge Group 9](#group---creative-coder)** - 🎮 Creative Coder - Customize with code
+   - [ ] **[Challenge Group 10](#group---add-a-new-laser-weapon)** - 🔫 Add a New Laser Weapon
+   - [ ] **[Challenge Group 11](#group---continuous-laser)** - ⚡ Continuous Laser
 7. [ ] **[Upload Your Project](#upload-your-project)** ⬆️ - before leaving to our [Google Drive folder](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj?usp=sharing) to find it at home
 8. [ ] **[Demo your game!](#demo-your-game)** - 🏁 to your parents at the end of the session!
 
@@ -360,14 +363,20 @@ Press **F5**. Play for a few minutes. Try to survive the enemy waves. How many w
 Open `resources/player_stats/player_stats.tres` in the Inspector.
 Change **`Speed`** to `500`. Launch the game. Try `50`. Which value is the most fun?
 
+- The initial value was: `50`.
+
 #### **Challenge 3 - Become invincible**
 
 In the same file, change **`Hp Max`** to `9999`. Launch the game. You can no longer die!
+
+- The initial value was: `30`.
 
 #### **Challenge 4 - One-shot the bats**
 
 Open `resources/enemy_stats/bat_stats.tres`.
 Change **`Hp Max`** to `1`. Bats now die in a single shot!
+
+- The initial value was: `5`.
 
 #### **Challenge 5 - Flood wave 1**
 
@@ -375,22 +384,28 @@ Open `resources/wave_data/wave1_data.tres`.
 In the **`Sub Waves`** list, click on the first element. Change **`Amount`** to `20`.
 Launch the game — you're surrounded!
 
----
-
-### Group - Resource Tinkerer
-
-[Back to steps ⬆️](#workshop-steps)
-
-> In this group, you keep modifying `.tres` files, but you explore more configuration options.
+- The initial value was: `1`.
 
 #### **Challenge 6 — Shoot like a machine gun**
 
 In `resources/player_stats/player_stats.tres`, change **`Attack Cooldown`** to `0.05`.
 (This value is the time in seconds between each shot. The smaller it is, the faster you shoot!)
 
+- The initial value was: `0.2`.
+
 #### **Challenge 7 — Double your damage**
 
 Still in `player_stats.tres`, find **`Damage Information`** and click to open it. Change the **`Damage`** value. Try `50`!
+
+- The initial value was: `3`.
+
+---
+
+### Group - Resource Tinkerer
+
+[Back to steps ⬆️](#workshop-steps)
+
+> In this group, you continue modifying `.tres` files, but explore the configurations in more depth.
 
 #### **Challenge 8 — Change the spawn formation**
 
@@ -400,9 +415,25 @@ In `resources/wave_data/wave1_data.tres`, open a `SubWaveData` and change **`Pat
 - `CIRCLE`: they appear in a circle around you
 - `CLUSTER`: they appear as a group
 
+- The initial values were:
+  - Subwave 0: `Random`
+  - Subwave 1: `Random`
+  - Subwave 2: `Cluster`
+  - Subwave 3: `Cluster`
+  - Subwave 4: `Random`
+  - Subwave 5: `Circle`
+
 #### **Challenge 9 — Replace the enemies**
 
 In the same wave, change **`Enemy Type`** to `KNIGHT` or `SPIDER`. Launch the game — surprise!
+
+- The initial values were:
+  - Subwave 0: `Bat`
+  - Subwave 1: `Bat`
+  - Subwave 2: `Bat`
+  - Subwave 3: `Ghost`
+  - Subwave 4: `Bat`
+  - Subwave 5: `Ghost`
 
 #### **Challenge 10 — Find your perfect balance**
 
@@ -425,6 +456,8 @@ You'll see the line: `player.velocity = input_vector * player_stats.speed`
 This is where speed is applied! Modify the line to use `player_stats.speed * 2`. What happens?
 
 #### **Challenge 12 — Speed up the fireball**
+
+This challenge can only be fully tested with a gamepad. A bug 🪳 has crept into the game — mouse aiming doesn't work yet. Try this challenge with both a gamepad and the mouse, before going to fix the bug in the next group!
 
 Open `src/scenes/entities/player/fireball/fireball.gd`.
 Find the `speed` variable. You can also change it from the editor: in the `fireball.tscn` scene, click the root node and look for **`Speed`** in the Inspector. Set it to `1000`!
@@ -779,16 +812,429 @@ func _process(_delta: float) -> void:
 	time_label.text = str(int(GameData.survival_time)) + "s"
 ```
 
-#### **Challenge 27 — Print your stats by pressing Space**
+Go to the `2D` viewport and place the time wherever you want on the screen.
 
-In `src/scripts/autoloads/game_data.gd`, inside the `_process` function, add:
+---
+
+### Group - Add a New Laser Weapon
+
+[Back to steps ⬆️](#workshop-steps)
+
+> In this group, you'll add a **second weapon** to the wizard: a laser bolt fired with right-click! You'll write a new script from scratch, set up a scene, and wire everything into the existing weapon system. This is the most ambitious challenge!
+
+#### **Challenge 27 — Explore the fireball code**
+
+Before creating anything new, let's understand how the fireball works.
+
+Open `src/scenes/entities/player/fireball/fireball.gd`. Read through it.
+
+- What class does it extend? (`Area2D`)
+- What `@export` variables does it have?
+- What does the `die()` function do?
+
+Now open `src/scenes/entities/player/weapon/weapon.gd`. Read the `spawn_fireball()` function.
+
+- What does `NodeUtil.instance_2d_scene_at_location` do?
+- What two properties does it set on the fireball before firing it?
+
+You now have all the tools you need to build the laser! 🔍
+
+#### **Challenge 28 — Create the laser script**
+
+In the FileSystem, right-click on `src/scenes/entities/player/` and choose **New Folder**. Name it `laser`.
+
+Inside that folder, right-click → **New Script**. Name it `laser.gd`.
+
+Your laser needs to:
+
+1. Move in a direction at high speed (`speed = 400` — compared to `160` for the fireball)
+2. **Rotate to face its direction** so the beam points the right way (`rotation = direction.angle()`)
+3. Disappear instantly when it hits something — with a guard so `die()` only runs once
+
+**Hint:** Look at `fireball.gd` for inspiration. Key differences:
+
+- Only `@export var speed: int = 400` — no node references needed
+- In `_physics_process`, set `rotation = direction.angle()` **before** moving, so the beam always faces forward
+- `die()` uses `set_deferred("monitoring", false)` on `self` (the Area2D) — no child node needed
+- Add `var is_dying: bool = false` to block double calls
+
+<details>
+<summary>Solution</summary>
 
 ```gdscript
-if Input.is_action_just_pressed("ui_accept"):  # Space bar
-	print("Score: ", score, " | Time: ", int(survival_time), "s")
+class_name Laser
+extends Area2D
+
+@export var speed: int = 400
+
+var direction: Vector2 = Vector2.RIGHT
+var damage_information: DamageInformation
+var is_dying: bool = false
+
+
+func _ready() -> void:
+	body_entered.connect(die)
+	area_entered.connect(die)
+
+
+func _physics_process(delta: float) -> void:
+	rotation = direction.angle()
+	global_position += direction * speed * delta
+
+
+func die(_element: Node2D) -> void:
+	if is_dying:
+		return
+	is_dying = true
+	set_deferred("monitoring", false)
+	queue_free()
 ```
 
-Launch the game and press **Space** during a run — your stats appear in the console at the bottom of Godot!
+</details>
+
+Save with **Ctrl+S**.
+
+#### **Challenge 29 — Create the laser scene**
+
+The laser will be drawn with a **Line2D** node — a cyan line that rotates to face the direction of fire. No sprite, no particles: a real beam.
+
+In the FileSystem, right-click on `src/scenes/entities/player/fireball/fireball.tscn` and choose **Duplicate**. Move the new file into the `laser/` folder and rename it `laser.tscn`.
+
+Open `laser.tscn` by double-clicking it.
+
+**1 — Swap the script:**
+
+- In the scene tree, rename the root node from `Fireball` to `Laser`.
+- Click the script icon (📜) in the Inspector → detach `fireball.gd` → drag `laser.gd` onto the **Script** property.
+- Set `Speed` to `400` in the Inspector.
+
+**2 — Clean up the fireball nodes:**
+
+Select and delete these nodes from the scene tree (select → `Delete` key):
+
+- `TrailParticles`
+- `SparkParticles`
+- `ShadowSprite`
+- `FireballSfx`
+- `Sprite`
+
+**3 — Add the laser beam:**
+
+Right-click the **Laser** root node → **Add Child Node** → search for **`Line2D`** → **Create**.
+
+Select the **Line2D** node and in the Inspector:
+
+- **Default Color** → set it to cyan: click the color box and enter `(R: 0, G: 255, B: 255)`
+- **Width** → `4`
+- **Points** → click **+** twice to add two points:
+  - Point 0: `x = 0, y = 0`
+  - Point 1: `x = 30, y = 0`
+
+Save with **Ctrl+S**.
+
+> 💡 The Line2D draws from point 0 to point 1. Since the laser rotates in `_physics_process`, it will always point in the direction it travels!
+
+#### **Challenge 30 — Connect the laser to the weapon**
+
+Open `src/scenes/entities/player/weapon/weapon.gd`.
+
+Below `@export var fireball_scene: PackedScene`, add a new export for the laser:
+
+```gdscript
+@export var laser_scene: PackedScene
+```
+
+At the end of the `_process` function (after the `attack_primary` block), add:
+
+```gdscript
+	if Input.is_action_just_pressed("attack_secondary"):
+		fire_laser()
+```
+
+Then add these two new functions after `spawn_fireball()`:
+
+```gdscript
+func fire_laser() -> void:
+	if laser_scene:
+		spawn_laser()
+
+func spawn_laser() -> void:
+	var laser := NodeUtil.instance_2d_scene_at_location(laser_scene, self, global_position) as Laser
+	laser.direction = current_direction
+	laser.damage_information = player_stats.damage_information
+```
+
+Save with **Ctrl+S**.
+
+**Bind right-click:**
+Go to **Project > Project Settings > Input Map**, find `attack_secondary` and click **+** to add an event. Press the **right mouse button** — it should appear in the list.
+
+**Assign the scene in the editor:**
+Open `src/scenes/entities/player/weapon/weapon.tscn`, select the **Weapon** node, and in the Inspector drag `laser.tscn` onto the **Laser Scene** property.
+
+Launch the game — **left-click** fires fireballs, **right-click** fires lasers! 🔵
+
+---
+
+### Group - Continuous Laser
+
+[Back to steps ⬆️](#workshop-steps)
+
+> In this group, you'll create a **continuous laser beam** — it stays on until an enemy dies! Instead of dealing damage per hit, it deals **damage over time**. You'll use a new Godot tool called `RayCast2D` to detect what's in the laser's path each frame.
+
+#### **Challenge 31 — Understand RayCast2D**
+
+A `RayCast2D` shoots an invisible ray from a point in a direction. Every frame, it answers: "Did I hit something? If so, what is it and where exactly?"
+
+Unlike the `Area2D` used in the fireball (which detects overlaps between shapes), a `RayCast2D` always gives you the **first** object in its path — perfect for a laser beam that stops at the nearest enemy or wall.
+
+Open `src/scenes/entities/player/weapon/weapon.gd` and read the `spawn_fireball()` function.
+
+- The fireball is a projectile: it's created, then travels on its own each frame.
+- The continuous laser is different: **it doesn't move**. It stays attached to the weapon, rotates with it, and reads the raycast hit point every frame to draw the beam.
+
+Think about it:
+
+- Why is `RayCast2D` better than a very long Area2D for a beam?
+- What's the difference between "10 damage per hit" and "10 damage per second"?
+
+#### **Challenge 32 — Create the continuous laser scene**
+
+Create a new folder `src/scenes/entities/player/continuous_laser/`.
+
+Inside, right-click → **New Scene**. Choose **Node2D** as root and name it `ContinuousLaser`. Save it as `continuous_laser.tscn`.
+
+Add three child nodes to `ContinuousLaser`:
+
+**1 — RayCast2D:**
+Right-click `ContinuousLaser` → Add Child Node → `RayCast2D`.
+In the Inspector:
+
+- `Target Position`: `x = 400, y = 0`
+- `Collision Mask`: click the mask grid and enable **layer 1** (world) and **layer 6** (enemy_physics)
+
+**2 — Line2D:**
+Right-click `ContinuousLaser` → Add Child Node → `Line2D`.
+In the Inspector:
+
+- **Default Color** → cyan `(R: 0, G: 255, B: 255)`
+- **Width** → `4`
+- **Points** → click **+** twice:
+  - Point 0: `x = 0, y = 0`
+  - Point 1: `x = 400, y = 0`
+
+**3 — Timer** (rename it `DamageTimer`):
+Right-click `ContinuousLaser` → Add Child Node → `Timer`. Rename it `DamageTimer`.
+In the Inspector:
+
+- `Wait Time`: `0.2`
+- `One Shot`: ❌
+- `Autostart`: ❌
+
+Save with **Ctrl+S**.
+
+> 💡 Since `ContinuousLaser` will be a **child of the Weapon**, it automatically rotates with it — the beam will always point in the direction the wizard is aiming!
+
+#### **Challenge 33 — Write the continuous laser script**
+
+In the folder `src/scenes/entities/player/continuous_laser/`, create a new script `continuous_laser.gd` and attach it to the `ContinuousLaser` node.
+
+The script needs to:
+
+1. `activate(dmg_info)` — make the beam visible and start the damage timer
+2. `deactivate()` — hide the beam and stop the timer
+3. In `_process` — update the Line2D endpoint to follow the raycast hit point every frame
+4. On `DamageTimer` timeout — find the enemy the raycast is hitting and call `hurt.emit()`
+5. When `Signals.enemy_died` fires — automatically call `deactivate()`
+
+**Hints:**
+
+- `raycast.get_collision_point()` returns the hit position in **global** space — use `to_local(...)` to convert it to the node's local space for the Line2D
+- To find the enemy's hurtbox: `body.find_child("EnemyHurtBox") as EnemyHurtBox`, then call `hurtbox.hurt.emit(damage_information)`
+- Start with `visible = false` in `_ready()` — the laser is off by default
+
+<details>
+<summary>Solution</summary>
+
+```gdscript
+class_name ContinuousLaser
+extends Node2D
+
+@onready var raycast: RayCast2D = $RayCast2D
+@onready var line: Line2D = $Line2D
+@onready var damage_timer: Timer = $DamageTimer
+
+var damage_information: DamageInformation
+var is_active: bool = false
+var needs_rearm: bool = false
+
+
+func _ready() -> void:
+	damage_timer.timeout.connect(_on_damage_timer_timeout)
+	Signals.enemy_died.connect(_on_enemy_died)
+	visible = false
+
+
+func activate(dmg_info: DamageInformation) -> void:
+	damage_information = dmg_info
+	is_active = true
+	needs_rearm = false
+	visible = true
+	damage_timer.start()
+
+
+func deactivate() -> void:
+	is_active = false
+	visible = false
+	damage_timer.stop()
+
+
+func _process(_delta: float) -> void:
+	if not is_active:
+		return
+	if raycast.is_colliding():
+		line.set_point_position(1, to_local(raycast.get_collision_point()))
+	else:
+		line.set_point_position(1, Vector2(400, 0))
+
+
+func _on_damage_timer_timeout() -> void:
+	if not raycast.is_colliding():
+		return
+	var body = raycast.get_collider()
+	var hurtbox := body.find_child("EnemyHurtBox") as EnemyHurtBox
+	if hurtbox:
+		hurtbox.hurt.emit(damage_information)
+
+
+func _on_enemy_died(_enemy: Enemy) -> void:
+	deactivate()
+	needs_rearm = true
+```
+
+</details>
+
+Save with **Ctrl+S**.
+
+#### **Challenge 34 — Connect the continuous laser to the weapon**
+
+**Add the scene to the weapon:**
+Open `src/scenes/entities/player/weapon/weapon.tscn`. In the scene tree, right-click the **Weapon** root node → **Instantiate Child Scene** → select `continuous_laser.tscn`.
+
+The `ContinuousLaser` node is now a child of the Weapon. Since the Weapon rotates toward the mouse, the laser follows automatically!
+
+**Modify `weapon.gd`:**
+Open `src/scenes/entities/player/weapon/weapon.gd`.
+
+Add this line with the other `@onready` variables at the top:
+
+```gdscript
+@onready var continuous_laser: ContinuousLaser = $ContinuousLaser
+```
+
+In `_process`, replace the `attack_secondary` block with:
+
+```gdscript
+	if Input.is_action_pressed("attack_secondary"):
+		if not continuous_laser.is_active and not continuous_laser.needs_rearm:
+			continuous_laser.activate(player_stats.damage_information)
+	else:
+		continuous_laser.needs_rearm = false
+		if continuous_laser.is_active:
+			continuous_laser.deactivate()
+```
+
+> 💡 The laser stays on as long as the button is held. If an enemy dies, `needs_rearm` blocks automatic reactivation — the player must release and press again.
+
+Launch the game — **hold right-click** to fire the continuous laser. Release to turn it off, or let it kill an enemy and it will shut off automatically! ⚡
+
+#### **Challenge 35 — Add a glow effect to the beam**
+
+A real laser beam has a glow around it! We'll add a second, wider, semi-transparent `Line2D` behind the main beam to simulate this effect.
+
+**In `continuous_laser.tscn`:**
+
+Right-click `ContinuousLaser` → **Add Child Node** → `Line2D`. Rename it `GlowLine`.
+
+Select `GlowLine` and in the Inspector:
+
+- **Default Color** → semi-transparent cyan: `(R: 0, G: 255, B: 255, A: 60)`
+- **Width** → `8`
+- **Points** → click **+** twice:
+  - Point 0: `x = 0, y = 0`
+  - Point 1: `x = 400, y = 0`
+
+In the scene tree, **drag `GlowLine` above `Line2D`** so it renders behind the main beam.
+
+Save with **Ctrl+S**.
+
+**In `continuous_laser.gd`:**
+
+Add a reference to `GlowLine` with the other `@onready` variables:
+
+```gdscript
+@onready var glow: Line2D = $GlowLine
+```
+
+In `_process`, update the `glow` endpoint alongside `line`:
+
+```gdscript
+func _process(_delta: float) -> void:
+	if not is_active:
+		return
+	if raycast.is_colliding():
+		var hit := to_local(raycast.get_collision_point())
+		line.set_point_position(1, hit)
+		glow.set_point_position(1, hit)
+	else:
+		line.set_point_position(1, Vector2(400, 0))
+		glow.set_point_position(1, Vector2(400, 0))
+```
+
+Launch the game — the beam now has a luminous halo around it! ✨
+
+#### **Challenge 36 — Add a laser sound**
+
+**In `continuous_laser.tscn`:**
+
+Right-click `ContinuousLaser` → Add Child Node → `AudioStreamPlayer`. Rename it `LaserSfx`.
+
+In the Inspector:
+
+- **Stream** → drag `assets/sounds/sfx/continuous_laser.wav` from the FileSystem
+- **Autoplay**: ❌
+- Enable looping: double-click `continuous_laser.wav` in the FileSystem → enable **Loop**
+- If this doesn't work, it's because the imported file is read-only — check the solution below to see how to enable it
+
+<details>
+
+<summary>Solution</summary>
+
+![image](./readme-images/continuous-beam-audio-loop-mode.png)
+
+</details>
+
+**In `continuous_laser.gd`:**
+
+Add the reference:
+
+```gdscript
+@onready var laser_sfx: AudioStreamPlayer = $LaserSfx
+```
+
+In `activate()`, add at the end:
+
+```gdscript
+	laser_sfx.play()
+```
+
+In `deactivate()`, add at the end:
+
+```gdscript
+	laser_sfx.stop()
+```
+
+Launch the game — the laser now makes sound while active and goes silent when it cuts off! 🔊
 
 ---
 
@@ -833,6 +1279,7 @@ It’s time to present your work to your parents. Explain to them:
   - Group 5: Finding an open source sprite, importing it into Godot, replacing the wizard’s appearance
   - Group 6: Adding walls to the arena with collisions and a visible shape
   - Group 7: Changing the color of fireballs and explosions, tracking survival time, displaying it on screen
+  - Group 8: Creating a laser weapon, writing a script, creating a scene, connecting it to the weapon system
 - Which challenge was the hardest? Why?
 - Did you personalize the game? How?
 
