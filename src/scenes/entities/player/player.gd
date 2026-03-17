@@ -13,6 +13,7 @@ signal stats_changed(type: UpgradePotion.UpgradeType)
 @onready var player_health: PlayerHealth = %PlayerHealth
 @onready var teleport_cooldown: Timer = $TeleportCooldown
 @onready var teleport_label: Label = $TeleportLabel
+@onready var teleport_particles: GPUParticles2D = $TeleportParticles
 
 
 ## Runs once just when the Player has been initialized
@@ -50,12 +51,15 @@ func _process(_delta: float) -> void:
 		teleport_label.text = "%.1f" % teleport_cooldown.time_left
 		
 func _do_teleport() -> void:
+	teleport_particles.restart()
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 0.5)
 	await tween.finished
 
 	global_position = get_global_mouse_position()
 	get_viewport().get_camera_2d().reset_smoothing()
+	Input.warp_mouse(get_viewport().get_visible_rect().size / 2)
 
+	teleport_particles.restart()
 	tween = create_tween()
 	tween.tween_property(self, "modulate:a", 1.0, 0.5)

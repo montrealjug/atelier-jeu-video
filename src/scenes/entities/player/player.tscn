@@ -56,6 +56,16 @@ scale_max = 2.0
 scale_curve = SubResource("CurveTexture_lgfv5")
 color_ramp = SubResource("GradientTexture1D_3vwgm")
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d28hy"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 1.5
+color = Color(0.61960787, 0, 0.61960787, 0.73333335)
+
 [node name="Player" type="CharacterBody2D" unique_id=2134559845]
 collision_layer = 0
 motion_mode = 1
@@ -147,3 +157,12 @@ offset_left = -20.0
 offset_top = -50.0
 offset_right = 20.0
 offset_bottom = -27.0
+
+[node name="TeleportParticles" type="GPUParticles2D" parent="." unique_id=716753300]
+emitting = false
+amount = 20
+texture = ExtResource("12_k7lkm")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_d28hy")
