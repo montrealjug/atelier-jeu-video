@@ -64,14 +64,14 @@ The Godot interface is divided into 4 main areas:
 │  Toolbar (Play ▶, Save, etc.)                  │
 ├───────────┬────────────────────┬───────────────┤
 │           │                    │               │
-│ FileSystem│   Viewport         │   Inspector   │
-│ (your     │   (what you see    │   (node       │
-│  files)   │    in the game)    │   properties) │
+│ Scene     │   Viewport         │   Inspector   │
+│  (node    │   (what you see    │   (node       │
+│    tree)  │    in the game)    │   properties) │
 │           │                    │               │
 ├───────────┤                    ├───────────────┤
-│ Scene     │                    │               │
-│ (node     │                    │               │
-│  tree)    │                    │               │
+│FileSystem |                    │               │
+│ (your     │                    │               │
+│  files)   │                    │               │
 ├───────────┴────────────────────┴───────────────┤
 │  Output / Console (error messages, print…)     │
 └────────────────────────────────────────────────┘
@@ -138,6 +138,9 @@ Follow these steps below in order. Ask a workshop leader if you're stuck!
    - [ ] **[Challenge Group 9](#group---creative-coder)** - 🎮 Creative Coder - Customize with code
    - [ ] **[Challenge Group 10](#group---add-a-new-laser-weapon)** - 🔫 Add a New Laser Weapon
    - [ ] **[Challenge Group 11](#group---continuous-laser)** - ⚡ Continuous Laser
+
+- [ ] **[Challenge Group 12](#group---teleportation)** - 🌀 Teleportation
+
 7. [ ] **[Upload Your Project](#upload-your-project)** ⬆️ - before leaving to our [Google Drive folder](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj?usp=sharing) to find it at home
 8. [ ] **[Demo your game!](#demo-your-game)** - 🏁 to your parents at the end of the session!
 
@@ -608,6 +611,8 @@ Then, right-click the `Hud` node again. It doesn't have a script attached yet to
 ```gdscript
 @onready var score_label: Label = $ScoreLabel
 
+[...]
+
 func _process(_delta: float) -> void:
 	score_label.text = "Score: " + str(GameData.score)
 ```
@@ -807,6 +812,8 @@ In the HUD script, add or complete the `_process` function to show the time:
 
 ```gdscript
 @onready var time_label: Label = $TimeLabel
+
+[...]
 
 func _process(_delta: float) -> void:
 	time_label.text = str(int(GameData.survival_time)) + "s"
@@ -1027,7 +1034,7 @@ In the Inspector:
 Right-click `ContinuousLaser` → Add Child Node → `Timer`. Rename it `DamageTimer`.
 In the Inspector:
 
-- `Wait Time`: `0.2`
+- `Wait Time`: `0.05`
 - `One Shot`: ❌
 - `Autostart`: ❌
 
@@ -1238,6 +1245,85 @@ Launch the game — the laser now makes sound while active and goes silent when 
 
 ---
 
+### Group - Teleportation
+
+[Back to steps ⬆️](#workshop-steps)
+
+> In this group, you'll add a special ability to the wizard: by pressing **E**, he instantly teleports to wherever your mouse is pointing! You'll modify the player script directly and add a cooldown to keep the ability balanced.
+
+#### **Challenge 37 — Add the keyboard action**
+
+Before writing any code, you need to tell Godot that the **E** key corresponds to the action `"teleport"`.
+
+Go to **Project → Project Settings → Input Map**.
+
+At the top of the list, in the **Add New Action** field, type `teleport` and click **Add**.
+
+The `teleport` action appears in the list. Click the **+** to its right, then press the **E** key on your keyboard → **OK**.
+
+Close the Project Settings window.
+
+> 💡 This is how the whole game works: `"attack_primary"`, `"attack_secondary"`, `"move_up"` are all actions defined here and read in code using `Input.is_action_pressed(...)`.
+
+#### **Challenge 38 — Write the teleport code**
+
+Open `src/scenes/entities/player/player.gd`.
+
+Add this function at the end of the file:
+
+```gdscript
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("teleport"):
+		global_position = get_global_mouse_position()
+```
+
+Launch the game — press **E** and the wizard instantly jumps to the mouse cursor! 🌀
+
+Think about it:
+
+- What is the difference between `global_position` and `position`?
+- What would happen if you replaced `is_action_pressed` with `is_action_just_pressed`?
+
+#### **Challenge 39 — Add a cooldown**
+
+Right now you can teleport endlessly without any limit. Let's add a **1 second** cooldown.
+
+**In `src/scenes/entities/player/player.tscn`:**
+
+Open the player scene. In the scene tree, right-click the **Player** root node → **Add Child Node** → `Timer`. Rename it `TeleportCooldown`.
+
+In the Inspector:
+
+- `Wait Time`: `1.0`
+- `One Shot`: ✅
+- `Autostart`: ❌
+
+Save with **Ctrl+S**.
+
+**In `player.gd`:**
+
+Add a reference to the timer with the other `@onready` variables:
+
+```gdscript
+@onready var teleport_cooldown: Timer = $TeleportCooldown
+```
+
+Modify the `_input` function to check the cooldown before teleporting:
+
+```gdscript
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("teleport"):
+		if teleport_cooldown.is_stopped():
+			global_position = get_global_mouse_position()
+			teleport_cooldown.start()
+```
+
+Launch the game — you can teleport once, then you must wait 1 second before using it again!
+
+> 💡 Change the `Wait Time` value on the timer in the Inspector to adjust the cooldown duration. `0.5` for a quick blink, `3.0` to make it more strategic!
+
+---
+
 ### Upload Your Project
 
 [Back to steps ⬆️](#workshop-steps)
@@ -1280,6 +1366,8 @@ It’s time to present your work to your parents. Explain to them:
   - Group 6: Adding walls to the arena with collisions and a visible shape
   - Group 7: Changing the color of fireballs and explosions, tracking survival time, displaying it on screen
   - Group 8: Creating a laser weapon, writing a script, creating a scene, connecting it to the weapon system
+  - Group 9: Creating a continuous laser with RayCast2D, damage over time, automatic deactivation on enemy death
+  - Group 10: Adding teleportation to the mouse cursor with E key, cooldown
 - Which challenge was the hardest? Why?
 - Did you personalize the game? How?
 

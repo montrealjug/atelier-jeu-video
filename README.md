@@ -64,14 +64,14 @@ L'interface de Godot se divise en 4 grandes zones :
 │  Barre d'outils (Play ▶, Save, etc.)           │
 ├───────────┬────────────────────┬───────────────┤
 │           │                    │               │
-│ FileSystem│   Viewport         │   Inspector   │
-│ (tes      │   (ce que tu vois  │   (propriétés │
-│  fichiers)│    dans le jeu)    │    du nœud)   │
+│ Scene     |   Viewport         │   Inspector   │
+│ (arbre    │   (ce que tu vois  │   (propriétés │
+│  de nœuds)│    dans le jeu)    │    du nœud)   │
 │           │                    │               │
 ├───────────┤                    ├───────────────┤
-│ Scene     │                    │               │
-│ (arbre    │                    │               │
-│  de nœuds)│                    │               │
+│ FileSystem│                    │               │
+│ (tes      │                    │               │
+│  fichiers)│                    │               │
 ├───────────┴────────────────────┴───────────────┤
 │  Output / Console (messages d'erreur, print…)  │
 └────────────────────────────────────────────────┘
@@ -138,6 +138,9 @@ Suis ces étapes ci dessous dans l'ordre. Demande à un animateur si tu es bloqu
    - [ ] **[Groupe de défis 9](#groupe---codeur-créatif)** - 🎮 Codeur Créatif - Personnalise avec du code
    - [ ] **[Groupe de défis 10](#groupe---ajoutes-une-nouvelle-arme-laser)** - 🔫 Ajoutes une nouvelle arme laser
    - [ ] **[Groupe de défis 11](#groupe---laser-continu)** - ⚡ Laser Continu
+
+- [ ] **[Groupe de défis 12](#groupe---téléportation)** - 🌀 Téléportation
+
 7. [ ] **[Upload ton projet](#upload-ton-projet)** - ⬆️ avant de partir dans notre [dossier Google Drive](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj?usp=sharing) pour le retrouver chez toi
 8. [ ] **[Présente ton jeu !](#présente-ton-jeu)** - 🏁 à tes parents à la fin de la session !
 
@@ -610,6 +613,8 @@ Ensuite, fais à nouveau un clic droit sur le noeud `Hud`. Il n'a pas encore de 
 ```gdscript
 @onready var score_label: Label = $ScoreLabel
 
+[...]
+
 func _process(_delta: float) -> void:
 	score_label.text = "Score : " + str(GameData.score)
 ```
@@ -809,6 +814,8 @@ Dans le script du HUD, ajoute ou complète la fonction `_process` pour afficher 
 
 ```gdscript
 @onready var time_label: Label = $TimeLabel
+
+[...]
 
 func _process(_delta: float) -> void:
 	time_label.text = str(int(GameData.survival_time)) + "s"
@@ -1029,7 +1036,7 @@ Dans l'Inspector :
 Clic droit sur `ContinuousLaser` → Add Child Node → `Timer`. Renomme-le `DamageTimer`.
 Dans l'Inspector :
 
-- `Wait Time` : `0.2`
+- `Wait Time` : `0.05`
 - `One Shot` : ❌
 - `Autostart` : ❌
 
@@ -1240,6 +1247,85 @@ Lance le jeu — le laser fait maintenant du bruit tant qu'il est actif, et s'ar
 
 ---
 
+### Groupe - Téléportation
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
+
+> Dans ce groupe, tu vas ajouter une capacité spéciale au sorcier : en appuyant sur **E**, il se téléporte instantanément à l'endroit où pointe ta souris ! Tu vas modifier directement le script du joueur et ajouter un temps de recharge pour équilibrer la capacité.
+
+#### **Défi 37 — Ajoute l'action clavier**
+
+Avant d'écrire du code, tu dois dire à Godot que la touche **E** correspond à l'action `"teleport"`.
+
+Va dans **Project → Project Settings → Input Map**.
+
+En haut de la liste, dans le champ **Add New Action**, tape `teleport` et clique sur **Add**.
+
+L'action `teleport` apparaît dans la liste. Clique sur le **+** à sa droite, puis appuie sur la touche **E** du clavier → **OK**.
+
+Ferme la fenêtre Project Settings.
+
+> 💡 C'est comme ça que tout le jeu fonctionne : `"attack_primary"`, `"attack_secondary"`, `"move_up"` sont toutes des actions définies ici et lues dans le code avec `Input.is_action_pressed(...)`.
+
+#### **Défi 38 — Écris le code de téléportation**
+
+Ouvre `src/scenes/entities/player/player.gd`.
+
+Ajoute cette fonction à la fin du fichier :
+
+```gdscript
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("teleport"):
+		global_position = get_global_mouse_position()
+```
+
+Lance le jeu — appuie sur **E** et le sorcier saute instantanément sous le curseur de la souris ! 🌀
+
+Réfléchis :
+
+- Quelle est la différence entre `global_position` et `position` ?
+- Que se passerait-il si tu remplaçais `is_action_pressed` par `is_action_just_pressed` ?
+
+#### **Défi 39 — Ajoute un temps de recharge**
+
+Pour l'instant tu peux te téléporter en boucle sans limite. Ajoutons un cooldown de **1 seconde**.
+
+**Dans `src/scenes/entities/player/player.tscn` :**
+
+Ouvre la scène du joueur. Dans l'arbre de scène, clic droit sur le nœud racine **Player** → **Add Child Node** → `Timer`. Renomme-le `TeleportCooldown`.
+
+Dans l'Inspector :
+
+- `Wait Time` : `1.0`
+- `One Shot` : ✅
+- `Autostart` : ❌
+
+Sauvegarde avec **Ctrl+S**.
+
+**Dans `player.gd` :**
+
+Ajoute une référence au timer avec les autres `@onready` :
+
+```gdscript
+@onready var teleport_cooldown: Timer = $TeleportCooldown
+```
+
+Modifie la fonction `_input` pour vérifier le cooldown avant de se téléporter :
+
+```gdscript
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("teleport"):
+		if teleport_cooldown.is_stopped():
+			global_position = get_global_mouse_position()
+			teleport_cooldown.start()
+```
+
+Lance le jeu — tu peux te téléporter une fois, puis tu dois attendre 1 seconde avant de pouvoir le refaire !
+
+> 💡 Change la valeur `Wait Time` du timer dans l'Inspector pour ajuster la durée du cooldown. `0.5` pour être rapide, `3.0` pour rendre la capacité plus stratégique !
+
+---
+
 ### Upload ton Projet
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
@@ -1283,6 +1369,7 @@ Il est temps de présenter ton travail à tes parents. Explique-leur :
   - Groupe 7: Changer la couleur des boules de feu et des explosions, compter le temps de survie, l'afficher à l'écran
   - Groupe 8: Créer une arme laser, écrire un script, créer une scène, connecter au système d'armes
   - Groupe 9: Créer un laser continu avec RayCast2D, dégâts au fil du temps, désactivation automatique à la mort d'un ennemi
+  - Groupe 10: Ajouter la téléportation sur la souris avec la touche E, temps de recharge
 - Quel défi était le plus difficile ? Pourquoi ?
 - Tu as personnalisé le jeu ? Comment ?
 
