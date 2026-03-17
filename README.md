@@ -1295,7 +1295,7 @@ Ouvre la scène du joueur. Dans l'arbre de scène, clic droit sur le nœud racin
 
 Dans l'Inspector :
 
-- `Wait Time` : `1.0`
+- `Wait Time` : `5.0`
 - `One Shot` : ✅
 - `Autostart` : ❌
 
@@ -1322,6 +1322,128 @@ func _input(event: InputEvent) -> void:
 Lance le jeu — tu peux te téléporter une fois, puis tu dois attendre 1 seconde avant de pouvoir le refaire !
 
 > 💡 Change la valeur `Wait Time` du timer dans l'Inspector pour ajuster la durée du cooldown. `0.5` pour être rapide, `3.0` pour rendre la capacité plus stratégique !
+
+#### **Défi 40 — Affiche le cooldown à l'écran**
+
+On va afficher le temps restant directement au-dessus du sorcier — comme ça, le joueur sait quand il peut se retéléporter.
+
+**Dans `src/scenes/entities/player/player.tscn` :**
+
+Clic droit sur le nœud racine **Player** → **Add Child Node** → `Label`. Renomme-le `TeleportLabel`.
+
+Dans l'Inspector :
+
+- `Position` : `x = -20, y = -50` (au-dessus du sorcier)
+- `Text` : laisse vide
+- `Visible` : ❌ (décoché)
+
+**Dans `player.gd` :**
+
+Ajoute la référence :
+
+```gdscript
+@onready var teleport_label: Label = $TeleportLabel
+```
+
+Ajoute une fonction `_process` pour mettre à jour le label chaque frame :
+
+```gdscript
+func _process(_delta: float) -> void:
+	if teleport_cooldown.is_stopped():
+		teleport_label.visible = false
+	else:
+		teleport_label.visible = true
+		teleport_label.text = "%.1f" % teleport_cooldown.time_left
+```
+
+Lance le jeu — quand tu te téléportes, un compte à rebours apparaît au-dessus du sorcier et disparaît quand la capacité est à nouveau disponible !
+
+#### **Défi 41 — Ajoute une animation de téléportation**
+
+On va faire disparaître le sorcier en fondu, le téléporter, puis le faire réapparaître. Pour ça on utilise un **Tween** — un outil de Godot qui anime une valeur de A vers B sur une durée donnée.
+
+Dans `player.gd`, remplace la fonction `_input` par ceci :
+
+```gdscript
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("teleport"):
+		if teleport_cooldown.is_stopped():
+			teleport_cooldown.start()
+			_do_teleport()
+
+
+func _do_teleport() -> void:
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 0.0, 0.5)
+	await tween.finished
+
+	global_position = get_global_mouse_position()
+	get_viewport().get_camera_2d().reset_smoothing()
+
+	tween = create_tween()
+	tween.tween_property(self, "modulate:a", 1.0, 0.5)
+```
+
+> 💡 `modulate:a` contrôle la transparence du nœud (0 = invisible, 1 = opaque). Le `await tween.finished` met la fonction en pause jusqu'à ce que le fondu soit terminé, puis la téléportation se fait, puis le sorcier réapparaît.
+
+Lance le jeu — le sorcier s'efface doucement, disparaît, et réapparaît à l'endroit du curseur ! ✨
+
+#### **Défi 43 — Ajoute des particules magiques**
+
+On va déclencher une explosion de particules au point de départ **et** au point d'arrivée. Le truc clé : on va désactiver les **coordonnées locales** des particules, ce qui fait que les particules émises restent dans l'espace monde même quand le joueur se déplace.
+
+**Dans `src/scenes/entities/player/player.tscn` :**
+
+Clic droit sur **Player** → Add Child Node → `GPUParticles2D`. Renomme-le `TeleportParticles`.
+
+Dans l'Inspector, configure :
+
+- `Amount` : `20`
+- `Lifetime` : `0.5`
+- `One Shot` : ✅
+- `Explosiveness` : `0.8` (toutes les particules partent d'un coup)
+- `Emitting` : ❌
+- `Local Coords` : ❌ ← **important !** les particules restent là où elles ont été émises
+
+Clique sur **Process Material** → **New ParticleProcessMaterial**. Clique dessus pour l'ouvrir, puis configure :
+
+- `Spread` : `180` (dans toutes les directions)
+- `Initial Velocity` → `Min` : `50`, `Max` : `150`
+- `Gravity` : `x = 0, y = 0`
+- `Scale Min` : `0.5`, `Scale Max` : `1.5`
+
+Pour la texture, clique sur **Texture** → glisse `assets/sprites/weapons/spark.png` depuis le FileSystem.
+
+Pour la couleur : clique sur **Color Curves** → **New GradientTexture1D** → clique dessus → édite le gradient avec une couleur violette/magenta `(R: 180, G: 50, B: 255)` qui s'efface vers transparent.
+
+Sauvegarde avec **Ctrl+S**.
+
+**Dans `player.gd` :**
+
+Ajoute la référence :
+
+```gdscript
+@onready var teleport_particles: GPUParticles2D = $TeleportParticles
+```
+
+Dans `_do_teleport()`, ajoute `teleport_particles.restart()` au départ et à l'arrivée :
+
+```gdscript
+func _do_teleport() -> void:
+	teleport_particles.restart()
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 0.0, 0.5)
+	await tween.finished
+
+	global_position = get_global_mouse_position()
+	get_viewport().get_camera_2d().reset_smoothing()
+
+	teleport_particles.restart()
+	tween = create_tween()
+	tween.tween_property(self, "modulate:a", 1.0, 0.5)
+```
+
+Lance le jeu — une gerbe de particules violettes explose au point de départ, puis une autre apparaît là où le sorcier réapparaît ! 🪄
 
 ---
 
