@@ -106,9 +106,11 @@ Here's a GDScript example:
 # This is a comment (it is not executed)
 var speed = 200          # We create a "speed" variable
 
+## Runs once when the scene starts
 func _ready():
 	print("The game starts!")  # Prints a message at startup
 
+## Runs every frame (60x/sec)
 func _process(delta):
 	position.x += speed * delta  # Moves the object to the right
 ```
@@ -302,10 +304,10 @@ You'll also see `float` for decimal numbers (e.g. `0.5`).
 If the condition is true, the `if` block runs. Otherwise, the `else` block runs.
 
 ```gdscript
-if points > 10:
-	print("You win!")
-else:
-	print("Not yet...")
+if points > 10: # if points exceed 10
+	print("You win!") # display the victory message
+else: # otherwise
+	print("Not yet...") # display the failure message
 ```
 
 In the game, we use `if / else` to aim with the joystick OR the mouse depending on what the player is using:
@@ -325,8 +327,9 @@ A **function** is a named block of code you can call whenever you need it.
 It avoids writing the same code over and over.
 
 ```gdscript
+## Prints a greeting message to the console
 func say_hello() -> void:
-	print("Hello!")
+	print("Hello!") # prints the text to the console
 
 say_hello()  # calls the function → prints "Hello!"
 ```
@@ -492,9 +495,9 @@ That's the direction of the right gamepad stick. If no one is using a gamepad, `
 In `src/scenes/entities/player/weapon/weapon.gd`, find this block in `_process`:
 
 ```gdscript
-var right_stick_direction := get_right_stick_direction(0.1)
-if right_stick_direction != Vector2.ZERO:
-	current_direction = right_stick_direction
+var right_stick_direction := get_right_stick_direction(0.1) # read the right stick
+if right_stick_direction != Vector2.ZERO: # joystick in use?
+	current_direction = right_stick_direction # aim with the joystick
 ```
 
 Your turn! Add an `else` block right after the `if`. Inside that `else`, you need to update `current_direction` with the direction pointing toward the mouse.
@@ -516,11 +519,11 @@ Here are the tools you have:
 Add an `else` branch to aim toward the mouse when no joystick is used:
 
 ```gdscript
-var right_stick_direction := get_right_stick_direction(0.1)
-if right_stick_direction != Vector2.ZERO:
-	current_direction = right_stick_direction
+var right_stick_direction := get_right_stick_direction(0.1) # read the right stick
+if right_stick_direction != Vector2.ZERO: # joystick active?
+	current_direction = right_stick_direction # aim with the joystick
 else:
-	current_direction = (get_global_mouse_position() - global_position).normalized()
+	current_direction = (get_global_mouse_position() - global_position).normalized() # aim toward the mouse
 ```
 
 </details>
@@ -583,12 +586,14 @@ Who is already listening? Search for `enemy_died.connect` in the project (**Proj
 In `src/scripts/autoloads/game_data.gd`, add a function to listen to the `enemy_died` signal:
 
 ```gdscript
+## Connects the enemy death signal on start
 func _ready() -> void:
-	Signals.enemy_died.connect(_on_enemy_died)
+	Signals.enemy_died.connect(_on_enemy_died) # listen for enemy deaths
 
+## Called every time an enemy dies
 func _on_enemy_died(_enemy: Enemy) -> void:
-	score += 1
-	print("Score: ", score)
+	score += 1 # increment the score
+	print("Score: ", score) # log to the console
 ```
 
 Launch the game and watch the console at the bottom of Godot — the score goes up with every kill!
@@ -608,12 +613,13 @@ Then, right-click the `Hud` node again. It doesn't have a script attached yet to
 4. Replace the file content with this code
 
 ```gdscript
-@onready var score_label: Label = $ScoreLabel
+@onready var score_label: Label = $ScoreLabel # reference to the score Label
 
 [...]
 
+## Updates the score display every frame
 func _process(_delta: float) -> void:
-	score_label.text = "Score: " + str(GameData.score)
+	score_label.text = "Score: " + str(GameData.score) # display current score
 ```
 
 Finally, click **"2D"** in the toolbar at the very top of the editor to switch to the visual scene view.
@@ -796,10 +802,11 @@ Open `src/scripts/autoloads/game_data.gd`.
 Add a variable and a function to measure elapsed time:
 
 ```gdscript
-var survival_time: float = 0.0
+var survival_time: float = 0.0 # survival time in seconds
 
+## Increments survival time every frame
 func _process(delta: float) -> void:
-	survival_time += delta
+	survival_time += delta # add elapsed time
 ```
 
 `GameData.survival_time` now holds the number of seconds since the game started!
@@ -810,12 +817,13 @@ Open `src/scenes/ui/hud/hud.tscn`. Add a **Label** node and name it `TimeLabel`.
 In the HUD script, add or complete the `_process` function to show the time:
 
 ```gdscript
-@onready var time_label: Label = $TimeLabel
+@onready var time_label: Label = $TimeLabel # reference to the time Label
 
 [...]
 
+## Updates the timer display every frame
 func _process(_delta: float) -> void:
-	time_label.text = str(int(GameData.survival_time)) + "s"
+	time_label.text = str(int(GameData.survival_time)) + "s" # show time as integer
 ```
 
 Go to the `2D` viewport and place the time wherever you want on the screen.
@@ -871,29 +879,32 @@ Your laser needs to:
 class_name Laser
 extends Area2D
 
-@export var speed: int = 400
+@export var speed: int = 400 # laser speed in pixels/sec
 
-var direction: Vector2 = Vector2.RIGHT
-var damage_information: DamageInformation
-var is_dying: bool = false
+var direction: Vector2 = Vector2.RIGHT # travel direction
+var damage_information: DamageInformation # damage dealt on hit
+var is_dying: bool = false # guard against double calls
 
 
+## Connects collision signals on startup
 func _ready() -> void:
-	body_entered.connect(die)
-	area_entered.connect(die)
+	body_entered.connect(die) # collision with a physics body
+	area_entered.connect(die) # collision with an area
 
 
+## Moves and rotates the laser every frame
 func _physics_process(delta: float) -> void:
-	rotation = direction.angle()
-	global_position += direction * speed * delta
+	rotation = direction.angle() # rotate beam to face direction
+	global_position += direction * speed * delta # move forward
 
 
+## Destroys the laser on first collision
 func die(_element: Node2D) -> void:
-	if is_dying:
-		return
-	is_dying = true
-	set_deferred("monitoring", false)
-	queue_free()
+	if is_dying: # already dying?
+		return # ignore the double call
+	is_dying = true # mark as dying
+	set_deferred("monitoring", false) # disable collisions
+	queue_free() # remove the node
 ```
 
 </details>
@@ -953,21 +964,23 @@ Below `@export var fireball_scene: PackedScene`, add a new export for the laser:
 At the end of the `_process` function (after the `attack_primary` block), add:
 
 ```gdscript
-	if Input.is_action_just_pressed("attack_secondary"):
-		fire_laser()
+	if Input.is_action_just_pressed("attack_secondary"): # right-click pressed?
+		fire_laser() # fire a laser bolt
 ```
 
 Then add these two new functions after `spawn_fireball()`:
 
 ```gdscript
+## Fires a laser if the scene is assigned
 func fire_laser() -> void:
-	if laser_scene:
-		spawn_laser()
+	if laser_scene: # is the laser scene set?
+		spawn_laser() # create the laser
 
+## Instantiates and configures the laser
 func spawn_laser() -> void:
-	var laser := NodeUtil.instance_2d_scene_at_location(laser_scene, self, global_position) as Laser
-	laser.direction = current_direction
-	laser.damage_information = player_stats.damage_information
+	var laser := NodeUtil.instance_2d_scene_at_location(laser_scene, self, global_position) as Laser # spawn the laser
+	laser.direction = current_direction # set its direction
+	laser.damage_information = player_stats.damage_information # set its damage
 ```
 
 Save with **Ctrl+S**.
@@ -1066,56 +1079,62 @@ The script needs to:
 class_name ContinuousLaser
 extends Node2D
 
-@onready var raycast: RayCast2D = $RayCast2D
-@onready var line: Line2D = $Line2D
-@onready var damage_timer: Timer = $DamageTimer
+@onready var raycast: RayCast2D = $RayCast2D # detection ray
+@onready var line: Line2D = $Line2D # visual laser beam
+@onready var damage_timer: Timer = $DamageTimer # periodic damage timer
 
-var damage_information: DamageInformation
-var is_active: bool = false
-var needs_rearm: bool = false
+var damage_information: DamageInformation # damage to deal
+var is_active: bool = false # is the laser active?
+var needs_rearm: bool = false # must release before firing again?
 
 
+## Initializes connections and hides the laser
 func _ready() -> void:
-	damage_timer.timeout.connect(_on_damage_timer_timeout)
-	Signals.enemy_died.connect(_on_enemy_died)
-	visible = false
+	damage_timer.timeout.connect(_on_damage_timer_timeout) # connect the timer
+	Signals.enemy_died.connect(_on_enemy_died) # listen for enemy deaths
+	visible = false # laser is off by default
 
 
+## Activates the laser and starts dealing damage
 func activate(dmg_info: DamageInformation) -> void:
-	damage_information = dmg_info
-	is_active = true
-	needs_rearm = false
-	visible = true
-	damage_timer.start()
+	damage_information = dmg_info # store the damage info
+	is_active = true # mark as active
+	needs_rearm = false # clear the rearm lock
+	visible = true # show the laser
+	damage_timer.start() # start the damage timer
 
 
+## Deactivates the laser and stops damage
 func deactivate() -> void:
-	is_active = false
-	visible = false
-	damage_timer.stop()
+	is_active = false # mark as inactive
+	visible = false # hide the laser
+	damage_timer.stop() # stop the damage timer
 
 
+## Updates the beam endpoint every frame
 func _process(_delta: float) -> void:
-	if not is_active:
-		return
-	if raycast.is_colliding():
-		line.set_point_position(1, to_local(raycast.get_collision_point()))
+	if not is_active: # laser inactive?
+		return # nothing to do
+	if raycast.is_colliding(): # ray hitting something?
+		line.set_point_position(1, to_local(raycast.get_collision_point())) # point to hit
 	else:
-		line.set_point_position(1, Vector2(400, 0))
+		line.set_point_position(1, Vector2(400, 0)) # full beam length
 
 
+## Deals damage to the enemy being hit
 func _on_damage_timer_timeout() -> void:
-	if not raycast.is_colliding():
-		return
-	var body = raycast.get_collider()
-	var hurtbox := body.find_child("EnemyHurtBox") as EnemyHurtBox
-	if hurtbox:
-		hurtbox.hurt.emit(damage_information)
+	if not raycast.is_colliding(): # nothing hit?
+		return # no damage
+	var body = raycast.get_collider() # get the hit object
+	var hurtbox := body.find_child("EnemyHurtBox") as EnemyHurtBox # find the hurtbox
+	if hurtbox: # hurtbox found?
+		hurtbox.hurt.emit(damage_information) # deal the damage
 
 
+## Deactivates the laser when an enemy dies
 func _on_enemy_died(_enemy: Enemy) -> void:
-	deactivate()
-	needs_rearm = true
+	deactivate() # turn off the laser
+	needs_rearm = true # block auto-reactivation
 ```
 
 </details>
@@ -1141,13 +1160,13 @@ Add this line with the other `@onready` variables at the top:
 In `_process`, replace the `attack_secondary` block with:
 
 ```gdscript
-	if Input.is_action_pressed("attack_secondary"):
-		if not continuous_laser.is_active and not continuous_laser.needs_rearm:
-			continuous_laser.activate(player_stats.damage_information)
+	if Input.is_action_pressed("attack_secondary"): # right-click held?
+		if not continuous_laser.is_active and not continuous_laser.needs_rearm: # can activate?
+			continuous_laser.activate(player_stats.damage_information) # turn on the laser
 	else:
-		continuous_laser.needs_rearm = false
-		if continuous_laser.is_active:
-			continuous_laser.deactivate()
+		continuous_laser.needs_rearm = false # clear the rearm lock
+		if continuous_laser.is_active: # laser still on?
+			continuous_laser.deactivate() # turn off the laser
 ```
 
 > 💡 The laser stays on as long as the button is held. If an enemy dies, `needs_rearm` blocks automatic reactivation — the player must release and press again.
@@ -1185,16 +1204,17 @@ Add a reference to `GlowLine` with the other `@onready` variables:
 In `_process`, update the `glow` endpoint alongside `line`:
 
 ```gdscript
+## Updates beam and glow endpoint every frame
 func _process(_delta: float) -> void:
-	if not is_active:
-		return
-	if raycast.is_colliding():
-		var hit := to_local(raycast.get_collision_point())
-		line.set_point_position(1, hit)
-		glow.set_point_position(1, hit)
+	if not is_active: # laser inactive?
+		return # nothing to do
+	if raycast.is_colliding(): # collision detected?
+		var hit := to_local(raycast.get_collision_point()) # hit point in local space
+		line.set_point_position(1, hit) # update the beam endpoint
+		glow.set_point_position(1, hit) # update the glow endpoint
 	else:
-		line.set_point_position(1, Vector2(400, 0))
-		glow.set_point_position(1, Vector2(400, 0))
+		line.set_point_position(1, Vector2(400, 0)) # full beam length
+		glow.set_point_position(1, Vector2(400, 0)) # full glow length
 ```
 
 Launch the game — the beam now has a luminous halo around it! ✨
@@ -1271,9 +1291,10 @@ Open `src/scenes/entities/player/player.gd`.
 Add this function at the end of the file:
 
 ```gdscript
+## Teleports the wizard to the mouse on E
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("teleport"):
-		global_position = get_global_mouse_position()
+	if event.is_action_pressed("teleport"): # E key pressed?
+		global_position = get_global_mouse_position() # jump to the cursor
 ```
 
 Launch the game — press **E** and the wizard instantly jumps to the mouse cursor! 🌀
@@ -1310,11 +1331,12 @@ Add a reference to the timer with the other `@onready` variables:
 Modify the `_input` function to check the cooldown before teleporting:
 
 ```gdscript
+## Teleports only if the cooldown is over
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("teleport"):
-		if teleport_cooldown.is_stopped():
-			global_position = get_global_mouse_position()
-			teleport_cooldown.start()
+	if event.is_action_pressed("teleport"): # E key pressed?
+		if teleport_cooldown.is_stopped(): # cooldown finished?
+			global_position = get_global_mouse_position() # jump to the mouse
+			teleport_cooldown.start() # start the cooldown
 ```
 
 Launch the game — you can teleport once, then you must wait 1 second before using it again!
@@ -1346,12 +1368,13 @@ Add the reference:
 Add a `_process` function to update the label every frame:
 
 ```gdscript
+## Shows or hides the cooldown countdown
 func _process(_delta: float) -> void:
-	if teleport_cooldown.is_stopped():
-		teleport_label.visible = false
+	if teleport_cooldown.is_stopped(): # cooldown finished?
+		teleport_label.visible = false # hide the label
 	else:
-		teleport_label.visible = true
-		teleport_label.text = "%.1f" % teleport_cooldown.time_left
+		teleport_label.visible = true # show the label
+		teleport_label.text = "%.1f" % teleport_cooldown.time_left # remaining time
 ```
 
 Launch the game — when you teleport, a countdown appears above the wizard and disappears when the ability is ready again!
@@ -1363,23 +1386,25 @@ We'll make the wizard fade out, teleport, then fade back in. For this we use a *
 In `player.gd`, replace the `_input` function with this:
 
 ```gdscript
+## Triggers the teleport animation with cooldown
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("teleport"):
-		if teleport_cooldown.is_stopped():
-			teleport_cooldown.start()
-			_do_teleport()
+	if event.is_action_pressed("teleport"): # E key pressed?
+		if teleport_cooldown.is_stopped(): # cooldown finished?
+			teleport_cooldown.start() # start the cooldown
+			_do_teleport() # launch the animation
 
 
+## Fades out, teleports, then fades back in
 func _do_teleport() -> void:
-	var tween = create_tween()
-	tween.tween_property(self, "modulate:a", 0.0, 0.5)
-	await tween.finished
+	var tween = create_tween() # create an animator
+	tween.tween_property(self, "modulate:a", 0.0, 0.5) # fade to invisible
+	await tween.finished # wait for fade to complete
 
-	global_position = get_global_mouse_position()
-	get_viewport().get_camera_2d().reset_smoothing()
+	global_position = get_global_mouse_position() # teleport to mouse
+	get_viewport().get_camera_2d().reset_smoothing() # reset camera smoothing
 
-	tween = create_tween()
-	tween.tween_property(self, "modulate:a", 1.0, 0.5)
+	tween = create_tween() # new animator
+	tween.tween_property(self, "modulate:a", 1.0, 0.5) # fade back in
 ```
 
 > 💡 `modulate:a` controls the node's transparency (0 = invisible, 1 = opaque). `await tween.finished` pauses the function until the fade-out is done, then the teleport happens, then the wizard fades back in.
@@ -1427,18 +1452,19 @@ Add the reference:
 In `_do_teleport()`, add `teleport_particles.restart()` at departure and arrival:
 
 ```gdscript
+## Animates the teleport with particle bursts
 func _do_teleport() -> void:
-	teleport_particles.restart()
-	var tween = create_tween()
-	tween.tween_property(self, "modulate:a", 0.0, 0.5)
-	await tween.finished
+	teleport_particles.restart() # burst particles at departure
+	var tween = create_tween() # create an animator
+	tween.tween_property(self, "modulate:a", 0.0, 0.5) # fade to invisible
+	await tween.finished # wait for fade to complete
 
-	global_position = get_global_mouse_position()
-	get_viewport().get_camera_2d().reset_smoothing()
+	global_position = get_global_mouse_position() # teleport to mouse
+	get_viewport().get_camera_2d().reset_smoothing() # reset camera smoothing
 
-	teleport_particles.restart()
-	tween = create_tween()
-	tween.tween_property(self, "modulate:a", 1.0, 0.5)
+	teleport_particles.restart() # burst particles at arrival
+	tween = create_tween() # new animator
+	tween.tween_property(self, "modulate:a", 1.0, 0.5) # fade back in
 ```
 
 Launch the game — a burst of purple particles explodes at the departure point, then another appears where the wizard reappears! 🪄

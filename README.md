@@ -106,9 +106,11 @@ Voici un exemple de GDScript :
 # Ceci est un commentaire (il n'est pas exécuté)
 var vitesse = 200          # On crée une variable "vitesse"
 
+## S'exécute une fois au démarrage de la scène
 func _ready():
 	print("Le jeu démarre !")  # Affiche un message au démarrage
 
+## S'exécute à chaque image (60x/sec)
 func _process(delta):
 	position.x += vitesse * delta  # Déplace l'objet vers la droite
 ```
@@ -302,10 +304,10 @@ Le **if** permet au code de choisir quoi faire selon une condition.
 S'il la condition est vraie, le bloc du `if` s'exécute. Sinon, c'est le bloc du `else`.
 
 ```gdscript
-if points > 10:
-	print("Tu as gagné !")
-else:
-	print("Pas encore...")
+if points > 10: # si points dépasse 10
+	print("Tu as gagné !") # affiche le message de victoire
+else: # sinon
+	print("Pas encore...") # affiche le message d'échec
 ```
 
 Dans le jeu, on utilise `if / else` pour viser avec le joystick OU avec la souris selon ce que le joueur utilise :
@@ -325,8 +327,9 @@ Une **fonction**, c'est un bloc de code qui a un nom et qu'on peut appeler quand
 Ça évite de répéter le même code partout.
 
 ```gdscript
+## Affiche un message de bienvenue
 func dire_bonjour() -> void:
-	print("Bonjour !")
+	print("Bonjour !") # affiche le texte à la console
 
 dire_bonjour()  # appelle la fonction → affiche "Bonjour !"
 ```
@@ -494,9 +497,9 @@ C'est la direction du joystick droit (manette). Si personne n'utilise de manette
 Dans `src/scenes/entities/player/weapon/weapon.gd`, trouve dans `_process` ce bloc :
 
 ```gdscript
-var right_stick_direction := get_right_stick_direction(0.1)
-if right_stick_direction != Vector2.ZERO:
-	current_direction = right_stick_direction
+var right_stick_direction := get_right_stick_direction(0.1) # lit le joystick droit
+if right_stick_direction != Vector2.ZERO: # joystick utilisé ?
+	current_direction = right_stick_direction # vise avec le joystick
 ```
 
 À toi de jouer ! Ajoute un bloc `else` juste après le `if`. Dans ce `else`, tu dois mettre à jour `current_direction` avec la direction qui pointe vers la souris.
@@ -518,11 +521,11 @@ Voici les outils dont tu disposes :
 Ajoute un `else` pour viser vers la souris si aucun joystick n'est utilisé :
 
 ```gdscript
-var right_stick_direction := get_right_stick_direction(0.1)
-if right_stick_direction != Vector2.ZERO:
-	current_direction = right_stick_direction
+var right_stick_direction := get_right_stick_direction(0.1) # lit le joystick droit
+if right_stick_direction != Vector2.ZERO: # joystick actif ?
+	current_direction = right_stick_direction # vise avec le joystick
 else:
-	current_direction = (get_global_mouse_position() - global_position).normalized()
+	current_direction = (get_global_mouse_position() - global_position).normalized() # vise vers la souris
 ```
 
 </details>
@@ -585,12 +588,14 @@ Qui l'écoute déjà ? Cherche `enemy_died.connect` dans le projet (menu **Proje
 Dans `src/scripts/autoloads/game_data.gd`, ajoute une fonction pour écouter le signal `enemy_died` :
 
 ```gdscript
+## Connecte le signal de mort d'ennemi
 func _ready() -> void:
-	Signals.enemy_died.connect(_on_enemy_died)
+	Signals.enemy_died.connect(_on_enemy_died) # écoute la mort des ennemis
 
+## Appelée quand un ennemi meurt
 func _on_enemy_died(_enemy: Enemy) -> void:
-	score += 1
-	print("Score : ", score)
+	score += 1 # incrémente le score
+	print("Score : ", score) # affiche dans la console
 ```
 
 Lance le jeu et regarde la console en bas de Godot — le score monte à chaque ennemi tué !
@@ -610,12 +615,13 @@ Ensuite, fais à nouveau un clic droit sur le noeud `Hud`. Il n'a pas encore de 
 4. Changes le contenu du fichier pour ajouter et remplacer ce code
 
 ```gdscript
-@onready var score_label: Label = $ScoreLabel
+@onready var score_label: Label = $ScoreLabel # référence au Label de score
 
 [...]
 
+## Met à jour l'affichage du score chaque frame
 func _process(_delta: float) -> void:
-	score_label.text = "Score : " + str(GameData.score)
+	score_label.text = "Score : " + str(GameData.score) # affiche le score actuel
 ```
 
 Finalement, cliques sur "2D" dans la barre tout en haut de la fenêtre de cet editeur pour rentrer dans l'édition visuelle de la scène.
@@ -798,10 +804,11 @@ Ouvre `src/scripts/autoloads/game_data.gd`.
 Ajoute une variable et une fonction pour mesurer le temps écoulé :
 
 ```gdscript
-var survival_time: float = 0.0
+var survival_time: float = 0.0 # temps de survie en secondes
 
+## Incrémente le temps de survie chaque frame
 func _process(delta: float) -> void:
-	survival_time += delta
+	survival_time += delta # ajoute le temps écoulé
 ```
 
 `GameData.survival_time` contient maintenant le nombre de secondes depuis le début de la partie !
@@ -812,12 +819,13 @@ Ouvre `src/scenes/ui/hud/hud.tscn`. Ajoute un nœud **Label** et nomme-le `TimeL
 Dans le script du HUD, ajoute ou complète la fonction `_process` pour afficher le temps :
 
 ```gdscript
-@onready var time_label: Label = $TimeLabel
+@onready var time_label: Label = $TimeLabel # référence au Label de temps
 
 [...]
 
+## Met à jour le chrono affiché chaque frame
 func _process(_delta: float) -> void:
-	time_label.text = str(int(GameData.survival_time)) + "s"
+	time_label.text = str(int(GameData.survival_time)) + "s" # affiche le temps en entier
 ```
 
 Va dans le viewport `2D` et place le temps oú tu veux sur l'écran.
@@ -873,29 +881,32 @@ Ton laser doit :
 class_name Laser
 extends Area2D
 
-@export var speed: int = 400
+@export var speed: int = 400 # vitesse du laser (px/sec)
 
-var direction: Vector2 = Vector2.RIGHT
-var damage_information: DamageInformation
-var is_dying: bool = false
+var direction: Vector2 = Vector2.RIGHT # direction de déplacement
+var damage_information: DamageInformation # dégâts infligés
+var is_dying: bool = false # garde anti-double-appel
 
 
+## Connecte les signaux de collision au démarrage
 func _ready() -> void:
-	body_entered.connect(die)
-	area_entered.connect(die)
+	body_entered.connect(die) # collision avec un corps physique
+	area_entered.connect(die) # collision avec une zone
 
 
+## Déplace et oriente le laser chaque frame
 func _physics_process(delta: float) -> void:
-	rotation = direction.angle()
-	global_position += direction * speed * delta
+	rotation = direction.angle() # oriente le trait dans sa direction
+	global_position += direction * speed * delta # avance dans la direction
 
 
+## Détruit le laser à la première collision
 func die(_element: Node2D) -> void:
-	if is_dying:
-		return
-	is_dying = true
-	set_deferred("monitoring", false)
-	queue_free()
+	if is_dying: # déjà en train de mourir ?
+		return # on ignore le double-appel
+	is_dying = true # marque comme en train de mourir
+	set_deferred("monitoring", false) # désactive les collisions
+	queue_free() # supprime le nœud
 ```
 
 </details>
@@ -955,21 +966,23 @@ Sous `@export var fireball_scene: PackedScene`, ajoute un nouvel export pour le 
 À la fin de la fonction `_process` (après le bloc `attack_primary`), ajoute :
 
 ```gdscript
-	if Input.is_action_just_pressed("attack_secondary"):
-		fire_laser()
+	if Input.is_action_just_pressed("attack_secondary"): # clic droit pressé ?
+		fire_laser() # tire un laser
 ```
 
 Ensuite, ajoute ces deux nouvelles fonctions après `spawn_fireball()` :
 
 ```gdscript
+## Tire un laser si la scène est assignée
 func fire_laser() -> void:
-	if laser_scene:
-		spawn_laser()
+	if laser_scene: # la scène laser est-elle définie ?
+		spawn_laser() # crée le laser
 
+## Instancie et configure le laser
 func spawn_laser() -> void:
-	var laser := NodeUtil.instance_2d_scene_at_location(laser_scene, self, global_position) as Laser
-	laser.direction = current_direction
-	laser.damage_information = player_stats.damage_information
+	var laser := NodeUtil.instance_2d_scene_at_location(laser_scene, self, global_position) as Laser # crée le laser
+	laser.direction = current_direction # définit sa direction
+	laser.damage_information = player_stats.damage_information # définit ses dégâts
 ```
 
 Sauvegarde avec **Ctrl+S**.
@@ -1068,56 +1081,62 @@ Le script doit :
 class_name ContinuousLaser
 extends Node2D
 
-@onready var raycast: RayCast2D = $RayCast2D
-@onready var line: Line2D = $Line2D
-@onready var damage_timer: Timer = $DamageTimer
+@onready var raycast: RayCast2D = $RayCast2D # rayon de détection
+@onready var line: Line2D = $Line2D # trait visuel du laser
+@onready var damage_timer: Timer = $DamageTimer # timer de dégâts périodiques
 
-var damage_information: DamageInformation
-var is_active: bool = false
-var needs_rearm: bool = false
+var damage_information: DamageInformation # dégâts à infliger
+var is_active: bool = false # laser actif ?
+var needs_rearm: bool = false # doit relâcher avant de retirer ?
 
 
+## Initialise les connexions et cache le laser
 func _ready() -> void:
-	damage_timer.timeout.connect(_on_damage_timer_timeout)
-	Signals.enemy_died.connect(_on_enemy_died)
-	visible = false
+	damage_timer.timeout.connect(_on_damage_timer_timeout) # connecte le timer
+	Signals.enemy_died.connect(_on_enemy_died) # écoute la mort des ennemis
+	visible = false # laser éteint par défaut
 
 
+## Active le laser et démarre les dégâts
 func activate(dmg_info: DamageInformation) -> void:
-	damage_information = dmg_info
-	is_active = true
-	needs_rearm = false
-	visible = true
-	damage_timer.start()
+	damage_information = dmg_info # stocke les infos de dégâts
+	is_active = true # marque comme actif
+	needs_rearm = false # réinitialise le verrou
+	visible = true # rend le laser visible
+	damage_timer.start() # démarre le timer de dégâts
 
 
+## Désactive le laser et arrête les dégâts
 func deactivate() -> void:
-	is_active = false
-	visible = false
-	damage_timer.stop()
+	is_active = false # marque comme inactif
+	visible = false # cache le laser
+	damage_timer.stop() # arrête le timer de dégâts
 
 
+## Met à jour l'extrémité du rayon chaque frame
 func _process(_delta: float) -> void:
-	if not is_active:
-		return
-	if raycast.is_colliding():
-		line.set_point_position(1, to_local(raycast.get_collision_point()))
+	if not is_active: # laser inactif ?
+		return # rien à faire
+	if raycast.is_colliding(): # le rayon touche quelque chose ?
+		line.set_point_position(1, to_local(raycast.get_collision_point())) # pointe vers l'impact
 	else:
-		line.set_point_position(1, Vector2(400, 0))
+		line.set_point_position(1, Vector2(400, 0)) # longueur maximale
 
 
+## Inflige des dégâts à l'ennemi touché
 func _on_damage_timer_timeout() -> void:
-	if not raycast.is_colliding():
-		return
-	var body = raycast.get_collider()
-	var hurtbox := body.find_child("EnemyHurtBox") as EnemyHurtBox
-	if hurtbox:
-		hurtbox.hurt.emit(damage_information)
+	if not raycast.is_colliding(): # rien touché ?
+		return # pas de dégâts
+	var body = raycast.get_collider() # récupère l'objet touché
+	var hurtbox := body.find_child("EnemyHurtBox") as EnemyHurtBox # cherche la hurtbox
+	if hurtbox: # hurtbox trouvée ?
+		hurtbox.hurt.emit(damage_information) # inflige les dégâts
 
 
+## Désactive le laser quand un ennemi meurt
 func _on_enemy_died(_enemy: Enemy) -> void:
-	deactivate()
-	needs_rearm = true
+	deactivate() # éteint le laser
+	needs_rearm = true # bloque la réactivation auto
 ```
 
 </details>
@@ -1143,13 +1162,13 @@ Ajoute cette ligne avec les autres variables `@onready` en haut :
 Dans `_process`, remplace le bloc `attack_secondary` par :
 
 ```gdscript
-	if Input.is_action_pressed("attack_secondary"):
-		if not continuous_laser.is_active and not continuous_laser.needs_rearm:
-			continuous_laser.activate(player_stats.damage_information)
+	if Input.is_action_pressed("attack_secondary"): # clic droit maintenu ?
+		if not continuous_laser.is_active and not continuous_laser.needs_rearm: # peut activer ?
+			continuous_laser.activate(player_stats.damage_information) # active le laser
 	else:
-		continuous_laser.needs_rearm = false
-		if continuous_laser.is_active:
-			continuous_laser.deactivate()
+		continuous_laser.needs_rearm = false # libère le verrou de réarmement
+		if continuous_laser.is_active: # laser encore actif ?
+			continuous_laser.deactivate() # éteint le laser
 ```
 
 > 💡 Le laser reste actif tant que le bouton est maintenu. Si un ennemi meurt, `needs_rearm` bloque la réactivation automatique — le joueur doit relâcher puis ré-appuyer.
@@ -1187,16 +1206,17 @@ Ajoute une référence au nœud `GlowLine` avec les autres `@onready` :
 Dans la fonction `_process`, mets à jour le point final de `glow` en même temps que `line` :
 
 ```gdscript
+## Met à jour rayon et lueur chaque frame
 func _process(_delta: float) -> void:
-	if not is_active:
-		return
-	if raycast.is_colliding():
-		var hit := to_local(raycast.get_collision_point())
-		line.set_point_position(1, hit)
-		glow.set_point_position(1, hit)
+	if not is_active: # laser inactif ?
+		return # rien à faire
+	if raycast.is_colliding(): # collision détectée ?
+		var hit := to_local(raycast.get_collision_point()) # point d'impact en local
+		line.set_point_position(1, hit) # met à jour le rayon
+		glow.set_point_position(1, hit) # met à jour la lueur
 	else:
-		line.set_point_position(1, Vector2(400, 0))
-		glow.set_point_position(1, Vector2(400, 0))
+		line.set_point_position(1, Vector2(400, 0)) # longueur max du rayon
+		glow.set_point_position(1, Vector2(400, 0)) # longueur max de la lueur
 ```
 
 Lance le jeu — le rayon a maintenant une auréole lumineuse autour de lui ! ✨
@@ -1273,9 +1293,10 @@ Ouvre `src/scenes/entities/player/player.gd`.
 Ajoute cette fonction à la fin du fichier :
 
 ```gdscript
+## Téléporte le sorcier sur la souris avec E
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("teleport"):
-		global_position = get_global_mouse_position()
+	if event.is_action_pressed("teleport"): # touche E pressée ?
+		global_position = get_global_mouse_position() # saute sur le curseur
 ```
 
 Lance le jeu — appuie sur **E** et le sorcier saute instantanément sous le curseur de la souris ! 🌀
@@ -1312,11 +1333,12 @@ Ajoute une référence au timer avec les autres `@onready` :
 Modifie la fonction `_input` pour vérifier le cooldown avant de se téléporter :
 
 ```gdscript
+## Téléporte si le cooldown est terminé
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("teleport"):
-		if teleport_cooldown.is_stopped():
-			global_position = get_global_mouse_position()
-			teleport_cooldown.start()
+	if event.is_action_pressed("teleport"): # touche E pressée ?
+		if teleport_cooldown.is_stopped(): # cooldown terminé ?
+			global_position = get_global_mouse_position() # saute sur la souris
+			teleport_cooldown.start() # démarre le cooldown
 ```
 
 Lance le jeu — tu peux te téléporter une fois, puis tu dois attendre 1 seconde avant de pouvoir le refaire !
@@ -1348,12 +1370,13 @@ Ajoute la référence :
 Ajoute une fonction `_process` pour mettre à jour le label chaque frame :
 
 ```gdscript
+## Affiche ou cache le compte à rebours du cooldown
 func _process(_delta: float) -> void:
-	if teleport_cooldown.is_stopped():
-		teleport_label.visible = false
+	if teleport_cooldown.is_stopped(): # cooldown terminé ?
+		teleport_label.visible = false # cache le label
 	else:
-		teleport_label.visible = true
-		teleport_label.text = "%.1f" % teleport_cooldown.time_left
+		teleport_label.visible = true # affiche le label
+		teleport_label.text = "%.1f" % teleport_cooldown.time_left # temps restant
 ```
 
 Lance le jeu — quand tu te téléportes, un compte à rebours apparaît au-dessus du sorcier et disparaît quand la capacité est à nouveau disponible !
@@ -1365,23 +1388,25 @@ On va faire disparaître le sorcier en fondu, le téléporter, puis le faire ré
 Dans `player.gd`, remplace la fonction `_input` par ceci :
 
 ```gdscript
+## Déclenche la téléportation avec cooldown
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("teleport"):
-		if teleport_cooldown.is_stopped():
-			teleport_cooldown.start()
-			_do_teleport()
+	if event.is_action_pressed("teleport"): # touche E pressée ?
+		if teleport_cooldown.is_stopped(): # cooldown terminé ?
+			teleport_cooldown.start() # démarre le cooldown
+			_do_teleport() # lance l'animation
 
 
+## Anime le fondu, téléporte, puis refait apparaître
 func _do_teleport() -> void:
-	var tween = create_tween()
-	tween.tween_property(self, "modulate:a", 0.0, 0.5)
-	await tween.finished
+	var tween = create_tween() # crée un animateur
+	tween.tween_property(self, "modulate:a", 0.0, 0.5) # fondu vers invisible
+	await tween.finished # attend la fin du fondu
 
-	global_position = get_global_mouse_position()
-	get_viewport().get_camera_2d().reset_smoothing()
+	global_position = get_global_mouse_position() # se téléporte sur la souris
+	get_viewport().get_camera_2d().reset_smoothing() # recale la caméra
 
-	tween = create_tween()
-	tween.tween_property(self, "modulate:a", 1.0, 0.5)
+	tween = create_tween() # nouvel animateur
+	tween.tween_property(self, "modulate:a", 1.0, 0.5) # réapparition en fondu
 ```
 
 > 💡 `modulate:a` contrôle la transparence du nœud (0 = invisible, 1 = opaque). Le `await tween.finished` met la fonction en pause jusqu'à ce que le fondu soit terminé, puis la téléportation se fait, puis le sorcier réapparaît.
@@ -1429,18 +1454,19 @@ Ajoute la référence :
 Dans `_do_teleport()`, ajoute `teleport_particles.restart()` au départ et à l'arrivée :
 
 ```gdscript
+## Anime la téléportation avec particules
 func _do_teleport() -> void:
-	teleport_particles.restart()
-	var tween = create_tween()
-	tween.tween_property(self, "modulate:a", 0.0, 0.5)
-	await tween.finished
+	teleport_particles.restart() # particules au point de départ
+	var tween = create_tween() # crée un animateur
+	tween.tween_property(self, "modulate:a", 0.0, 0.5) # fondu vers invisible
+	await tween.finished # attend la fin du fondu
 
-	global_position = get_global_mouse_position()
-	get_viewport().get_camera_2d().reset_smoothing()
+	global_position = get_global_mouse_position() # se téléporte sur la souris
+	get_viewport().get_camera_2d().reset_smoothing() # recale la caméra
 
-	teleport_particles.restart()
-	tween = create_tween()
-	tween.tween_property(self, "modulate:a", 1.0, 0.5)
+	teleport_particles.restart() # particules au point d'arrivée
+	tween = create_tween() # nouvel animateur
+	tween.tween_property(self, "modulate:a", 1.0, 0.5) # réapparition en fondu
 ```
 
 Lance le jeu — une gerbe de particules violettes explose au point de départ, puis une autre apparaît là où le sorcier réapparaît ! 🪄
