@@ -355,6 +355,8 @@ Les défis sont regroupés par niveau de difficulté. **Commence par le groupe 1
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
 
+![Group Image](./readme-images/challenges-group-explorator.png)
+
 > Dans ce groupe, tu modifies uniquement des **fichiers de configuration** (.tres) directement dans l'éditeur Godot. Pas besoin d'écrire du code !
 >
 > Pour ouvrir un fichier `.tres` : double-clique dessus dans le panneau **FileSystem** (en bas à gauche). Ses propriétés s'affichent dans l'**Inspector** (à droite).
@@ -410,6 +412,8 @@ Toujours dans `player_stats.tres`, cherche **`Damage Information`** et clique de
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
 
+![Group Image](./readme-images/challenges-group-resource-tinkerer.png)
+
 > Dans ce groupe, tu continues à modifier des fichiers `.tres`, mais tu explores plus en profondeur les configurations disponibles.
 
 #### **Défi 8 — Change la formation d'apparition**
@@ -450,6 +454,8 @@ Crée une vague 1 qui te semble fun à jouer et garde les changements que tu pr�
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
 
+![Group Image](./readme-images/challenges-group-code-reader.png)
+
 > Dans ce groupe, tu ouvres de vrais fichiers de code GDScript (`.gd`). L'objectif est de **lire et comprendre**, puis de faire de petites modifications.
 >
 > Pour ouvrir un script : double-clique dessus dans le **FileSystem**. Il s'ouvre dans l'éditeur de code.
@@ -487,6 +493,8 @@ C'est la direction du joystick droit (manette). Si personne n'utilise de manette
 ### Groupe - Codeur
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
+
+![Group Image](./readme-images/challenges-group-coder.png)
 
 > Dans ce groupe, tu **écris du code** pour ajouter de nouvelles fonctionnalités. C'est la partie la plus difficile — mais aussi la plus satisfaisante ! 💪
 >
@@ -547,6 +555,8 @@ Ainsi le jeu fonctionne avec les deux types de contrôle, sans que l'un interfè
 ### Groupe - Score
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
+
+![Group Image](./readme-images/challenges-group-score.png)
 
 > Dans ce groupe, tu vas **ajouter un système de score** au jeu — tu apprendras à utiliser les signaux, les bonnes pratiques de code, et tu afficheras un compteur de kills en temps réel à l'écran.
 
@@ -642,6 +652,8 @@ Place le oú tu veux dans la zone bleue et lance le jeu pour vérifier qu'il fon
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
 
+![Group Image](./readme-images/challenges-group-one-more-wave.png)
+
 > Dans ce groupe, tu vas **concevoir ta propre vague d'ennemis** de A à Z et l'ajouter au jeu. Pas de code requis — c'est un défi de game design !
 
 #### **Défi 19 — Crée une vague 6**
@@ -676,6 +688,8 @@ Lance le jeu et survie jusqu'à ta vague !
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
 
+![Group Image](./readme-images/challenges-group-pixel-artist.png)
+
 > Dans ce groupe, tu vas **changer l'apparence visuelle du sorcier** en remplaçant son image par un personnage open source trouvé sur internet. Pas besoin d'écrire du code — c'est une mission de graphisme !
 >
 > Les sprites open source sont des images libres de droits que la communauté met à disposition gratuitement. C'est comme ça que fonctionne l'Open Source dans le monde de l'art !
@@ -708,6 +722,8 @@ Dans le FileSystem, ouvre `src/scenes/entities/player/sprite/player_sprite.tscn`
 ### Groupe - Architecte
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
+
+![Group Image](./readme-images/challenges-group-architect.png)
 
 > Dans ce groupe, tu vas **ajouter des murs** dans l'arène pour créer des obstacles physiques. Le sorcier et les ennemis ne pourront pas les traverser — ça change complètement la façon de jouer !
 >
@@ -775,6 +791,8 @@ Lance le jeu — le sorcier et les ennemis ne peuvent plus traverser tes murs !
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
 
+![Group Image](./readme-images/challenges-group-creative-coder.png)
+
 > Dans ce groupe, tu **écris du code** pour personnaliser le jeu selon tes envies. Ces défis ne sont pas forcément plus difficiles — ils t'apprennent à **exprimer ta créativité avec le code** !
 
 #### **Défi 23 — Change la couleur des boules de feu**
@@ -835,6 +853,8 @@ Va dans le viewport `2D` et place le temps oú tu veux sur l'écran.
 ### Groupe - Ajoutes une nouvelle arme laser
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
+
+![Group Image](./readme-images/challenges-group-new-laser-weapon.png)
 
 > Dans ce groupe, tu vas ajouter une **deuxième arme** au sorcier : un rayon laser tiré avec le clic droit ! Tu vas écrire un nouveau script de zéro, créer une scène, et connecter le tout au système d'armes existant. C'est le défi le plus ambitieux !
 
@@ -1000,6 +1020,8 @@ Lance le jeu — **clic gauche** tire des boules de feu, **clic droit** tire des
 ### Groupe - Laser Continu
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
+
+![Group Image](./readme-images/challenges-group-continuous-laser-beam.png)
 
 > Dans ce groupe, tu vas créer un **rayon laser continu** — il reste actif jusqu'à ce qu'un ennemi meure ! Au lieu de faire des dégâts par impact, il fait des **dégâts au fil du temps**. Tu vas utiliser un nouvel outil de Godot appelé `RayCast2D` pour détecter ce qui se trouve sur le chemin du laser à chaque frame.
 
@@ -1269,6 +1291,8 @@ Lance le jeu — le laser fait maintenant du bruit tant qu'il est actif, et s'ar
 ### Groupe - Téléportation
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
+
+![Group Image](./readme-images/challenges-group-teleport.png)
 
 > Dans ce groupe, tu vas ajouter une capacité spéciale au sorcier : en appuyant sur **E**, il se téléporte instantanément à l'endroit où pointe ta souris ! Tu vas modifier directement le script du joueur et ajouter un temps de recharge pour équilibrer la capacité.
 

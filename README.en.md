@@ -353,6 +353,8 @@ Challenges are grouped by difficulty. **Start with Group 1** and go at your own 
 
 ### Group - Explorer
 
+![Group Image](./readme-images/challenges-group-explorator.png)
+
 [Back to steps ⬆️](#workshop-steps)
 
 > In this group, you only modify **configuration files** (.tres) directly in the Godot editor. No coding needed!
@@ -408,6 +410,8 @@ Still in `player_stats.tres`, find **`Damage Information`** and click to open it
 
 ### Group - Resource Tinkerer
 
+![Group Image](./readme-images/challenges-group-resource-tinkerer.png)
+
 [Back to steps ⬆️](#workshop-steps)
 
 > In this group, you continue modifying `.tres` files, but explore the configurations in more depth.
@@ -448,6 +452,8 @@ Restore player stats to reasonable values, but keep the wave changes you prefer.
 
 ### Group - Code Reader
 
+![Group Image](./readme-images/challenges-group-code-reader.png)
+
 [Back to steps ⬆️](#workshop-steps)
 
 > In this group, you open real GDScript code files (`.gd`). The goal is to **read and understand**, then make small modifications.
@@ -483,6 +489,8 @@ That's the direction of the right gamepad stick. If no one is using a gamepad, `
 ---
 
 ### Group - Coder
+
+![Group Image](./readme-images/challenges-group-coder.png)
 
 [Back to steps ⬆️](#workshop-steps)
 
@@ -543,6 +551,8 @@ This way the game works with both types of controls, without one interfering wit
 ---
 
 ### Group - Score
+
+![Group Image](./readme-images/challenges-group-score.png)
 
 [Back to steps ⬆️](#workshop-steps)
 
@@ -638,6 +648,8 @@ Place it wherever you want in the blue zone and launch the game to check that it
 
 ### Group - One More Wave
 
+![Group Image](./readme-images/challenges-group-one-more-wave.png)
+
 [Back to steps ⬆️](#workshop-steps)
 
 > In this group, you'll **design your own enemy wave** from scratch and add it to the game. No code required — pure game design!
@@ -672,6 +684,8 @@ Launch the game and survive to your wave!
 
 ### Group - Pixel Art Artist
 
+![Group Image](./readme-images/challenges-group-pixel-artist.png)
+
 [Back to steps ⬆️](#workshop-steps)
 
 > In this group, you'll **change the wizard's visual appearance** by replacing the sprite image with an open source character found online. No code required — this is a design challenge!
@@ -704,6 +718,8 @@ In the FileSystem, open `src/scenes/entities/player/sprite/player_sprite.tscn` b
 ---
 
 ### Group - Architect
+
+![Group Image](./readme-images/challenges-group-architect.png)
 
 [Back to steps ⬆️](#workshop-steps)
 
@@ -771,6 +787,8 @@ Launch the game — the wizard and enemies can no longer walk through your walls
 
 ### Group - Creative Coder
 
+![Group Image](./readme-images/challenges-group-creative-coder.png)
+
 [Back to steps ⬆️](#workshop-steps)
 
 > In this group, you **write code** to customize the game your way. These challenges aren't necessarily harder — they're about **expressing your creativity through code**!
@@ -831,6 +849,8 @@ Go to the `2D` viewport and place the time wherever you want on the screen.
 ---
 
 ### Group - Add a New Laser Weapon
+
+![Group Image](./readme-images/challenges-group-new-laser-weapon.png)
 
 [Back to steps ⬆️](#workshop-steps)
 
@@ -996,6 +1016,8 @@ Launch the game — **left-click** fires fireballs, **right-click** fires lasers
 ---
 
 ### Group - Continuous Laser
+
+![Group Image](./readme-images/challenges-group-continuous-laser-beam.png)
 
 [Back to steps ⬆️](#workshop-steps)
 
@@ -1265,6 +1287,8 @@ Launch the game — the laser now makes sound while active and goes silent when 
 ---
 
 ### Group - Teleportation
+
+![Group Image](./readme-images/challenges-group-teleport.png)
 
 [Back to steps ⬆️](#workshop-steps)
 
