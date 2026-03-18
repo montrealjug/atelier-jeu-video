@@ -680,6 +680,19 @@ Launch the game and survive to your wave!
 
 </details>
 
+#### **Challenge 21 — Don't forget the UpgradeSpawner for between-wave bonuses!**
+
+In the same scene `src/scenes/game/wave_manager/game.tscn`, click the **UpgradeSpawner** node in the scene tree.
+
+In the Inspector, find the **`Waves Data`** array and add an entry for your 6th wave — otherwise the between-wave bonuses won't show up after wave 5!
+
+<details>
+<summary>Solution</summary>
+
+![Challenge 21 solution](./readme-images/challenges-group-one-more-wave-upgrade-spawner.png)
+
+</details>
+
 ---
 
 ### Group - Pixel Art Artist
@@ -692,7 +705,7 @@ Launch the game and survive to your wave!
 >
 > Open source sprites are royalty-free images shared freely by the community. That's how Open Source works in the art world!
 
-#### **Challenge 21 — Look at the current wizard sprite**
+#### **Challenge 22 — Look at the current wizard sprite**
 
 In the FileSystem, navigate to `assets/sprites/entities/`.
 Double-click `mage.png` to preview it in the right panel. This is the image that represents your wizard in the game!
@@ -727,7 +740,7 @@ In the FileSystem, open `src/scenes/entities/player/sprite/player_sprite.tscn` b
 >
 > In Godot, an object that blocks others is called a **StaticBody2D**. You give it a **CollisionShape2D** to define its shape, and a visual element so you can see it.
 
-#### **Challenge 22 — Open the main game scene**
+#### **Challenge 23 — Open the main game scene**
 
 In the FileSystem, navigate to `src/scenes/game/wave_manager/` and double-click **`game.tscn`**. Click **2D** in the top toolbar.
 You can see the arena in the Viewport. This is where you'll place your walls!
@@ -793,7 +806,7 @@ Launch the game — the wizard and enemies can no longer walk through your walls
 
 > In this group, you **write code** to customize the game your way. These challenges aren't necessarily harder — they're about **expressing your creativity through code**!
 
-#### **Challenge 23 — Change the fireball color**
+#### **Challenge 24 — Change the fireball color**
 
 Open `src/scenes/entities/player/fireball/fireball.gd`.
 In the `_ready()` function, after the two existing lines, add:
@@ -804,7 +817,7 @@ sprite.modulate = Color(0.5, 0, 1)  # purple fireballs!
 
 Launch the game. Try other colors: `Color.GREEN`, `Color.BLUE`, `Color(1, 0.5, 0)` for orange, `Color.RED`…
 
-#### **Challenge 24 — Change the explosion color**
+#### **Challenge 25 — Change the explosion color**
 
 In the same `fireball.gd` file, still inside `_ready()`, also add:
 
@@ -814,7 +827,7 @@ spark_particles.modulate = Color(0, 1, 0)  # green explosion sparks!
 
 Launch the game and shoot fireballs — the sparks on impact change color!
 
-#### **Challenge 25 — Track your survival time**
+#### **Challenge 26 — Track your survival time**
 
 Open `src/scripts/autoloads/game_data.gd`.
 Add a variable and a function to measure elapsed time:
@@ -829,7 +842,7 @@ func _process(delta: float) -> void:
 
 `GameData.survival_time` now holds the number of seconds since the game started!
 
-#### **Challenge 26 — Display the survival time on screen**
+#### **Challenge 27 — Display the survival time on screen**
 
 Open `src/scenes/ui/hud/hud.tscn`. Add a **Label** node and name it `TimeLabel`.
 In the HUD script, add or complete the `_process` function to show the time:
@@ -856,7 +869,7 @@ Go to the `2D` viewport and place the time wherever you want on the screen.
 
 > In this group, you'll add a **second weapon** to the wizard: a laser bolt fired with right-click! You'll write a new script from scratch, set up a scene, and wire everything into the existing weapon system. This is the most ambitious challenge!
 
-#### **Challenge 27 — Explore the fireball code**
+#### **Challenge 28 — Explore the fireball code**
 
 Before creating anything new, let's understand how the fireball works.
 
@@ -873,7 +886,7 @@ Now open `src/scenes/entities/player/weapon/weapon.gd`. Read the `spawn_fireball
 
 You now have all the tools you need to build the laser! 🔍
 
-#### **Challenge 28 — Create the laser script**
+#### **Challenge 29 — Create the laser script**
 
 In the FileSystem, right-click on `src/scenes/entities/player/` and choose **New Folder**. Name it `laser`.
 
@@ -931,7 +944,7 @@ func die(_element: Node2D) -> void:
 
 Save with **Ctrl+S**.
 
-#### **Challenge 29 — Create the laser scene**
+#### **Challenge 30 — Create the laser scene**
 
 The laser will be drawn with a **Line2D** node — a cyan line that rotates to face the direction of fire. No sprite, no particles: a real beam.
 
@@ -971,7 +984,7 @@ Save with **Ctrl+S**.
 
 > 💡 The Line2D draws from point 0 to point 1. Since the laser rotates in `_physics_process`, it will always point in the direction it travels!
 
-#### **Challenge 30 — Connect the laser to the weapon**
+#### **Challenge 31 — Connect the laser to the weapon**
 
 Open `src/scenes/entities/player/weapon/weapon.gd`.
 
@@ -1023,7 +1036,7 @@ Launch the game — **left-click** fires fireballs, **right-click** fires lasers
 
 > In this group, you'll create a **continuous laser beam** — it stays on until an enemy dies! Instead of dealing damage per hit, it deals **damage over time**. You'll use a new Godot tool called `RayCast2D` to detect what's in the laser's path each frame.
 
-#### **Challenge 31 — Understand RayCast2D**
+#### **Challenge 32 — Understand RayCast2D**
 
 A `RayCast2D` shoots an invisible ray from a point in a direction. Every frame, it answers: "Did I hit something? If so, what is it and where exactly?"
 
@@ -1039,7 +1052,7 @@ Think about it:
 - Why is `RayCast2D` better than a very long Area2D for a beam?
 - What's the difference between "10 damage per hit" and "10 damage per second"?
 
-#### **Challenge 32 — Create the continuous laser scene**
+#### **Challenge 33 — Create the continuous laser scene**
 
 Create a new folder `src/scenes/entities/player/continuous_laser/`.
 
@@ -1076,7 +1089,7 @@ Save with **Ctrl+S**.
 
 > 💡 Since `ContinuousLaser` will be a **child of the Weapon**, it automatically rotates with it — the beam will always point in the direction the wizard is aiming!
 
-#### **Challenge 33 — Write the continuous laser script**
+#### **Challenge 34 — Write the continuous laser script**
 
 In the folder `src/scenes/entities/player/continuous_laser/`, create a new script `continuous_laser.gd` and attach it to the `ContinuousLaser` node.
 
@@ -1163,7 +1176,7 @@ func _on_enemy_died(_enemy: Enemy) -> void:
 
 Save with **Ctrl+S**.
 
-#### **Challenge 34 — Connect the continuous laser to the weapon**
+#### **Challenge 35 — Connect the continuous laser to the weapon**
 
 **Add the scene to the weapon:**
 Open `src/scenes/entities/player/weapon/weapon.tscn`. In the scene tree, right-click the **Weapon** root node → **Instantiate Child Scene** → select `continuous_laser.tscn`.
@@ -1195,7 +1208,7 @@ In `_process`, replace the `attack_secondary` block with:
 
 Launch the game — **hold right-click** to fire the continuous laser. Release to turn it off, or let it kill an enemy and it will shut off automatically! ⚡
 
-#### **Challenge 35 — Add a glow effect to the beam**
+#### **Challenge 36 — Add a glow effect to the beam**
 
 A real laser beam has a glow around it! We'll add a second, wider, semi-transparent `Line2D` behind the main beam to simulate this effect.
 
@@ -1241,7 +1254,7 @@ func _process(_delta: float) -> void:
 
 Launch the game — the beam now has a luminous halo around it! ✨
 
-#### **Challenge 36 — Add a laser sound**
+#### **Challenge 37 — Add a laser sound**
 
 **In `continuous_laser.tscn`:**
 
@@ -1294,7 +1307,7 @@ Launch the game — the laser now makes sound while active and goes silent when 
 
 > In this group, you'll add a special ability to the wizard: by pressing **E**, he instantly teleports to wherever your mouse is pointing! You'll modify the player script directly and add a cooldown to keep the ability balanced.
 
-#### **Challenge 37 — Add the keyboard action**
+#### **Challenge 38 — Add the keyboard action**
 
 Before writing any code, you need to tell Godot that the **E** key corresponds to the action `"teleport"`.
 
@@ -1308,7 +1321,7 @@ Close the Project Settings window.
 
 > 💡 This is how the whole game works: `"attack_primary"`, `"attack_secondary"`, `"move_up"` are all actions defined here and read in code using `Input.is_action_pressed(...)`.
 
-#### **Challenge 38 — Write the teleport code**
+#### **Challenge 39 — Write the teleport code**
 
 Open `src/scenes/entities/player/player.gd`.
 
@@ -1328,7 +1341,7 @@ Think about it:
 - What is the difference between `global_position` and `position`?
 - What would happen if you replaced `is_action_pressed` with `is_action_just_pressed`?
 
-#### **Challenge 39 — Add a cooldown**
+#### **Challenge 40 — Add a cooldown**
 
 Right now you can teleport endlessly without any limit. Let's add a **1 second** cooldown.
 
@@ -1367,7 +1380,7 @@ Launch the game — you can teleport once, then you must wait 1 second before us
 
 > 💡 Change the `Wait Time` value on the timer in the Inspector to adjust the cooldown duration. `0.5` for a quick blink, `3.0` to make it more strategic!
 
-#### **Challenge 40 — Show the cooldown on screen**
+#### **Challenge 41 — Show the cooldown on screen**
 
 We'll display the remaining time directly above the wizard — so the player always knows when they can teleport again.
 
@@ -1403,7 +1416,7 @@ func _process(_delta: float) -> void:
 
 Launch the game — when you teleport, a countdown appears above the wizard and disappears when the ability is ready again!
 
-#### **Challenge 41 — Add a teleport animation**
+#### **Challenge 42 — Add a teleport animation**
 
 We'll make the wizard fade out, teleport, then fade back in. For this we use a **Tween** — a Godot tool that animates a value from A to B over a given duration.
 
@@ -1435,7 +1448,7 @@ func _do_teleport() -> void:
 
 Launch the game — the wizard gently fades out, disappears, and reappears at the cursor position! ✨
 
-#### **Challenge 43 — Add magic particles**
+#### **Challenge 44 — Add magic particles**
 
 We'll trigger a particle burst at the departure point **and** at the arrival point. The key trick: disabling **local coordinates** on the particles so that emitted particles stay in world space even when the player moves.
 

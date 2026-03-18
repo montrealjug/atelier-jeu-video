@@ -682,6 +682,19 @@ Lance le jeu et survie jusqu'à ta vague !
 
 </details>
 
+#### **Défi 21 — N'oublies pas le UpgradeSpawner pour les bonus entre les vagues !**
+
+Dans la même scène `src/scenes/game/wave_manager/game.tscn`, clique sur le nœud **UpgradeSpawner** dans l'arbre de scène.
+
+Dans l'Inspector, trouve le tableau **`Waves Data`** et ajoute une entrée pour ta 6ème vague — sinon les bonus entre les vagues ne s'afficheront pas après la vague 5 !
+
+<details>
+<summary>Solution</summary>
+
+![Solution du défi 21](./readme-images/challenges-group-one-more-wave-upgrade-spawner.png)
+
+</details>
+
 ---
 
 ### Groupe - Artiste Pixel Art
@@ -694,7 +707,7 @@ Lance le jeu et survie jusqu'à ta vague !
 >
 > Les sprites open source sont des images libres de droits que la communauté met à disposition gratuitement. C'est comme ça que fonctionne l'Open Source dans le monde de l'art !
 
-#### **Défi 21 — Observe le sprite actuel du sorcier**
+#### **Défi 22 — Observe le sprite actuel du sorcier**
 
 Dans le FileSystem, navigue jusqu'au dossier `assets/sprites/entities/`.
 Double-clique sur `mage.png` pour le prévisualiser dans la colonne de droite. C'est cette image qui représente ton sorcier dans le jeu !
@@ -729,7 +742,7 @@ Dans le FileSystem, ouvre `src/scenes/entities/player/sprite/player_sprite.tscn`
 >
 > Dans Godot, un objet qui bloque les autres s'appelle un **StaticBody2D** (corps statique). On lui ajoute une **CollisionShape2D** pour définir sa forme, et un visuel pour le voir à l'écran.
 
-#### **Défi 22 — Ouvre la scène principale du jeu**
+#### **Défi 23 — Ouvre la scène principale du jeu**
 
 Dans le FileSystem, navigue jusqu'à `src/scenes/game/wave_manager/` et double-clique sur **`game.tscn`**. Cliques dans la barre du haut sur `2D`.
 Tu vois l'arène du jeu dans le Viewport. C'est ici que tu vas placer tes murs !
@@ -795,7 +808,7 @@ Lance le jeu — le sorcier et les ennemis ne peuvent plus traverser tes murs !
 
 > Dans ce groupe, tu **écris du code** pour personnaliser le jeu selon tes envies. Ces défis ne sont pas forcément plus difficiles — ils t'apprennent à **exprimer ta créativité avec le code** !
 
-#### **Défi 23 — Change la couleur des boules de feu**
+#### **Défi 24 — Change la couleur des boules de feu**
 
 Ouvre `src/scenes/entities/player/fireball/fireball.gd`.
 Dans la fonction `_ready()`, après les deux lignes existantes, ajoute :
@@ -806,7 +819,7 @@ sprite.modulate = Color(0.5, 0, 1)  # boules de feu violettes !
 
 Lance le jeu. Essaie d'autres couleurs : `Color.GREEN`, `Color.BLUE`, `Color(1, 0.5, 0)` pour l'orange, `Color.RED`…
 
-#### **Défi 24 — Change la couleur de l'explosion**
+#### **Défi 25 — Change la couleur de l'explosion**
 
 Dans le même fichier `fireball.gd`, toujours dans `_ready()`, ajoute aussi :
 
@@ -816,7 +829,7 @@ spark_particles.modulate = Color(0, 1, 0)  # étincelles vertes !
 
 Lance le jeu et tire des boules de feu — les étincelles à l'impact changent de couleur !
 
-#### **Défi 25 — Compte le temps de survie**
+#### **Défi 26 — Compte le temps de survie**
 
 Ouvre `src/scripts/autoloads/game_data.gd`.
 Ajoute une variable et une fonction pour mesurer le temps écoulé :
@@ -831,7 +844,7 @@ func _process(delta: float) -> void:
 
 `GameData.survival_time` contient maintenant le nombre de secondes depuis le début de la partie !
 
-#### **Défi 26 — Affiche le temps de survie à l'écran**
+#### **Défi 27 — Affiche le temps de survie à l'écran**
 
 Ouvre `src/scenes/ui/hud/hud.tscn`. Ajoute un nœud **Label** et nomme-le `TimeLabel`.
 Dans le script du HUD, ajoute ou complète la fonction `_process` pour afficher le temps :
@@ -858,7 +871,7 @@ Va dans le viewport `2D` et place le temps oú tu veux sur l'écran.
 
 > Dans ce groupe, tu vas ajouter une **deuxième arme** au sorcier : un rayon laser tiré avec le clic droit ! Tu vas écrire un nouveau script de zéro, créer une scène, et connecter le tout au système d'armes existant. C'est le défi le plus ambitieux !
 
-#### **Défi 27 — Explore le code de la boule de feu**
+#### **Défi 28 — Explore le code de la boule de feu**
 
 Avant de créer quoi que ce soit, comprends comment fonctionne la boule de feu.
 
@@ -875,7 +888,7 @@ Maintenant ouvre `src/scenes/entities/player/weapon/weapon.gd`. Lis la fonction 
 
 Tu as maintenant tous les outils pour créer le laser ! 🔍
 
-#### **Défi 28 — Crée le script du laser**
+#### **Défi 29 — Crée le script du laser**
 
 Dans le FileSystem, fais un clic droit sur `src/scenes/entities/player/` et choisis **New Folder**. Nomme-le `laser`.
 
@@ -933,7 +946,7 @@ func die(_element: Node2D) -> void:
 
 Sauvegarde avec **Ctrl+S**.
 
-#### **Défi 29 — Crée la scène du laser**
+#### **Défi 30 — Crée la scène du laser**
 
 Le laser sera dessiné avec un nœud **Line2D** — un trait cyan qui tourne dans la direction de tir. Pas de sprite, pas de particules : un vrai rayon !
 
@@ -973,7 +986,7 @@ Sauvegarde avec **Ctrl+S**.
 
 > 💡 La Line2D trace un trait du point 0 au point 1. Comme le laser tourne dans `_physics_process`, il pointera toujours dans sa direction de déplacement !
 
-#### **Défi 30 — Connecte le laser à l'arme**
+#### **Défi 31 — Connecte le laser à l'arme**
 
 Ouvre `src/scenes/entities/player/weapon/weapon.gd`.
 
@@ -1025,7 +1038,7 @@ Lance le jeu — **clic gauche** tire des boules de feu, **clic droit** tire des
 
 > Dans ce groupe, tu vas créer un **rayon laser continu** — il reste actif jusqu'à ce qu'un ennemi meure ! Au lieu de faire des dégâts par impact, il fait des **dégâts au fil du temps**. Tu vas utiliser un nouvel outil de Godot appelé `RayCast2D` pour détecter ce qui se trouve sur le chemin du laser à chaque frame.
 
-#### **Défi 31 — Comprendre le RayCast2D**
+#### **Défi 32 — Comprendre le RayCast2D**
 
 Un `RayCast2D` envoie un rayon invisible depuis un point dans une direction. À chaque frame, il répond à la question : « Est-ce que j'ai touché quelque chose ? Si oui, quoi et où exactement ? »
 
@@ -1041,7 +1054,7 @@ Réfléchis :
 - Pourquoi `RayCast2D` est-il meilleur qu'un long `Area2D` pour un rayon ?
 - Quelle est la différence entre « 10 dégâts par impact » et « 10 dégâts par seconde » ?
 
-#### **Défi 32 — Crée la scène du laser continu**
+#### **Défi 33 — Crée la scène du laser continu**
 
 Crée un nouveau dossier `src/scenes/entities/player/continuous_laser/`.
 
@@ -1078,7 +1091,7 @@ Sauvegarde avec **Ctrl+S**.
 
 > 💡 Puisque `ContinuousLaser` sera un **enfant de l'Arme**, il tourne automatiquement avec elle — le rayon pointera toujours dans la direction visée par le sorcier !
 
-#### **Défi 33 — Écris le script du laser continu**
+#### **Défi 34 — Écris le script du laser continu**
 
 Dans le dossier `src/scenes/entities/player/continuous_laser/`, crée un nouveau script `continuous_laser.gd` et attache-le au nœud `ContinuousLaser`.
 
@@ -1165,7 +1178,7 @@ func _on_enemy_died(_enemy: Enemy) -> void:
 
 Sauvegarde avec **Ctrl+S**.
 
-#### **Défi 34 — Connecte le laser continu à l'arme**
+#### **Défi 35 — Connecte le laser continu à l'arme**
 
 **Ajoute la scène à l'arme :**
 Ouvre `src/scenes/entities/player/weapon/weapon.tscn`. Dans l'arbre de scène, clic droit sur le nœud racine **Weapon** → **Instantiate Child Scene** → sélectionne `continuous_laser.tscn`.
@@ -1197,7 +1210,7 @@ Dans `_process`, remplace le bloc `attack_secondary` par :
 
 Lance le jeu — **maintiens le clic droit** pour déclencher le laser continu. Relâche pour l'éteindre, ou laisse-le tuer un ennemi et il s'éteindra automatiquement ! ⚡
 
-#### **Défi 35 — Ajoute un effet de lueur au rayon**
+#### **Défi 36 — Ajoute un effet de lueur au rayon**
 
 Un vrai rayon laser a une lueur autour de lui ! On va ajouter une deuxième `Line2D` plus large et semi-transparente derrière le rayon principal pour simuler cet effet.
 
@@ -1243,7 +1256,7 @@ func _process(_delta: float) -> void:
 
 Lance le jeu — le rayon a maintenant une auréole lumineuse autour de lui ! ✨
 
-#### **Défi 36 — Ajoute un son de laser**
+#### **Défi 37 — Ajoute un son de laser**
 
 **Dans `continuous_laser.tscn` :**
 
@@ -1296,7 +1309,7 @@ Lance le jeu — le laser fait maintenant du bruit tant qu'il est actif, et s'ar
 
 > Dans ce groupe, tu vas ajouter une capacité spéciale au sorcier : en appuyant sur **E**, il se téléporte instantanément à l'endroit où pointe ta souris ! Tu vas modifier directement le script du joueur et ajouter un temps de recharge pour équilibrer la capacité.
 
-#### **Défi 37 — Ajoute l'action clavier**
+#### **Défi 38 — Ajoute l'action clavier**
 
 Avant d'écrire du code, tu dois dire à Godot que la touche **E** correspond à l'action `"teleport"`.
 
@@ -1310,7 +1323,7 @@ Ferme la fenêtre Project Settings.
 
 > 💡 C'est comme ça que tout le jeu fonctionne : `"attack_primary"`, `"attack_secondary"`, `"move_up"` sont toutes des actions définies ici et lues dans le code avec `Input.is_action_pressed(...)`.
 
-#### **Défi 38 — Écris le code de téléportation**
+#### **Défi 39 — Écris le code de téléportation**
 
 Ouvre `src/scenes/entities/player/player.gd`.
 
@@ -1330,7 +1343,7 @@ Réfléchis :
 - Quelle est la différence entre `global_position` et `position` ?
 - Que se passerait-il si tu remplaçais `is_action_pressed` par `is_action_just_pressed` ?
 
-#### **Défi 39 — Ajoute un temps de recharge**
+#### **Défi 40 — Ajoute un temps de recharge**
 
 Pour l'instant tu peux te téléporter en boucle sans limite. Ajoutons un cooldown de **1 seconde**.
 
@@ -1369,7 +1382,7 @@ Lance le jeu — tu peux te téléporter une fois, puis tu dois attendre 1 secon
 
 > 💡 Change la valeur `Wait Time` du timer dans l'Inspector pour ajuster la durée du cooldown. `0.5` pour être rapide, `3.0` pour rendre la capacité plus stratégique !
 
-#### **Défi 40 — Affiche le cooldown à l'écran**
+#### **Défi 41 — Affiche le cooldown à l'écran**
 
 On va afficher le temps restant directement au-dessus du sorcier — comme ça, le joueur sait quand il peut se retéléporter.
 
@@ -1405,7 +1418,7 @@ func _process(_delta: float) -> void:
 
 Lance le jeu — quand tu te téléportes, un compte à rebours apparaît au-dessus du sorcier et disparaît quand la capacité est à nouveau disponible !
 
-#### **Défi 41 — Ajoute une animation de téléportation**
+#### **Défi 42 — Ajoute une animation de téléportation**
 
 On va faire disparaître le sorcier en fondu, le téléporter, puis le faire réapparaître. Pour ça on utilise un **Tween** — un outil de Godot qui anime une valeur de A vers B sur une durée donnée.
 
@@ -1437,7 +1450,7 @@ func _do_teleport() -> void:
 
 Lance le jeu — le sorcier s'efface doucement, disparaît, et réapparaît à l'endroit du curseur ! ✨
 
-#### **Défi 43 — Ajoute des particules magiques**
+#### **Défi 44 — Ajoute des particules magiques**
 
 On va déclencher une explosion de particules au point de départ **et** au point d'arrivée. Le truc clé : on va désactiver les **coordonnées locales** des particules, ce qui fait que les particules émises restent dans l'espace monde même quand le joueur se déplace.
 
@@ -1685,8 +1698,11 @@ Quelques commandes pour reset un projet correctement
 <summary>Solution</summary>
 
 ```
+git checkout main-with-solutions
 git reset --hard origin/workshop
 git merge challenges-group-fix-mouse-aiming challenges-group-score
+
+git merge fix-default-weapon-direction challenges-group-score challenges-group-one-more-wave challenges-group-teleportation challenges-group-artist-pixel-art challenges-group-fix-mouse-aiming challenges-group-architect  challenges-group-continuous-laser-beam challenges-group-creative-coder
 ```
 
 </details>
