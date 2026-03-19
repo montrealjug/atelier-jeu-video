@@ -677,6 +677,38 @@ Place le oú tu veux dans la zone bleue et lance le jeu pour vérifier qu'il fon
 
 </details>
 
+#### **Défi 19 — Compte le temps de survie**
+
+Ouvre `src/scripts/autoloads/game_data.gd`.
+Ajoute une variable et une fonction pour mesurer le temps écoulé :
+
+```gdscript
+var survival_time: float = 0.0 # temps de survie en secondes
+
+## Incrémente le temps de survie chaque frame
+func _process(delta: float) -> void:
+	survival_time += delta # ajoute le temps écoulé
+```
+
+`GameData.survival_time` contient maintenant le nombre de secondes depuis le début de la partie !
+
+#### **Défi 20 — Affiche le temps de survie à l'écran**
+
+Ouvre `src/scenes/ui/hud/hud.tscn`. Ajoute un nœud **Label** et nomme-le `TimeLabel`.
+Dans le script du HUD, ajoute ou complète la fonction `_process` pour afficher le temps :
+
+```gdscript
+@onready var time_label: Label = $TimeLabel # référence au Label de temps
+
+[...]
+
+## Met à jour le chrono affiché chaque frame
+func _process(_delta: float) -> void:
+	time_label.text = str(int(GameData.survival_time)) + "s" # affiche le temps en entier
+```
+
+Va dans le viewport `2D` et place le temps oú tu veux sur l'écran.
+
 ---
 
 ### Groupe - Une Vague de Plus
@@ -687,7 +719,7 @@ Place le oú tu veux dans la zone bleue et lance le jeu pour vérifier qu'il fon
 
 > Dans ce groupe, tu vas **concevoir ta propre vague d'ennemis** de A à Z et l'ajouter au jeu. Pas de code requis — c'est un défi de game design !
 
-#### **Défi 19 — Crée une vague 6**
+#### **Défi 21 — Crée une vague 6**
 
 Dans le FileSystem, fais un clic droit sur `resources/wave_data/wave5_data.tres` et choisis **Duplicate**. Renomme le fichier en `wave6_data.tres`.
 Ouvre-la et crée la vague la plus difficile que tu puisses imaginer ! Plus d'ennemis, des knights, des archers...
@@ -699,7 +731,7 @@ Ouvre-la et crée la vague la plus difficile que tu puisses imaginer ! Plus d'en
 
 </details>
 
-#### **Défi 20 — Ajoute ta vague 6 au jeu**
+#### **Défi 22 — Ajoute ta vague 6 au jeu**
 
 Ouvre la scène `src/scenes/game/wave_manager/game.tscn`. Clique sur le nœud **WaveManager** dans l'arbre. Dans l'Inspector, trouve le tableau **`Waves Data`** et clique sur le **+** pour ajouter une entrée. Sélectionne ton fichier `wave6_data.tres`.
 Lance le jeu et survie jusqu'à ta vague !
@@ -713,7 +745,7 @@ Lance le jeu et survie jusqu'à ta vague !
 
 </details>
 
-#### **Défi 21 — N'oublies pas le UpgradeSpawner pour les bonus entre les vagues !**
+#### **Défi 23 — N'oublies pas le UpgradeSpawner pour les bonus entre les vagues !**
 
 Dans la même scène `src/scenes/game/wave_manager/game.tscn`, clique sur le nœud **UpgradeSpawner** dans l'arbre de scène.
 
@@ -738,7 +770,7 @@ Dans l'Inspector, trouve le tableau **`Waves Data`** et ajoute une entrée pour 
 >
 > Les sprites open source sont des images libres de droits que la communauté met à disposition gratuitement. C'est comme ça que fonctionne l'Open Source dans le monde de l'art !
 
-#### **Défi 22 — Observe le sprite actuel du sorcier**
+#### **Défi 24 — Observe le sprite actuel du sorcier**
 
 Dans le FileSystem, navigue jusqu'au dossier `assets/sprites/entities/`.
 Double-clique sur `mage.png` pour le prévisualiser dans la colonne de droite. C'est cette image qui représente ton sorcier dans le jeu !
@@ -773,7 +805,7 @@ Dans le FileSystem, ouvre `src/scenes/entities/player/sprite/player_sprite.tscn`
 >
 > Dans Godot, un objet qui bloque les autres s'appelle un **StaticBody2D** (corps statique). On lui ajoute une **CollisionShape2D** pour définir sa forme, et un visuel pour le voir à l'écran.
 
-#### **Défi 23 — Ouvre la scène principale du jeu**
+#### **Défi 25 — Ouvre la scène principale du jeu**
 
 Dans le FileSystem, navigue jusqu'à `src/scenes/game/wave_manager/` et double-clique sur **`game.tscn`**. Cliques dans la barre du haut sur `2D`.
 Tu vois l'arène du jeu dans le Viewport. C'est ici que tu vas placer tes murs !
@@ -839,7 +871,7 @@ Lance le jeu — le sorcier et les ennemis ne peuvent plus traverser tes murs !
 
 > Dans ce groupe, tu **écris du code** pour personnaliser le jeu selon tes envies. Ces défis ne sont pas forcément plus difficiles — ils t'apprennent à **exprimer ta créativité avec le code** !
 
-#### **Défi 24 — Change la couleur des boules de feu**
+#### **Défi 26 — Change la couleur des boules de feu**
 
 Ouvre `src/scenes/entities/player/fireball/fireball.gd`.
 Dans la fonction `_ready()`, après les deux lignes existantes, ajoute :
@@ -850,7 +882,7 @@ sprite.modulate = Color(0.5, 0, 1)  # boules de feu violettes !
 
 Lance le jeu. Essaie d'autres couleurs : `Color.GREEN`, `Color.BLUE`, `Color(1, 0.5, 0)` pour l'orange, `Color.RED`…
 
-#### **Défi 25 — Change la couleur de l'explosion**
+#### **Défi 27 — Change la couleur de l'explosion**
 
 Dans le même fichier `fireball.gd`, toujours dans `_ready()`, ajoute aussi :
 
@@ -859,38 +891,6 @@ spark_particles.modulate = Color(0, 1, 0)  # étincelles vertes !
 ```
 
 Lance le jeu et tire des boules de feu — les étincelles à l'impact changent de couleur !
-
-#### **Défi 26 — Compte le temps de survie**
-
-Ouvre `src/scripts/autoloads/game_data.gd`.
-Ajoute une variable et une fonction pour mesurer le temps écoulé :
-
-```gdscript
-var survival_time: float = 0.0 # temps de survie en secondes
-
-## Incrémente le temps de survie chaque frame
-func _process(delta: float) -> void:
-	survival_time += delta # ajoute le temps écoulé
-```
-
-`GameData.survival_time` contient maintenant le nombre de secondes depuis le début de la partie !
-
-#### **Défi 27 — Affiche le temps de survie à l'écran**
-
-Ouvre `src/scenes/ui/hud/hud.tscn`. Ajoute un nœud **Label** et nomme-le `TimeLabel`.
-Dans le script du HUD, ajoute ou complète la fonction `_process` pour afficher le temps :
-
-```gdscript
-@onready var time_label: Label = $TimeLabel # référence au Label de temps
-
-[...]
-
-## Met à jour le chrono affiché chaque frame
-func _process(_delta: float) -> void:
-	time_label.text = str(int(GameData.survival_time)) + "s" # affiche le temps en entier
-```
-
-Va dans le viewport `2D` et place le temps oú tu veux sur l'écran.
 
 ---
 

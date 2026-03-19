@@ -673,6 +673,38 @@ Place it wherever you want in the blue zone and launch the game to check that it
 
 </details>
 
+#### **Challenge 19 — Track your survival time**
+
+Open `src/scripts/autoloads/game_data.gd`.
+Add a variable and a function to measure elapsed time:
+
+```gdscript
+var survival_time: float = 0.0 # survival time in seconds
+
+## Increments survival time every frame
+func _process(delta: float) -> void:
+	survival_time += delta # add elapsed time
+```
+
+`GameData.survival_time` now holds the number of seconds since the game started!
+
+#### **Challenge 20 — Display the survival time on screen**
+
+Open `src/scenes/ui/hud/hud.tscn`. Add a **Label** node and name it `TimeLabel`.
+In the HUD script, add or complete the `_process` function to show the time:
+
+```gdscript
+@onready var time_label: Label = $TimeLabel # reference to the time Label
+
+[...]
+
+## Updates the timer display every frame
+func _process(_delta: float) -> void:
+	time_label.text = str(int(GameData.survival_time)) + "s" # show time as integer
+```
+
+Go to the `2D` viewport and place the time wherever you want on the screen.
+
 ---
 
 ### Group - One More Wave
@@ -683,7 +715,7 @@ Place it wherever you want in the blue zone and launch the game to check that it
 
 > In this group, you'll **design your own enemy wave** from scratch and add it to the game. No code required — pure game design!
 
-#### **Challenge 19 — Create wave 6**
+#### **Challenge 21 — Create wave 6**
 
 In the FileSystem, right-click `resources/wave_data/wave5_data.tres` and choose **Duplicate**. Rename the file to `wave6_data.tres`.
 Open it and design the hardest wave you can imagine! More enemies, knights, archers…
@@ -695,7 +727,7 @@ Open it and design the hardest wave you can imagine! More enemies, knights, arch
 
 </details>
 
-#### **Challenge 20 — Add your wave 6 to the game**
+#### **Challenge 22 — Add your wave 6 to the game**
 
 Open the scene `src/scenes/game/wave_manager/game.tscn`. Click the **WaveManager** node in the tree. In the Inspector, find the **`Waves Data`** array and click **+** to add an entry. Select your `wave6_data.tres` file.
 Launch the game and survive to your wave!
@@ -709,7 +741,7 @@ Launch the game and survive to your wave!
 
 </details>
 
-#### **Challenge 21 — Don't forget the UpgradeSpawner for between-wave bonuses!**
+#### **Challenge 23 — Don't forget the UpgradeSpawner for between-wave bonuses!**
 
 In the same scene `src/scenes/game/wave_manager/game.tscn`, click the **UpgradeSpawner** node in the scene tree.
 
@@ -734,7 +766,7 @@ In the Inspector, find the **`Waves Data`** array and add an entry for your 6th 
 >
 > Open source sprites are royalty-free images shared freely by the community. That's how Open Source works in the art world!
 
-#### **Challenge 22 — Look at the current wizard sprite**
+#### **Challenge 24 — Look at the current wizard sprite**
 
 In the FileSystem, navigate to `assets/sprites/entities/`.
 Double-click `mage.png` to preview it in the right panel. This is the image that represents your wizard in the game!
@@ -769,7 +801,7 @@ In the FileSystem, open `src/scenes/entities/player/sprite/player_sprite.tscn` b
 >
 > In Godot, an object that blocks others is called a **StaticBody2D**. You give it a **CollisionShape2D** to define its shape, and a visual element so you can see it.
 
-#### **Challenge 23 — Open the main game scene**
+#### **Challenge 25 — Open the main game scene**
 
 In the FileSystem, navigate to `src/scenes/game/wave_manager/` and double-click **`game.tscn`**. Click **2D** in the top toolbar.
 You can see the arena in the Viewport. This is where you'll place your walls!
@@ -835,7 +867,7 @@ Launch the game — the wizard and enemies can no longer walk through your walls
 
 > In this group, you **write code** to customize the game your way. These challenges aren't necessarily harder — they're about **expressing your creativity through code**!
 
-#### **Challenge 24 — Change the fireball color**
+#### **Challenge 26 — Change the fireball color**
 
 Open `src/scenes/entities/player/fireball/fireball.gd`.
 In the `_ready()` function, after the two existing lines, add:
@@ -846,7 +878,7 @@ sprite.modulate = Color(0.5, 0, 1)  # purple fireballs!
 
 Launch the game. Try other colors: `Color.GREEN`, `Color.BLUE`, `Color(1, 0.5, 0)` for orange, `Color.RED`…
 
-#### **Challenge 25 — Change the explosion color**
+#### **Challenge 27 — Change the explosion color**
 
 In the same `fireball.gd` file, still inside `_ready()`, also add:
 
@@ -855,38 +887,6 @@ spark_particles.modulate = Color(0, 1, 0)  # green explosion sparks!
 ```
 
 Launch the game and shoot fireballs — the sparks on impact change color!
-
-#### **Challenge 26 — Track your survival time**
-
-Open `src/scripts/autoloads/game_data.gd`.
-Add a variable and a function to measure elapsed time:
-
-```gdscript
-var survival_time: float = 0.0 # survival time in seconds
-
-## Increments survival time every frame
-func _process(delta: float) -> void:
-	survival_time += delta # add elapsed time
-```
-
-`GameData.survival_time` now holds the number of seconds since the game started!
-
-#### **Challenge 27 — Display the survival time on screen**
-
-Open `src/scenes/ui/hud/hud.tscn`. Add a **Label** node and name it `TimeLabel`.
-In the HUD script, add or complete the `_process` function to show the time:
-
-```gdscript
-@onready var time_label: Label = $TimeLabel # reference to the time Label
-
-[...]
-
-## Updates the timer display every frame
-func _process(_delta: float) -> void:
-	time_label.text = str(int(GameData.survival_time)) + "s" # show time as integer
-```
-
-Go to the `2D` viewport and place the time wherever you want on the screen.
 
 ---
 
