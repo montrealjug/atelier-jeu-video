@@ -1,17 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://braa1unmmys20"]
+[gd_scene format=3 uid="uid://braa1unmmys20"]
 
 [ext_resource type="PackedScene" uid="uid://dmx638jp264ur" path="res://src/scenes/ui/hud/hp_bar/hp_indicator.tscn" id="1_y1o3i"]
 [ext_resource type="PackedScene" uid="uid://ph68ehp7k5c1" path="res://src/scenes/ui/hud/wave_indicator/wave_indicator.tscn" id="2_ov136"]
 
-[node name="Hud" type="Control"]
+[sub_resource type="GDScript" id="GDScript_y1o3i"]
+script/source = "extends Control
+
+@onready var score_label: Label = $ScoreLabel # référence au Label de score
+@onready var time_label: Label = $TimeLabel # référence au Label de temps
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	score_label.text = \"Score : \" + str(GameData.score) # affiche le score actuel
+	time_label.text = str(int(GameData.survival_time)) + \"s\" # affiche le temps en entier
+"
+
+[node name="Hud" type="Control" unique_id=496099902]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = SubResource("GDScript_y1o3i")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1379526975]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -20,16 +38,30 @@ grow_horizontal = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=896779619]
 layout_mode = 2
 alignment = 1
 
-[node name="HpBar" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_y1o3i")]
+[node name="HpBar" parent="MarginContainer/HBoxContainer" unique_id=404651295 instance=ExtResource("1_y1o3i")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer" unique_id=20379188]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="WaveIndicator" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_ov136")]
+[node name="WaveIndicator" parent="MarginContainer/HBoxContainer" unique_id=416727228 instance=ExtResource("2_ov136")]
 layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=2118180257]
+layout_mode = 0
+offset_left = 419.0
+offset_top = 235.0
+offset_right = 459.0
+offset_bottom = 258.0
+
+[node name="TimeLabel" type="Label" parent="." unique_id=1444851330]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 240.0
+offset_right = 61.0
+offset_bottom = 263.0

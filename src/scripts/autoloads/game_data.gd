@@ -17,14 +17,17 @@ var waves_data: Array[WaveData]
 var game_root: Node2D
 
 ## -- score variables here --
+var score: int = 0
 
 ## -- survival variables here --
+var survival_time: float = 0.0 # temps de survie en secondes
 
 func _ready() -> void:
-	pass
+	Signals.enemy_died.connect(_on_enemy_died)
 
 func _on_enemy_died(_enemy: Enemy) -> void:
-	pass
+	score += 1
+	print("Score : ", score)
 
 func _process(delta: float) -> void:
-	pass
+	survival_time += delta # ajoute le temps écoulé
