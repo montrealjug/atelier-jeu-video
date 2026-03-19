@@ -1824,14 +1824,15 @@ Dans l'Inspector du nœud `Storm`, la propriété `Lightning Strike Scene` doit 
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
 
-1. Ouvres le dossier windows à l'emplacement suivant: `C:\workspace\\`
-2. Fais un `Clic-Droit` sur le dossier `atelier-jeu-video`
-3. Sélectionne `Compress to ...` `>` `ZIP File`
-4. Après compression, un fichier sera créé avec l'extension `******.zip`. Renomme le avec ton prénom
-5. Clique sur [ce lien pour ouvrir directement le dossier Google Drive](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj) dans un navigateur internet.
+1. Ouvres le dossier windows à l'emplacement suivant: `C:\workspace\atelier-jeu-video`
+2. double clic sur le fichie `save.bat`, entre un nom de sauvegarde et lorsque ça t'est demandé, choisis ZIP.
+3. Après compression, tu trouveras ton projet compressé au format ZIP dans ton projet du jeux vidéo.
+4. Clique sur [ce lien pour ouvrir directement le dossier Google Drive](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj) dans un navigateur internet.
+5. Si ce n'est pas déjà fait, connectes toi avec le compte `lab.devoxx4kidsqc@gmail.com` - demande nous le mot de passe.
 6. Glisse ton fichier `******.zip` dans le navigateur pour uploader ton fichier sur notre Google Drive.
 7. Demandes un QR code papier aux instructeurs qui contient le lien vers notre page [https://linktr.ee/devoxx4kids_montreal](https://linktr.ee/devoxx4kids_montreal)
 8. Une fois chez toi, rends toi à cette adresse avec un navigateur internet, descend jusqu'àu bouton avec l'icone de Godot qui pointe vers le dossier Google Drive avec ton jeu.
+9. Tu n'as pas besoin de te reconnecter au compte, le dossier est public pour le téléchargement, tu peux même partager le QR code à tes amis si tu veux !
 
 ![Bouton-Jeux-Google-Drive](./readme-images/jeux-google-drive.png)
 
