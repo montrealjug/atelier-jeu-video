@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://btdl5bib3qgbm"]
+[gd_scene format=3 uid="uid://btdl5bib3qgbm"]
 
 [ext_resource type="Shader" uid="uid://b68sxx64mnqgf" path="res://resources/visual_shaders/flash.tres" id="1_8g1s0"]
-[ext_resource type="Texture2D" uid="uid://di4eri2ujk4b2" path="res://assets/sprites/entities/mage.png" id="1_x5fo1"]
 [ext_resource type="Script" uid="uid://72goo1gpu8id" path="res://src/scenes/entities/player/sprite/player_sprite.gd" id="2_1ifkv"]
+[ext_resource type="Texture2D" uid="uid://eg6uvmetk8ul" path="res://assets/sprites/entities/alien.png" id="2_8g1s0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_us741"]
 shader = ExtResource("1_8g1s0")
@@ -47,14 +47,12 @@ _data = {
 &"sprite_animation": SubResource("Animation_x5fo1")
 }
 
-[node name="PlayerSprite" type="Sprite2D"]
+[node name="PlayerSprite" type="Sprite2D" unique_id=1368802262]
 material = SubResource("ShaderMaterial_us741")
-texture = ExtResource("1_x5fo1")
+texture = ExtResource("2_8g1s0")
 offset = Vector2(0, -8)
 script = ExtResource("2_1ifkv")
 
-[node name="AnimationTree" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_swokn")
-}
-autoplay = "sprite_animation"
+[node name="AnimationTree" type="AnimationPlayer" parent="." unique_id=76379871]
+libraries/ = SubResource("AnimationLibrary_swokn")
+autoplay = &"sprite_animation"
