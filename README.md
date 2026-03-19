@@ -171,6 +171,7 @@ Suis ces étapes ci dessous dans l'ordre. Demande à un animateur si tu es bloqu
    - [ ] **[Groupe de défis 10](#groupe---ajoutes-une-nouvelle-arme-laser)** - 🔫 Ajoutes une nouvelle arme laser
    - [ ] **[Groupe de défis 11](#groupe---laser-continu)** - ⚡ Laser Continu
    - [ ] **[Groupe de défis 12](#groupe---téléportation)** - 🌀 Téléportation
+   - [ ] **[Groupe de défis 13](#groupe---tempête-électrique)** - ⛈️ Tempête Électrique
 
 7. [ ] **[Upload ton projet](#upload-ton-projet)** - ⬆️ avant de partir dans notre [dossier Google Drive](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj?usp=sharing) pour le retrouver chez toi
 8. [ ] **[Présente ton jeu !](#présente-ton-jeu)** - 🏁 à tes parents à la fin de la session !
