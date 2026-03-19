@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="WaveData" format=3 uid="uid://3m57nh74gxw0"]
+
+[ext_resource type="Script" uid="uid://df2nx5j0m8id6" path="res://src/scripts/resources/wave_data.gd" id="1_sax7y"]
+[ext_resource type="Script" uid="uid://tgvholfykshc" path="res://src/scripts/resources/sub_wave_data.gd" id="2_6wk3v"]
+
+[sub_resource type="Resource" id="Resource_v1j0h"]
+script = ExtResource("2_6wk3v")
+enemy_type = 2
+amount = 48
+order = 1
+metadata/_custom_type_script = "uid://tgvholfykshc"
+
+[sub_resource type="Resource" id="Resource_h5yla"]
+script = ExtResource("2_6wk3v")
+pattern = 1
+enemy_type = 3
+amount = 48
+order = 2
+metadata/_custom_type_script = "uid://tgvholfykshc"
+
+[resource]
+script = ExtResource("1_sax7y")
+sub_waves = Array[ExtResource("2_6wk3v")]([SubResource("Resource_v1j0h"), SubResource("Resource_h5yla")])
+metadata/_custom_type_script = "uid://df2nx5j0m8id6"
