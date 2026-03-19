@@ -1542,14 +1542,15 @@ Launch the game — a burst of purple particles explodes at the departure point,
 
 [Back to steps ⬆️](#workshop-steps)
 
-1. Open the Windows folder at the following location: `C:\workspace\`
-2. `Right-click` on the `atelier-jeu-video` folder
-3. Select `Compress to ...` `>` `ZIP File`
-4. After compression, a file with the extension `******.zip` will be created. Rename it with your first name
-5. Click on [this link to open the Google Drive folder directly](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj) in a web browser
-6. Drag your `******.zip` file into the browser to upload it to our Google Drive
-7. Ask the instructors for a paper QR code containing the link to our page [https://linktr.ee/devoxx4kids_montreal](https://linktr.ee/devoxx4kids_montreal)
-8. Once at home, go to that address in a browser, scroll down to the button with the Godot icon that points to the Google Drive folder with your game
+1. Open the Windows folder at the following location: `C:\workspace\atelier-jeu-video`
+2. Double-click the file `save.bat`, enter a backup name, and when prompted, choose ZIP.
+3. After compression, you will find your project compressed as a ZIP file inside your video game project folder.
+4. Click [this link to open the Google Drive folder directly](https://drive.google.com/drive/folders/1Nno74QtZJMh8ZiMtmIGogpXdfisY1pnj) in a web browser.
+5. If you have not already done so, sign in with the account `lab.devoxx4kidsqc@gmail.com` — ask us for the password.
+6. Drag your `******.zip` file into the browser to upload it to our Google Drive.
+7. Ask the instructors for a printed QR code that contains the link to our page: [https://linktr.ee/devoxx4kids_montreal](https://linktr.ee/devoxx4kids_montreal)
+8. Once you are home, go to this address in a web browser, then scroll down to the button with the Godot icon that links to the Google Drive folder containing your game.
+9. You do not need to sign in to the account again, since the folder is public for downloading. You can even share the QR code with your friends if you want.
 
 ![Games-Google-Drive-Button](./readme-images/jeux-google-drive.png)
 
