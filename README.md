@@ -119,6 +119,36 @@ func _process(delta):
 
 ---
 
+## 💾 Sauvegarder ton projet
+
+Tu peux sauvegarder ton projet à tout moment grâce aux scripts de sauvegarde inclus dans le dossier du jeu.
+
+### Sur Windows — double-clique sur `save.bat`
+
+Le fichier se trouve ici :
+
+```
+C:\workspace\atelier-jeu-video\save.bat
+```
+
+> Il y a aussi `save.sh` à utiliser sur Linux
+
+Double-clique dessus.
+
+Le fichier se trouve dans le dossier du jeu. Double-clique dessus et choisis **"Exécuter"** (ou "Run in Terminal") si une fenêtre te le demande. Une fenêtre noire s'ouvre avec le Dungeon Save System 🧙. Il te demande deux choses :
+
+1. **Un nom de sauvegarde** (20 caractères max) — par exemple ton prénom, ou `"avant-laser"`, `"version-finale"`…
+2. **GIT ou ZIP** — choisis ta méthode :
+
+| Méthode | Quand l'utiliser                                                                                                                                     |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ZIP** | Dans tous les cas — crée un fichier `<nom>.zip` dans le dossier du jeu. C'est la méthode recommandée pour tout le monde.                             |
+| **GIT** | Pendant le workshop uniquement, si toi ou quelqu'un dans ton entourage sait utiliser Git. Ça enregistre une version dans l'historique Git du projet. |
+
+> 💡 **Tu ne sais pas ce qu'est Git ?** Choisis **ZIP** — c'est simple, rapide, et ça marche toujours !
+
+---
+
 ## Étapes de l'atelier
 
 Suis ces étapes ci dessous dans l'ordre. Demande à un animateur si tu es bloqué !
@@ -1510,6 +1540,284 @@ Lance le jeu — une gerbe de particules violettes explose au point de départ, 
 
 ---
 
+### Groupe - Tempête Électrique
+
+[Revenir aux étapes ⬆️](#étapes-de-latelier)
+
+![Group Image](./readme-images/challenges-group-lightning-storm.png)
+
+> Dans ce groupe, tu vas transformer la vague 6 en une vraie tempête électrique ! L'arène s'assombrira, des éclairs illumineront le ciel, et des zones de foudre mortelles apparaîtront au sol. Si le sorcier marche dessus au mauvais moment… il perd de la vie !
+
+#### **Défi 45 — Crée le gestionnaire de tempête**
+
+Ouvre la scène `src/scenes/game/wave_manager/game.tscn`. Dans l'arbre de scène, fais un **clic droit sur le nœud racine** et choisis **Add Child Node**.
+
+Cherche **`CanvasLayer`** et clique **Create**. Renomme-le `Storm`.
+
+Dans l'**Inspector**, règle la propriété **`Layer`** à `100` (pour s'afficher par-dessus tout le jeu).
+
+Maintenant, ajoute deux nœuds enfants à `Storm` :
+
+**L'assombrissement :**
+
+- Clic droit sur `Storm` → Add Child Node → **`ColorRect`**, renomme-le `DarkOverlay`
+- Dans l'Inspector, clique sur **`Layout`** → **`Full Rect`** (pour couvrir tout l'écran)
+- Change la couleur : `(R: 0, G: 0, B: 0, A: 100)` — noir semi-transparent
+- Décoche **`Visible`** ❌
+
+**Le flash d'éclair :**
+
+- Clic droit sur `Storm` → Add Child Node → **`ColorRect`**, renomme-le `FlashOverlay`
+- Dans l'Inspector, clique sur **`Layout`** → **`Full Rect`**
+- Change la couleur : `(R: 255, G: 255, B: 255, A: 200)` — blanc presque opaque
+- Décoche **`Visible`** ❌
+
+**Le timer des flashs :**
+
+- Clic droit sur `Storm` → Add Child Node → **`Timer`**, renomme-le `FlashTimer`
+- `One Shot` : ✅, `Autostart` : ❌
+
+Fais un **clic droit sur `Storm`** → **Attach Script**. Nomme-le `storm.gd` et place-le dans `src/scenes/game/wave_manager/`. Clique **Create**.
+
+Sauvegarde avec **Ctrl+S**.
+
+#### **Défi 46 — Assombris l'arène pendant la vague 6**
+
+Ouvre `storm.gd` et remplace son contenu par ce code :
+
+```gdscript
+## Gère les effets visuels de la tempête électrique en vague 6
+extends CanvasLayer
+
+@onready var dark_overlay: ColorRect = $DarkOverlay # le voile sombre
+@onready var flash_overlay: ColorRect = $FlashOverlay # l'éclair blanc
+@onready var flash_timer: Timer = $FlashTimer # le timer entre deux éclairs
+
+
+func _ready() -> void:
+	Signals.wave_started.connect(_on_wave_started) # écoute le signal de début de vague
+	flash_timer.timeout.connect(_on_flash_timer_timeout) # écoute la fin du timer
+
+
+## Déclenche la tempête quand la vague 6 commence
+func _on_wave_started(wave_number: int) -> void:
+	if wave_number == 6: # seulement en vague 6 ?
+		dark_overlay.visible = true # assombrit l'arène
+		_programmer_prochain_eclair() # lance le premier éclair
+
+
+## Programme le prochain flash dans un délai aléatoire de 5 à 15 secondes
+func _programmer_prochain_eclair() -> void:
+	flash_timer.wait_time = randf_range(5.0, 15.0) # durée aléatoire
+	flash_timer.start() # démarre le timer
+
+
+## Quand le timer se termine : fait clignoter l'écran
+func _on_flash_timer_timeout() -> void:
+	flash_overlay.visible = true # flash blanc !
+	await get_tree().create_timer(0.12).timeout # attend 0.12 secondes
+	flash_overlay.visible = false # éteint le flash
+	_programmer_prochain_eclair() # prépare le prochain
+```
+
+Lance le jeu et survie jusqu'à la vague 6 — l'arène devient sombre et des éclairs illuminent l'écran ! ⚡
+
+> 💡 **`randf_range(5.0, 15.0)`** génère un nombre décimal aléatoire entre 5 et 15. **`await`** met le code en pause jusqu'à ce que le timer soit terminé, comme dans la téléportation.
+
+<details>
+<summary>Solution</summary>
+
+L'arbre de scène de `Storm` devrait ressembler à ceci :
+
+```
+Storm (CanvasLayer, layer = 100)
+├── DarkOverlay (ColorRect, noir semi-transparent, visible = false)
+├── FlashOverlay (ColorRect, blanc, visible = false)
+└── FlashTimer (Timer, one_shot = true)
+```
+
+</details>
+
+---
+
+#### **Défi 47 — Crée la scène d'une zone de foudre**
+
+Tu vas créer une nouvelle scène pour les zones de foudre au sol — ces petits carrés jaunes qui avertissent le joueur avant que la foudre tombe !
+
+Dans le **FileSystem**, fais un clic droit sur le dossier `src/scenes/game/wave_manager/` → **New Scene**.
+
+Dans l'arbre de scène vide, clique sur **Other Node** → cherche **`Node2D`** → **Create**. Renomme-le `LightningStrike`.
+
+Ajoute les nœuds enfants suivants à `LightningStrike` :
+
+**Le carré d'avertissement :**
+
+- Add Child Node → **`ColorRect`**, renomme-le `Warning`
+- Dans l'Inspector : `Size` = `(32, 32)`, `Position` = `(-16, -16)` (pour centrer)
+- Couleur : `(R: 255, G: 220, B: 0, A: 200)` — jaune électrique
+
+**Le flash au moment de l'impact :**
+
+- Add Child Node → **`ColorRect`**, renomme-le `Strike`
+- Dans l'Inspector : `Size` = `(32, 32)`, `Position` = `(-16, -16)`
+- Couleur : `(R: 255, G: 255, B: 255, A: 255)` — blanc pur
+- Décoche **`Visible`** ❌
+
+**Le timer avant l'impact (3 secondes d'avertissement) :**
+
+- Add Child Node → **`Timer`**, renomme-le `StrikeTimer`
+- `Wait Time` : `3.0`, `One Shot` : ✅, `Autostart` : ✅
+
+Fais un **clic droit sur `LightningStrike`** → **Attach Script** → nomme-le `lightning_strike.gd`, dans `src/scenes/game/wave_manager/`. Clique **Create**.
+
+Sauvegarde la scène avec **Ctrl+S** sous le nom `lightning_strike.tscn` dans `src/scenes/game/wave_manager/`.
+
+Maintenant, ouvre `lightning_strike.gd` et écris ce code :
+
+```gdscript
+## Un éclair qui tombe sur une zone : avertissement jaune, puis impact blanc
+extends Node2D
+
+@onready var warning: ColorRect = $Warning # le carré jaune d'avertissement
+@onready var strike: ColorRect = $Strike # le flash blanc de l'impact
+@onready var strike_timer: Timer = $StrikeTimer # le timer de 3 secondes
+
+
+func _ready() -> void:
+	strike_timer.timeout.connect(_on_strike_timer_timeout) # écoute la fin du timer
+
+
+## Quand les 3 secondes sont écoulées : déclenche l'impact !
+func _on_strike_timer_timeout() -> void:
+	warning.visible = false # cache l'avertissement
+	strike.visible = true # flash blanc !
+	_infliger_degats() # vérifie si le joueur est là
+	await get_tree().create_timer(0.3).timeout # attend 0.3 secondes
+	queue_free() # supprime cette zone
+
+
+## Vérifie si le joueur est sur la zone, et lui inflige des dégâts
+func _infliger_degats() -> void:
+	var player = GameData.player
+	if player == null: # pas de joueur ?
+		return
+	var distance = global_position.distance_to(player.global_position)
+	if distance < 24: # le joueur est dans la zone ?
+		var dmg = DamageInformation.new() # crée un objet de dégâts
+		dmg.damage = 1 # 1 point de dégât
+		player.player_health.hurt_box.hurt.emit(dmg) # inflige les dégâts !
+```
+
+> 💡 **`global_position.distance_to(...)`** calcule la distance entre deux points dans le monde. **`queue_free()`** supprime le nœud de la scène — c'est comme ça qu'on efface les objets en Godot.
+
+<details>
+<summary>Solution</summary>
+
+L'arbre de scène de `LightningStrike` devrait ressembler à ceci :
+
+```
+LightningStrike (Node2D)
+├── Warning (ColorRect, 32×32, jaune, visible = true)
+├── Strike (ColorRect, 32×32, blanc, visible = false)
+└── StrikeTimer (Timer, wait_time = 3.0, one_shot = true, autostart = true)
+```
+
+</details>
+
+---
+
+#### **Défi 48 — Fais apparaître les zones de foudre pendant la vague 6**
+
+Maintenant on va faire spawner entre 0 et 10 zones de foudre aléatoirement dans l'arène, régulièrement pendant la vague 6.
+
+Retourne dans `storm.gd`. Ajoute un nouveau **Timer** à la scène `Storm` :
+
+Dans `game.tscn`, sélectionne le nœud `Storm` → Add Child Node → **`Timer`**, renomme-le `LightningSpawnTimer`.
+
+Dans l'Inspector : `Wait Time` : `4.0`, `One Shot` : ❌, `Autostart` : ❌
+
+Sauvegarde avec **Ctrl+S**.
+
+Maintenant, mets à jour `storm.gd` pour ajouter la logique de spawn :
+
+```gdscript
+## Gère les effets visuels de la tempête électrique en vague 6
+extends CanvasLayer
+
+@export var lightning_strike_scene: PackedScene # la scène de zone de foudre
+
+@onready var dark_overlay: ColorRect = $DarkOverlay # le voile sombre
+@onready var flash_overlay: ColorRect = $FlashOverlay # l'éclair blanc
+@onready var flash_timer: Timer = $FlashTimer # le timer entre deux éclairs
+@onready var lightning_spawn_timer: Timer = $LightningSpawnTimer # le timer de spawn
+
+
+func _ready() -> void:
+	Signals.wave_started.connect(_on_wave_started) # écoute le signal de début de vague
+	flash_timer.timeout.connect(_on_flash_timer_timeout) # écoute la fin du timer
+	lightning_spawn_timer.timeout.connect(_on_lightning_spawn_timer_timeout)
+
+
+## Déclenche la tempête quand la vague 6 commence
+func _on_wave_started(wave_number: int) -> void:
+	if wave_number == 6: # seulement en vague 6 ?
+		dark_overlay.visible = true # assombrit l'arène
+		_programmer_prochain_eclair() # lance le premier éclair
+		lightning_spawn_timer.start() # commence à faire apparaître les zones
+
+
+## Programme le prochain flash dans un délai aléatoire de 5 à 15 secondes
+func _programmer_prochain_eclair() -> void:
+	flash_timer.wait_time = randf_range(5.0, 15.0) # durée aléatoire
+	flash_timer.start() # démarre le timer
+
+
+## Quand le timer se termine : fait clignoter l'écran
+func _on_flash_timer_timeout() -> void:
+	flash_overlay.visible = true # flash blanc !
+	await get_tree().create_timer(0.12).timeout # attend 0.12 secondes
+	flash_overlay.visible = false # éteint le flash
+	_programmer_prochain_eclair() # prépare le prochain
+
+
+## Fait apparaître entre 0 et 10 zones de foudre dans l'arène
+func _on_lightning_spawn_timer_timeout() -> void:
+	var nombre = randi_range(0, 10) # combien d'éclairs ce tour-ci ?
+	for i in nombre: # répète "nombre" fois
+		_spawn_un_eclair()
+
+
+## Place une zone de foudre à une position aléatoire dans la zone de jeu
+func _spawn_un_eclair() -> void:
+	if lightning_strike_scene == null: # la scène est-elle assignée ?
+		return
+	var zone = GameData.spawn_area # la zone où les ennemis apparaissent
+	var pos = Vector2(
+		randf_range(zone.position.x, zone.end.x), # x aléatoire dans la zone
+		randf_range(zone.position.y, zone.end.y)  # y aléatoire dans la zone
+	)
+	var strike = lightning_strike_scene.instantiate() # crée une zone de foudre
+	strike.global_position = pos # place-la dans le monde
+	GameData.game_root.add_child(strike) # ajoute-la à la scène principale
+```
+
+Maintenant, dans l'Inspector du nœud `Storm` (dans `game.tscn`), tu dois voir la propriété **`Lightning Strike Scene`**.
+
+Glisse le fichier `lightning_strike.tscn` depuis le FileSystem vers cette propriété.
+
+Lance le jeu et survie jusqu'à la vague 6 — des carrés jaunes apparaissent aléatoirement dans l'arène, puis des éclairs s'abattent ! ⚡
+
+> 💡 **`randi_range(0, 10)`** génère un entier aléatoire entre 0 et 10. **`instantiate()`** crée une copie d'une scène dans le jeu — comme les ennemis qui apparaissent depuis leurs scènes !
+
+<details>
+<summary>Solution</summary>
+
+Dans l'Inspector du nœud `Storm`, la propriété `Lightning Strike Scene` doit pointer vers `res://src/scenes/game/wave_manager/lightning_strike.tscn`.
+
+</details>
+
+---
+
 ### Upload ton Projet
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
@@ -1554,6 +1862,7 @@ Il est temps de présenter ton travail à tes parents. Explique-leur :
   - Groupe 8: Créer une arme laser, écrire un script, créer une scène, connecter au système d'armes
   - Groupe 9: Créer un laser continu avec RayCast2D, dégâts au fil du temps, désactivation automatique à la mort d'un ennemi
   - Groupe 10: Ajouter la téléportation sur la souris avec la touche E, temps de recharge
+  - Groupe 11: Transformer la vague 6 en tempête électrique : écran sombre, flashs d'éclair, zones de foudre mortelles
 - Quel défi était le plus difficile ? Pourquoi ?
 - Tu as personnalisé le jeu ? Comment ?
 

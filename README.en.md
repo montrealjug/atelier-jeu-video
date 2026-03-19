@@ -119,6 +119,34 @@ func _process(delta):
 
 ---
 
+## 💾 Saving Your Project
+
+You can save your project at any time using the save scripts included in the game folder.
+
+### On Windows — double-click `save.bat`
+
+The file is located here:
+
+```
+C:\workspace\atelier-jeu-video\save.bat
+```
+
+> There is also `save.sh` to use on Linux
+
+Double-click it. If you are on Linux, double-click `save.sh` and choose **"Run"** (or "Run in Terminal") if a window prompts you. A black window opens with the Dungeon Save System 🧙. It will ask you two things:
+
+1. **A save name** (max 20 characters) — for example your first name, or `"before-laser"`, `"final-version"`…
+2. **GIT or ZIP** — choose your method:
+
+| Method | When to use it |
+| ------ | -------------- |
+| **ZIP** | In all cases — creates a `<name>.zip` file in the game folder. This is the recommended method for everyone. |
+| **GIT** | During the workshop only, if you or someone you know is familiar with Git. It records a version in the project's Git history. |
+
+> 💡 **Not sure what Git is?** Choose **ZIP** — it's simple, fast, and always works!
+
+---
+
 ## Workshop Steps
 
 Follow these steps below in order. Ask a workshop leader if you're stuck!
