@@ -20,6 +20,7 @@ var game_root: Node2D
 var score: int = 0
 
 ## -- survival variables here --
+var survival_time: float = 0.0 # temps de survie en secondes
 
 func _ready() -> void:
 	Signals.enemy_died.connect(_on_enemy_died)
@@ -29,4 +30,4 @@ func _on_enemy_died(_enemy: Enemy) -> void:
 	print("Score : ", score)
 
 func _process(delta: float) -> void:
-	pass
+	survival_time += delta # ajoute le temps écoulé

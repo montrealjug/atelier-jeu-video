@@ -7,6 +7,7 @@
 script/source = "extends Control
 
 @onready var score_label: Label = $ScoreLabel # référence au Label de score
+@onready var time_label: Label = $TimeLabel # référence au Label de temps
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,6 +17,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	score_label.text = \"Score : \" + str(GameData.score) # affiche le score actuel
+	time_label.text = str(int(GameData.survival_time)) + \"s\" # affiche le temps en entier
 "
 
 [node name="Hud" type="Control" unique_id=496099902]
@@ -56,3 +58,10 @@ offset_left = 419.0
 offset_top = 235.0
 offset_right = 459.0
 offset_bottom = 258.0
+
+[node name="TimeLabel" type="Label" parent="." unique_id=1444851330]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 240.0
+offset_right = 61.0
+offset_bottom = 263.0
