@@ -166,8 +166,7 @@ Follow these steps below in order. Ask a workshop leader if you're stuck!
    - [ ] **[Challenge Group 7](#group---pixel-art-artist)** - 🎨 Pixel Art Artist - Customize your character
    - [ ] **[Challenge Group 8](#group---architect)** - 🏗️ Architect - Add Obstacles
    - [ ] **[Challenge Group 9](#group---creative-coder)** - 🎮 Creative Coder - Customize with code
-   - [ ] **[Challenge Group 10](#group---add-a-new-laser-weapon)** - 🔫 Add a New Laser Weapon
-   - [ ] **[Challenge Group 11](#group---continuous-laser)** - ⚡ Continuous Laser
+   - [ ] **[Challenge Group 11](#group---add-a-new-laser-beam-weapon)** - ⚡ Add a New Laser Beam Weapon
    - [ ] **[Challenge Group 12](#group---teleportation)** - 🌀 Teleportation
    - [ ] **[Challenge Group 13](#group---lightning-storm)** - ⛈️ Lightning Storm
 
@@ -890,6 +889,7 @@ Launch the game and shoot fireballs — the sparks on impact change color!
 
 ---
 
+<!--
 ### Group - Add a New Laser Weapon
 
 ![Group Image](./readme-images/challenges-group-new-laser-weapon.png)
@@ -1054,10 +1054,11 @@ Go to **Project > Project Settings > Input Map**, find `attack_secondary` and cl
 Open `src/scenes/entities/player/weapon/weapon.tscn`, select the **Weapon** node, and in the Inspector drag `laser.tscn` onto the **Laser Scene** property.
 
 Launch the game — **left-click** fires fireballs, **right-click** fires lasers! 🔵
+-->
 
 ---
 
-### Group - Continuous Laser
+### Group - Add a New Laser Beam Weapon
 
 ![Group Image](./readme-images/challenges-group-continuous-laser-beam.png)
 
@@ -1065,7 +1066,7 @@ Launch the game — **left-click** fires fireballs, **right-click** fires lasers
 
 > In this group, you'll create a **continuous laser beam** — it stays on until an enemy dies! Instead of dealing damage per hit, it deals **damage over time**. You'll use a new Godot tool called `RayCast2D` to detect what's in the laser's path each frame.
 
-#### **Challenge 32 — Understand RayCast2D**
+#### **Challenge 28 — Understand RayCast2D**
 
 A `RayCast2D` shoots an invisible ray from a point in a direction. Every frame, it answers: "Did I hit something? If so, what is it and where exactly?"
 
@@ -1081,7 +1082,7 @@ Think about it:
 - Why is `RayCast2D` better than a very long Area2D for a beam?
 - What's the difference between "10 damage per hit" and "10 damage per second"?
 
-#### **Challenge 33 — Create the continuous laser scene**
+#### **Challenge 29 — Create the continuous laser scene**
 
 Create a new folder `src/scenes/entities/player/continuous_laser/`.
 
@@ -1118,7 +1119,7 @@ Save with **Ctrl+S**.
 
 > 💡 Since `ContinuousLaser` will be a **child of the Weapon**, it automatically rotates with it — the beam will always point in the direction the wizard is aiming!
 
-#### **Challenge 34 — Write the continuous laser script**
+#### **Challenge 30 — Write the continuous laser script**
 
 In the folder `src/scenes/entities/player/continuous_laser/`, create a new script `continuous_laser.gd` and attach it to the `ContinuousLaser` node.
 
@@ -1205,7 +1206,7 @@ func _on_enemy_died(_enemy: Enemy) -> void:
 
 Save with **Ctrl+S**.
 
-#### **Challenge 35 — Connect the continuous laser to the weapon**
+#### **Challenge 31 — Connect the continuous laser to the weapon**
 
 **Add the scene to the weapon:**
 Open `src/scenes/entities/player/weapon/weapon.tscn`. In the scene tree, right-click the **Weapon** root node → **Instantiate Child Scene** → select `continuous_laser.tscn`.
@@ -1237,7 +1238,7 @@ In `_process`, replace the `attack_secondary` block with:
 
 Launch the game — **hold right-click** to fire the continuous laser. Release to turn it off, or let it kill an enemy and it will shut off automatically! ⚡
 
-#### **Challenge 36 — Add a glow effect to the beam**
+#### **Challenge 32 — Add a glow effect to the beam**
 
 A real laser beam has a glow around it! We'll add a second, wider, semi-transparent `Line2D` behind the main beam to simulate this effect.
 
@@ -1283,7 +1284,7 @@ func _process(_delta: float) -> void:
 
 Launch the game — the beam now has a luminous halo around it! ✨
 
-#### **Challenge 37 — Add a laser sound**
+#### **Challenge 33 — Add a laser sound**
 
 **In `continuous_laser.tscn`:**
 
@@ -1336,7 +1337,7 @@ Launch the game — the laser now makes sound while active and goes silent when 
 
 > In this group, you'll add a special ability to the wizard: by pressing **E**, he instantly teleports to wherever your mouse is pointing! You'll modify the player script directly and add a cooldown to keep the ability balanced.
 
-#### **Challenge 38 — Add the keyboard action**
+#### **Challenge 34 — Add the keyboard action**
 
 Before writing any code, you need to tell Godot that the **E** key corresponds to the action `"teleport"`.
 
@@ -1350,7 +1351,7 @@ Close the Project Settings window.
 
 > 💡 This is how the whole game works: `"attack_primary"`, `"attack_secondary"`, `"move_up"` are all actions defined here and read in code using `Input.is_action_pressed(...)`.
 
-#### **Challenge 39 — Write the teleport code**
+#### **Challenge 35 — Write the teleport code**
 
 Open `src/scenes/entities/player/player.gd`.
 
@@ -1370,7 +1371,7 @@ Think about it:
 - What is the difference between `global_position` and `position`?
 - What would happen if you replaced `is_action_pressed` with `is_action_just_pressed`?
 
-#### **Challenge 40 — Add a cooldown**
+#### **Challenge 36 — Add a cooldown**
 
 Right now you can teleport endlessly without any limit. Let's add a **1 second** cooldown.
 
@@ -1409,7 +1410,7 @@ Launch the game — you can teleport once, then you must wait 1 second before us
 
 > 💡 Change the `Wait Time` value on the timer in the Inspector to adjust the cooldown duration. `0.5` for a quick blink, `3.0` to make it more strategic!
 
-#### **Challenge 41 — Show the cooldown on screen**
+#### **Challenge 37 — Show the cooldown on screen**
 
 We'll display the remaining time directly above the wizard — so the player always knows when they can teleport again.
 
@@ -1445,7 +1446,7 @@ func _process(_delta: float) -> void:
 
 Launch the game — when you teleport, a countdown appears above the wizard and disappears when the ability is ready again!
 
-#### **Challenge 42 — Add a teleport animation**
+#### **Challenge 38 — Add a teleport animation**
 
 We'll make the wizard fade out, teleport, then fade back in. For this we use a **Tween** — a Godot tool that animates a value from A to B over a given duration.
 
@@ -1477,7 +1478,7 @@ func _do_teleport() -> void:
 
 Launch the game — the wizard gently fades out, disappears, and reappears at the cursor position! ✨
 
-#### **Challenge 44 — Add magic particles**
+#### **Challenge 40 — Add magic particles**
 
 We'll trigger a particle burst at the departure point **and** at the arrival point. The key trick: disabling **local coordinates** on the particles so that emitted particles stay in world space even when the player moves.
 
@@ -1578,9 +1579,9 @@ It’s time to present your work to your parents. Explain to them:
   - Group 5: Finding an open source sprite, importing it into Godot, replacing the wizard’s appearance
   - Group 6: Adding walls to the arena with collisions and a visible shape
   - Group 7: Changing the color of fireballs and explosions, tracking survival time, displaying it on screen
-  - Group 8: Creating a laser weapon, writing a script, creating a scene, connecting it to the weapon system
-  - Group 9: Creating a continuous laser with RayCast2D, damage over time, automatic deactivation on enemy death
-  - Group 10: Adding teleportation to the mouse cursor with E key, cooldown
+  - Group 8: Creating a continuous laser beam with RayCast2D, damage over time, automatic deactivation on enemy death
+  - Group 9: Adding teleportation to the mouse cursor with E key, cooldown
+  - Group 10: Transforming wave 6 into an electric storm: dark screen, lightning flashes, deadly strike zones
 - Which challenge was the hardest? Why?
 - Did you personalize the game? How?
 

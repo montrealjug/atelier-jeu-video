@@ -168,8 +168,7 @@ Suis ces étapes ci dessous dans l'ordre. Demande à un animateur si tu es bloqu
    - [ ] **[Groupe de défis 7](#groupe---artiste-pixel-art)** - 🎨 Artiste Pixel Art - Personnalise ton personnage
    - [ ] **[Groupe de défis 8](#groupe---architecte)** - 🏗️ Architecte - Ajoute des Obstacles
    - [ ] **[Groupe de défis 9](#groupe---codeur-créatif)** - 🎮 Codeur Créatif - Personnalise avec du code
-   - [ ] **[Groupe de défis 10](#groupe---ajoutes-une-nouvelle-arme-laser)** - 🔫 Ajoutes une nouvelle arme laser
-   - [ ] **[Groupe de défis 11](#groupe---laser-continu)** - ⚡ Laser Continu
+   - [ ] **[Groupe de défis 11](#groupe---ajoutes-une-nouvelle-arme-rayon-laser)** - ⚡ Ajoutes une nouvelle arme rayon laser
    - [ ] **[Groupe de défis 12](#groupe---téléportation)** - 🌀 Téléportation
    - [ ] **[Groupe de défis 13](#groupe---tempête-électrique)** - ⛈️ Tempête Électrique
 
@@ -894,6 +893,7 @@ Lance le jeu et tire des boules de feu — les étincelles à l'impact changent 
 
 ---
 
+<!--
 ### Groupe - Ajoutes une nouvelle arme laser
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
@@ -1058,10 +1058,11 @@ Va dans **Project > Project Settings > Input Map**, trouve `attack_secondary` et
 Ouvre `src/scenes/entities/player/weapon/weapon.tscn`, sélectionne le nœud **Weapon**, et dans l'Inspector glisse `laser.tscn` sur la propriété **Laser Scene**.
 
 Lance le jeu — **clic gauche** tire des boules de feu, **clic droit** tire des lasers ! 🔵
+-->
 
 ---
 
-### Groupe - Laser Continu
+### Groupe - Ajoutes une nouvelle arme rayon laser
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
 
@@ -1069,7 +1070,7 @@ Lance le jeu — **clic gauche** tire des boules de feu, **clic droit** tire des
 
 > Dans ce groupe, tu vas créer un **rayon laser continu** — il reste actif jusqu'à ce qu'un ennemi meure ! Au lieu de faire des dégâts par impact, il fait des **dégâts au fil du temps**. Tu vas utiliser un nouvel outil de Godot appelé `RayCast2D` pour détecter ce qui se trouve sur le chemin du laser à chaque frame.
 
-#### **Défi 32 — Comprendre le RayCast2D**
+#### **Défi 28 — Comprendre le RayCast2D**
 
 Un `RayCast2D` envoie un rayon invisible depuis un point dans une direction. À chaque frame, il répond à la question : « Est-ce que j'ai touché quelque chose ? Si oui, quoi et où exactement ? »
 
@@ -1085,7 +1086,7 @@ Réfléchis :
 - Pourquoi `RayCast2D` est-il meilleur qu'un long `Area2D` pour un rayon ?
 - Quelle est la différence entre « 10 dégâts par impact » et « 10 dégâts par seconde » ?
 
-#### **Défi 33 — Crée la scène du laser continu**
+#### **Défi 29 — Crée la scène du laser continu**
 
 Crée un nouveau dossier `src/scenes/entities/player/continuous_laser/`.
 
@@ -1122,7 +1123,7 @@ Sauvegarde avec **Ctrl+S**.
 
 > 💡 Puisque `ContinuousLaser` sera un **enfant de l'Arme**, il tourne automatiquement avec elle — le rayon pointera toujours dans la direction visée par le sorcier !
 
-#### **Défi 34 — Écris le script du laser continu**
+#### **Défi 30 — Écris le script du laser continu**
 
 Dans le dossier `src/scenes/entities/player/continuous_laser/`, crée un nouveau script `continuous_laser.gd` et attache-le au nœud `ContinuousLaser`.
 
@@ -1209,7 +1210,7 @@ func _on_enemy_died(_enemy: Enemy) -> void:
 
 Sauvegarde avec **Ctrl+S**.
 
-#### **Défi 35 — Connecte le laser continu à l'arme**
+#### **Défi 31 — Connecte le laser continu à l'arme**
 
 **Ajoute la scène à l'arme :**
 Ouvre `src/scenes/entities/player/weapon/weapon.tscn`. Dans l'arbre de scène, clic droit sur le nœud racine **Weapon** → **Instantiate Child Scene** → sélectionne `continuous_laser.tscn`.
@@ -1241,7 +1242,7 @@ Dans `_process`, remplace le bloc `attack_secondary` par :
 
 Lance le jeu — **maintiens le clic droit** pour déclencher le laser continu. Relâche pour l'éteindre, ou laisse-le tuer un ennemi et il s'éteindra automatiquement ! ⚡
 
-#### **Défi 36 — Ajoute un effet de lueur au rayon**
+#### **Défi 32 — Ajoute un effet de lueur au rayon**
 
 Un vrai rayon laser a une lueur autour de lui ! On va ajouter une deuxième `Line2D` plus large et semi-transparente derrière le rayon principal pour simuler cet effet.
 
@@ -1287,7 +1288,7 @@ func _process(_delta: float) -> void:
 
 Lance le jeu — le rayon a maintenant une auréole lumineuse autour de lui ! ✨
 
-#### **Défi 37 — Ajoute un son de laser**
+#### **Défi 33 — Ajoute un son de laser**
 
 **Dans `continuous_laser.tscn` :**
 
@@ -1340,7 +1341,7 @@ Lance le jeu — le laser fait maintenant du bruit tant qu'il est actif, et s'ar
 
 > Dans ce groupe, tu vas ajouter une capacité spéciale au sorcier : en appuyant sur **E**, il se téléporte instantanément à l'endroit où pointe ta souris ! Tu vas modifier directement le script du joueur et ajouter un temps de recharge pour équilibrer la capacité.
 
-#### **Défi 38 — Ajoute l'action clavier**
+#### **Défi 34 — Ajoute l'action clavier**
 
 Avant d'écrire du code, tu dois dire à Godot que la touche **E** correspond à l'action `"teleport"`.
 
@@ -1354,7 +1355,7 @@ Ferme la fenêtre Project Settings.
 
 > 💡 C'est comme ça que tout le jeu fonctionne : `"attack_primary"`, `"attack_secondary"`, `"move_up"` sont toutes des actions définies ici et lues dans le code avec `Input.is_action_pressed(...)`.
 
-#### **Défi 39 — Écris le code de téléportation**
+#### **Défi 35 — Écris le code de téléportation**
 
 Ouvre `src/scenes/entities/player/player.gd`.
 
@@ -1374,7 +1375,7 @@ Réfléchis :
 - Quelle est la différence entre `global_position` et `position` ?
 - Que se passerait-il si tu remplaçais `is_action_pressed` par `is_action_just_pressed` ?
 
-#### **Défi 40 — Ajoute un temps de recharge**
+#### **Défi 36 — Ajoute un temps de recharge**
 
 Pour l'instant tu peux te téléporter en boucle sans limite. Ajoutons un cooldown de **1 seconde**.
 
@@ -1413,7 +1414,7 @@ Lance le jeu — tu peux te téléporter une fois, puis tu dois attendre 1 secon
 
 > 💡 Change la valeur `Wait Time` du timer dans l'Inspector pour ajuster la durée du cooldown. `0.5` pour être rapide, `3.0` pour rendre la capacité plus stratégique !
 
-#### **Défi 41 — Affiche le cooldown à l'écran**
+#### **Défi 37 — Affiche le cooldown à l'écran**
 
 On va afficher le temps restant directement au-dessus du sorcier — comme ça, le joueur sait quand il peut se retéléporter.
 
@@ -1449,7 +1450,7 @@ func _process(_delta: float) -> void:
 
 Lance le jeu — quand tu te téléportes, un compte à rebours apparaît au-dessus du sorcier et disparaît quand la capacité est à nouveau disponible !
 
-#### **Défi 42 — Ajoute une animation de téléportation**
+#### **Défi 38 — Ajoute une animation de téléportation**
 
 On va faire disparaître le sorcier en fondu, le téléporter, puis le faire réapparaître. Pour ça on utilise un **Tween** — un outil de Godot qui anime une valeur de A vers B sur une durée donnée.
 
@@ -1481,7 +1482,7 @@ func _do_teleport() -> void:
 
 Lance le jeu — le sorcier s'efface doucement, disparaît, et réapparaît à l'endroit du curseur ! ✨
 
-#### **Défi 44 — Ajoute des particules magiques**
+#### **Défi 40 — Ajoute des particules magiques**
 
 On va déclencher une explosion de particules au point de départ **et** au point d'arrivée. Le truc clé : on va désactiver les **coordonnées locales** des particules, ce qui fait que les particules émises restent dans l'espace monde même quand le joueur se déplace.
 
@@ -1549,7 +1550,7 @@ Lance le jeu — une gerbe de particules violettes explose au point de départ, 
 
 > Dans ce groupe, tu vas transformer la vague 6 en une vraie tempête électrique ! L'arène s'assombrira, des éclairs illumineront le ciel, et des zones de foudre mortelles apparaîtront au sol. Si le sorcier marche dessus au mauvais moment… il perd de la vie !
 
-#### **Défi 45 — Crée le gestionnaire de tempête**
+#### **Défi 41 — Crée le gestionnaire de tempête**
 
 Ouvre la scène `src/scenes/game/wave_manager/game.tscn`. Dans l'arbre de scène, fais un **clic droit sur le nœud racine** et choisis **Add Child Node**.
 
@@ -1582,7 +1583,7 @@ Fais un **clic droit sur `Storm`** → **Attach Script**. Nomme-le `storm.gd` et
 
 Sauvegarde avec **Ctrl+S**.
 
-#### **Défi 46 — Assombris l'arène pendant la vague 6**
+#### **Défi 42 — Assombris l'arène pendant la vague 6**
 
 Ouvre `storm.gd` et remplace son contenu par ce code :
 
@@ -1641,7 +1642,7 @@ Storm (CanvasLayer, layer = 100)
 
 ---
 
-#### **Défi 47 — Crée la scène d'une zone de foudre**
+#### **Défi 43 — Crée la scène d'une zone de foudre**
 
 Tu vas créer une nouvelle scène pour les zones de foudre au sol — ces petits carrés jaunes qui avertissent le joueur avant que la foudre tombe !
 
@@ -1727,7 +1728,7 @@ LightningStrike (Node2D)
 
 ---
 
-#### **Défi 48 — Fais apparaître les zones de foudre pendant la vague 6**
+#### **Défi 44 — Fais apparaître les zones de foudre pendant la vague 6**
 
 Maintenant on va faire spawner entre 0 et 10 zones de foudre aléatoirement dans l'arène, régulièrement pendant la vague 6.
 
@@ -1860,10 +1861,9 @@ Il est temps de présenter ton travail à tes parents. Explique-leur :
   - Groupe 5: Trouver un sprite open source, l'importer dans Godot, remplacer l'apparence du sorcier
   - Groupe 6: Ajouter des murs dans l'arène, avec collisions et visuel
   - Groupe 7: Changer la couleur des boules de feu et des explosions, compter le temps de survie, l'afficher à l'écran
-  - Groupe 8: Créer une arme laser, écrire un script, créer une scène, connecter au système d'armes
-  - Groupe 9: Créer un laser continu avec RayCast2D, dégâts au fil du temps, désactivation automatique à la mort d'un ennemi
-  - Groupe 10: Ajouter la téléportation sur la souris avec la touche E, temps de recharge
-  - Groupe 11: Transformer la vague 6 en tempête électrique : écran sombre, flashs d'éclair, zones de foudre mortelles
+  - Groupe 8: Créer un rayon laser continu avec RayCast2D, dégâts au fil du temps, désactivation automatique à la mort d'un ennemi
+  - Groupe 9: Ajouter la téléportation sur la souris avec la touche E, temps de recharge
+  - Groupe 10: Transformer la vague 6 en tempête électrique : écran sombre, flashs d'éclair, zones de foudre mortelles
 - Quel défi était le plus difficile ? Pourquoi ?
 - Tu as personnalisé le jeu ? Comment ?
 
