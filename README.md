@@ -1564,14 +1564,14 @@ Maintenant, ajoute deux nœuds enfants à `Storm` :
 
 - Clic droit sur `Storm` → Add Child Node → **`ColorRect`**, renomme-le `DarkOverlay`
 - Dans l'Inspector, clique sur **`Layout`** → **`Full Rect`** (pour couvrir tout l'écran)
-- Change la couleur : `(R: 0, G: 0, B: 0, A: 100)` — noir semi-transparent
+- Change la couleur : `(R: 0, G: 0, B: 0, A: 180)` — noir semi-transparent
 - Décoche **`Visible`** ❌
 
 **Le flash d'éclair :**
 
 - Clic droit sur `Storm` → Add Child Node → **`ColorRect`**, renomme-le `FlashOverlay`
 - Dans l'Inspector, clique sur **`Layout`** → **`Full Rect`**
-- Change la couleur : `(R: 255, G: 255, B: 255, A: 200)` — blanc presque opaque
+- Change la couleur : `(R: 140, G: 195, B: 255, A: 11)` — blanc presque opaque
 - Décoche **`Visible`** ❌
 
 **Le timer des flashs :**
@@ -1586,6 +1586,8 @@ Sauvegarde avec **Ctrl+S**.
 #### **Défi 42 — Assombris l'arène pendant la vague 6**
 
 Ouvre `storm.gd` et remplace son contenu par ce code :
+
+> Trouves le numéro de la vague dans le code, pour le remplacer par 1 comme ça tu pourras tester plus facilement !
 
 ```gdscript
 ## Gère les effets visuels de la tempête électrique en vague 6
@@ -1610,7 +1612,7 @@ func _on_wave_started(wave_number: int) -> void:
 
 ## Programme le prochain flash dans un délai aléatoire de 5 à 15 secondes
 func _programmer_prochain_eclair() -> void:
-	flash_timer.wait_time = randf_range(5.0, 15.0) # durée aléatoire
+	flash_timer.wait_time = randf_range(3.0, 10.0) # durée aléatoire
 	flash_timer.start() # démarre le timer
 
 
@@ -1624,7 +1626,7 @@ func _on_flash_timer_timeout() -> void:
 
 Lance le jeu et survie jusqu'à la vague 6 — l'arène devient sombre et des éclairs illuminent l'écran ! ⚡
 
-> 💡 **`randf_range(5.0, 15.0)`** génère un nombre décimal aléatoire entre 5 et 15. **`await`** met le code en pause jusqu'à ce que le timer soit terminé, comme dans la téléportation.
+> 💡 **`randf_range(3.0, 10.0)`** génère un nombre décimal aléatoire entre 5 et 15. **`await`** met le code en pause jusqu'à ce que le timer soit terminé, comme dans la téléportation.
 
 <details>
 <summary>Solution</summary>
@@ -1644,7 +1646,7 @@ Storm (CanvasLayer, layer = 100)
 
 #### **Défi 43 — Crée la scène d'une zone de foudre**
 
-Tu vas créer une nouvelle scène pour les zones de foudre au sol — ces petits carrés jaunes qui avertissent le joueur avant que la foudre tombe !
+Tu vas créer une nouvelle scène pour les zones de foudre au sol — ces **ronds jaunes qui clignotent** pour avertir le joueur avant que la foudre tombe ! Ils utilisent la même animation que les cercles qui apparaissent avant les ennemis.
 
 Dans le **FileSystem**, fais un clic droit sur le dossier `src/scenes/game/wave_manager/` → **New Scene**.
 
@@ -1652,18 +1654,24 @@ Dans l'arbre de scène vide, clique sur **Other Node** → cherche **`Node2D`** 
 
 Ajoute les nœuds enfants suivants à `LightningStrike` :
 
-**Le carré d'avertissement :**
+**La zone d'avertissement :**
 
-- Add Child Node → **`ColorRect`**, renomme-le `Warning`
-- Dans l'Inspector : `Size` = `(32, 32)`, `Position` = `(-16, -16)` (pour centrer)
-- Couleur : `(R: 255, G: 220, B: 0, A: 200)` — jaune électrique
+- Add Child Node → **`Sprite2D`**, renomme-le `Warning`
+- Dans l'Inspector, clique sur le champ **`Texture`** → **Quick Load** → choisis **`target.png`**
+- Change **`Modulate`** : `(R: 238, G: 216, B: 0, A: 255)` — bleu électrique
 
-**Le flash au moment de l'impact :**
+**L'animation d'éclair à l'impact :**
 
-- Add Child Node → **`ColorRect`**, renomme-le `Strike`
-- Dans l'Inspector : `Size` = `(32, 32)`, `Position` = `(-16, -16)`
-- Couleur : `(R: 255, G: 255, B: 255, A: 255)` — blanc pur
+- Add Child Node → **`AnimatedSprite2D`**, renomme-le `Strike`
+- Dans l'Inspector, clique sur **`Sprite Frames`** → **New SpriteFrames**
+- Double-clique sur la ressource **SpriteFrames** qui vient d'apparaître — le panneau SpriteFrames s'ouvre en bas de l'écran
+- Clique sur **Add frames from sprite sheet** (l'icône grille avec un +)
+- Sélectionne **`assets/sprites/misc/thunder.png`**
+- Dans la fenêtre qui s'ouvre, règle la grille : **`Horizontal` = 4**, **`Vertical` = 1**
+- Sélectionne les 4 frames (Ctrl+A), puis clique **Add X frames**
+- De retour dans l'Inspector, règle **`FPS`** à `30` (30 images par seconde)
 - Décoche **`Visible`** ❌
+- Vérifies bien que l'icone `Animation Looping` est désactivé ! [Animation Looping](./readme-images/challenges-lightning-animation-looping.png)
 
 **Le timer avant l'impact (3 secondes d'avertissement) :**
 
@@ -1677,24 +1685,35 @@ Sauvegarde la scène avec **Ctrl+S** sous le nom `lightning_strike.tscn` dans `s
 Maintenant, ouvre `lightning_strike.gd` et écris ce code :
 
 ```gdscript
-## Un éclair qui tombe sur une zone : avertissement jaune, puis impact blanc
+## Un éclair qui tombe sur une zone : rond jaune clignotant, puis impact d'éclair animé
 extends Node2D
 
-@onready var warning: ColorRect = $Warning # le carré jaune d'avertissement
-@onready var strike: ColorRect = $Strike # le flash blanc de l'impact
+@onready var warning: Sprite2D = $Warning # le rond jaune d'avertissement
+@onready var strike: AnimatedSprite2D = $Strike # l'animation d'éclair
 @onready var strike_timer: Timer = $StrikeTimer # le timer de 3 secondes
 
 
 func _ready() -> void:
 	strike_timer.timeout.connect(_on_strike_timer_timeout) # écoute la fin du timer
+	_pulse_warning() # lance l'animation de clignotement
+
+
+## Fait pulser le rond en boucle (même animation que l'apparition des ennemis !)
+func _pulse_warning() -> void:
+	var tween = create_tween().set_loops() # boucle infinie
+	tween.tween_property(warning, "scale", Vector2(1.2, 1.0), 0.35) # grossit
+	tween.parallel().tween_property(warning, "modulate", Color(1, 0.451, 0.224, 1), 0.35) # devient orange
+	tween.tween_property(warning, "scale", Vector2(0.85, 0.75), 0.35) # rétrécit
+	tween.parallel().tween_property(warning, "modulate", Color(1, 0.933, 0.271, 1), 0.35) # revient jaune
 
 
 ## Quand les 3 secondes sont écoulées : déclenche l'impact !
 func _on_strike_timer_timeout() -> void:
 	warning.visible = false # cache l'avertissement
-	strike.visible = true # flash blanc !
+	strike.visible = true # montre l'éclair
+	strike.play("default") # joue l'animation
 	_infliger_degats() # vérifie si le joueur est là
-	await get_tree().create_timer(0.3).timeout # attend 0.3 secondes
+	await strike.animation_finished # attend la fin de l'animation
 	queue_free() # supprime cette zone
 
 
@@ -1710,7 +1729,7 @@ func _infliger_degats() -> void:
 		player.player_health.hurt_box.hurt.emit(dmg) # inflige les dégâts !
 ```
 
-> 💡 **`global_position.distance_to(...)`** calcule la distance entre deux points dans le monde. **`queue_free()`** supprime le nœud de la scène — c'est comme ça qu'on efface les objets en Godot.
+> 💡 **`strike.play("default")`** lance l'animation. **`await strike.animation_finished`** attend que les 4 frames soient jouées avant de supprimer la zone. Sprite par [Gutima15](https://opengameart.org/content/thunder-sprite) (CC-BY 4.0).
 
 <details>
 <summary>Solution</summary>
@@ -1719,8 +1738,8 @@ L'arbre de scène de `LightningStrike` devrait ressembler à ceci :
 
 ```
 LightningStrike (Node2D)
-├── Warning (ColorRect, 32×32, jaune, visible = true)
-├── Strike (ColorRect, 32×32, blanc, visible = false)
+├── Warning (Sprite2D, texture = target.png, modulate = jaune, visible = true)
+├── Strike (AnimatedSprite2D, SpriteFrames = thunder.png 4 frames, visible = false)
 └── StrikeTimer (Timer, wait_time = 3.0, one_shot = true, autostart = true)
 ```
 
@@ -1730,7 +1749,7 @@ LightningStrike (Node2D)
 
 #### **Défi 44 — Fais apparaître les zones de foudre pendant la vague 6**
 
-Maintenant on va faire spawner entre 0 et 10 zones de foudre aléatoirement dans l'arène, régulièrement pendant la vague 6.
+Maintenant on va faire spawner entre 30 et 70 zones de foudre aléatoirement dans l'arène, régulièrement pendant la vague 6.
 
 Retourne dans `storm.gd`. Ajoute un nouveau **Timer** à la scène `Storm` :
 
@@ -1770,7 +1789,7 @@ func _on_wave_started(wave_number: int) -> void:
 
 ## Programme le prochain flash dans un délai aléatoire de 5 à 15 secondes
 func _programmer_prochain_eclair() -> void:
-	flash_timer.wait_time = randf_range(5.0, 15.0) # durée aléatoire
+	flash_timer.wait_time = randf_range(3.0, 10.0) # durée aléatoire
 	flash_timer.start() # démarre le timer
 
 
@@ -1782,9 +1801,9 @@ func _on_flash_timer_timeout() -> void:
 	_programmer_prochain_eclair() # prépare le prochain
 
 
-## Fait apparaître entre 0 et 10 zones de foudre dans l'arène
+## Fait apparaître entre 30 et 70 zones de foudre dans l'arène
 func _on_lightning_spawn_timer_timeout() -> void:
-	var nombre = randi_range(0, 10) # combien d'éclairs ce tour-ci ?
+	var nombre = randi_range(30, 70) # combien d'éclairs ce tour-ci ?
 	for i in nombre: # répète "nombre" fois
 		_spawn_un_eclair()
 
@@ -1807,7 +1826,7 @@ Maintenant, dans l'Inspector du nœud `Storm` (dans `game.tscn`), tu dois voir l
 
 Glisse le fichier `lightning_strike.tscn` depuis le FileSystem vers cette propriété.
 
-Lance le jeu et survie jusqu'à la vague 6 — des carrés jaunes apparaissent aléatoirement dans l'arène, puis des éclairs s'abattent ! ⚡
+Lance le jeu et survie jusqu'à la vague 6 — des ronds jaunes clignotants apparaissent aléatoirement dans l'arène, puis des éclairs s'abattent ! ⚡
 
 > 💡 **`randi_range(0, 10)`** génère un entier aléatoire entre 0 et 10. **`instantiate()`** crée une copie d'une scène dans le jeu — comme les ennemis qui apparaissent depuis leurs scènes !
 
@@ -2013,7 +2032,7 @@ git checkout main-with-solutions
 git reset --hard origin/workshop
 git merge challenges-group-fix-mouse-aiming challenges-group-score
 
-git merge fix-default-weapon-direction challenges-group-score challenges-group-one-more-wave challenges-group-teleportation challenges-group-artist-pixel-art challenges-group-fix-mouse-aiming challenges-group-architect  challenges-group-continuous-laser-beam challenges-group-creative-coder
+git merge fix-default-weapon-direction challenges-group-score challenges-group-one-more-wave challenges-group-teleportation challenges-group-artist-pixel-art challenges-group-fix-mouse-aiming challenges-group-architect  challenges-group-continuous-laser-beam challenges-group-creative-coder challenges-group-lightning
 ```
 
 </details>

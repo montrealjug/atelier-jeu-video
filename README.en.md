@@ -1538,6 +1538,303 @@ Launch the game — a burst of purple particles explodes at the departure point,
 
 ---
 
+### Group - Lightning Storm
+
+[Back to steps ⬆️](#workshop-steps)
+
+![Group Image](./readme-images/challenges-group-lightning-storm.png)
+
+> In this group, you'll transform wave 6 into a real electric storm! The arena will darken, lightning will illuminate the sky, and deadly strike zones will appear on the ground. If the wizard steps on one at the wrong moment… he loses health!
+
+#### **Challenge 41 — Create the storm manager**
+
+Open the scene `src/scenes/game/wave_manager/game.tscn`. In the scene tree, **right-click the root node** and choose **Add Child Node**.
+
+Search for **`CanvasLayer`** and click **Create**. Rename it `Storm`.
+
+In the **Inspector**, set the **`Layer`** property to `100` (so it renders on top of everything).
+
+Now add three child nodes to `Storm`:
+
+**The darkening overlay:**
+
+- Right-click `Storm` → Add Child Node → **`ColorRect`**, rename it `DarkOverlay`
+- In the Inspector, click **`Layout`** → **`Full Rect`** (to cover the whole screen)
+- Set the color: `(R: 0, G: 0, B: 0, A: 180)` — semi-transparent black
+- Uncheck **`Visible`** ❌
+
+**The lightning flash:**
+
+- Right-click `Storm` → Add Child Node → **`ColorRect`**, rename it `FlashOverlay`
+- In the Inspector, click **`Layout`** → **`Full Rect`**
+- Set the color: `(R: 140, G: 195, B: 255, A: 11)` — nearly opaque white
+- Uncheck **`Visible`** ❌
+
+**The flash timer:**
+
+- Right-click `Storm` → Add Child Node → **`Timer`**, rename it `FlashTimer`
+- `One Shot`: ✅, `Autostart`: ❌
+
+**Right-click `Storm`** → **Attach Script**. Name it `storm.gd` and place it in `src/scenes/game/wave_manager/`. Click **Create**.
+
+Save with **Ctrl+S**.
+
+#### **Challenge 42 — Darken the arena during wave 6**
+
+Open `storm.gd` and replace its content with this code:
+
+> Find the wave number in the code and replace it with 1 so you can test more easily!
+
+```gdscript
+## Manages the visual effects of the electric storm in wave 6
+extends CanvasLayer
+
+@onready var dark_overlay: ColorRect = $DarkOverlay # the dark veil
+@onready var flash_overlay: ColorRect = $FlashOverlay # the white flash
+@onready var flash_timer: Timer = $FlashTimer # timer between flashes
+
+
+func _ready() -> void:
+	Signals.wave_started.connect(_on_wave_started) # listen for wave start signal
+	flash_timer.timeout.connect(_on_flash_timer_timeout) # listen for timer end
+
+
+## Triggers the storm when wave 6 starts
+func _on_wave_started(wave_number: int) -> void:
+	if wave_number == 6: # only in wave 6?
+		dark_overlay.visible = true # darken the arena
+		_schedule_next_lightning() # trigger the first flash
+
+
+## Schedules the next flash after a random delay of 3 to 10 seconds
+func _schedule_next_lightning() -> void:
+	flash_timer.wait_time = randf_range(3.0, 10.0) # random duration
+	flash_timer.start() # start the timer
+
+
+## When the timer ends: flash the screen
+func _on_flash_timer_timeout() -> void:
+	flash_overlay.visible = true # white flash!
+	await get_tree().create_timer(0.12).timeout # wait 0.12 seconds
+	flash_overlay.visible = false # turn off the flash
+	_schedule_next_lightning() # prepare the next one
+```
+
+Launch the game and survive to wave 6 — the arena goes dark and lightning illuminates the screen! ⚡
+
+> 💡 **`randf_range(3.0, 10.0)`** generates a random decimal number between 3 and 10. **`await`** pauses the code until the timer ends, just like in teleportation.
+
+<details>
+<summary>Solution</summary>
+
+The `Storm` scene tree should look like this:
+
+```
+Storm (CanvasLayer, layer = 100)
+├── DarkOverlay (ColorRect, semi-transparent black, visible = false)
+├── FlashOverlay (ColorRect, white, visible = false)
+└── FlashTimer (Timer, one_shot = true)
+```
+
+</details>
+
+---
+
+#### **Challenge 43 — Create the lightning strike zone scene**
+
+You'll create a new scene for ground strike zones — those **blinking yellow circles** that warn the player before lightning strikes! They use the same animation as the circles that appear before enemies.
+
+In the **FileSystem**, right-click the folder `src/scenes/game/wave_manager/` → **New Scene**.
+
+In the empty scene tree, click **Other Node** → search for **`Node2D`** → **Create**. Rename it `LightningStrike`.
+
+Add the following child nodes to `LightningStrike`:
+
+**The warning circle:**
+
+- Add Child Node → **`Sprite2D`**, rename it `Warning`
+- In the Inspector, click the **`Texture`** field → **Quick Load** → choose **`target.png`**
+- Set **`Modulate`**: `(R: 238, G: 216, B: 0, A: 255)` — electric yellow
+
+**The lightning impact animation:**
+
+- Add Child Node → **`AnimatedSprite2D`**, rename it `Strike`
+- In the Inspector, click **`Sprite Frames`** → **New SpriteFrames**
+- Double-click the **SpriteFrames** resource that just appeared — the SpriteFrames panel opens at the bottom of the screen
+- Click **Add frames from sprite sheet** (the grid icon with a +)
+- Select **`assets/sprites/misc/thunder.png`**
+- In the window that opens, set the grid: **`Horizontal` = 4**, **`Vertical` = 1**
+- Select all 4 frames (Ctrl+A), then click **Add X frames**
+- Back in the Inspector, set **`FPS`** to `30` (30 frames per second)
+- Uncheck **`Visible`** ❌
+- Make sure the `Animation Looping` icon is disabled! ![Animation Looping](./readme-images/challenges-lightning-animation-looping.png)
+
+**The timer before impact (3 seconds of warning):**
+
+- Add Child Node → **`Timer`**, rename it `StrikeTimer`
+- `Wait Time`: `3.0`, `One Shot`: ✅, `Autostart`: ✅
+
+**Right-click `LightningStrike`** → **Attach Script** → name it `lightning_strike.gd`, in `src/scenes/game/wave_manager/`. Click **Create**.
+
+Save the scene with **Ctrl+S** as `lightning_strike.tscn` in `src/scenes/game/wave_manager/`.
+
+Now open `lightning_strike.gd` and write this code:
+
+```gdscript
+## A lightning strike on a zone: blinking yellow circle, then animated lightning impact
+extends Node2D
+
+@onready var warning: Sprite2D = $Warning # the yellow warning circle
+@onready var strike: AnimatedSprite2D = $Strike # the lightning animation
+@onready var strike_timer: Timer = $StrikeTimer # the 3-second timer
+
+
+func _ready() -> void:
+	strike_timer.timeout.connect(_on_strike_timer_timeout) # listen for timer end
+	_pulse_warning() # start the blinking animation
+
+
+## Pulses the circle in a loop (same animation as enemy spawning!)
+func _pulse_warning() -> void:
+	var tween = create_tween().set_loops() # infinite loop
+	tween.tween_property(warning, "scale", Vector2(1.2, 1.0), 0.35) # grows
+	tween.parallel().tween_property(warning, "modulate", Color(1, 0.451, 0.224, 1), 0.35) # turns orange
+	tween.tween_property(warning, "scale", Vector2(0.85, 0.75), 0.35) # shrinks
+	tween.parallel().tween_property(warning, "modulate", Color(1, 0.933, 0.271, 1), 0.35) # back to yellow
+
+
+## When 3 seconds have passed: trigger the impact!
+func _on_strike_timer_timeout() -> void:
+	warning.visible = false # hide the warning
+	strike.visible = true # show the lightning
+	strike.play("default") # play the animation
+	_deal_damage() # check if the player is there
+	await strike.animation_finished # wait for the animation to finish
+	queue_free() # remove this zone
+
+
+## Checks if the player is on the zone and deals damage
+func _deal_damage() -> void:
+	var player = GameData.player
+	if player == null: # no player?
+		return
+	var distance = global_position.distance_to(player.global_position)
+	if distance < 24: # player is in the zone?
+		var dmg = DamageInformation.new() # create a damage object
+		dmg.damage = 1 # 1 point of damage
+		player.player_health.hurt_box.hurt.emit(dmg) # deal the damage!
+```
+
+> 💡 **`strike.play("default")`** plays the animation. **`await strike.animation_finished`** waits for all 4 frames to play before removing the zone. Sprite by [Gutima15](https://opengameart.org/content/thunder-sprite) (CC-BY 4.0).
+
+<details>
+<summary>Solution</summary>
+
+The `LightningStrike` scene tree should look like this:
+
+```
+LightningStrike (Node2D)
+├── Warning (Sprite2D, texture = target.png, modulate = yellow, visible = true)
+├── Strike (AnimatedSprite2D, SpriteFrames = thunder.png 4 frames, visible = false)
+└── StrikeTimer (Timer, wait_time = 3.0, one_shot = true, autostart = true)
+```
+
+</details>
+
+---
+
+#### **Challenge 44 — Spawn strike zones during wave 6**
+
+Now we'll spawn between 30 and 70 strike zones randomly in the arena, regularly throughout wave 6.
+
+Go back to `storm.gd`. Add a new **Timer** to the `Storm` scene:
+
+In `game.tscn`, select the `Storm` node → Add Child Node → **`Timer`**, rename it `LightningSpawnTimer`.
+
+In the Inspector: `Wait Time`: `4.0`, `One Shot`: ❌, `Autostart`: ❌
+
+Save with **Ctrl+S**.
+
+Now update `storm.gd` to add the spawn logic:
+
+```gdscript
+## Manages the visual effects of the electric storm in wave 6
+extends CanvasLayer
+
+@export var lightning_strike_scene: PackedScene # the strike zone scene
+
+@onready var dark_overlay: ColorRect = $DarkOverlay # the dark veil
+@onready var flash_overlay: ColorRect = $FlashOverlay # the white flash
+@onready var flash_timer: Timer = $FlashTimer # timer between flashes
+@onready var lightning_spawn_timer: Timer = $LightningSpawnTimer # the spawn timer
+
+
+func _ready() -> void:
+	Signals.wave_started.connect(_on_wave_started) # listen for wave start signal
+	flash_timer.timeout.connect(_on_flash_timer_timeout) # listen for timer end
+	lightning_spawn_timer.timeout.connect(_on_lightning_spawn_timer_timeout)
+
+
+## Triggers the storm when wave 6 starts
+func _on_wave_started(wave_number: int) -> void:
+	if wave_number == 6: # only in wave 6?
+		dark_overlay.visible = true # darken the arena
+		_schedule_next_lightning() # trigger the first flash
+		lightning_spawn_timer.start() # start spawning zones
+
+
+## Schedules the next flash after a random delay of 3 to 10 seconds
+func _schedule_next_lightning() -> void:
+	flash_timer.wait_time = randf_range(3.0, 10.0) # random duration
+	flash_timer.start() # start the timer
+
+
+## When the timer ends: flash the screen
+func _on_flash_timer_timeout() -> void:
+	flash_overlay.visible = true # white flash!
+	await get_tree().create_timer(0.12).timeout # wait 0.12 seconds
+	flash_overlay.visible = false # turn off the flash
+	_schedule_next_lightning() # prepare the next one
+
+
+## Spawns between 30 and 70 strike zones in the arena
+func _on_lightning_spawn_timer_timeout() -> void:
+	var count = randi_range(30, 70) # how many strikes this round?
+	for i in count: # repeat "count" times
+		_spawn_strike()
+
+
+## Places a strike zone at a random position in the play area
+func _spawn_strike() -> void:
+	if lightning_strike_scene == null: # is the scene assigned?
+		return
+	var zone = GameData.spawn_area # the area where enemies spawn
+	var pos = Vector2(
+		randf_range(zone.position.x, zone.end.x), # random x in the zone
+		randf_range(zone.position.y, zone.end.y)  # random y in the zone
+	)
+	var strike = lightning_strike_scene.instantiate() # create a strike zone
+	strike.global_position = pos # place it in the world
+	GameData.game_root.add_child(strike) # add it to the main scene
+```
+
+In the Inspector of the `Storm` node (in `game.tscn`), you should now see the **`Lightning Strike Scene`** property.
+
+Drag the `lightning_strike.tscn` file from the FileSystem onto this property.
+
+Launch the game and survive to wave 6 — blinking yellow circles appear randomly in the arena, then lightning strikes! ⚡
+
+> 💡 **`randi_range(30, 70)`** generates a random integer between 30 and 70. **`instantiate()`** creates a copy of a scene in the game — just like enemies that appear from their scenes!
+
+<details>
+<summary>Solution</summary>
+
+In the Inspector of the `Storm` node, the `Lightning Strike Scene` property must point to `res://src/scenes/game/wave_manager/lightning_strike.tscn`.
+
+</details>
+
+---
+
 ### Upload Your Project
 
 [Back to steps ⬆️](#workshop-steps)
