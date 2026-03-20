@@ -138,9 +138,9 @@ Double-click it. If you are on Linux, double-click `save.sh` and choose **"Run"*
 1. **A save name** (max 20 characters) — for example your first name, or `"before-laser"`, `"final-version"`…
 2. **GIT or ZIP** — choose your method:
 
-| Method | When to use it |
-| ------ | -------------- |
-| **ZIP** | In all cases — creates a `<name>.zip` file in the game folder. This is the recommended method for everyone. |
+| Method  | When to use it                                                                                                                |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **ZIP** | In all cases — creates a `<name>.zip` file in the game folder. This is the recommended method for everyone.                   |
 | **GIT** | During the workshop only, if you or someone you know is familiar with Git. It records a version in the project's Git history. |
 
 > 💡 **Not sure what Git is?** Choose **ZIP** — it's simple, fast, and always works!
@@ -1542,7 +1542,7 @@ Launch the game — a burst of purple particles explodes at the departure point,
 
 [Back to steps ⬆️](#workshop-steps)
 
-![Group Image](./readme-images/challenges-group-lightning-storm.png)
+![Group Image](./readme-images/challenges-group-lightning.png)
 
 > In this group, you'll transform wave 6 into a real electric storm! The arena will darken, lightning will illuminate the sky, and deadly strike zones will appear on the ground. If the wizard steps on one at the wrong moment… he loses health!
 

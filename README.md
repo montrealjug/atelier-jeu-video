@@ -1546,7 +1546,7 @@ Lance le jeu — une gerbe de particules violettes explose au point de départ, 
 
 [Revenir aux étapes ⬆️](#étapes-de-latelier)
 
-![Group Image](./readme-images/challenges-group-lightning-storm.png)
+![Group Image](./readme-images/challenges-group-lightning.png)
 
 > Dans ce groupe, tu vas transformer la vague 6 en une vraie tempête électrique ! L'arène s'assombrira, des éclairs illumineront le ciel, et des zones de foudre mortelles apparaîtront au sol. Si le sorcier marche dessus au mauvais moment… il perd de la vie !
 
