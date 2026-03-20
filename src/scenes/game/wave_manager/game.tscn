@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://xkcnsgxt7vq6" path="res://src/scenes/ui/death_screen/death_screen.tscn" id="9_8q054"]
 [ext_resource type="PackedScene" uid="uid://d1kf8mir5dbwc" path="res://src/scenes/ui/pause_screen/pause_screen.tscn" id="10_4xhn5"]
 [ext_resource type="AudioStream" uid="uid://c6f8kcsyjp011" path="res://assets/sounds/music/game_music.mp3" id="11_7n3mf"]
+[ext_resource type="Script" uid="uid://cqlodf3il0cwn" path="res://src/scenes/game/wave_manager/storm.gd" id="12_dwom2"]
+[ext_resource type="PackedScene" uid="uid://bo481r5cc6qvp" path="res://src/scenes/game/wave_manager/lightning_strike.tscn" id="13_s3qvi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2mvk4"]
 texture = ExtResource("3_s3qvi")
@@ -294,3 +296,26 @@ stream = ExtResource("11_7n3mf")
 volume_db = -10.0
 autoplay = true
 bus = &"Music"
+
+[node name="Storm" type="CanvasLayer" parent="." unique_id=1203383252]
+layer = 100
+script = ExtResource("12_dwom2")
+lightning_strike_scene = ExtResource("13_s3qvi")
+
+[node name="DarkOverlay" type="ColorRect" parent="Storm" unique_id=1922939471]
+offset_right = 1265.0
+offset_bottom = 661.0
+color = Color(0, 0, 0, 0.7058824)
+
+[node name="FlashOverlay" type="ColorRect" parent="Storm" unique_id=1249574876]
+visible = false
+offset_right = 1265.0
+offset_bottom = 661.0
+color = Color(0.54901963, 0.7647059, 1, 0.043137256)
+
+[node name="FlashTimer" type="Timer" parent="Storm" unique_id=1129586853]
+one_shot = true
+autostart = true
+
+[node name="LightningSpawnTimer" type="Timer" parent="Storm" unique_id=530908731]
+wait_time = 4.0
