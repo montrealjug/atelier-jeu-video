@@ -534,7 +534,7 @@ Voici les outils dont tu disposes :
 **Indice :** ici, tu dois :
 
 - Ajouter `else` à l’instruction `if` — rappelle-toi des bases du code qu’on a vues au début de l’atelier !
-- Écrire cette ligne sous le `else`, mais en programmation avec les outils : `current direction = (global mouse position - global position).normalized`
+- Écrire cette ligne sous le `else`, mais en programmation avec les outils : `current_direction = global_position.direction_to(get_global_mouse_position())`
 
 <details>
 <summary>Solution</summary>
